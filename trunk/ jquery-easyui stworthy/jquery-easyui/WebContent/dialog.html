@@ -3,10 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="css/dialog.css">
-	<link rel="stylesheet" type="text/css" href="css/icon.css">
-	<link rel="stylesheet" type="text/css" href="css/linkbutton.css">
-	<link rel="stylesheet" type="text/css" href="css/shadow.css">
+	<link rel="stylesheet" type="text/css" href="themes/default/dialog.css">
+	<link rel="stylesheet" type="text/css" href="themes/default/icon.css">
+	<link rel="stylesheet" type="text/css" href="themes/default/linkbutton.css">
+	<link rel="stylesheet" type="text/css" href="themes/default/shadow.css">
 	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.draggable.js"></script>
 	<script type="text/javascript" src="js/jquery.resizable.js"></script>
@@ -47,15 +47,11 @@
 				closed:true
 			});
 		}
-		function load1(){
-			$('#dlg1').dialog({href:'test.jsp'});
-		}
 	</script>
 </head>
 <body>
 	<a href="#" onclick="open1();">open</a>
 	<a href="#" onclick="close1();">close</a>
-	<a href="#" onclick="load1();">load</a>
 	
 	<div id="dlg1" title="Save Info" style="width:320px;">
 		<div style="padding:20px;">
