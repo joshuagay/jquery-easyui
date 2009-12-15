@@ -2,7 +2,7 @@
  * accordion 1.0 - jQuery Plug-in
  * 
  * Licensed under the GPL:
- *   http://gplv3.fsf.org
+ *   http://www.gnu.org/licenses/gpl.txt
  *
  * Copyright 2009 stworthy [ stworthy@gmail.com ] 
  * 

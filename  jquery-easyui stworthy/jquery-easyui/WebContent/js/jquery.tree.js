@@ -1,3 +1,11 @@
+/**
+ * tree 1.0 - jQuery Plug-in
+ * 
+ * Licensed under the GPL:
+ *   http://www.gnu.org/licenses/gpl.txt
+ *
+ * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ */
 (function($){
 	/**
 	 * wrap the <ul> tag as a tree and then return it.
