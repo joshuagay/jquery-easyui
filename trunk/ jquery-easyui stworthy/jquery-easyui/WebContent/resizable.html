@@ -20,6 +20,7 @@
 				},
 				onResize: function(e){
 					$('#info').html($(e.data.target).css('width'));
+					return false;
 				},
 				onStopResize: function(e){
 					$('#info').html('stop:'+$(e.data.target).css('width'));

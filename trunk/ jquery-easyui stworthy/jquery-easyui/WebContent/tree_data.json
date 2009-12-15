@@ -10,7 +10,6 @@
 			text:'PhotoShop'
 		},{
 			id: 8,
-			iconCls:'icon-search',
 			text:'异步加载测试项',
 			state:'closed'
 		}]
