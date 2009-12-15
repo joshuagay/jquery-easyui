@@ -1,0 +1,107 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="css/layout.css">
+	<link rel="stylesheet" type="text/css" href="css/linkbutton.css">
+	<link rel="stylesheet" type="text/css" href="css/pagination.css">
+	<link rel="stylesheet" type="text/css" href="css/datagrid.css">
+	<link rel="stylesheet" type="text/css" href="css/tabs.css">
+	<link rel="stylesheet" type="text/css" href="css/accordion.css">
+	<link rel="stylesheet" type="text/css" href="css/tree.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<script type="text/javascript" src="js/jquery-1.2.6.js"></script>
+	<script type="text/javascript" src="js/jquery.resizable.js"></script>
+	<script type="text/javascript" src="js/jquery.layout.js"></script>
+	<script type="text/javascript" src="js/jquery.linkbutton.js"></script>
+	<script type="text/javascript" src="js/jquery.pagination.js"></script>
+	<script type="text/javascript" src="js/jquery.tabs.js"></script>
+	<script type="text/javascript" src="js/jquery.accordion.js"></script>
+	<script type="text/javascript" src="js/jquery.datagrid.js"></script>
+	<script type="text/javascript" src="js/jquery.tree.js"></script>
+	<script>
+		$(function(){
+			//$('#cc').layout();
+			$('#tt2').datagrid({
+				title:'my table',
+				width:800,
+				height:500,
+				url:'json_test.jsp',
+				sortName: 'code',
+				sortOrder: 'desc',
+					columns:[[
+					          {title:'info',colspan:2},
+								{field:'addr',title:'地址',width:120,rowspan:2,sortable:true},
+								{field:'col4',title:'Col41',width:150,align:'right',rowspan:2},
+								{field:'opt',title:'操作',width:100,rowspan:2,
+									formatter:function(value,rec){
+										return '<span style="color:red">'+rec.name+'</span>';
+									}
+								}
+					          
+					],[
+								{field:'code',title:'编号',width:80,sortable:true},
+								{field:'name',title:'名称',width:120}
+					]],
+				pagination:true
+				
+			});
+			$('#aa').accordion();
+			$('#sublayout').layout();
+			$('#tree1').tree({url:'tree_data.json'});
+			$('body').layout();
+		});
+	</script>
+</head>
+<body>
+		<div region="north" title="ntitle" split="true" style="height:100px;padding:10px;">
+			<p>n1</p>
+			<p>n2</p>
+			<p>n3</p>
+			<p>n4</p>
+			<p>n5</p>
+		</div>
+		<div region="south" fit="true" title="南方标题" split="true" style="height:100px;padding:10px;background:#efefef;">
+			<div id="sublayout" style="width:100%;height:100%;background:#ccc;">
+				<div region="center">sub center</div>
+				<div region="east" split="true" style="width:200px;">sub center</div>
+			</div>
+		</div>
+		<div region="east" icon="icon-reload" title="wtitle" split="true" style="width:180px;padding1:15px;">
+			<ul id="tree1"></ul>
+		</div>
+		<div region="west" split="true" fit="true" title="导航菜单" style="width:280px;background:#00ee00;padding:5px;">
+			<div id="aa" style="width:300px;height:200px;">
+				<div title="title1" style="overflow:auto;">
+					<p>content1</p>
+					<p>content1</p>
+					<p>content1</p>
+					<p>content1</p>
+					<p>content1</p>
+					<p>content1</p>
+					<p>content1</p>
+					<p>content12</p>
+				</div>
+				<div title="title2" selected="true" style="padding:10px;">
+					content2
+				</div>
+				<div title="title3">
+					content3
+				</div>
+			</div>
+		</div>
+		<div region="center" fit="true" style="padding1:5px;background:#aaa;">
+	<div id="tabs1" class="tabs-container" style="height:200px;">
+		<div title="Tab1" style="padding:20px;display:none;"> 
+		tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1
+		</div>
+		<div title="Tab2" closable="true" style="padding:20px;display:none;"> This is Tab2 width close button.</div>
+		<div title="Tab3" fit="true" icon="icon-reload" closable="true" style="overflow:hidden;padding1:20px;">
+			<table id="tt2"></table> 
+		</div>
+		<div title="Tab4 with iframe" fit="true" closable="true" style="width:100%;height:100%;display:none;">
+		</div>
+	</div>
+		</div>
+</body>
+</html>
