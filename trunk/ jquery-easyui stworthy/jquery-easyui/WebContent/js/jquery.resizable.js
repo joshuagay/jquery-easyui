@@ -78,13 +78,10 @@
 		}
 		
 		function doUp(e){
+			resize(e);
 			$(document).unbind('.resizable');
-			if ($.data(e.data.target, 'resizable').options.onStopResize.call(e.data.target, e) == false){
-				return false;
-			} else {
-				resize(e);
-				return false;
-			}
+			$.data(e.data.target, 'resizable').options.onStopResize.call(e.data.target, e);
+			return false;
 		}
 		
 		return this.each(function(){
