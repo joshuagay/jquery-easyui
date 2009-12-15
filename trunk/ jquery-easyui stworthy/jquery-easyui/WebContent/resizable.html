@@ -20,7 +20,6 @@
 				},
 				onResize: function(e){
 					$('#info').html($(e.data.target).css('width'));
-					return false;
 				},
 				onStopResize: function(e){
 					$('#info').html('stop:'+$(e.data.target).css('width'));
@@ -31,12 +30,6 @@
 
 		function stop(){
 			$('div.mcc').draggable({disabled:true});
-		}
-		function enable(){
-			$('div.mcc').resizable({disabled:false});
-		}
-		function disable(){
-			$('div.mcc').resizable({disabled:true});
 		}
 	</script>
 </head>
@@ -50,11 +43,6 @@
 	<div id="rd" style="margin:10px;padding:10px;width:100px;height:100px;background:#ddd;border:1px solid red;">拖动并改变大小</div>
 	<div class="mcc" style="-moz-border-radius:5px;left:300px;top:100px;width:100px;height:100px;background:#eee;border:2px solid red;">
 		<a href="#" onclick="stop()">stopdrag</a>
-	</div>
-	<div class="mcc" style="overflow:auto;margin:10px 0px 10px 20px;padding:10px;left:300px;top:200px;width:100px;height:100px;background:#eee;border:1px solid red;">
-		<a href="#" onclick="enable()">enable resize</a><br/>
-		<a href="#" onclick="disable()">disable resize</a>
-		<div style="width:100px;height:100px;overflow:auto;border:1px solid blue;"></div>
 	</div>
 </body>
 </html>
