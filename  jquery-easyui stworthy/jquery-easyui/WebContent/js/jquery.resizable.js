@@ -68,21 +68,23 @@
 		}
 		
 		function doMove(e){
-//			resize(e);
 			$.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e);
 			if ($.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e) == false){
 				return false;
 			} else {
 				resize(e);
+				return false;
 			}
-			return false;
 		}
 		
 		function doUp(e){
-			resize(e);
 			$(document).unbind('.resizable');
-			$.data(e.data.target, 'resizable').options.onStopResize.call(e.data.target, e);
-			return false;
+			if ($.data(e.data.target, 'resizable').options.onStopResize.call(e.data.target, e) == false){
+				return false;
+			} else {
+				resize(e);
+				return false;
+			}
 		}
 		
 		return this.each(function(){
