@@ -1,5 +1,24 @@
 #summary Enable any DOM element to be resizable
 
+= Usage =
+{{{
+$('#rd').resizable({
+	minWidth: 50,
+	maxWidth: 150,
+	minHeight: 100,
+	maxHeight: 200,
+	onStartResize: function(e){
+		$('#info').html('start'+$(this).css('width'));
+	},
+	onResize: function(e){
+		$('#info').html($(this).css('width'));
+	},
+	onStopResize: function(e){
+		$('#info').html('stop:'+$(this).css('width'));
+	}
+});
+}}}
+
 = Options =
 
 Override defaults width $.fn.resizable.defaults
