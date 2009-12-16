@@ -11,7 +11,7 @@
 			$('#dd1').draggable({
 				
 				onStartDrag:function(){
-					//$('#info').html('start drag');
+					$('#info').html('start drag:'+$(this).css('left'));
 				}
 			});
 			$('#dd2').draggable({axis:null,handle:'#title'});

@@ -9,7 +9,7 @@
 (function($){
 	$.fn.draggable = function(options){
 		function doDown(e){
-			$.data(e.data.target, 'draggable').options.onStartDrag(e);
+			$.data(e.data.target, 'draggable').options.onStartDrag.call(e.data.target, e);
 			return false;
 		}
 		
@@ -36,13 +36,13 @@
 					top: top
 				});
 			}
-			$.data(e.data.target, 'draggable').options.onDrag(e);
+			$.data(e.data.target, 'draggable').options.onDrag.call(e.data.target, e);
 			return false;
 		}
 		
 		function doUp(e){
 			$(document).unbind('.draggable');
-			$.data(e.data.target, 'draggable').options.onStopDrag(e);
+			$.data(e.data.target, 'draggable').options.onStopDrag.call(e.data.target, e);
 			return false;
 		}
 		
