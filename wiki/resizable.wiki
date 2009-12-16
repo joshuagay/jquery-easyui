@@ -42,5 +42,6 @@ Override defaults width $.fn.resizable.defaults
    * triggered when element start resize
  * onResize: function(){}
    * triggered when element resizing
+   * when return false, the DOM element will acts not real resizing
  * onStopResize: function(){}
    * triggered when element stop resize
