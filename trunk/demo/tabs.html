@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="css/tabs.css">
-	<link rel="stylesheet" type="text/css" href="css/icon.css">
-	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/linkbutton.css">
-	<script type="text/javascript" src="js/jquery.linkbutton.js"></script>
-	<script type="text/javascript" src="js/jquery.tabs.js"></script>
+	<link rel="stylesheet" type="text/css" href="../themes/default/tabs.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/linkbutton.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../src/jquery.linkbutton.js"></script>
+	<script type="text/javascript" src="../src/jquery.tabs.js"></script>
 	<script>
 		var index = 1;
 		function addTab(){
@@ -28,7 +28,7 @@
 	<br/>
 	<div id="tt" class="tabs-container" style="width:500px;height:150px;">
 		<div title="Tab1" style="padding:20px;display:none;"> This is Tab1.</div>
-		<div title="Tab2" closable="true" style="padding:20px;display:none;"> This is Tab2 width close button.</div>
+		<div title="Tab2" closable="true" style="overflow:auto;padding:20px;display:none;"  href="test.html"> This is Tab2 width close button.</div>
 		<div title="Tab3" icon="icon-reload" closable="true" style="padding:20px;display:none;"> This is Tab3 width icon.</div>
 		<div title="Tab4 with iframe" closable="true" style="width:100%;height:100%;display:none;">
 			<iframe scrolling="yes" frameborder="0"  src="http://www.google.com" style="width:100%;height:100%;"></iframe>
