@@ -1,0 +1,26 @@
+#summary Enable any DOM element to be resizable
+
+= Options =
+
+Override defaults width $.fn.resizable.defaults
+
+ * disabled: false
+   * when true to disable resizable, false to enable it.
+ * handles: 'n, e, s, w, ne, se, sw, nw, all'
+   * indicate the direction of resizable,'n' is the north,'e' is the east,etc.
+ * minWidth: 10
+   * the minimum width when resizable
+ * minHeight: 10
+   * the minimum height when resizable
+ * maxWidth: 10
+   * the maximum width when resizable
+ * maxHeight: 10
+   * then maximum height when resizable
+ * edge:5
+   * the edge of border to be resized
+ * onStartResize: function(){}
+   * trigger when element start resize
+ * onResize: function(){}
+   * trigger when element resizing
+ * onStopResize: function(){}
+   * trigger when element stop resize
