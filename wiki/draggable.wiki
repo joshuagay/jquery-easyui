@@ -1,4 +1,4 @@
-#summary Enable any DOM element to draggable
+#summary Enable any DOM element to be draggable
 
 = Usage =
 {{{
