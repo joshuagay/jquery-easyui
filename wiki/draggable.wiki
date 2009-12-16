@@ -1,0 +1,11 @@
+#summary Enable any DOM element to draggable
+
+= Usage =
+{{{
+$('#dd').draggable();
+$('#dd').draggable({handle:'#title'});
+}}}
+
+= Options =
+
+ * handle: null
