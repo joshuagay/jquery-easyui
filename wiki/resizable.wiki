@@ -39,8 +39,8 @@ Override defaults width $.fn.resizable.defaults
  * edge:5
    * the edge of border to be resized
  * onStartResize: function(){}
-   * trigger when element start resize
+   * triggered when element start resize
  * onResize: function(){}
-   * trigger when element resizing
+   * triggered when element resizing
  * onStopResize: function(){}
-   * trigger when element stop resize
+   * triggered when element stop resize
