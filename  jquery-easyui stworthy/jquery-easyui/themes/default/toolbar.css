@@ -1,0 +1,19 @@
+.toolbar{
+	height:30px;
+	padding1:5px;
+}
+.toolbar ul.dmenu{
+	display:inline-block;
+	*display:inline;
+	zoom:1;
+	height:24px;
+	width1:300px;
+}
+.toolbar ul.dmenu li a{
+	width1:60px;
+	background:transparent;
+	border:0px;
+}
+.toolbar ul.dmenu1 li ul li a{
+	background:#f7f7f7;
+}

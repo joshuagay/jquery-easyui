@@ -1,0 +1,19 @@
+[{
+	text:'文件夹1',
+	iconCls:'icon-save',
+	children:[{
+		text:'File1'
+	},{
+		text:'多媒体资料',
+		state:'open',
+		children:[{
+			text:'PhotoShop'
+		},{
+			id: 8,
+			text:'异步加载测试项',
+			state:'closed'
+		}]
+	}]
+},{
+	text:'文件2'
+}]
