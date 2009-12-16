@@ -64,7 +64,8 @@
 			if ($(this).attr('selected') == 'true'){
 				$('>div.accordion-header div.accordion-arrow', panel)
 						.removeClass('accordion-arrow-close')
-						.addClass('accordion-arrow-open');
+						.addClass('accordion-arrow-open')
+						.parent().addClass('accordion-header-selected');
 				$('>div.accordion-body', panel).show();
 			}
 			if ($(this).attr('icon')){
@@ -78,7 +79,8 @@
 		if ($('>div.accordion-panel>div.accordion-body:visible', container).length == 0){
 			$('>div.accordion-panel>div.accordion-header:first>div.accordion-arrow', container)
 					.removeClass('accordion-arrow-close')
-					.addClass('accordion-arrow-open');
+					.addClass('accordion-arrow-open')
+					.parent().addClass('accordion-header-selected');
 			$('>div.accordion-panel>div.accordion-body:first', container).show();
 		}
 		
@@ -98,6 +100,8 @@
 					.removeClass('accordion-arrow-close')
 					.addClass('accordion-arrow-open');
 			
+			$('>div.accordion-panel>div.accordion-header-selected', container).removeClass('accordion-header-selected');
+			$(this).addClass('accordion-header-selected');
 		});
 		
 		$(container).bind('_resize', function(e,width,height){
