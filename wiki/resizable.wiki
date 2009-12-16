@@ -22,7 +22,7 @@ $('#rd').resizable({
 
 = Options =
 
-Override defaults width $.fn.resizable.defaults
+Override defaults with $.fn.resizable.defaults
 
  * disabled: false
    * when true to disable resizable, false to enable it.
