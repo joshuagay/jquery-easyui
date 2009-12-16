@@ -12,6 +12,11 @@
 	padding:5px;
 	position:relative;
 	cursor: default;
+	color:1B5978;
+}
+.accordion-header-selected{
+	background:#FBEC88;
+	border-bottom:1px solid #F68263;
 }
 .accordion-header-with-icon{
 	padding-left:26px;
