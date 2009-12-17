@@ -1,4 +1,5 @@
 #summary Enable any DOM element to be draggable
+#labels Featured
 
 = Usage =
 {{{
