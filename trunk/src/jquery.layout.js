@@ -192,9 +192,17 @@
 		$('<div class="layout-expand-north"><div class="layout-button-expand layout-button-down"></div></div>').appendTo(cc);
 		$('<div class="layout-expand-south"><div class="layout-button-expand layout-button-up"></div></div>').appendTo(cc);
 		
-		$('>div[region=center]', container)
+		var center = $('>div[region=center]', container)
 				.addClass('layout-body')
 				.wrap('<div class="layout-panel layout-panel-center"></div>');
+		if (center.attr('title')){
+			var header = $('<div class="layout-header"><span></span></div>').prependTo(center.parent());
+			$('span', header).html(center.attr('title'));
+			if (center.attr('icon')){
+				header.addClass('layout-header-with-icon');
+				$('<div class="layout-icon ' + center.attr('icon') + '"></div>').appendTo(header);
+			}
+		}
 		
 		function wrapPanel(dir){
 			var pp = $('>div[region='+dir+']', container).addClass('layout-body');
@@ -335,6 +343,10 @@
 		// set east panel collapse property
 		$('>div.layout-header div.layout-button-collapse', east).click(function(){
 			var expand = $('>div.layout-expand-east', container);
+			expand.css({
+				width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
+				height:($.boxModel==true ? (east.outerHeight()-(expand.outerHeight()-expand.height())) : east.outerHeight())
+			});
 			center.width(center.width()+east.outerWidth()-expand.outerWidth());
 			setBodySize(center);
 			
@@ -343,10 +355,8 @@
 				expand.css({
 					display:'block',
 					top:parseInt(east.css('top')),
-					width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
-					height:($.boxModel==true ? (east.outerHeight()-(expand.outerHeight()-expand.height())) : east.outerHeight())
+					left:cc.outerWidth() - expand.outerWidth()
 				});
-				expand.css('left', cc.outerWidth() - expand.outerWidth());
 			});
 		});
 		$('>div.layout-expand-east', container).click(function(){
@@ -372,6 +382,10 @@
 		// set west panel collapse property
 		$('>div.layout-header div.layout-button-collapse', west).click(function(){
 			var expand = $('>div.layout-expand-west', container);
+			expand.css({
+				width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
+				height: ($.boxModel==true ? (west.outerHeight()-(expand.outerHeight()-expand.height())) : west.outerHeight())
+			});
 			center.width(center.width()+west.outerWidth()-expand.outerWidth());
 			center.css('left', expand.outerWidth());
 			setBodySize(center);
@@ -380,9 +394,7 @@
 				expand.css({
 					display: 'block',
 					top: parseInt(west.css('top')),
-					left: 0,
-					width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
-					height: ($.boxModel==true ? (west.outerHeight()-(expand.outerHeight()-expand.height())) : west.outerHeight())
+					left: 0
 				});
 			});
 		});
