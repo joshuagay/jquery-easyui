@@ -91,25 +91,23 @@
 	
 	function resize(target) {
 		var dialog = $.data(target, 'dialog').dialog;
-		var content = $('div.dialog-content', dialog);
-		var height = $(dialog).height() - $('div.dialog-header', dialog).outerHeight(true);
-		height -= $('div.dialog-button', dialog).outerHeight(true);
-		if ($.boxModel == true) {
-			height -= content.outerHeight(true) - content.height();
-		} else {
-			height += content.outerHeight(true) - content.outerHeight();
-		}
-		$('div.dialog-content', dialog).css('height', height);
+		var content = $('>div.dialog-content', dialog);
+		var height = $(dialog).height() 
+				- $('>div.dialog-header', dialog).outerHeight(true)
+				- $('div.dialog-button', dialog).outerHeight(true);
 		
-		if ($.boxModel == false) {
-			var width = $(dialog).width();
-			$('div.dialog-content', dialog).css('width', width);
-			$('div.dialog-button', dialog).css('padding', '5px 0px 5px 0px;');
+		if ($.boxModel == true) {
+			content.height(height - (content.outerHeight() - content.height()));
+			content.width($(dialog).width() - (content.outerWidth() - content.width()));
+		} else {
+			content.height(height);
+			content.width($(dialog).width());
 		}
 		
 		var shadow = $.data(target, 'dialog').shadow;
 		if (shadow) {
 			shadow.css({
+				display:'block',
 				top: parseInt(dialog.css('top')),
 				left: parseInt(dialog.css('left')) - 5,
 				width: dialog.outerWidth() + 10,
@@ -117,6 +115,12 @@
 			});
 			$('.dialog-shadow-inner', shadow).shadow({hidden:false});
 		}
+	}
+	
+	function fitChild(target){
+		var dialog = $.data(target, 'dialog').dialog;
+		var content = $('>div.dialog-content', dialog);
+		$('>div', content).trigger('_resize');
 	}
 	
 	// create and return the dialog
@@ -236,6 +240,10 @@
 				disabled: opts.draggable == false,
 				onDrag:function(){
 					resize(target);
+				},
+				onStopDrag:function(){
+					resize(target);
+					fitChild(target);
 				}
 			});
 			
@@ -243,6 +251,10 @@
 				disabled: opts.resizable == false,
 				onResize: function(){
 					resize(target);
+				},
+				onStopResize: function(){
+					resize(target);
+					fitChild(target);
 				}
 			});
 			
@@ -287,6 +299,7 @@
 				if (dialog.css('display') == 'none') {
 					open(this);
 					resize(this);	// resize the dialog
+					fitChild(this);
 				}
 			} else {
 				if (dialog.css('display') == 'block') {

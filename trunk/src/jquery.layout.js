@@ -17,9 +17,7 @@
 	 */
 	function fitChildSize(panel){
 		var body = $('>div.layout-body', panel);
-		if (body.attr('fit') == 'true'){
-			$('>div', body).trigger('_resize', [body.width(), body.height()]);
-		}
+		$('>div', body).trigger('_resize');
 	}
 	
 	/**
@@ -46,9 +44,15 @@
 	 * set layout size
 	 */
 	function setSize(container){
+		var opts = $.data(container, 'layout').options;
 		var cc = $(container);
-		var center = $('>div.layout-panel-center', cc);
 		
+		if (opts.fit == true){
+			var p = cc.parent();
+			cc.width(p.width()).height(p.height());
+		}
+		
+		var center = $('>div.layout-panel-center', cc);
 		
 		var cpos = {
 			top:0,
@@ -318,9 +322,11 @@
 		
 		initCollapse(container);
 
-		$(container).bind('_resize', function(e,width,height){
-			$(container).width(width).height(height);
-			setSize(container);
+		$(container).bind('_resize', function(){
+			var opts = $.data(container, 'layout').options;
+			if (opts.fit == true){
+				setSize(container);
+			}
 			return false;
 		});
 		$(window).resize(function(){
@@ -570,12 +576,17 @@
 		return this.each(function(){
 			var state = $.data(this, 'layout');
 			if (!state){
+				var opts = $.extend({}, {
+					fit: $(this).attr('fit') == 'true'
+				});
 				init(this);
 				$.data(this, 'layout', {
-					inited: true
+					inited: true,
+					options: opts
 				});
 			}
 			setSize(this);
+//			doFit(this);
 		});
 	};
 })(jQuery);

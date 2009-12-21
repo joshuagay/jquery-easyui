@@ -17,6 +17,11 @@
 	function setSize(target) {
 		var grid = $.data(target, 'datagrid').grid;
 		var opts = $.data(target, 'datagrid').options;
+		if (opts.fit == true){
+			var p = grid.parent();
+			opts.width = p.width();
+			opts.height = p.height();
+		}
 		
 		if (opts.rownumbers || (opts.frozenColumns && opts.frozenColumns.length>0)){
 			$('.datagrid-body .datagrid-cell,.datagrid-body .datagrid-cell-rownumber',grid).addClass('datagrid-cell-height');
@@ -164,13 +169,12 @@
 			}
 		});
 		
-		grid.bind('_resize', function(e,width,height){
-			var elem = $('.datagrid-view2 .datagrid-body table', grid)[0];
-			var opts = $.data(elem, 'datagrid').options;
-			opts.width = width;
-			opts.height = height;
-			setSize(elem);
-			fixColumnSize(elem);
+		grid.bind('_resize', function(){
+			var opts = $.data(target, 'datagrid').options;
+			if (opts.fit == true){
+				setSize(target);
+				fixColumnSize(target);
+			}
 			return false;
 		});
 		
@@ -867,6 +871,7 @@
 		pagination: false,
 		rownumbers: false,
 		singleSelect: false,
+		fit: false,
 		pageNumber: 1,
 		pageSize: 10,
 		pageList: [10,20,30,40,50],

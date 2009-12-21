@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,6 +18,12 @@
 				closable:true
 			});
 		}
+		$(function(){
+			$('#tt2').tabs({
+				width:600,
+				height:200
+			});
+		});
 	</script>
 </head>
 <body>
@@ -26,15 +31,15 @@
 		<a class="l-btn" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
 	</div>
 	<br/>
-	<div id="tt" class="tabs-container" style="width:500px;height:150px;">
+	<div id="tt" fit1="true" class="tabs-container" style="width:500px;height:150px;">
 		<div title="Tab1" style="padding:20px;display:none;"> This is Tab1.</div>
-		<div title="Tab2" closable="true" style="overflow:auto;padding:20px;display:none;"  href="test.html"> This is Tab2 width close button.</div>
+		<div title="Tab2" closable="true" style="overflow:auto;padding:20px;display:none;" cache="false" href="test.html"> This is Tab2 width close button.</div>
 		<div title="Tab3" icon="icon-reload" closable="true" style="padding:20px;display:none;"> This is Tab3 width icon.</div>
 		<div title="Tab4 with iframe" closable="true" style="width:100%;height:100%;display:none;">
 			<iframe scrolling="yes" frameborder="0"  src="http://www.google.com" style="width:100%;height:100%;"></iframe>
 		</div>
 		<div title="Tab5 with sub tabs" closable="true" icon="icon-cut" style="padding:10px;display:none;">
-			<div class="tabs-container" style="height1:100px;width:100%;">
+			<div class="tabs-container" style="height:100px;width:300px;">
 				<div title="子标题1">子内容1</div>
 				<div title="子标题2">子内容2</div>
 				<div title="子标题3">子内容3</div>

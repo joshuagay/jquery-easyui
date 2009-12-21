@@ -1,12 +1,13 @@
 .dialog{
-	background:#fff;
+	background1:#fff;
 	border:2px solid #7eabcd;
 	font-size:12px;
 	position:absolute;
 	padding:1px;
 	display:none;
 	overflow:hidden;
-	-moz-border-radius:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
 }
 .dialog-shadow{
 	position:absolute;
@@ -53,7 +54,7 @@ a:hover.dialog-close{
 	filter:alpha(opacity=100);
 }
 .dialog-content{
-	padding:10px;
+	padding:0px;
 	overflow: auto;
 	background:#fff url('images/dialog_content_bg.gif') repeat-x;
 }
