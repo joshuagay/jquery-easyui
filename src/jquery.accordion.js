@@ -11,6 +11,11 @@
 	function setSize(container){
 		var opts = $.data(container, 'accordion').options;
 		var cc = $(container);
+		if (opts.fit == true){
+			var p = cc.parent();
+			opts.width = p.width();
+			opts.height = p.height();
+		}
 		
 		if (opts.width > 0){
 			cc.width($.boxModel==true ? (opts.width-(cc.outerWidth()-cc.width())) : opts.width);
@@ -35,15 +40,15 @@
 			h += $(this).outerHeight();
 		});
 		var height = $(container).height() - h; 
-		$('>div.accordion-panel>div.accordion-body>div', container).each(function(){
-			var panel = $(this);
-			var pp = panel.parent();
+		$('>div.accordion-panel>div.accordion-body', container).each(function(){
+			var pbody = $(this);
+			var panel = $(this).find('>div');
 			if ($.boxModel == true){
+				pbody.height(height - (pbody.outerHeight() - pbody.height()));
 				panel.height(height - (panel.outerHeight() - panel.height()));
-				pp.height(height - (pp.outerHeight() - pp.height()));
 			} else {
+				pbody.height(height);
 				panel.height(height);
-				pp.height(height);
 			}
 		});
 	}
@@ -102,13 +107,12 @@
 			
 			$('>div.accordion-panel>div.accordion-header-selected', container).removeClass('accordion-header-selected');
 			$(this).addClass('accordion-header-selected');
+			setSize(container);
 		});
 		
-		$(container).bind('_resize', function(e,width,height){
-			if (width>0 && height>0){
-				var opts = $.data(container, 'accordion').options;
-				opts.width = width;
-				opts.height = height;
+		$(container).bind('_resize', function(){
+			var opts = $.data(container, 'accordion').options;
+			if (opts.fit == true){
 				setSize(container);
 			}
 			return false;
@@ -116,6 +120,7 @@
 		
 		return $(container);
 	}
+	
 	
 	$.fn.accordion = function(options){
 		options = options || {};
@@ -127,27 +132,28 @@
 				opts = $.extend(state.options, options);
 				state.opts = opts;
 			} else {
-				opts = $.extend({}, $.fn.accordion.defaults, options);
-				if (opts.width == 'auto'){
-					opts.width = parseInt($(this).css('width')) || 'auto';
-				}
-				if (opts.height == 'auto'){
-					opts.height = parseInt($(this).css('height')) || 'auto';
-				}
+				opts = $.extend({}, $.fn.accordion.defaults, {
+					width: (parseInt($(this).css('width')) || 'auto'),
+					height: (parseInt($(this).css('height')) || 'auto'),
+					fit: $(this).attr('fit') == 'true'
+				}, options);
 				$.data(this, 'accordion', {
 					options: opts,
 					accordion: wrapAccordion(this)
 				});
 			}
 			
-			var container = this;
-			
-			setSize(container);
+			setSize(this);
 		});
 	};
 	
 	$.fn.accordion.defaults = {
 		width: 'auto',
-		height: 'auto'
+		height: 'auto',
+		fit: false
 	};
+	
+	$(function(){
+		$('.accordion-container').accordion();
+	});
 })(jQuery);
