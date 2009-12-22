@@ -619,7 +619,7 @@
 		}
 		
 		
-		$('.datagrid-body, .datagrid-header', grid).scrollLeft(0);
+		$('.datagrid-body, .datagrid-header', grid).scrollLeft(0).scrollTop(0);
 		var fields = getColumnFields(opts.columns);
 		$('.datagrid-view2 .datagrid-body table', grid).html(getTBody(fields));
 //		$('.datagrid-view2 .datagrid-body table', grid)[0].innerHTML = (getTBody(fields));
