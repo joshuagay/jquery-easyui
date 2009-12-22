@@ -586,7 +586,10 @@
 				});
 			}
 			setSize(this);
-//			doFit(this);
 		});
 	};
+	
+	$(function(){
+		$('.layout-container').layout();
+	});
 })(jQuery);
