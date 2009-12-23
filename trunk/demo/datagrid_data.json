@@ -1,0 +1,15 @@
+{                                                      
+total:239,                                                      
+rows:[                                                          
+{code:'001',name:'名称1',addr:'红领巾路1号',col4:'col4 data'},         
+{code:'002',name:'名称2',addr:'红领巾路2号',col4:'col4 data'},         
+{code:'003',name:'名称3',addr:'红领巾路3号',col4:'col4 data'},         
+{code:'004',name:'名称4',addr:'红领巾路4号',col4:'col4 data'},         
+{code:'005',name:'名称5',addr:'红领巾路5号',col4:'col4 data'},         
+{code:'006',name:'名称6',addr:'红领巾路6号',col4:'col4 data'},          
+{code:'007',name:'名称7',addr:'红领巾路7号',col4:'col4 data'},          
+{code:'008',name:'名称8',addr:'红领巾路8号',col4:'col4 data'},          
+{code:'009',name:'名称9',addr:'红领巾路9号',col4:'col4 data'},          
+{code:'010',name:'名称10',addr:'红领巾路10号',col4:'col4 data'},          
+]                                                               
+}                                                               

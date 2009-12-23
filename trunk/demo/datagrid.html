@@ -20,33 +20,30 @@
 				height:350,
 				nowrap: false,
 				striped: true,
-				url:'json_test.jsp',
+				url:'datagrid_data.json',
 				sortName: 'code',
 				sortOrder: 'desc',
-				idField:'orderNo',
+				idField:'code',
 				frozenColumns:[[
 				                {field:'ck',checkbox:true},
-				                {title:'NO',field:'orderNo',width:80,sortable:true}
+				                {title:'code',field:'code',width:80,sortable:true}
 				]],
 				columns:[[
-				          {title:'info',colspan:2},
-							{field:'addr',title:'地址',width:120,rowspan:2,sortable:true},
-							{field:'col4',title:'Col41',width:150,align:'right',rowspan:2},
-							{field:'opt',title:'操作',width:100,rowspan:2,
+				          {title:'Base Information',colspan:3},
+							{field:'opt',title:'操作',width:100,align:'center', rowspan:2,
 								formatter:function(value,rec){
-									return '<span style="color:red">'+rec.name+'</span>';
+									return '<span style="color:red">Edit Delete</span>';
 								}
 							}
 				          
 				],[
-							{field:'code',title:'编号',width:80,sortable:true},
-							{field:'name',title:'名称',width:120}
+							{field:'name',title:'名称',width:120},
+							{field:'addr',title:'地址',width:120,rowspan:2,sortable:true},
+							{field:'col4',title:'Col41',width:150,rowspan:2}
 				]],
 				pagination:true,
-				rownumbers1:true,
-				singleSelect:true,
-				pageSize:10,
-				pageList:[2,10,20],
+				rownumbers:true,
+				singleSelect:false,
 				toolbar:[{
 					text:'Add',
 					iconCls:'icon-add',
@@ -88,7 +85,7 @@
 			var ids = [];
 			var rows = $('#test').datagrid('getSelections');
 			for(var i=0;i<rows.length;i++){
-				ids.push(rows[i].orderNo);
+				ids.push(rows[i].code);
 			}
 			alert(ids.join(':'))
 		}
@@ -102,18 +99,6 @@
 	<a href="#" onclick="getSelected()">getSelected</a>
 	<a href="#" onclick="getSelections()">getSelections</a>
 	
-	<table id="test">
-		<thead>
-		  <tr> 
-		    <th colspan="2">信息</th>
-		    <th field="addr" rowspan="2" width="150" sortable="true">ADDRESS</th>
-		    <th field="col4" rowspan="2" width="150" formatter="myformatter">COL4</th>
-		  </tr>
-		  <tr> 
-		    <th field="code" width="80" align="right">CODE</th>
-		    <th field="name" width="120">NAME</th>
-		  </tr>
-		</thead>
-	</table>
+	<table id="test"></table>
 </body>
 </html>
