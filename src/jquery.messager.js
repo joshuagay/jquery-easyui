@@ -27,7 +27,7 @@
 				timeout: 4000
 			}, options || {});
 			
-			var win = $('<div></div>').appendTo(document.body);
+			var win = $('<div></div>').addClass('messager-body').appendTo(document.body);
 			win.html(options.msg);
 			win.dialog({
 				title:options.title,
@@ -79,21 +79,21 @@
 			}
 			content += '<div style="clear:both;"/>';
 			
-			var win = $('<div></div>').appendTo(document.body);
+			var win = $('<div></div>').addClass('messager-body').appendTo(document.body);
 			win.html(content);
+			var buttons = {};
+			buttons[$.messager.defaults.ok] = function(){
+				win.dialog({closed:true});
+				if (fn){
+					fn();
+					return false;
+				}
+			};
 			win.dialog({
 				title: title,
 				modal:true,
 				resizable:false,
-				buttons:{
-					'Ok':function(){
-						win.dialog({closed:true});
-						if (fn){
-							fn();
-							return false;
-						}
-					}
-				},
+				buttons: buttons,
 				onClose:function(){
 					$(this).dialog('options').destroyOnClose = true;
 				}
@@ -101,30 +101,30 @@
 		},
 		
 		confirm: function(title, msg, fn) {
-			var win = $('<div></div>').appendTo(document.body);
+			var win = $('<div></div>').addClass('messager-body').appendTo(document.body);
 			win.html('<div class="messager-icon messager-question"></div>'
 						+ '<div>' + msg + '</div>'
 						+ '<div style="clear:both;"/>');
+			var buttons = {};
+			buttons[$.messager.defaults.ok] = function(){
+				win.dialog({closed:true});
+				if (fn){
+					fn(true);
+					return false;
+				}
+			};
+			buttons[$.messager.defaults.cancel] = function(){
+				win.dialog({closed:true});
+				if (fn){
+					fn(false);
+					return false;
+				}
+			};
 			win.dialog({
 				title: title,
 				modal:true,
 				resizable:false,
-				buttons:{
-					'Ok':function(){
-						win.dialog({closed:true});
-						if (fn){
-							fn(true);
-							return false;
-						}
-					},
-					'Cancel':function(){
-						win.dialog({closed:true});
-						if (fn){
-							fn(false);
-							return false;
-						}
-					}
-				},
+				buttons:buttons,
 				onClose:function(){
 					$(this).dialog('options').destroyOnClose = true;
 				}
@@ -132,37 +132,42 @@
 		},
 		
 		prompt: function(title, msg, fn) {
-			var win = $('<div></div>').appendTo(document.body);
+			var win = $('<div></div>').addClass('messager-body').appendTo(document.body);
 			win.html('<div class="messager-icon messager-question"></div>'
 						+ '<div>' + msg + '</div>'
 						+ '<br/>'
 						+ '<input class="messager-input" type="text" style="width:220px;"/>'
 						+ '<div style="clear:both;"/>');
+			var buttons = {};
+			buttons[$.messager.defaults.ok] = function(){
+				win.dialog({closed:true});
+				if (fn){
+					fn($('.messager-input', win).val());
+					return false;
+				}
+			};
+			buttons[$.messager.defaults.cancel] = function(){
+				win.dialog({closed:true});
+				if (fn){
+					fn();
+					return false;
+				}
+			};
 			win.dialog({
 				title: title,
 				modal:true,
 				resizable:false,
-				buttons:{
-					'Ok':function(){
-						win.dialog({closed:true});
-						if (fn){
-							fn($('.messager-input', win).val());
-							return false;
-						}
-					},
-					'Cancel':function(){
-						win.dialog({closed:true});
-						if (fn){
-							fn();
-							return false;
-						}
-					}
-				},
+				buttons:buttons,
 				onClose:function(){
 					$(this).dialog('options').destroyOnClose = true;
 				}
 			});
 		}
+	};
+	
+	$.messager.defaults = {
+		ok: 'Ok',
+		cancel: 'Cancel'
 	};
 	
 })(jQuery);

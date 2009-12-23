@@ -45,7 +45,7 @@
 		if (hit.length == 0) return;	// is a leaf node
 		
 		if (hit.hasClass('tree-collapsed')){
-			hit.removeClass('tree-collaspsed').addClass('tree-expanded');
+			hit.removeClass('tree-collapsed').addClass('tree-expanded');
 			hit.next().addClass('tree-folder-open');
 			var ul = $(node).next();
 			if (ul.length){

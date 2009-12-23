@@ -1,0 +1,15 @@
+.panel{
+	
+}
+.panel-corner-top,.panel-corner-bottom{
+	display:block;
+}
+.panel-corner-top b,.panel-corner-bottom b{
+	display:block;
+	height:1px;
+	font-size:1px;
+	overflow:hidden;
+	border-left-width:1px;
+	border-left-color:red;
+	border-right1:1px solid;
+}
