@@ -540,6 +540,11 @@
 			});
 		});
 		
+		$('>div.layout-expand-north,>div.layout-expand-south,>div.layout-expand-east,>div.layout-expand-west', container).hover(
+			function(){$(this).addClass('layout-expand-over');},
+			function(){$(this).removeClass('layout-expand-over');}
+		);
+		
 		center.bind('mouseover','center',collapsePanel);
 		north.bind('mouseover','north',collapsePanel);
 		south.bind('mouseover','south',collapsePanel);

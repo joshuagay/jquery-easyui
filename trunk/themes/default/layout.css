@@ -66,6 +66,9 @@
 	cursor:pointer;
 	z-index:1;
 }
+.layout-expand-over{
+	background:#E1F0F2;
+}
 .layout-icon{
 	position:absolute;
 	left:5px;

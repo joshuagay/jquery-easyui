@@ -1,15 +1,51 @@
 .panel{
-	
-}
-.panel-corner-top,.panel-corner-bottom{
-	display:block;
-}
-.panel-corner-top b,.panel-corner-bottom b{
-	display:block;
-	height:1px;
-	font-size:1px;
 	overflow:hidden;
-	border-left-width:1px;
-	border-left-color:red;
-	border-right1:1px solid;
+	font-size:12px;
+}
+.panel-header{
+	padding:5px;
+	color:#15428b;
+	font-weight:bold;
+	font-size:12px;
+	background:url('images/panel_title.png') repeat-x;
+	position:relative;
+	border:1px solid #99BBE8;
+}
+.panel-body{
+	overflow:auto;
+	border:1px solid #99BBE8;
+	border-top-width:0px;
+}
+.panel-body-noheader{
+	border-top-width:1px;
+}
+.panel-tool{
+	position:absolute;
+	right:2px;
+	top:4px;
+}
+.panel-tool div{
+	float:right;
+	width:16px;
+	height:16px;
+	margin-right:2px;
+	cursor:pointer;
+}
+.panel-tool-close{
+	background:url('images/panel_tools.gif') no-repeat -16px 0px;
+}
+.panel-tool-min{
+	background:url('images/panel_tools.gif') no-repeat 0px 0px;
+}
+.panel-tool-max{
+	background:url('images/panel_tools.gif') no-repeat 0px -16px;
+}
+.panel-tool-maxed{
+	background:url('images/panel_tools.gif') no-repeat -16px -16px;
+}
+.panel-tool-collapse{
+	background:url('images/panel_tool_collapse.gif') no-repeat;
+}
+.panel-tool-expand{
+	background:url('images/panel_tool_expand.gif') no-repeat;
 }
