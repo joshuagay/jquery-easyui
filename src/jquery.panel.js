@@ -17,87 +17,84 @@
 			}
 		}
 		
-		var height = panel.height() - panel.find('>.panel-corner-top').outerHeight() - panel.find('>.panel-corner-bottom').outerHeight();
+		var height = panel.height() - panel.find('>div.panel-header').outerHeight();
 		
+		var pheader = panel.find('>div.panel-header');
 		var pbody = panel.find('>div.panel-body');
 		if ($.boxModel == true){
+			pheader.width(panel.width() - (pheader.outerWidth() - pheader.width()));
 			pbody.width(panel.width() - (pbody.outerWidth() - pbody.width()));
 			pbody.height(height - (pbody.outerHeight() - pbody.height()));
 		} else {
+			pheader.width(panel.width());
 			pbody.width(panel.width());
 			pbody.height(height);
 		}
 	}
 	
-	function wrapPanel1(target){
-		var top = '';
-		var bottom = '';
-		var radius = 50;
-		
-		for(var i=0; i<radius; i++){
-			var width = Math.round(radius*(1-Math.cos(Math.asin(i/radius))));
-			top = '<b style="margin:0 ' + (width+'px') + '"></b>' + top;
-			bottom += '<b style="margin:0 ' + (width+'px') + '"></b>';
-		}
-		$(target).prepend('<b class="panel-corner-top">' + top + '</b>');
-		$(target).append('<b class="panel-corner-bottom">' + bottom + '</b>');
-	}
 	function wrapPanel(target){
-		$(target).addClass('panel-body');
-		var panel = $(target).addClass('panel').wrap('<div class="panel"></div>').parent();
-		panel.prepend('<b class="panel-corner-top"></b>');
-		panel.append('<b class="panel-corner-bottom"></b>');
+		var panel = $(target).addClass('panel-body').wrap('<div class="panel"></div>').parent();
 		return panel;
 	}
 	
-	function buildCorner(target){
+	function addHeader(target){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
-		
-		var pbody = panel.find('>div.panel-body');
-		pbody.css('border', opts.border);
-		
-		if (opts.cornerWidth > 0){
-			var top = '';
-			var bottom = '';
-			for(var i=0; i<opts.cornerWidth; i++){
-//				var width = Math.round(Math.sqrt(opts.cornerWidth*opts.cornerWidth-i*i));
-				var width = Math.round(opts.cornerWidth*(1-Math.cos(Math.asin(i/opts.cornerWidth))));
-				top = '<b style="margin:0 ' + (width+'px') + '"></b>' + top;
-				bottom += '<b style="margin:0 ' + (width+'px') + '"></b>';
+		panel.find('>div.panel-header').remove();
+		if (opts.title){
+			var header = $('<div class="panel-header"></div>').prependTo(panel);
+			var tool = $('<div class="panel-tool"></div>').appendTo(header);
+			$('<span></span>').html(opts.title).appendTo(header);
+			if (opts.closable){
+				$('<div class="panel-tool-close"></div>').appendTo(tool);
 			}
-			panel.find('>.panel-corner-top').html(top);
-			panel.find('>.panel-corner-bottom').html(bottom);
-			panel.find('>.panel-corner-top b,>.panel-corner-bottom b').css({
-				borderLeft: pbody.css('borderLeft'),
-				borderRight: pbody.css('borderRight'),
-				background: pbody.css('background')
-			});
-			var firstB = panel.find('>.panel-corner-top b:first');
-			var lastB = panel.find('>.panel-corner-bottom b:last');
-			panel.find('>.panel-corner-top b:first').css('borderTop', pbody.css('borderTop'));
-			panel.find('>.panel-corner-bottom b:last').css('borderBottom', pbody.css('borderBottom'));
-			if ($.boxModel == true){
-				firstB.css('height', 1-(firstB.outerHeight()-firstB.height()));
-				lastB.css('height', 1-(lastB.outerHeight()-lastB.height()));
+			if (opts.maximizable){
+				$('<div class="panel-tool-max"></div>').appendTo(tool);
 			}
-			
-			pbody.css('borderTop', 0);
-			pbody.css('borderBottom', 0);
+			if (opts.minimizable){
+				$('<div class="panel-tool-min"></div>').appendTo(tool);
+			}
+			if (opts.collapsible){
+				$('<div class="panel-tool-toggle panel-tool-collapse"></div>').appendTo(tool);
+			}
+			panel.find('>div.panel-body').removeClass('panel-body-noheader');
+		} else {
+			panel.find('>div.panel-body').addClass('panel-body-noheader');
 		}
 	}
+	
+	function bindEvents(target){
+		var panel = $.data(target, 'panel').panel;
+		$('>div.panel-header .panel-tool-toggle', panel).unbind('.panel', onToggle).bind('click.panel', onToggle);
+		
+		function onToggle(){
+			if ($(this).hasClass('panel-tool-collapse')){
+				$(this).removeClass('panel-tool-collapse').addClass('panel-tool-expand');
+				panel.find('>div.panel-body').slideUp();
+			} else {
+				$(this).removeClass('panel-tool-expand').addClass('panel-tool-collapse');
+				panel.find('>div.panel-body').slideDown();
+			}
+		}
+	}
+	
 	
 	$.fn.panel = function(options){
 		options = options || {};
 		return this.each(function(){
+			var opts;
 			var state = $.data(this, 'panel');
 			if (state){
-				
+				opts = $.extend(state.options, options);
 			} else {
-				var opts = $.extend({}, $.fn.panel.defaults, {
+				opts = $.extend({}, $.fn.panel.defaults, {
 					width: (parseInt($(this).css('width')) || 'auto'),
 					height: (parseInt($(this).css('height')) || 'auto'),
-					border: $(this).css('border')
+					title: $(this).attr('title'),
+					collapsible: $(this).attr('collapsible') == 'true',
+					minimizable: $(this).attr('minimizable') == 'true',
+					maximizable: $(this).attr('maximizable') == 'true',
+					closable: $(this).attr('closable') == 'true'
 				}, options);
 				$.data(this, 'panel', {
 					options: opts,
@@ -105,7 +102,9 @@
 				});
 			}
 			
-			buildCorner(this);
+			addHeader(this);
+			bindEvents(this);
+			
 			setSize(this);
 		});
 	};
@@ -113,6 +112,11 @@
 	$.fn.panel.defaults = {
 		width: 'auto',
 		height: 'auto',
-		cornerWidth: 5
+		title: null,
+		fit: false,
+		collapsible: false,
+		minimizable: false,
+		maximizable: false,
+		closable: false
 	};
 })(jQuery);
