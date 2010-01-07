@@ -3,21 +3,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/accordion.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/panel.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../src/jquery.panel.js"></script>
 	<script type="text/javascript" src="../src/jquery.accordion.js"></script>
 	<script type="text/javascript">
 		function setsize(){
 			$('#cc').width(700).height(350);
 			$('#aa').trigger('_resize');
 		}
+		function select(){
+			$('#aa').accordion('select','title1');
+		}
 	</script>
 </head>
 <body>
 	<div style="margin-bottom: 10px;">
 		<a href="#" onclick="setsize()">setsize</a>
+		<a href="#" onclick="select()">select</a>
 	</div>
-	<div id="cc" style="width:600px;height:300px;padding:10px;border:1px solid #ccc;">
+	<div id="cc" style="overflow:auto;width:600px;height:300px;padding:10px;border:1px solid #ccc;">
 		<div id="aa" class="accordion-container" fit="true" style="width:300px;height:200px;">
 			<div title="title1" icon="icon-save" style="overflow:auto;padding:10px;">
 				<h3 style="color:#0099FF;">Accordion for jQuery</h3>
@@ -35,7 +41,6 @@
 				content2
 			</div>
 			<div title="title3">
-				content3
 			</div>
 		</div>
 	</div>

@@ -2,6 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="../themes/default/panel.css">
 	<link rel="stylesheet" type="text/css" href="../themes/default/layout.css">
 	<link rel="stylesheet" type="text/css" href="../themes/default/linkbutton.css">
 	<link rel="stylesheet" type="text/css" href="../themes/default/pagination.css">
@@ -12,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="../src/jquery.resizable.js"></script>
+	<script type="text/javascript" src="../src/jquery.panel.js"></script>
 	<script type="text/javascript" src="../src/jquery.layout.js"></script>
 	<script type="text/javascript" src="../src/jquery.linkbutton.js"></script>
 	<script type="text/javascript" src="../src/jquery.pagination.js"></script>
@@ -21,13 +23,12 @@
 	<script type="text/javascript" src="../src/jquery.tree.js"></script>
 	<script>
 		$(function(){
-			//$('#cc').layout();
 			$('#tt2').datagrid({
 				title:'my table',
 				width:800,
 				height:500,
 				fit: true,
-				url:'datagrid_data.json',
+				url1:'datagrid_data.json',
 				sortName: 'code',
 				sortOrder: 'desc',
 				columns:[[
@@ -68,8 +69,8 @@
 		<div region="east" icon="icon-reload" title="wtitle" split="true" style="width:180px;padding1:15px;">
 			<ul id="tree1"></ul>
 		</div>
-		<div region="west" split="true" title="导航菜单" style="width:280px;background:#00ee00;padding:5px;">
-			<div class="accordion-container" fit="true">
+		<div region="west" split="true" title="导航菜单" style="width:280px;padding1:1px;">
+			<div class="accordion-container" fit="true" border="false">
 				<div title="title1" style="overflow:auto;">
 					<p>content1</p>
 					<p>content1</p>
@@ -89,9 +90,15 @@
 			</div>
 		</div>
 		<div region="center" title="center title" style="padding1:5px;background:#aaa;">
-			<div class="tabs-container" fit="true" style="height:200px;">
+			<div class="tabs-container" fit="true" border="false" style="height:200px;">
 				<div title="Tab1" style="padding:20px;display:none;"> 
-				tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1tab1
+					<div style="margin-top:20px;">
+					<p>该系统是一个由etmvc和easyui for jQuery技术构建的应用示例，如果您对本系统所使用的技术感兴趣，请与我们联系。</p>
+					<p>&nbsp;</p>
+					<p>设备管理是一款记录设备使用流程的软件，其中有设备信息录入，设备类别设置，区域信息的录制，设备的使用流程，设备使用流程中出错的处理，以及报表查询等功能。</p>
+					<p>&nbsp;</p>
+					<p>我们对系统进行简化，旨在说明一般功能的开发方法。</p>
+					</div>
 				</div>
 				<div title="Tab2" closable="true" style="padding:20px;display:none;"> This is Tab2 width close button.</div>
 				<div title="Tab3" fit="true" icon="icon-reload" closable="true" style="overflow:hidden;padding1:20px;">

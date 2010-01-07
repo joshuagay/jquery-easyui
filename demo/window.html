@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html style="height:100%;width:100%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="../themes/default/tabs.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/linkbutton.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/window.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/panel.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/layout.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../src/jquery.linkbutton.js"></script>
+	<script type="text/javascript" src="../src/jquery.resizable.js"></script>
+	<script type="text/javascript" src="../src/jquery.draggable.js"></script>
+	<script type="text/javascript" src="../src/jquery.panel.js"></script>
+	<script type="text/javascript" src="../src/jquery.window.js"></script>
+	<script type="text/javascript" src="../src/jquery.layout.js"></script>
+	<script>
+		$(function(){
+			$('#w').window({
+				modal1: true,
+				title1: 'My Window',
+				title1: '我的窗口',
+				showType: 'slide',
+				closed1: true,
+				shadow: true,
+				onResize1: function(w,h){
+					//alert('r:'+w+':'+h);
+				},
+				onOpen: function(w,h){
+					//alert('open')
+				},
+				onBeforeClose: function(w,h){
+					//alert('beforeclose');
+					//return false;
+				},
+				onClose: function(w,h){
+					//alert('close')
+				}
+			});
+		});
+		function resize(){
+			$('#w').window({
+				title: 'def',
+				width: 600,
+				modal: false,
+				shadow: false,
+				closed: false,
+				height: 300
+			});
+		}
+		function open1(){
+			$('#w').window('open');
+		}
+		function close1(){
+			$('#w').window('close');
+		}
+	</script>
+</head>
+<body style="height:100%;width:100%;overflow:hidden;border:none;">
+	<a href="javascript:void(0)" onclick="resize()">resize</a>
+	<a href="javascript:void(0)" onclick="open1()">open</a>
+	<a href="javascript:void(0)" onclick="close1()">close</a>
+	<div id="w" icon="icon-save" style="width:500px;height:200px;padding1:5px;">
+		<div class="layout-container" fit="true">
+			<div region="center"></div>
+			<div region="south">
+				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Ok</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
