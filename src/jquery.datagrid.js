@@ -776,6 +776,12 @@
 			var target = this;
 			var grid = $.data(this, 'datagrid').grid;
 			
+			if (opts.border == true){
+				grid.removeClass('datagrid-noborder');
+			} else {
+				grid.addClass('datagrid-noborder');
+			}
+			
 			if (opts.frozenColumns){
 				var t = createColumnHeader(opts.frozenColumns);
 				if (opts.rownumbers){
@@ -859,6 +865,9 @@
 	};
 	
 	$.fn.datagrid.defaults = {
+		title: null,
+		iconCls: null,
+		border: true,
 		width: 'auto',
 		height: 'auto',
 		frozenColumns: null,
