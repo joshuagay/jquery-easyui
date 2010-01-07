@@ -1,50 +1,22 @@
 /**
- * layout 1.0 - jQuery Plug-in
+ * layout - jQuery easyui 1.0.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
  *
- * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  * 
  * Dependencies:
- * 	resizable
+ *   resizable
+ *   panel
  */
 (function($){
 	var resizing = false;	// indicate if the region panel is resizing
 	
-	/**
-	 * make the child fit it's parent panel by trigger the _resize event
-	 */
-	function fitChildSize(panel){
-		var body = $('>div.layout-body', panel);
-		$('>div', body).trigger('_resize');
-	}
-	
-	/**
-	 * set the region panel body size
-	 */
-	function setBodySize(panel){
-		var header = $('>div.layout-header', panel);
-		var body = $('>div.layout-body', panel);
-		
-		if ($.boxModel == true){
-			header.width(panel.width() - (header.outerWidth() - header.width()));
-			body.width(panel.width() - (body.outerWidth() - body.width()));
-			body.height(panel.height() - header.outerHeight() - (body.outerHeight() - body.height()));
-		} else {
-			header.width(panel.width());
-			body.width(panel.width());
-			body.height(panel.height() - header.outerHeight());
-		}
-		
-		fitChildSize(panel);
-	}
-	
-	/**
-	 * set layout size
-	 */
 	function setSize(container){
 		var opts = $.data(container, 'layout').options;
+		var panels = $.data(container, 'layout').panels;
+		
 		var cc = $(container);
 		
 		if (opts.fit == true){
@@ -52,117 +24,84 @@
 			cc.width(p.width()).height(p.height());
 		}
 		
-		var center = $('>div.layout-panel-center', cc);
-		
 		var cpos = {
 			top:0,
 			left:0,
 			width:cc.width(),
-			height:cc.height(),
-			deltaWidth:center.outerWidth()-center.width(),
-			deltaHeight:center.outerHeight()-center.height()
+			height:cc.height()
 		};
 		
-		function setNorthSize(panel){
-			if ($.boxModel == true){
-				panel.width(cc.width() - (panel.outerWidth() - panel.width()));
-			} else {
-				panel.width(cc.width());
-			}
-			panel.css({
-				top: 0,
-				left: 0
+		// set north panel size
+		function setNorthSize(pp){
+			if (pp.length == 0) return;
+			pp.panel('resize', {
+				width: cc.width(),
+				height: pp.panel('options').height,
+				left: 0,
+				top: 0
 			});
-			setBodySize(panel);
-			cpos.top += panel.outerHeight();
-			cpos.height -= panel.outerHeight();
+			cpos.top += pp.panel('options').height;
+			cpos.height -= pp.panel('options').height;
 		}
-		var expand = $('>div.layout-expand-north:visible', cc);
-		var north = $('>div.layout-panel-north:visible', cc);
-		if (expand.length){
-			setNorthSize(expand);
-			setBodySize(north);
+		if (isVisible(panels.expandNorth)){
+			setNorthSize(panels.expandNorth);
 		} else {
-			setNorthSize(north);
+			setNorthSize(panels.north);
 		}
 		
-		
-		function setSouthSize(panel){
-			if ($.boxModel == true){
-				panel.width(cc.width() - (panel.outerWidth() - panel.width()));
-			} else {
-				panel.width(cc.width());
-			}
-			panel.css({
-				top: cc.height()-panel.outerHeight(),
-				left: 0
+		// set south panel size
+		function setSouthSize(pp){
+			if (pp.length == 0) return;
+			pp.panel('resize', {
+				width: cc.width(),
+				height: pp.panel('options').height,
+				left: 0,
+				top: cc.height() - pp.panel('options').height
 			});
-			setBodySize(panel);
-			cpos.height -= panel.outerHeight();
-			
+			cpos.height -= pp.panel('options').height;
 		}
-		var expand = $('>div.layout-expand-south:visible', cc);
-		var south = $('>div.layout-panel-south:visible', cc);
-		if (expand.length){
-			setSouthSize(expand);
-			setBodySize(south);
+		if (isVisible(panels.expandSouth)){
+			setSouthSize(panels.expandSouth);
 		} else {
-			setSouthSize(south);
+			setSouthSize(panels.south);
 		}
 		
-		function setEastSize(panel){
-			if ($.boxModel == true){
-				panel.height(cpos.height - (panel.outerHeight() - panel.height()));
-			} else {
-				panel.height(cpos.height);
-			}
-			panel.css({
-				top: cpos.top,
-				left: cc.width()-panel.outerWidth()
+		// set east panel size
+		function setEastSize(pp){
+			if (pp.length == 0) return;
+			pp.panel('resize', {
+				width: pp.panel('options').width,
+				height: cpos.height,
+				left: cc.width() - pp.panel('options').width,
+				top: cpos.top
 			});
-			setBodySize(panel);
-			cpos.width -= panel.outerWidth();
+			cpos.width -= pp.panel('options').width;
 		}
-		var expand = $('>div.layout-expand-east:visible', cc);
-		var east = $('>div.layout-panel-east:visible', cc);
-		if (expand.length){
-			setEastSize(expand);
-			setBodySize(east);
+		if (isVisible(panels.expandEast)){
+			setEastSize(panels.expandEast);
 		} else {
-			setEastSize(east);
+			setEastSize(panels.east);
 		}
 		
-		
-		function setWestSize(panel){
-			if ($.boxModel == true){
-				panel.height(cpos.height - (panel.outerHeight() - panel.height()));
-			} else {
-				panel.height(cpos.height);
-			}
-			panel.css({
-				top: cpos.top,
-				left: 0
+		// set west panel size
+		function setWestSize(pp){
+			if (pp.length == 0) return;
+			pp.panel('resize', {
+				width: pp.panel('options').width,
+				height: cpos.height,
+				left: 0,
+				top: cpos.top
 			});
-			setBodySize(panel);
-			cpos.left += panel.outerWidth();
-			cpos.width -= panel.outerWidth();
+			cpos.left += pp.panel('options').width;
+			cpos.width -= pp.panel('options').width;
 		}
-		var expand = $('>div.layout-expand-west:visible', cc);
-		var west = $('>div.layout-panel-west:visible', cc);
-		if (expand.length){
-			setWestSize(expand);
-			setBodySize(west);
+		if (isVisible(panels.expandWest)){
+			setWestSize(panels.expandWest);
 		} else {
-			setWestSize(west);
+			setWestSize(panels.west);
 		}
 		
-		center.css({
-			top:cpos.top,
-			left:cpos.left,
-			width:($.boxModel==true ? cpos.width-cpos.deltaWidth : cpos.width),
-			height:($.boxModel==true ? cpos.height-cpos.deltaHeight : cpos.height)
-		});
-		setBodySize(center);
+		panels.center.panel('resize', cpos);
 	}
 	
 	/**
@@ -188,63 +127,36 @@
 			padding:0
 		});
 		
-		$('<div class="layout-split-proxy-h"></div>').appendTo(cc);
-		$('<div class="layout-split-proxy-v"></div>').appendTo(cc);
 		
-		$('<div class="layout-expand-east"><div class="layout-button-expand layout-button-left"></div></div>').appendTo(cc);
-		$('<div class="layout-expand-west"><div class="layout-button-expand layout-button-right"></div></div>').appendTo(cc);
-		$('<div class="layout-expand-north"><div class="layout-button-expand layout-button-down"></div></div>').appendTo(cc);
-		$('<div class="layout-expand-south"><div class="layout-button-expand layout-button-up"></div></div>').appendTo(cc);
-		
-		var center = $('>div[region=center]', container)
-				.addClass('layout-body')
-				.wrap('<div class="layout-panel layout-panel-center"></div>');
-		if (center.attr('title')){
-			var header = $('<div class="layout-header"><span></span></div>').prependTo(center.parent());
-			$('span', header).html(center.attr('title'));
-			if (center.attr('icon')){
-				header.addClass('layout-header-with-icon');
-				$('<div class="layout-icon ' + center.attr('icon') + '"></div>').appendTo(header);
-			}
-		}
-		
-		function wrapPanel(dir){
+		function createPanel(dir){
 			var pp = $('>div[region='+dir+']', container).addClass('layout-body');
-			pp.wrap('<div class="layout-panel layout-panel-'+dir+'"></div>');
-			var panel = $('>div.layout-panel-' + dir, container);
-			if (pp.attr('title')){
-				var header = $('<div class="layout-header"><span></span><div class="layout-button-collapse"></div></div>').prependTo(panel);
-				$('span', header).html(pp.attr('title'));
-				if (pp.attr('icon')){
-					header.addClass('layout-header-with-icon');
-					$('<div class="layout-icon ' + pp.attr('icon') + '"></div>').appendTo(header);
-				}
-				var collapse = $('div.layout-button-collapse', header);
-				if (dir == 'north'){
-					collapse.addClass('layout-button-up');
-				} else if (dir == 'south'){
-					collapse.addClass('layout-button-down');
-				} else if (dir == 'east'){
-					collapse.addClass('layout-button-right');
-				} else if (dir == 'west'){
-					collapse.addClass('layout-button-left');
-				}
-			}
-			panel.css({
-				width: pp.css('width'),
-				height: pp.css('height')
-			});
-			pp.css({
-				width: null,
-				height: null
-			});
-			if ($.boxModel == true){
-				panel.width(panel.width() - (panel.outerWidth() - panel.width()));
-				panel.height(panel.height() - (panel.outerHeight() - panel.height()));
+			
+			var toolCls = null;
+			if (dir == 'north'){
+				toolCls = 'layout-button-up';
+			} else if (dir == 'south'){
+				toolCls = 'layout-button-down';
+			} else if (dir == 'east'){
+				toolCls = 'layout-button-right';
+			} else if (dir == 'west'){
+				toolCls = 'layout-button-left';
 			}
 			
+			var cls = 'layout-panel layout-panel-' + dir;
 			if (pp.attr('split') == 'true'){
-				panel.addClass('layout-split-' + dir);
+				cls += ' layout-split-' + dir;
+			}
+			pp.panel({
+				cls: cls,
+				doSize: false,
+				border: (pp.attr('border') == 'false' ? false : true),
+				tools: [{
+					iconCls: toolCls
+				}]
+			});
+			
+			if (pp.attr('split') == 'true'){
+				var panel = pp.panel('panel');
 				
 				var handles = '';
 				if (dir == 'north') handles = 's';
@@ -286,6 +198,13 @@
 							pos.height = panel.outerHeight();
 						}
 						proxy.css(pos);
+						
+						$('<div class="layout-mask"></div>').css({
+							left:0,
+							top:0,
+							width:cc.width(),
+							height:cc.height()
+						}).appendTo(cc);
 					},
 					onResize: function(e){
 						if (dir == 'north' || dir == 'south'){
@@ -300,28 +219,35 @@
 					onStopResize: function(){
 						$('>div.layout-split-proxy-v', container).css('display','none');
 						$('>div.layout-split-proxy-h', container).css('display','none');
+						var opts = pp.panel('options');
+						opts.width = panel.outerWidth();
+						opts.height = panel.outerHeight();
+						opts.left = panel.css('left');
+						opts.top = panel.css('top');
+						pp.panel('resize');
 						setSize(container);
 						resizing = false;
+						
+						cc.find('>div.layout-mask').remove();
 					}
 				});
 			}
-			return panel;
+			return pp;
 		}
 		
-		var north = wrapPanel('north');
-		var south = wrapPanel('south');
-		var east = wrapPanel('east');
-		var west = wrapPanel('west');
 		
-		if ($.boxModel == true){
-			north.height(north.height() - (north.outerHeight() - north.height()));
-			south.height(south.height() - (south.outerHeight() - south.height()));
-			east.width(east.width() - (east.outerWidth() - east.width()));
-			west.width(west.width() - (west.outerWidth() - west.width()));
-		}
+		$('<div class="layout-split-proxy-h"></div>').appendTo(cc);
+		$('<div class="layout-split-proxy-v"></div>').appendTo(cc);
 		
-		initCollapse(container);
-
+		var panels = {
+			center: createPanel('center')
+		};
+		
+		panels.north = createPanel('north');
+		panels.south = createPanel('south');
+		panels.east = createPanel('east');
+		panels.west = createPanel('west');
+		
 		$(container).bind('_resize', function(){
 			var opts = $.data(container, 'layout').options;
 			if (opts.fit == true){
@@ -332,248 +258,251 @@
 		$(window).resize(function(){
 			setSize(container);
 		});
+		
+		return panels;
 	}
 	
-	/**
-	 * initialize collapse event of the layout container
-	 */
-	function initCollapse(container){
+	
+	function bindEvents(container){
+		var panels = $.data(container, 'layout').panels;
+		
 		var cc = $(container);
-		var north = $('>div.layout-panel-north', container);
-		var south = $('>div.layout-panel-south', container);
-		var east = $('>div.layout-panel-east', container);
-		var west = $('>div.layout-panel-west', container);
-		var center = $('>div.layout-panel-center', container);
 		
-		
-		// set east panel collapse property
-		$('>div.layout-header div.layout-button-collapse', east).click(function(){
-			var expand = $('>div.layout-expand-east', container);
-			expand.css({
-				width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
-				height:($.boxModel==true ? (east.outerHeight()-(expand.outerHeight()-expand.height())) : east.outerHeight())
-			});
-			center.width(center.width()+east.outerWidth()-expand.outerWidth());
-			setBodySize(center);
+		function createExpandPanel(dir){
+			var icon;
+			if (dir == 'east') icon = 'layout-button-left'
+				else if (dir == 'west') icon = 'layout-button-right'
+					else if (dir == 'north') icon = 'layout-button-down'
+						else if (dir == 'south') icon = 'layout-button-up';
 			
-			east.animate({left:cc.width()}, function(){
-				east.css('display', 'none');
-				expand.css({
-					display:'block',
-					top:parseInt(east.css('top')),
-					left:cc.outerWidth() - expand.outerWidth()
+			return $('<div></div>').appendTo(cc).panel({
+				cls: 'layout-expand',
+				title: '&nbsp;',
+				closed: true,
+				doSize: false,
+				tools: [{iconCls: icon}]
+			});
+		}
+		
+		// bind east panel events
+		if (panels.east.length){
+			panels.east.panel('panel').bind('mouseover','east',collapsePanel);
+			panels.east.panel('header').find('.layout-button-right').click(function(){
+				panels.center.panel('resize', {
+					width: panels.center.panel('options').width + panels.east.panel('options').width - 28
 				});
-			});
-		});
-		$('>div.layout-expand-east', container).click(function(){
-			east.css({
-				display: 'block',
-				left: cc.outerWidth()
-			});
-			setBodySize(east);
-			east.animate({left:cc.width()-east.outerWidth()});
-		});
-		$('>div.layout-expand-east div.layout-button-expand', container).click(function(){
-			$(this).parent().css('display','none');
-			east.css({
-				display: 'block',
-				left: cc.outerWidth()
-			});
-			setBodySize(east);
-			east.animate({left:cc.width()-east.outerWidth()}, function(){
-				setSize(container);
-			});
-		});
-		
-		// set west panel collapse property
-		$('>div.layout-header div.layout-button-collapse', west).click(function(){
-			var expand = $('>div.layout-expand-west', container);
-			expand.css({
-				width: ($.boxModel==true ? (23-(expand.outerWidth()-expand.width())) : 23),
-				height: ($.boxModel==true ? (west.outerHeight()-(expand.outerHeight()-expand.height())) : west.outerHeight())
-			});
-			center.width(center.width()+west.outerWidth()-expand.outerWidth());
-			center.css('left', expand.outerWidth());
-			setBodySize(center);
-			west.animate({left:-west.outerWidth()}, function(){
-				west.css('display','none');
-				expand.css({
-					display: 'block',
-					top: parseInt(west.css('top')),
-					left: 0
+				panels.east.panel('panel').animate({left:cc.width()}, function(){
+					panels.east.panel('close');
+					panels.expandEast.panel('open').panel('resize', {
+						top: panels.east.panel('options').top,
+						left: cc.width() - 28,
+						width: 28,
+						height: panels.east.panel('options').height
+					});
 				});
+				if (!panels.expandEast) {
+					panels.expandEast = createExpandPanel('east');
+					panels.expandEast.panel('panel').click(function(){
+						panels.east.panel('open').panel('resize', {left:cc.width()});
+						panels.east.panel('panel').animate({
+							left: cc.width() - panels.east.panel('options').width
+						});
+						return false;
+					}).hover(
+						function(){$(this).addClass('layout-expand-over');},
+						function(){$(this).removeClass('layout-expand-over');}
+					);
+					panels.expandEast.panel('header').find('.layout-button-left').click(function(){
+						panels.expandEast.panel('close');
+						panels.east.panel('open').panel('resize', {left:cc.width()});
+						panels.east.panel('panel').animate({
+							left: cc.width() - panels.east.panel('options').width
+						}, function(){
+							setSize(container);
+						});
+						return false;
+					});
+				}
+				return false;
 			});
-		});
-		$('>div.layout-expand-west', container).click(function(){
-			west.css({
-				display:'block',
-				left:-west.outerWidth()
-			});
-			setBodySize(west);
-			west.animate({left:0});
-		});
-		$('>div.layout-expand-west div.layout-button-expand', container).click(function(){
-			$(this).parent().css('display','none');
-			west.css({
-				display:'block',
-				left:-west.outerWidth()
-			});
-			setBodySize(west);
-			west.animate({left:0}, function(){
-				setSize(container);
-			});
-		});
+		}
 		
-		// set north panel collapse property
-		$('>div.layout-header div.layout-button-collapse', north).click(function(){
-			var expand = $('>div.layout-expand-north', container);
-			expand.css({
-				width: ($.boxModel==true ? (north.outerWidth()-(expand.outerWidth()-expand.width())) : north.outerWidth()),
-				height: ($.boxModel==true ? (23-(expand.outerHeight()-expand.height())) : 23)
-			});
-			var hh = cc.height()
-					- $('>div.layout-expand-south:visible', cc).outerHeight()
-					- $('>div.layout-panel-south:visible', cc).outerHeight()
-					- expand.outerHeight();
-			
-			center.height(hh).css('top',expand.outerHeight());
-			east.height(hh).css('top',expand.outerHeight());
-			west.height(hh).css('top',expand.outerHeight());
-			var expand1 = $('>div.layout-expand-east:visible', container).css('top',expand.outerHeight());
-			var expand2 = $('>div.layout-expand-west:visible', container).css('top',expand.outerHeight());
-			if ($.boxModel == true){
-				expand1.height(east.outerHeight()-(expand1.outerHeight()-expand1.height()));
-				expand2.height(west.outerHeight()-(expand2.outerHeight()-expand2.height()));
-			} else {
-				expand1.height(east.outerHeight());
-				expand2.height(west.outerHeight());
-			}
-			setBodySize(center);
-			setBodySize(east);
-			setBodySize(west);
-			
-			north.animate({top:-north.outerHeight()}, function(){
-				north.css('display','none');
-				expand.css({
-					display: 'block',
-					top: 0,
-					left: 0
+		// bind west panel events
+		if (panels.west.length){
+			panels.west.panel('panel').bind('mouseover','west',collapsePanel);
+			panels.west.panel('header').find('.layout-button-left').click(function(){
+				panels.center.panel('resize', {
+					width: panels.center.panel('options').width + panels.west.panel('options').width - 28,
+					left: 28
 				});
-			});
-		});
-		$('>div.layout-expand-north', container).click(function(){
-			north.css({
-				display: 'block',
-				left: 0
-			});
-			setBodySize(north);
-			north.animate({top:0});
-		});
-		$('>div.layout-expand-north div.layout-button-expand', container).click(function(){
-			$(this).parent().css('display','none');
-			north.css({
-				display: 'block',
-				left: 0
-			});
-			setBodySize(north);
-			north.animate({top:0}, function(){
-				setSize(container);
-			});
-		});
-		
-		// set south panel collapse property
-		$('>div.layout-header div.layout-button-collapse', south).click(function(){
-			var expand = $('>div.layout-expand-south', cc);
-			expand.css({
-				width: ($.boxModel==true ? (south.outerWidth()-(expand.outerWidth()-expand.width())) : south.outerWidth()),
-				height: ($.boxModel==true ? (23-(expand.outerHeight()-expand.height())) : 23)
-			});
-			var hh = cc.height()
-					- $('>div.layout-expand-north:visible', cc).outerHeight()
-					- $('>div.layout-panel-north:visible', cc).outerHeight()
-					- expand.outerHeight();
-			center.height(hh);
-			east.height(hh);
-			west.height(hh);
-			var expand1 = $('>div.layout-expand-east:visible', container);
-			var expand2 = $('>div.layout-expand-west:visible', container);
-			if ($.boxModel == true){
-				expand1.height(east.outerHeight()-(expand1.outerHeight()-expand1.height()));
-				expand2.height(west.outerHeight()-(expand2.outerHeight()-expand2.height()));
-			} else {
-				expand1.height(east.outerHeight());
-				expand2.height(west.outerHeight());
-			}
-			
-			setBodySize(center);
-			setBodySize(east);
-			setBodySize(west);
-			
-			south.animate({top:cc.height()}, function(){
-				south.css('display', 'none');
-				expand.css({
-					display: 'block',
-					left: 0,
-					top: cc.outerHeight() - expand.outerHeight()
+				panels.west.panel('panel').animate({left:-panels.west.panel('options').width}, function(){
+					panels.west.panel('close');
+					panels.expandWest.panel('open').panel('resize', {
+						top: panels.west.panel('options').top,
+						left: 0,
+						width: 28,
+						height: panels.west.panel('options').height
+					});
 				});
+				if (!panels.expandWest) {
+					panels.expandWest = createExpandPanel('west');
+					panels.expandWest.panel('panel').click(function(){
+						panels.west.panel('open').panel('resize', {left: -panels.west.panel('options').width});
+						panels.west.panel('panel').animate({
+							left: 0
+						});
+						return false;
+					}).hover(
+						function(){$(this).addClass('layout-expand-over');},
+						function(){$(this).removeClass('layout-expand-over');}
+					);
+					panels.expandWest.panel('header').find('.layout-button-right').click(function(){
+						panels.expandWest.panel('close');
+						panels.west.panel('open').panel('resize', {left: -panels.west.panel('options').width});
+						panels.west.panel('panel').animate({
+							left: 0
+						}, function(){
+							setSize(container);
+						});
+						return false;
+					});
+				}
+				return false;
 			});
-		});
-		$('>div.layout-expand-south', container).click(function(){
-			south.css({
-				display: 'block',
-				left: 0,
-				top: cc.outerHeight()
-			});
-			setBodySize(south);
-			south.animate({top:cc.height()-south.outerHeight()});
-		});
-		$('>div.layout-expand-south div.layout-button-expand', container).click(function(){
-			$(this).parent().css('display', 'none');
-			south.css({
-				display: 'block',
-				left: 0,
-				top: cc.outerHeight()
-			});
-			setBodySize(south);
-			south.animate({top:cc.height()-south.outerHeight()}, function(){
-				setSize(container);
-			});
-		});
+		}
 		
-		$('>div.layout-expand-north,>div.layout-expand-south,>div.layout-expand-east,>div.layout-expand-west', container).hover(
-			function(){$(this).addClass('layout-expand-over');},
-			function(){$(this).removeClass('layout-expand-over');}
-		);
+		// bind north panel events
+		if (panels.north.length){
+			panels.north.panel('panel').bind('mouseover','north',collapsePanel);
+			panels.north.panel('header').find('.layout-button-up').click(function(){
+				var hh = cc.height() - 28;
+				if (isVisible(panels.expandSouth)){
+					hh -= panels.expandSouth.panel('options').height;
+				} else if (isVisible(panels.south)){
+					hh -= panels.south.panel('options').height;
+				}
+				panels.center.panel('resize', {top:28, height:hh});
+				panels.east.panel('resize', {top:28, height:hh});
+				panels.west.panel('resize', {top:28, height:hh});
+				if (isVisible(panels.expandEast)) panels.expandEast.panel('resize', {top:28, height:hh});
+				if (isVisible(panels.expandWest)) panels.expandWest.panel('resize', {top:28, height:hh});
+				
+				panels.north.panel('panel').animate({top:-panels.north.panel('options').height}, function(){
+					panels.north.panel('close');
+					panels.expandNorth.panel('open').panel('resize', {
+						top: 0,
+						left: 0,
+						width: cc.width(),
+						height: 28
+					});
+				});
+				if (!panels.expandNorth) {
+					panels.expandNorth = createExpandPanel('north');
+					panels.expandNorth.panel('panel').click(function(){
+						panels.north.panel('open').panel('resize', {top:-panels.north.panel('options').height});
+						panels.north.panel('panel').animate({top:0});
+						return false;
+					}).hover(
+						function(){$(this).addClass('layout-expand-over');},
+						function(){$(this).removeClass('layout-expand-over');}
+					);
+					panels.expandNorth.panel('header').find('.layout-button-down').click(function(){
+						panels.expandNorth.panel('close');
+						panels.north.panel('open').panel('resize', {top:-panels.north.panel('options').height});
+						panels.north.panel('panel').animate({top:0}, function(){
+							setSize(container);
+						});
+						return false;
+					});
+				}
+				return false;
+			});
+		}
 		
-		center.bind('mouseover','center',collapsePanel);
-		north.bind('mouseover','north',collapsePanel);
-		south.bind('mouseover','south',collapsePanel);
-		east.bind('mouseover','east',collapsePanel);
-		west.bind('mouseover','west',collapsePanel);
+		// bind south panel events
+		if (panels.south.length){
+			panels.south.panel('panel').bind('mouseover','south',collapsePanel);
+			panels.south.panel('header').find('.layout-button-down').click(function(){
+				var hh = cc.height() - 28;
+				if (isVisible(panels.expandNorth)){
+					hh -= panels.expandNorth.panel('options').height;
+				} else if (isVisible(panels.north)){
+					hh -= panels.north.panel('options').height;
+				}
+				panels.center.panel('resize', {height:hh});
+				panels.east.panel('resize', {height:hh});
+				panels.west.panel('resize', {height:hh});
+				if (isVisible(panels.expandEast)) panels.expandEast.panel('resize', {height:hh});
+				if (isVisible(panels.expandWest)) panels.expandWest.panel('resize', {height:hh});
+				
+				panels.south.panel('panel').animate({top:cc.height()}, function(){
+					panels.south.panel('close');
+					panels.expandSouth.panel('open').panel('resize', {
+						top: cc.height() - 28,
+						left: 0,
+						width: cc.width(),
+						height: 28
+					});
+				});
+				if (!panels.expandSouth) {
+					panels.expandSouth = createExpandPanel('south');
+					panels.expandSouth.panel('panel').click(function(){
+						panels.south.panel('open').panel('resize', {top:cc.height()});
+						panels.south.panel('panel').animate({top:cc.height()-panels.south.panel('options').height});
+						return false;
+					}).hover(
+						function(){$(this).addClass('layout-expand-over');},
+						function(){$(this).removeClass('layout-expand-over');}
+					);
+					panels.expandSouth.panel('header').find('.layout-button-up').click(function(){
+						panels.expandSouth.panel('close');
+						panels.south.panel('open').panel('resize', {top:cc.height()});
+						panels.south.panel('panel').animate({top:cc.height()-panels.south.panel('options').height}, function(){
+							setSize(container);
+						});
+						return false;
+					});
+				}
+				return false;
+			});
+		}
+		
+		panels.center.panel('panel').bind('mouseover','center',collapsePanel);
 		
 		function collapsePanel(e){
 			if (resizing == true) return;
 			
-			if (e.data != 'east' && $('>div.layout-expand-east',container).is(':visible') && east.is(':visible')){
-				east.animate({left:cc.outerWidth()}, function(){
-					east.css('display','none');
+			if (e.data != 'east' && isVisible(panels.east) && isVisible(panels.expandEast)){
+				panels.east.panel('panel').animate({left:cc.width()}, function(){
+					panels.east.panel('close');
 				});
 			}
-			if (e.data != 'west' && $('>div.layout-expand-west',container).is(':visible') && west.is(':visible')){
-				west.animate({left:-west.outerWidth()}, function(){
-					west.css('display','none');
+			if (e.data != 'west' && isVisible(panels.west) && isVisible(panels.expandWest)){
+				panels.west.panel('panel').animate({left:-panels.west.panel('options').width}, function(){
+					panels.west.panel('close');
 				});
 			}
-			if (e.data != 'north' && $('>div.layout-expand-north',container).is(':visible') && north.is(':visible')){
-				north.animate({top:-north.outerHeight()}, function(){
-					north.css('display','none');
+			if (e.data != 'north' && isVisible(panels.north) && isVisible(panels.expandNorth)){
+				panels.north.panel('panel').animate({top:-panels.north.panel('options').height}, function(){
+					panels.north.panel('close');
 				});
 			}
-			if (e.data != 'south' && $('>div.layout-expand-south',container).is(':visible') && south.is(':visible')){
-				south.animate({top:cc.outerHeight()}, function(){
-					south.css('display','none');
+			if (e.data != 'south' && isVisible(panels.south) && isVisible(panels.expandSouth)){
+				panels.south.panel('panel').animate({top:cc.height()}, function(){
+					panels.south.panel('close');
 				});
 			}
+			return false;
+		}
+		
+	}
+	
+	function isVisible(pp){
+		if (!pp) return false;
+		if (pp.length){
+			return pp.panel('panel').is(':visible');
+		} else {
+			return false;
 		}
 	}
 	
@@ -584,11 +513,14 @@
 				var opts = $.extend({}, {
 					fit: $(this).attr('fit') == 'true'
 				});
-				init(this);
+				var t1=new Date().getTime();
 				$.data(this, 'layout', {
-					inited: true,
-					options: opts
+					options: opts,
+					panels: init(this)
 				});
+				bindEvents(this);
+				var t2=new Date().getTime();
+//				alert(t2-t1)
 			}
 			setSize(this);
 		});

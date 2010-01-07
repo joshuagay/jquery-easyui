@@ -1,64 +1,63 @@
 /**
- * resizable 1.0 - jQuery Plug-in
+ * resizable - jQuery easyui 1.0.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
  *
- * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  */
 (function($){
 	$.fn.resizable = function(options){
 		function resize(e){
 			var resizeData = e.data;
 			var options = $.data(resizeData.target, 'resizable').options;
-			var target = resizeData.target;
 			if (resizeData.dir.indexOf('e') != -1) {
 				var width = resizeData.startWidth + e.pageX - resizeData.startX;
-				if ($.boxModel == false) {
-					width += resizeData.deltaWidth;
-				}
 				width = Math.min(
 							Math.max(width, options.minWidth),
 							options.maxWidth
 						);
-				$(target).css('width', width + 'px');
+				resizeData.width = width;
 			}
 			if (resizeData.dir.indexOf('s') != -1) {
 				var height = resizeData.startHeight + e.pageY - resizeData.startY;
-				if ($.boxModel == false) {
-					height += resizeData.deltaHeight;
-				}
 				height = Math.min(
-							Math.max(height, options.minHeight),
-							options.maxHeight
-						);
-				$(target).css('height', height + 'px');
+						Math.max(height, options.minHeight),
+						options.maxHeight
+				);
+				resizeData.height = height;
 			}
 			if (resizeData.dir.indexOf('w') != -1) {
-				var width = resizeData.startWidth - e.pageX + resizeData.startX;
-				if ($.boxModel == false) {
-					width += resizeData.deltaWidth;
-				}
-				if (width >= options.minWidth && width <= options.maxWidth) {
-					var left = resizeData.startLeft + e.pageX - resizeData.startX;
-					$(target).css({
-						left: left + 'px',
-						width: width + 'px'
-					});
+				resizeData.width = resizeData.startWidth - e.pageX + resizeData.startX;
+				if (resizeData.width >= options.minWidth && resizeData.width <= options.maxWidth) {
+					resizeData.left = resizeData.startLeft + e.pageX - resizeData.startX;
 				}
 			}
 			if (resizeData.dir.indexOf('n') != -1) {
-				var height = resizeData.startHeight - e.pageY + resizeData.startY;
-				if ($.boxModel == false) {
-					height += resizeData.deltaHeight;
+				resizeData.height = resizeData.startHeight - e.pageY + resizeData.startY;
+				if (resizeData.height >= options.minHeight && resizeData.height <= options.maxHeight) {
+					resizeData.top = resizeData.startTop + e.pageY - resizeData.startY;
 				}
-				if (height >= options.minHeight && height <= options.maxHeight) {
-					var top = resizeData.startTop + e.pageY - resizeData.startY;
-					$(target).css({
-						top: top + 'px',
-						height: height + 'px'
-					});
-				}
+			}
+		}
+		
+		function applySize(e){
+			var resizeData = e.data;
+			var target = resizeData.target;
+			if ($.boxModel == true){
+				$(target).css({
+					width: resizeData.width - resizeData.deltaWidth,
+					height: resizeData.height - resizeData.deltaHeight,
+					left: resizeData.left,
+					top: resizeData.top
+				});
+			} else {
+				$(target).css({
+					width: resizeData.width,
+					height: resizeData.height,
+					left: resizeData.left,
+					top: resizeData.top
+				});
 			}
 		}
 		
@@ -68,17 +67,16 @@
 		}
 		
 		function doMove(e){
-			$.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e);
-			if ($.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e) == false){
-				return false;
-			} else {
-				resize(e);
-				return false;
+			resize(e);
+			if ($.data(e.data.target, 'resizable').options.onResize.call(e.data.target, e) != false){
+				applySize(e)
 			}
+			return false;
 		}
 		
 		function doUp(e){
-			resize(e);
+			resize(e, true);
+			applySize(e);
 			$(document).unbind('.resizable');
 			$.data(e.data.target, 'resizable').options.onStopResize.call(e.data.target, e);
 			return false;
@@ -126,10 +124,14 @@
 					dir: dir,
 					startLeft: getCssValue('left'),
 					startTop: getCssValue('top'),
+					left: getCssValue('left'),
+					top: getCssValue('top'),
 					startX: e.pageX,
 					startY: e.pageY,
-					startWidth: $(target).width(),
-					startHeight: $(target).height(),
+					startWidth: $(target).outerWidth(),
+					startHeight: $(target).outerHeight(),
+					width: $(target).outerWidth(),
+					height: $(target).outerHeight(),
 					deltaWidth: $(target).outerWidth() - $(target).width(),
 					deltaHeight: $(target).outerHeight() - $(target).height()
 				};

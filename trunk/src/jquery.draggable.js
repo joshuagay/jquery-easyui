@@ -1,19 +1,14 @@
 /**
- * draggable 1.0 - jQuery Plug-in
+ * draggable - jQuery easyui 1.0.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
  *
- * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  */
 (function($){
 	$.fn.draggable = function(options){
-		function doDown(e){
-			$.data(e.data.target, 'draggable').options.onStartDrag.call(e.data.target, e);
-			return false;
-		}
-		
-		function doMove(e){
+		function drag(e){
 			var dragData = e.data;
 			var left = dragData.startLeft + e.pageX - dragData.startX;
 			var top = dragData.startTop + e.pageY - dragData.startY;
@@ -27,20 +22,39 @@
 			
 			var opts = $.data(e.data.target, 'draggable').options;
 			if (opts.axis == 'h') {
-				$(dragData.target).css('left', left);
+				dragData.left = left;
 			} else if (opts.axis == 'v') {
-				$(dragData.target).css('top', top);
+				dragData.top = top;
 			} else {
-				$(dragData.target).css({
-					left: left,
-					top: top
-				});
+				dragData.left = left;
+				dragData.top = top;
 			}
-			$.data(e.data.target, 'draggable').options.onDrag.call(e.data.target, e);
+		}
+		
+		function applyDrag(e){
+			var dragData = e.data;
+			$(dragData.target).css({
+				left: dragData.left,
+				top: dragData.top
+			});
+		}
+		
+		function doDown(e){
+			$.data(e.data.target, 'draggable').options.onStartDrag.call(e.data.target, e);
+			return false;
+		}
+		
+		function doMove(e){
+			drag(e);
+			if ($.data(e.data.target, 'draggable').options.onDrag.call(e.data.target, e) != false){
+				applyDrag(e);
+			}
 			return false;
 		}
 		
 		function doUp(e){
+			drag(e);
+			applyDrag(e);
 			$(document).unbind('.draggable');
 			$.data(e.data.target, 'draggable').options.onStopDrag.call(e.data.target, e);
 			return false;
@@ -86,6 +100,8 @@
 				var data = {
 					startLeft: position.left,
 					startTop: position.top,
+					left: position.left,
+					top: position.top,
 					startX: e.pageX,
 					startY: e.pageY,
 					target: e.data.target,
