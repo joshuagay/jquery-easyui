@@ -120,7 +120,7 @@
 	function fitChild(target){
 		var dialog = $.data(target, 'dialog').dialog;
 		var content = $('>div.dialog-content', dialog);
-		$('>div', content).trigger('_resize');
+		$('>div', content).triggerHandler('_resize');
 	}
 	
 	// create and return the dialog

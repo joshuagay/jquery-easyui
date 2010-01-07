@@ -137,8 +137,7 @@
 					panel.width(panels.width());
 				}
 			}
-			
-			$('>div', panel).trigger('_resize');
+			$('>div', panel).triggerHandler('_resize');
 		}
 		
 	}
@@ -335,6 +334,7 @@
 					width: (parseInt($(this).css('width')) || 'auto'),
 					height: (parseInt($(this).css('height')) || 'auto'),
 					fit: ($(this).attr('fit') == 'true'),
+					border: ($(this).attr('border') == 'false' ? false : true),
 					plain: ($(this).attr('plain') == 'true')
 				}, options);
 				wrapTabs(this);
@@ -345,12 +345,20 @@
 			
 			var container = this;
 			var header = $('>div.tabs-header', container);
+			var panels = $('>div.tabs-panels', container);
 			var tabs = $('ul.tabs', header);
 			
 			if (opts.plain == true) {
 				header.addClass('tabs-header-plain');
 			} else {
 				header.removeClass('tabs-header-plain');
+			}
+			if (opts.border == true){
+				header.removeClass('tabs-header-noborder');
+				panels.removeClass('tabs-panels-noborder');
+			} else {
+				header.addClass('tabs-header-noborder');
+				panels.addClass('tabs-panels-noborder');
 			}
 			
 			if (state) {
@@ -432,6 +440,7 @@
 		idSeed: 0,
 		plain: false,
 		fit: false,
+		border: true,
 		scrollIncrement: 100,
 		scrollDuration: 400,
 		onLoad: function(){},
