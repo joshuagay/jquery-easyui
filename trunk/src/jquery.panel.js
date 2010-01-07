@@ -8,11 +8,18 @@
  * 
  */
 (function($){
-	function setSize(target){
+	function setSize(target, param){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
 		var pheader = panel.find('>div.panel-header');
 		var pbody = panel.find('>div.panel-body');
+		
+		if (param){
+			if (param.width) opts.width = param.width;
+			if (param.height) opts.height = param.height;
+			if (param.left != null) opts.left = param.left;
+			if (param.top != null) opts.top = param.top;
+		}
 		
 		if (opts.fit == true){
 			var p = panel.parent();
@@ -61,6 +68,20 @@
 		opts.onResize.apply(target, [opts.width, opts.height]);
 		
 		panel.find('>div.panel-body>div').triggerHandler('_resize');
+	}
+	
+	function movePanel(target, param){
+		var opts = $.data(target, 'panel').options;
+		var panel = $.data(target, 'panel').panel;
+		if (param){
+			if (param.left != null) opts.left = param.left;
+			if (param.top != null) opts.top = param.top;
+		}
+		panel.css({
+			left: opts.left,
+			top: opts.top
+		});
+		opts.onMove.apply(target, [opts.left, opts.top]);
 	}
 	
 	function wrapPanel(target){
@@ -307,14 +328,11 @@
 				});
 			case 'resize':
 				return this.each(function(){
-					if (param){
-						var opts = $.data(this, 'panel').options;
-						if (param.width) opts.width = param.width;
-						if (param.height) opts.height = param.height;
-						if (param.left != null) opts.left = param.left;
-						if (param.top != null) opts.top = param.top;
-					}
-					setSize(this);
+					setSize(this, param);
+				});
+			case 'move':
+				return this.each(function(){
+					movePanel(this, param);
 				});
 			}
 		}
@@ -397,6 +415,7 @@
 		onBeforeClose: function(){},
 		onClose: function(){},
 		onResize: function(width,height){},
+		onMove: function(left,top){},
 		onMaximize: function(){},
 		onRestore: function(){},
 		onMinimize: function(){},

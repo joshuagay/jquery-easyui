@@ -20,8 +20,7 @@
 }
 .window .window-header{
 	background:transparent;
-	padding-top:2px;
-	padding-bottom:4px;
+	padding:2px 0px 4px 0px;
 }
 .window .window-body{
 	background:#fff;
@@ -33,17 +32,16 @@
 	top:1px;
 }
 .window .window-header .panel-with-icon{
-	padding-left:13px;
+	padding-left:18px;
 }
 .window .window-header .panel-tool{
 	top:0px;
-	right:0px;
+	right:1px;
 }
 .window-proxy{
 	position:absolute;
 	overflow:hidden;
 	border:1px dashed #15428b;
-	display:none;
 }
 .window-mask{
 	position:absolute;
@@ -54,7 +52,7 @@
 	filter:alpha(opacity=40);
 	opacity:0.40;
 	background:#ccc;
-	display:none;
+	display1:none;
 	font-size:1px;
 	*zoom:1;
 	overflow:hidden;

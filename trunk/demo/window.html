@@ -20,16 +20,23 @@
 		$(function(){
 			$('#w').window({
 				modal1: true,
-				title1: 'My Window',
+				title: 'My Window',
 				title1: '我的窗口',
 				showType: 'slide',
 				closed1: true,
-				shadow: true,
+				shadow1: true,
 				onResize1: function(w,h){
 					//alert('r:'+w+':'+h);
 				},
+				onBeforeOpen: function(){
+					var win = $(this).window('window');
+					win.slideDown(400,function(){
+						$('#w').window('open',true);
+					});
+					return false;
+				},
 				onOpen: function(w,h){
-					//alert('open')
+					alert('open')
 				},
 				onBeforeClose: function(w,h){
 					//alert('beforeclose');
@@ -39,12 +46,13 @@
 					//alert('close')
 				}
 			});
+			$('#w2').window();
 		});
 		function resize(){
 			$('#w').window({
 				title: 'def',
 				width: 600,
-				modal: false,
+				modal: true,
 				shadow: false,
 				closed: false,
 				height: 300
@@ -58,10 +66,12 @@
 		}
 	</script>
 </head>
-<body style="height:100%;width:100%;overflow:hidden;border:none;">
+<body style="height:100%;width:100%;overflow:hidden;border:none;" >
+	<div>
 	<a href="javascript:void(0)" onclick="resize()">resize</a>
 	<a href="javascript:void(0)" onclick="open1()">open</a>
 	<a href="javascript:void(0)" onclick="close1()">close</a>
+	</div>
 	<div id="w" icon="icon-save" style="width:500px;height:200px;padding1:5px;">
 		<div class="layout-container" fit="true">
 			<div region="center"></div>
@@ -69,6 +79,9 @@
 				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Ok</a>
 			</div>
 		</div>
+	</div>
+	<div id="w2" title="My Title" style="padding:10px;width:300px;height:200px;left:10px;top:60px;">
+		Message Test
 	</div>
 </body>
 </html>
