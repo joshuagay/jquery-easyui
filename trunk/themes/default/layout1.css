@@ -1,0 +1,113 @@
+.layout{
+	position:relative;
+	overflow:hidden;
+	margin:0;
+	padding:0;
+}
+.layout-panel{
+	position:absolute;
+	overflow:hidden;
+}
+.layout-panel-east,.layout-panel-west{
+	z-index:2;
+	background:#fff;
+}
+.layout-panel-north,.layout-panel-south{
+	z-index:3;
+	background:#fff;
+}
+.layout-header{
+	padding:5px;
+	background:url('images/layout_title.png') repeat-x;
+	font-size:12px;
+	position:relative;
+	border:1px solid #99BBE8;
+}
+.layout-header-with-icon{
+	padding-left:24px;
+}
+.layout-button-collapse{
+	position:absolute;
+	right:5px;
+	top:4px;
+	width:15px;
+	height:15px;
+}
+.layout-button-up{
+	background:url('images/layout_collapse_up.gif') no-repeat;
+	cursor:pointer;
+}
+.layout-button-down{
+	background:url('images/layout_collapse_down.gif') no-repeat;
+	cursor:pointer;
+}
+.layout-button-left{
+	background:url('images/layout_collapse_left.gif') no-repeat;
+	cursor:pointer;
+}
+.layout-button-right{
+	background:url('images/layout_collapse_right.gif') no-repeat;
+	cursor:pointer;
+}
+.layout-button-expand{
+	width:15px;
+	height:15px;
+	font-size:1px;
+	float:right;
+}
+.layout-expand-east,.layout-expand-west,.layout-expand-north,.layout-expand-south{
+	position:absolute;
+	padding:3px;
+	background:#D2E0F2;
+	border:1px solid #99BBE8;
+	display:none;
+	width:1px;
+	font-size:1px;
+	cursor:pointer;
+	z-index:1;
+}
+.layout-expand-over{
+	background:#E1F0F2;
+}
+.layout-icon{
+	position:absolute;
+	left:5px;
+	top:4px;
+	width:16px;
+	height:16px;
+}
+.layout-body{
+	overflow:auto;
+}
+.layout-split-proxy-h{
+	position:absolute;
+	width:5px;
+	background1:#ccc;
+	background:url('images/layout_split_h.gif') repeat-y right center;
+	font-size:1px;
+	cursor:e-resize;
+	display:none;
+	z-index:4;
+}
+.layout-split-proxy-v{
+	position:absolute;
+	height:5px;
+	background1:#ccc;
+	background:url('images/layout_split_v.gif') repeat-x center top;
+	font-size:1px;
+	cursor:n-resize;
+	display:none;
+	z-index:4;
+}
+.layout-split-north{
+	border-bottom:5px solid #D2E0F2;
+}
+.layout-split-south{
+	border-top:5px solid #D2E0F2;
+}
+.layout-split-east{
+	border-left:5px solid #D2E0F2;
+}
+.layout-split-west{
+	border-right:5px solid #D2E0F2;
+}

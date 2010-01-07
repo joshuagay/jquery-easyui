@@ -16,65 +16,39 @@
 	z-index:3;
 	background:#fff;
 }
-.layout-header{
-	padding:5px;
-	background:url('images/layout_title.png') repeat-x;
-	font-size:12px;
-	position:relative;
-	border:1px solid #99BBE8;
-}
-.layout-header-with-icon{
-	padding-left:24px;
-}
-.layout-button-collapse{
-	position:absolute;
-	right:5px;
-	top:4px;
-	width:15px;
-	height:15px;
-}
 .layout-button-up{
-	background:url('images/layout_collapse_up.gif') no-repeat;
-	cursor:pointer;
+	background:url('images/layout_button_up.gif') no-repeat;
 }
 .layout-button-down{
-	background:url('images/layout_collapse_down.gif') no-repeat;
-	cursor:pointer;
+	background:url('images/layout_button_down.gif') no-repeat;
 }
 .layout-button-left{
-	background:url('images/layout_collapse_left.gif') no-repeat;
-	cursor:pointer;
+	background:url('images/layout_button_left.gif') no-repeat;
 }
 .layout-button-right{
-	background:url('images/layout_collapse_right.gif') no-repeat;
-	cursor:pointer;
+	background:url('images/layout_button_right.gif') no-repeat;
 }
-.layout-button-expand{
-	width:15px;
-	height:15px;
-	font-size:1px;
-	float:right;
-}
-.layout-expand-east,.layout-expand-west,.layout-expand-north,.layout-expand-south{
+.layout-expand{
 	position:absolute;
-	padding:3px;
+	padding:0px 5px;
+	padding:0px;
 	background:#D2E0F2;
-	border:1px solid #99BBE8;
-	display:none;
-	width:1px;
 	font-size:1px;
 	cursor:pointer;
 	z-index:1;
 }
+.layout-expand .panel-header{
+	background:transparent;
+	border-bottom-width:0px;
+}
+.layout-expand .panel-header .panel-tool{
+	top: 5px;
+}
+.layout-expand .panel-body{
+	overflow:hidden;
+}
 .layout-expand-over{
 	background:#E1F0F2;
-}
-.layout-icon{
-	position:absolute;
-	left:5px;
-	top:4px;
-	width:16px;
-	height:16px;
 }
 .layout-body{
 	overflow:auto;
@@ -82,22 +56,20 @@
 .layout-split-proxy-h{
 	position:absolute;
 	width:5px;
-	background1:#ccc;
-	background:url('images/layout_split_h.gif') repeat-y right center;
+	background:#ccc;
 	font-size:1px;
 	cursor:e-resize;
 	display:none;
-	z-index:4;
+	z-index:5;
 }
 .layout-split-proxy-v{
 	position:absolute;
 	height:5px;
-	background1:#ccc;
-	background:url('images/layout_split_v.gif') repeat-x center top;
+	background:#ccc;
 	font-size:1px;
 	cursor:n-resize;
 	display:none;
-	z-index:4;
+	z-index:5;
 }
 .layout-split-north{
 	border-bottom:5px solid #D2E0F2;
@@ -111,3 +83,11 @@
 .layout-split-west{
 	border-right:5px solid #D2E0F2;
 }
+.layout-mask{
+	position:absolute;
+	background:#fafafa;
+	filter:alpha(opacity=10);
+	opacity:0.10;
+	z-index:4;
+}
+

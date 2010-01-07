@@ -12,6 +12,9 @@
 	padding-top:2px;
 	overflow:hidden;
 }
+.tabs-header-noborder{
+	border:0px;
+}
 .tabs-header-plain{
 	border:0px;
 	background:transparent;
@@ -166,4 +169,6 @@
 	border-top:0px;
 	overflow:auto;
 }
-
+.tabs-panels-noborder{
+	border:0px;
+}
