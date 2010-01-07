@@ -4,6 +4,9 @@
 	overflow1:hidden;
 	background:#fff;
 }
+.datagrid-noborder{
+	border-width:0px;
+}
 .datagrid-wrap{
 	position:relative;
 }

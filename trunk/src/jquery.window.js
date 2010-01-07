@@ -17,6 +17,9 @@
 		$(target).panel('resize');
 	}
 	
+	/**
+	 * create and initialize window, the window is created based on panel component 
+	 */
 	function init(target, options){
 		var state = $.data(target, 'window');
 		var opts;
@@ -128,6 +131,9 @@
 		}
 	}
 	
+	/**
+	 * set window drag and resize property
+	 */
 	function setProperties(target){
 		var state = $.data(target, 'window');
 		
