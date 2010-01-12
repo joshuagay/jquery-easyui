@@ -47,6 +47,7 @@
 				}
 			});
 			$('#w2').window();
+			$('#pp').panel();
 		});
 		function resize(){
 			$('#w').window({
@@ -72,16 +73,20 @@
 	<a href="javascript:void(0)" onclick="open1()">open</a>
 	<a href="javascript:void(0)" onclick="close1()">close</a>
 	</div>
-	<div id="w" icon="icon-save" style="width:500px;height:200px;padding1:5px;">
+	<div id="w" icon="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
 		<div class="layout-container" fit="true">
-			<div region="center"></div>
-			<div region="south">
+			<div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
+				This jQuery tutorial shows you a slick and animated method for enlarging thumbnail-sized photos when the user hovers on them.
+			</div>
+			<div region="south" border="false" style="text-align:right;height:30px;line-height:30px;">
 				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Ok</a>
+				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Cancel</a>
 			</div>
 		</div>
 	</div>
 	<div id="w2" title="My Title" style="padding:10px;width:300px;height:200px;left:10px;top:60px;">
 		Message Test
+		
 	</div>
 </body>
 </html>

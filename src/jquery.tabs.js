@@ -171,6 +171,7 @@
 				selected: $(this).attr('selected') == 'true',
 				cache: $(this).attr('cache') == 'false' ? false : true
 			};
+			$(this).attr('title','');
 			createTab(container, options);
 		});
 		
@@ -298,6 +299,10 @@
 		}
 	}
 	
+	function exists(container, title){
+		return $('>div.tabs-header li:has(a span:contains("' + title + '"))', container).length > 0;
+	}
+	
 	$.fn.tabs = function(options, param){
 		if (typeof options == 'string') {
 			switch(options) {
@@ -318,6 +323,8 @@
 					return this.each(function(){
 						selectTab(this, param);
 					});
+				case 'exists':
+					return exists(this[0], param);
 			}
 		}
 		

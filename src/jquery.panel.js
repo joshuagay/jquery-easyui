@@ -44,6 +44,7 @@
 				pbody.width(panel.width());
 			}
 		} else {
+			panel.width('auto');
 			pbody.width('auto');
 		}
 		if (!isNaN(opts.height)){
@@ -101,10 +102,8 @@
 		var panel = $.data(target, 'panel').panel;
 		panel.find('>div.panel-header').remove();
 		if (opts.title){
-//			var header = $('<div class="panel-header"><span>'+opts.title+'</span></div>').prependTo(panel);
 			var header = $('<div class="panel-header"><div class="panel-title">'+opts.title+'</div></div>').prependTo(panel);
 			if (opts.iconCls){
-//				header.addClass('panel-with-icon');
 				header.find('.panel-title').addClass('panel-with-icon');
 				$('<div class="panel-icon"></div>').addClass(opts.iconCls).appendTo(header);
 			}
@@ -205,6 +204,17 @@
 		panel.hide();
 		opts.closed = true;
 		opts.onClose.call(target);
+	}
+	
+	function destroyPanel(target, forceDestroy){
+		var opts = $.data(target, 'panel').options;
+		var panel = $.data(target, 'panel').panel;
+		
+		if (forceDestroy != true){
+			if (opts.onBeforeDestroy.call(target) == false) return;
+		}
+		panel.remove();
+		opts.onDestroy.call(target);
 	}
 	
 	function collapsePanel(target, animate){
@@ -321,6 +331,10 @@
 				return this.each(function(){
 					closePanel(this, param);
 				});
+			case 'destroy':
+				return this.each(function(){
+					destroyPanel(this, param);
+				});
 			case 'refresh':
 				return this.each(function(){
 					$.data(this, 'panel').isLoaded = false;
@@ -364,6 +378,7 @@
 					maximized: t.attr('maximized') == 'true',
 					closed: t.attr('closed') == 'true'
 				}, options);
+				t.attr('title', '');
 				state = $.data(this, 'panel', {
 					options: opts,
 					panel: wrapPanel(this),
@@ -375,13 +390,25 @@
 			setBorder(this);
 			loadData(this);
 			
-			if (opts.doSize == true) setSize(this);
-//			setSize(this);
+			if (opts.closed == true){
+				closePanel(this, true);
+			} else {
+				openPanel(this, true);
+				if (opts.doSize == true){
+					setSize(this);
+				}
+				if (opts.maximized == true) maximizePanel(this);
+				if (opts.minimized == true) minimizePanel(this);
+				if (opts.collapsed == true) collapsePanel(this);
+			}
 			
-			if (opts.maximized == true) maximizePanel(this);
-			if (opts.minimized == true) minimizePanel(this);
-			if (opts.collapsed == true) collapsePanel(this);
-			if (opts.closed == true) closePanel(this);
+//			if (opts.doSize == true) setSize(this);
+////			setSize(this);
+//			
+//			if (opts.maximized == true) maximizePanel(this);
+//			if (opts.minimized == true) minimizePanel(this);
+//			if (opts.collapsed == true) collapsePanel(this);
+//			if (opts.closed == true) closePanel(this);
 		});
 	};
 	
@@ -414,6 +441,8 @@
 		onOpen: function(){},
 		onBeforeClose: function(){},
 		onClose: function(){},
+		onBeforeDestroy: function(){},
+		onDestroy: function(){},
 		onResize: function(width,height){},
 		onMove: function(left,top){},
 		onMaximize: function(){},
