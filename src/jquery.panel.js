@@ -32,6 +32,8 @@
 		});
 		panel.css(opts.style);
 		panel.addClass(opts.cls);
+		pheader.addClass(opts.headerCls);
+		pbody.addClass(opts.bodyCls);
 		
 		if (!isNaN(opts.width)){
 			if ($.boxModel == true){
@@ -390,13 +392,13 @@
 			setBorder(this);
 			loadData(this);
 			
+			if (opts.doSize == true){
+				setSize(this);
+			}
 			if (opts.closed == true){
-				closePanel(this, true);
+				state.panel.hide();
 			} else {
-				openPanel(this, true);
-				if (opts.doSize == true){
-					setSize(this);
-				}
+				openPanel(this);
 				if (opts.maximized == true) maximizePanel(this);
 				if (opts.minimized == true) minimizePanel(this);
 				if (opts.collapsed == true) collapsePanel(this);
@@ -420,6 +422,8 @@
 		left: null,
 		top: null,
 		cls: null,
+		headerCls: null,
+		bodyCls: null,
 		style: {},
 		fit: false,
 		border: true,

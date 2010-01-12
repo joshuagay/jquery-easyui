@@ -1,10 +1,10 @@
 /**
- * linkbutton 1.0 - jQuery Plug-in
+ * linkbutton - jQuery easyui 1.0.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
  *
- * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  */
 (function($){
 	$.fn.linkbutton = function(options){
