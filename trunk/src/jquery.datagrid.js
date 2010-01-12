@@ -1,10 +1,10 @@
 /**
- * datagrid 1.0 - jQuery Plug-in
+ * datagrid - jQuery easyui 1.0.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
  *
- * Copyright 2009 stworthy [ stworthy@gmail.com ] 
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  * 
  * Dependencies:
  * 	resizable

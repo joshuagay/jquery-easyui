@@ -15,7 +15,7 @@
  */
 (function($){
 	function show(win, type, speed, timeout){
-//		if (!win) return;
+		if (!win) return;
 		
 		switch(type){
 		case null:
@@ -56,7 +56,7 @@
 	}
 	
 	function hide(win, type, speed){
-//		if (!win) return;
+		if (!win) return;
 		
 		switch(type){
 		case null:
@@ -131,6 +131,7 @@
 				shadow: false,
 				draggable: false,
 				resizable: false,
+				closed: true,
 				style: {
 					left: null,
 					top: null,
@@ -145,7 +146,12 @@
 					hide(win.window('window'), opts.showType, opts.showSpeed);
 					return false;
 				}
-			}).window('close', true).window('open');
+			});//.window('close', true).window('open');
+			win.window('window').css({
+				left: null,
+				top: null
+			});
+			win.window('open');
 		},
 		
 		alert: function(title, msg, icon, fn) {

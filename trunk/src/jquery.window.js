@@ -26,26 +26,28 @@
 		if (state){
 			opts = $.extend(state.opts, options);
 		} else {
-			opts = $.extend({}, $.fn.window.defaults, options);
+			opts = $.extend({}, $.fn.window.defaults, {
+				title: $(target).attr('title'),
+				collapsible: ($(target).attr('collapsible') == 'false' ? false : true),
+				minimizable: ($(target).attr('minimizable') == 'false' ? false : true),
+				maximizable: ($(target).attr('maximizable') == 'false' ? false : true),
+				closable: ($(target).attr('closable') == 'false' ? false : true),
+				closed: $(target).attr('closed') == 'true',
+				shadow: ($(target).attr('shadow') == 'false' ? false : true),
+				modal: $(target).attr('modal') == 'true'
+			}, options);
+			$(target).attr('title', '');
 			state = $.data(target, 'window', {});
 		}
 		
-		// create mask
-		if (state.mask) state.mask.remove();
-		if (opts.modal == true){
-			state.mask = $('<div class="window-mask"></div>').appendTo('body');
-			state.mask.css({
-				zIndex: $.fn.window.defaults.zIndex++,
-				width: getPageArea().width,
-				height: getPageArea().height
-			});
-		}
-		
 		// create window
-		var win = $(target).addClass('window-body').panel($.extend({}, opts, {
+		var win = $(target).panel($.extend({}, opts, {
 			border: false,
-			doSize: false,
+			doSize: true,	// size the panel, the property undefined in window component
+			closed: true,	// close the panel
 			cls: 'window',
+			headerCls: 'window-header',
+			bodyCls: 'window-body',
 			onBeforeDestroy: function(){
 				if (opts.onBeforeDestroy){
 					if (opts.onBeforeDestroy.call(target) == false) return false;
@@ -63,9 +65,16 @@
 			},
 			onOpen: function(){
 				var state = $.data(target, 'window');
-				if (state.shadow) state.shadow.show();
+				if (state.shadow){
+					state.shadow.css({
+						display:'block',
+						left: state.options.left,
+						top: state.options.top,
+						width: state.window.outerWidth(),
+						height: state.window.outerHeight()
+					});
+				}
 				if (state.mask) state.mask.show();
-				setSize(target);
 				
 				if (opts.onOpen) opts.onOpen.call(target);
 			},
@@ -113,23 +122,36 @@
 				if (opts.onExpand) opts.onExpand.call(target);
 			}
 		}));
-		win.panel('panel').find('>div.panel-header').addClass('window-header');
-		
-		// create shadow
-		if (state.shadow) state.shadow.remove();
-		if (opts.shadow == true){
-			state.shadow = $('<div class="window-shadow"></div>').insertAfter(win.panel('panel'));
-			state.shadow.css({
-				zIndex: $.fn.window.defaults.zIndex++,
-				display: (win.panel('options').closed == true ? 'none' : 'block')
-			});
-		}
-		win.panel('panel').css('z-index', $.fn.window.defaults.zIndex++);
 		
 		// save the window state
 		state.options = win.panel('options');
 		state.opts = opts;
 		state.window = win.panel('panel');
+		
+		// create mask
+		if (state.mask) state.mask.remove();
+		if (opts.modal == true){
+			state.mask = $('<div class="window-mask"></div>').appendTo('body');
+			state.mask.css({
+				zIndex: $.fn.window.defaults.zIndex++,
+				width: getPageArea().width,
+				height: getPageArea().height,
+				display: 'none'
+			});
+		}
+		
+		// create shadow
+		if (state.shadow) state.shadow.remove();
+		if (opts.shadow == true){
+			state.shadow = $('<div class="window-shadow"></div>').insertAfter(state.window);
+			state.shadow.css({
+				zIndex: $.fn.window.defaults.zIndex++,
+				display: 'none'
+			});
+		}
+		
+		state.window.css('z-index', $.fn.window.defaults.zIndex++);
+		
 		
 		// if require center the window
 		if (state.options.left == null){
@@ -145,6 +167,11 @@
 				height = state.window.outerHeight();
 			}
 			state.options.top = ($(window).height() - height) / 2 + $(document).scrollTop();
+		}
+		win.window('move');
+		
+		if (state.opts.closed == false){
+			win.window('open');	// open the window
 		}
 	}
 	
@@ -289,7 +316,6 @@
 		return this.each(function(){
 			init(this, options);
 			setProperties(this);
-			setSize(this);
 		});
 	};
 	
@@ -297,10 +323,15 @@
 		zIndex: 9000,
 		draggable: true,
 		resizable: true,
+		shadow: true,
+		modal: false,
+		
+		// window's property which difference from panel
+		title: 'New Window',
 		collapsible: true,
 		minimizable: true,
 		maximizable: true,
 		closable: true,
-		shadow: true
+		closed: false
 	};
 })(jQuery);

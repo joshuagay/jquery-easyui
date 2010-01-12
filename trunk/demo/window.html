@@ -20,15 +20,15 @@
 		$(function(){
 			$('#w').window({
 				modal1: true,
-				title: 'My Window',
-				title1: '我的窗口',
+				title1: 'My Window',
+				title: '我的窗口',
 				showType: 'slide',
 				closed1: true,
-				shadow1: true,
+				shadow1: false,
 				onResize1: function(w,h){
 					//alert('r:'+w+':'+h);
 				},
-				onBeforeOpen: function(){
+				onBeforeOpen1: function(){
 					var win = $(this).window('window');
 					win.slideDown(400,function(){
 						$('#w').window('open',true);
@@ -36,7 +36,7 @@
 					return false;
 				},
 				onOpen: function(w,h){
-					alert('open')
+					//alert('open')
 				},
 				onBeforeClose: function(w,h){
 					//alert('beforeclose');
@@ -46,7 +46,10 @@
 					//alert('close')
 				}
 			});
-			$('#w2').window();
+			$('#w2').window({
+				modal1:true,
+				closed:false
+			});
 			$('#pp').panel();
 		});
 		function resize(){
@@ -84,9 +87,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<div style="width:600px;height:300px;position:relative;border:1px solid red;overflow:auto;">
 	<div id="w2" title="My Title" style="padding:10px;width:300px;height:200px;left:10px;top:60px;">
 		Message Test
 		
+	</div>
 	</div>
 </body>
 </html>
