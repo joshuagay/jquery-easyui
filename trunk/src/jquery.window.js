@@ -13,7 +13,7 @@
  * 
  */
 (function($){
-	function setSize(target){
+	function setSize(target, param){
 		$(target).panel('resize');
 	}
 	
@@ -45,6 +45,15 @@
 		var win = $(target).addClass('window-body').panel($.extend({}, opts, {
 			border: false,
 			doSize: false,
+			cls: 'window',
+			onBeforeDestroy: function(){
+				if (opts.onBeforeDestroy){
+					if (opts.onBeforeDestroy.call(target) == false) return false;
+				}
+				var state = $.data(target, 'window');
+				if (state.shadow) state.shadow.remove();
+				if (state.mask) state.mask.remove();
+			},
 			onClose: function(){
 				var state = $.data(target, 'window');
 				if (state.shadow) state.shadow.hide();
@@ -66,8 +75,8 @@
 					state.shadow.css({
 						left: state.options.left,
 						top: state.options.top,
-						width: state.options.width,
-						height: state.options.height
+						width: state.window.outerWidth(),
+						height: state.window.outerHeight()
 					});
 				}
 				
@@ -124,10 +133,18 @@
 		
 		// if require center the window
 		if (state.options.left == null){
-			state.options.left = ($(window).width() - state.options.width) / 2 + $(document).scrollLeft();
+			var width = state.options.width;
+			if (isNaN(width)){
+				width = state.window.outerWidth();
+			}
+			state.options.left = ($(window).width() - width) / 2 + $(document).scrollLeft();
 		}
 		if (state.options.top == null){
-			state.options.top = ($(window).height() - state.options.height) / 2 + $(document).scrollTop();
+			var height = state.window.height;
+			if (isNaN(height)){
+				height = state.window.outerHeight();
+			}
+			state.options.top = ($(window).height() - height) / 2 + $(document).scrollTop();
 		}
 	}
 	
@@ -138,7 +155,7 @@
 		var state = $.data(target, 'window');
 		
 		state.window.draggable({
-			handle: '>div.panel-header>div.panel-title',
+			handle: '>div.panel-header',
 			disabled: state.options.draggable == false,
 			onStartDrag: function(e){
 				if (state.mask) state.mask.css('z-index', $.fn.window.defaults.zIndex++);
@@ -147,15 +164,20 @@
 				
 				state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
 				state.proxy.css({
+					display:'none',
 					zIndex: $.fn.window.defaults.zIndex++,
 					left: e.data.left,
 					top: e.data.top,
 					width: ($.boxModel==true ? (state.window.outerWidth()-(state.proxy.outerWidth()-state.proxy.width())) : state.window.outerWidth()),
 					height: ($.boxModel==true ? (state.window.outerHeight()-(state.proxy.outerHeight()-state.proxy.height())) : state.window.outerHeight())
 				});
+				setTimeout(function(){
+					state.proxy.show();
+				}, 500);
 			},
 			onDrag: function(e){
 				state.proxy.css({
+					display:'block',
 					left: e.data.left,
 					top: e.data.top
 				});
@@ -244,6 +266,10 @@
 				return this.each(function(){
 					$(this).panel('close', param);
 				});
+			case 'destroy':
+				return this.each(function(){
+					$(this).panel('destroy', param);
+				});
 			case 'refresh':
 				return this.each(function(){
 					$(this).panel('refresh');
@@ -271,7 +297,6 @@
 		zIndex: 9000,
 		draggable: true,
 		resizable: true,
-		cls: 'window',
 		collapsible: true,
 		minimizable: true,
 		maximizable: true,

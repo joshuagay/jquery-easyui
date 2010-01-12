@@ -10,11 +10,11 @@
 }
 .layout-panel-east,.layout-panel-west{
 	z-index:2;
-	background:#fff;
+	background1:#fff;
 }
 .layout-panel-north,.layout-panel-south{
 	z-index:3;
-	background:#fff;
+	background1:#fff;
 }
 .layout-button-up{
 	background:url('images/layout_button_up.gif') no-repeat;
@@ -52,6 +52,7 @@
 }
 .layout-body{
 	overflow:auto;
+	background:#fff;
 }
 .layout-split-proxy-h{
 	position:absolute;
