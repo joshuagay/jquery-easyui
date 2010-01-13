@@ -32,11 +32,17 @@
 				fit:true
 			});
 		});
+		function exists(){
+			var b = $('#tt').tabs('exists','Tab21');
+			alert(b);
+		}
+		
 	</script>
 </head>
 <body>
 	<div>
 		<a class="l-btn" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
+		<a class="l-btn" href="javascript:void(0)" onclick="exists()">exists</a>
 	</div>
 	<br/>
 	<div id="tt" fit1="true" class="tabs-container" style="width:500px;height:250px;">
