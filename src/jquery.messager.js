@@ -14,6 +14,9 @@
  *  window
  */
 (function($){
+	/**
+	 * show window with animate, after sometime close the window
+	 */
 	function show(win, type, speed, timeout){
 		if (!win) return;
 		
@@ -55,6 +58,9 @@
 		
 	}
 	
+	/**
+	 * hide window with animate
+	 */
 	function hide(win, type, speed){
 		if (!win) return;
 		
@@ -78,6 +84,9 @@
 		}, speed);
 	}
 	
+	/**
+	 * create a dialog, when dialog is closed destroy it
+	 */
 	function createDialog(title, content, buttons){
 		var win = $('<div class="messager-body"></div>').appendTo('body');
 		win.append(content);
@@ -132,12 +141,6 @@
 				draggable: false,
 				resizable: false,
 				closed: true,
-				style: {
-					left: null,
-					top: null,
-					right: 0,
-					bottom: -document.body.scrollTop-document.documentElement.scrollTop
-				},
 				onBeforeOpen: function(){
 					show($(this).window('window'), opts.showType, opts.showSpeed, opts.timeout);
 					return false;
@@ -146,10 +149,14 @@
 					hide(win.window('window'), opts.showType, opts.showSpeed);
 					return false;
 				}
-			});//.window('close', true).window('open');
+			});
+			
+			// set the message window to the right bottom position
 			win.window('window').css({
 				left: null,
-				top: null
+				top: null,
+				right: 0,
+				bottom: -document.body.scrollTop-document.documentElement.scrollTop
 			});
 			win.window('open');
 		},
