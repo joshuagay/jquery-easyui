@@ -1,4 +1,5 @@
 #sidebar TableOfContents
+  * [welcome Welcome]
   * Base
     * [draggable Draggable]
     * [resizable Resizable]
