@@ -11,8 +11,8 @@
   * Button Menu
     * Link Button
     * Menu
-    * MenuButton
-    * SplitButton
+    * Menu Button
+    * Split Button
   * Form
-  * DataGrid
+  * Data Grid
   * Tree
