@@ -15,15 +15,15 @@
 	function init(target){
 		var opts = $.data(target, 'menubutton').options;
 		var btn = $(target);
-		btn.linkbutton($.extend({}, opts, {plain:true}));
-		btn.addClass('m-btn');
+		btn.removeClass('m-btn-active m-btn-plain-active');
+		btn.linkbutton(opts);
 		if (opts.menu){
 			$(opts.menu).menu({
 				onShow: function(){
-					btn.addClass('m-btn-active');
+					btn.addClass((opts.plain==true) ? 'm-btn-plain-active' : 'm-btn-active');
 				},
 				onHide: function(){
-					btn.removeClass('m-btn-active');
+					btn.removeClass((opts.plain==true) ? 'm-btn-plain-active' : 'm-btn-active');
 				}
 			});
 		}
@@ -80,7 +80,8 @@
 	
 	$.fn.menubutton.defaults = {
 			disabled: false,
+			plain: true,
 			menu: null,
-			duration: 300
+			duration: 100
 	};
 })(jQuery);
