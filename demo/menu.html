@@ -1,0 +1,66 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#mm').menu({
+				left: 200,
+				top: 100
+			});
+			$('#aa1').click(function(){
+				$('#mm').menu('show',{
+					left:100,
+					top:100
+				});
+			});
+			$('#aa2').click(function(){
+				$('#mm').menu('hide');
+			});
+		});
+	</script>
+</head>
+<body style="margin:0;padding:10px;">
+	<div style="background:#fafafa;">
+		<a href="#" id="aa1">ShowMenu</a>
+		<a href="#" id="aa2">HideMenu</a>
+	</div>
+	<div id="mm" style="width:120px;">
+		<div onclick="javascript:alert('open')">Open</div>
+		<div icon="icon-save">Save</div>
+		<div class="menu-sep"></div>
+		<div>Exit</div>
+		<div onclick="javascript:alert('打开')">
+			<span>打开</span>
+			<div style="width:150px;">
+				<div><b>Word</b></div>
+				<div>Excel</div>
+				<div>PowerPoint</div>
+				<div>
+					<span>M1</span>
+					<div style="width:120px;">
+						<div>sub1</div>
+						<div>sub2</div>
+						<div onclick="javascript:alert('sub')">
+							<span>Sub</span>
+							<div style="width:80px;">
+								<div onclick="javascript:alert('sub21')">sub21</div>
+								<div>sub22</div>
+								<div>sub23</div>
+							</div>
+						</div>
+						<div>sub3</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div icon="icon-save">保存</div>
+		<div class="menu-sep"></div>
+		<div>退出</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+a.s-btn .s-btn-downarrow{
+	display:inline-block;
+	width:16px;
+	background:url('images/menu_downarrow.png') no-repeat 9px center;
+}
+a:hover.s-btn,a.s-btn-active{
+	border:1px solid #7eabcd;
+	background:url('images/button_plain_hover.png') repeat-x left bottom;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+}
+a:hover.s-btn .s-btn-downarrow,a.s-btn-active .s-btn-downarrow{
+	background:url('images/menu_split_downarrow.png') no-repeat 4px center;
+}

@@ -1,0 +1,11 @@
+.m-btn-downarrow{
+	display:inline-block;
+	width:12px;
+	background:url('images/menu_downarrow.png') no-repeat 4px 5px;
+}
+a:hover.m-btn,a.m-btn-active{
+	border:1px solid #7eabcd;
+	background:url('images/button_plain_hover.png') repeat-x left bottom;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+}
