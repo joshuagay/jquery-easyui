@@ -9,13 +9,13 @@
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#tt').tree();
+			$('#tt1').tree();
 			$('#tt2').tree({
 				url: 'tree_data.json',
 				onClick:function(node){
 					alert('you click '+node.text);
 				}
-			}).tree({animate:true});
+			});
 		});
 		function reload(){
 			$('#tt2').tree('reload');
@@ -23,40 +23,44 @@
 	</script>
 </head>
 <body>
+	<h1>Tree</h1>
+	<p>Create from html markup</p>
+	<ul id="tt1">
+		<li>
+			<span>文件夹</span>
+			<ul>
+				<li>
+					<span>Sub Folder 1</span>
+					<ul>
+						<li>
+							<span><a href="#">File 11</a></span>
+						</li>
+						<li>
+							<span>File 12</span>
+						</li>
+						<li>
+							<span>File 13</span>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<span>File 2</span>
+				</li>
+				<li>
+					<span>File 3</span>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<span>File21</span>
+		</li>
+	</ul>
+	<hr></hr>
+	<p>Create from json data</p>
+	<div style="margin:10px;">
+		<a href="#" onclick="reload()">reload</a>
+	</div>
 
-<ul id="tt">
-	<li>
-		<span>文件夹</span>
-		<ul>
-			<li>
-				<span>Sub Folder 1</span>
-				<ul>
-					<li>
-						<span><a href="#">File 11</a></span>
-					</li>
-					<li>
-						<span>File 12</span>
-					</li>
-					<li>
-						<span>File 13</span>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span>File 2</span>
-			</li>
-			<li>
-				<span>File 3</span>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<span>File21</span>
-	</li>
-</ul>
-<hr></hr>
-<a href="#" onclick="reload()">reload</a>
-
-<ul id="tt2"></ul>
+	<ul id="tt2"></ul>
 </body>
 </html>

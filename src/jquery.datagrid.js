@@ -618,7 +618,6 @@
 			return tbody.join('');
 		}
 		
-		
 		$('.datagrid-body, .datagrid-header', grid).scrollLeft(0).scrollTop(0);
 		var fields = getColumnFields(opts.columns);
 		$('.datagrid-view2 .datagrid-body table', grid).html(getTBody(fields));

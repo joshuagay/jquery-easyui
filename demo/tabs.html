@@ -25,20 +25,15 @@
 				fit:true
 			});
 		});
-		function exists(){
-			var b = $('#tt').tabs('exists','Tab2');
-			alert('The tab name Tab2 exists? ' + b);
-		}
-		
 	</script>
 </head>
 <body>
+	<h1>Tabs</h1>
 	<div>
 		<a class="l-btn" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
-		<a class="l-btn" href="javascript:void(0)" onclick="exists()">exists</a>
 	</div>
 	<br/>
-	<div id="tt" fit1="true" class="tabs-container" style="width:500px;height:250px;">
+	<div id="tt" class="tabs-container" style="width:500px;height:250px;">
 		<div title="Tab1" style="padding:20px;display:none;">
 		</div>
 		<div title="Tab2" closable="true" style="overflow:auto;padding:20px;display:none;" cache="false" href="tabs_href_test.html"> This is Tab2 width close button.</div>
