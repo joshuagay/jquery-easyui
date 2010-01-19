@@ -7,9 +7,9 @@
     * Panel
     * Layout
     * Accordion
-    * TabContainer
+    * Tab Container
   * Button Menu
-    * LinkButton
+    * Link Button
     * Menu
     * MenuButton
     * SplitButton
