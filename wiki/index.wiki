@@ -1,4 +1,4 @@
 #sidebar index
-  * [draggable base]
-    * draggable draggable
-    * resizable resizable
+  * draggable base
+    * [draggable draggable]
+    * [resizable resizable]
