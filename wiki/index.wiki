@@ -1,4 +1,0 @@
-#sidebar draggable
-  * base
-    * [draggable draggable]
-    * [resizable resizable]
