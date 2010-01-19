@@ -670,12 +670,20 @@ a:hover.l-btn-disabled span.l-btn-left{
 	width:12px;
 	background:url('images/menu_downarrow.png') no-repeat 4px 5px;
 }
-a:hover.m-btn,a.m-btn-active{
+
+a.m-btn-active{
+	background-position: bottom right;
+}
+a.m-btn-active span.l-btn-left{
+	background-position: bottom left;
+}
+a.m-btn-plain-active{
+	background:transparent;
 	border:1px solid #7eabcd;
-	background:url('images/button_plain_hover.png') repeat-x left bottom;
 	-moz-border-radius:3px;
 	-webkit-border-radius: 3px;
-}.messager-body{
+}
+.messager-body{
 	padding:5px 10px;
 }
 .messager-button{
@@ -877,18 +885,32 @@ a:hover.m-btn,a.m-btn-active{
 	height:100%;
 }
 
-a.s-btn .s-btn-downarrow{
+.s-btn-downarrow{
 	display:inline-block;
 	width:16px;
 	background:url('images/menu_downarrow.png') no-repeat 9px center;
 }
-a:hover.s-btn,a.s-btn-active{
+
+a.s-btn-active{
+	background-position: bottom right;
+}
+a.s-btn-active span.l-btn-left{
+	background-position: bottom left;
+}
+a.s-btn-active .s-btn-downarrow{
+	background:url('images/menu_split_downarrow.png') no-repeat 4px center;
+}
+a:hover.l-btn .s-btn-downarrow{
+	background:url('images/menu_split_downarrow.png') no-repeat 4px center;
+}
+
+a.s-btn-plain-active{
+	background:transparent;
 	border:1px solid #7eabcd;
-	background:url('images/button_plain_hover.png') repeat-x left bottom;
 	-moz-border-radius:3px;
 	-webkit-border-radius: 3px;
 }
-a:hover.s-btn .s-btn-downarrow,a.s-btn-active .s-btn-downarrow{
+a.s-btn-plain-active .s-btn-downarrow{
 	background:url('images/menu_split_downarrow.png') no-repeat 4px center;
 }.tabs-container{
 	overflow:hidden;

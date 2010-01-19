@@ -1,6 +1,9 @@
 .icon-add{
 	background:url('icons/edit_add.png') no-repeat;
 }
+.icon-edit{
+	background:url('icons/pencil.png') no-repeat;
+}
 .icon-remove{
 	background:url('icons/edit_remove.png') no-repeat;
 }

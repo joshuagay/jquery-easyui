@@ -18,17 +18,17 @@
 		if (opts.menu){
 			$(opts.menu).menu({
 				onShow: function(){
-					btn.addClass('s-btn-active');
+					btn.addClass((opts.plain==true) ? 's-btn-plain-active' : 's-btn-active');
 				},
 				onHide: function(){
-					btn.removeClass('s-btn-active');
+					btn.removeClass((opts.plain==true) ? 's-btn-plain-active' : 's-btn-active');
 				}
 			});
 		}
 		
 		var btn = $(target);
-		btn.linkbutton($.extend({}, opts, {plain:true}));
-		btn.addClass('s-btn');
+		btn.removeClass('s-btn-active s-btn-plain-active');
+		btn.linkbutton(opts);
 		
 		var menubtn = btn.find('.s-btn-downarrow');
 		menubtn.unbind('.splitbutton');
@@ -84,6 +84,7 @@
 	$.fn.splitbutton.defaults = {
 		disabled: false,
 		menu: null,
-		duration: 300
+		plain: true,
+		duration: 100
 	};
 })(jQuery);
