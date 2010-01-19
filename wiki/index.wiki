@@ -1,7 +1,7 @@
 #sidebar TableOfContents
-  * Base
+  * [Base]
     * [draggable Draggable]
     * [resizable Resizable]
-  * Layout
+  * [Layout]
     * [Layout]
     * [TabContainer]
