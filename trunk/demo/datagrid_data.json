@@ -10,6 +10,6 @@ rows:[
 {code:'007',name:'名称7',addr:'红领巾路7号',col4:'col4 data'},          
 {code:'008',name:'名称8',addr:'红领巾路8号',col4:'col4 data'},          
 {code:'009',name:'名称9',addr:'红领巾路9号',col4:'col4 data'},          
-{code:'010',name:'名称10',addr:'红领巾路10号',col4:'col4 data'},          
+{code:'010',name:'名称10',addr:'红领巾路10号',col4:'col4 data'}     
 ]                                                               
 }                                                               

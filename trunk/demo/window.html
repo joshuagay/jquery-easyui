@@ -9,43 +9,11 @@
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		$(function(){
-			$('#w').window({
-				modal1: true,
-				title1: 'My Window',
-				title: '我的窗口',
-				showType: 'slide',
-				closed1: true,
-				shadow1: false,
-				onResize1: function(w,h){
-					//alert('r:'+w+':'+h);
-				},
-				onBeforeOpen1: function(){
-					var win = $(this).window('window');
-					win.slideDown(400,function(){
-						$('#w').window('open',true);
-					});
-					return false;
-				},
-				onOpen: function(w,h){
-					//alert('open')
-				},
-				onBeforeClose: function(w,h){
-					//alert('beforeclose');
-					//return false;
-				},
-				onClose: function(w,h){
-					//alert('close')
-				}
-			});
-			$('#w2').window({
-				modal1:true,
-				closed:false
-			});
-			$('#pp').panel();
+			$('#w').window();
 		});
 		function resize(){
 			$('#w').window({
-				title: 'def',
+				title: 'New Title',
 				width: 600,
 				modal: true,
 				shadow: false,
@@ -62,28 +30,22 @@
 	</script>
 </head>
 <body style="height:100%;width:100%;overflow:hidden;border:none;" >
+	<h1>Window</h1>
 	<div>
-	<a href="javascript:void(0)" onclick="resize()">resize</a>
-	<a href="javascript:void(0)" onclick="open1()">open</a>
-	<a href="javascript:void(0)" onclick="close1()">close</a>
+		<a href="javascript:void(0)" onclick="resize()">resize</a>
+		<a href="javascript:void(0)" onclick="open1()">open</a>
+		<a href="javascript:void(0)" onclick="close1()">close</a>
 	</div>
-	<div id="w" icon="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
+	<div id="w" title="My Window" icon="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
 		<div class="layout-container" fit="true">
 			<div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
-				This jQuery tutorial shows you a slick and animated method for enlarging thumbnail-sized photos when the user hovers on them.
+				jQuery easyui framework help you build your web page easily.
 			</div>
 			<div region="south" border="false" style="text-align:right;height:30px;line-height:30px;">
 				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Ok</a>
 				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Cancel</a>
 			</div>
 		</div>
-	</div>
-	
-	<div style="width:600px;height:300px;position:relative;border:1px solid red;overflow:auto;">
-	<div id="w2" title="My Title" style="padding:10px;width:300px;height:200px;left:10px;top:60px;">
-		Message Test
-		
-	</div>
 	</div>
 </body>
 </html>
