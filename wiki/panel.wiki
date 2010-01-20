@@ -22,3 +22,8 @@ Override defaults with $.fn.panel.defaults
 ||minimized||boolean||Defines if the panel is minimized at initialization||false||
 ||maximized||boolean||Defines if the panel is maximized at initialization||false||
 ||closed||boolean||Defines if the panel is closed at initialization||false||
+||href||string||A URL to load remote data and then display in the panel||null||
+||loadingMessage||string||When loading remote data show a message in the panel||Loading...||
+||onLoad||function||Callback function when remote data is loaded||||
+||onBeforeOpen||function||Callback function before panel is opened||||
+||onOpen||function||Callback function after panel is opened||||
