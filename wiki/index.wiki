@@ -14,5 +14,7 @@
     * Menu Button
     * Split Button
   * Form
+  * Window
   * Data Grid
+  * Pagination
   * Tree
