@@ -44,3 +44,16 @@ Override defaults with $.fn.panel.defaults
 ||onMaximize||none||Fires after the window has been maximized||
 ||onRestore||none||Fires after the window has been restored to its original size||
 ||onMinimize||none||Fires after the window has been minimized||
+
+== Methods ==
+||*Name*||*Parameters*||*Description*||
+||options||none||Return options property||
+||panel||none||Return the panel object||
+||header||none||Return the panel header object||
+||body||none||Return the panel body object||
+||open||forceOpen||When forceOpen parameter set to true, the panel is opened bypass the onBeforeOpen callback||
+||close||forceClose||When forceClose parameter set to true, the panel is closed bypass the onBeforeClose callback||
+||destroy||forceDestroy||When forceDestroy parameter set to true, the panel is destroyed bypass the onBeforeDestroy callback||
+||refresh||none||Refresh the panel to load remote data when href property is setted||
+||resize||properties||Set panel size and do layout, the properties can contains {width,height,left,top}||
+||move||properties||Move then panel to a new position, the properties can contains {left,top}||
