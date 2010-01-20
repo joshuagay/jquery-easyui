@@ -10,3 +10,15 @@ Override defaults with $.fn.panel.defaults
 ||cls||string||Add a CSS class to the panel||null||
 ||headerCls||string||Add a CSS class to the panel header||null||
 ||bodyCls||string||Add a CSS class to the panel body||null||
+||style||object||Add a custom specification style to the panel||{}||
+||fit||boolean||When true to set the panel size fit it's parent container||false||
+||border||boolean||Defines if to show panel border||true||
+||doSize||boolean||If set to true,the panel will be resize and do layout when created||true||
+||collapsible||boolean||Defines if to show collapsible button||false||
+||minimizable||boolean||Defines if to show minimizable button||false||
+||maximizable||boolean||Defines if to show maximizable button||false||
+||closable||boolean||Defines if to show closable button||false||
+||collapsed||boolean||Defines if the panel is collapsed at initialization||false||
+||minimized||boolean||Defines if the panel is minimized at initialization||false||
+||maximized||boolean||Defines if the panel is maximized at initialization||false||
+||closed||boolean||Defines if the panel is closed at initialization||false||
