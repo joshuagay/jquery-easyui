@@ -1,0 +1,12 @@
+= Options =
+Override defaults with $.fn.panel.defaults
+||*Name*||*Type*||*Description*||*Default*||
+||title||string||The title text to display in panel header||null||
+||iconCls||string||A CSS class to display a 16x16 icon in panel||null||
+||width||number||Set the panel width||auto||
+||height||number||Set the panel height||auto||
+||left||number||Set the panel left position||null||
+||top||number||Set the panel top position||null||
+||cls||string||Add a CSS class to the panel||null||
+||headerCls||string||Add a CSS class to the panel header||null||
+||bodyCls||string||Add a CSS class to the panel body||null||
