@@ -4,7 +4,7 @@
     * [draggable Draggable]
     * [resizable Resizable]
   * Layout
-    * Panel
+    * [panel Panel]
     * Layout
     * Accordion
     * Tab Container
