@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+One-sentence summary of this page.
 
 = Usage =
 
@@ -26,4 +26,11 @@ Override defaults with $.fn.window.defaults
 
 == Properties ==
 
+Many window properties can inhirit from panel,bellow is the window private properties
+
 || *Name* || *Type* || *Description* || *Default* ||
+|| zIndex || number || Window z-index,increment from it || 9000 ||
+|| draggable || boolean || Defines if window can be dragged || true ||
+|| resizable || boolean || Defines if window can be resized || true ||
+|| shadow || boolean || If set to true,when window show the shadow will show also || true ||
+|| modal || boolean || Defines if window is a modal window || false ||
