@@ -43,3 +43,11 @@ Window override some panel properties
 || minimizable || boolean || Defines if to show minimizable button || true ||
 || maximizable || boolean || Defines if to show maximizable button || true ||
 || closable || boolean || Defines if to show closable button || true ||
+
+== Events ==
+
+Window events is same as panel events, see panel events for more information.
+
+== Methods ==
+
+Window methods is same as panel methods, except the 'header' and 'body' method.
