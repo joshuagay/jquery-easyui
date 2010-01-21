@@ -1,3 +1,25 @@
+= Usage =
+== Markup ==
+{{{
+<div id="p">
+  Panel Content
+</div>
+}}}
+
+== jQuery ==
+To create panel from markup
+{{{
+$('#p').panel(options)
+}}}
+
+To invoke a panel method
+{{{
+$('#p').panel('move',{
+  left:100,
+  top:100
+});
+}}}
+
 = Options =
 Override defaults with $.fn.panel.defaults
 == Properties ==
@@ -46,7 +68,7 @@ Override defaults with $.fn.panel.defaults
 ||onMinimize||none||Fires after the window has been minimized||
 
 == Methods ==
-|| *Name* || *Parameters* || *Description* ||
+|| *Name* || *Parameter* || *Description* ||
 ||options||none||Return options property||
 ||panel||none||Return the panel object||
 ||header||none||Return the panel header object||
