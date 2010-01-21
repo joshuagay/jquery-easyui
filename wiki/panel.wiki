@@ -1,7 +1,8 @@
 = Usage =
 == Markup ==
+The markup can contain panel's attribute
 {{{
-<div id="p">
+<div id="p" title="My Panel" collapsible="true" style="padding:10px;">
   Panel Content
 </div>
 }}}
