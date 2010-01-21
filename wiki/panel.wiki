@@ -13,7 +13,7 @@ To create panel from markup
 $('#p').panel(options)
 }}}
 
-To create panel with custom tool
+To create panel with custom tools
 {{{
 $('#p').panel({
   title: 'My Panel',
