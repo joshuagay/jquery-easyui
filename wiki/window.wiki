@@ -1,0 +1,29 @@
+#summary One-sentence summary of this page.
+
+= Usage =
+
+== Markup ==
+{{{
+<div id="win" icon="icon-save" title="My Window">
+  Window Content
+</div>
+}}}
+
+== jQuery ==
+
+To create window
+{{{
+$('#win').window(options)
+}}}
+
+To invoke window method
+{{{
+$('#win').window('open')
+}}}
+
+= Options =
+Override defaults with $.fn.window.defaults
+
+== Properties ==
+
+|| *Name* || *Type* || *Description* || *Default* ||
