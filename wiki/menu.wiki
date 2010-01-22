@@ -41,7 +41,7 @@ Override defaults with $.fn.menu.defaults.
 || *Name* || *Type* || *Description* || *Default* ||
 || zIndex || number || Menu z-index style,increase from it. || 110000 ||
 || left || number || Menu left position. || 0 ||
-|| top || number Menu top position. || 0 ||
+|| top || number || Menu top position. || 0 ||
 
 == Events ==
 
