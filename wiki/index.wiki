@@ -8,11 +8,11 @@
     * Layout
     * Accordion
     * Tab Container
-  * Button Menu
+  * Button
     * Link Button
-    * Menu
     * Menu Button
     * Split Button
+  * Menu
   * Form
   * [window Window]
   * Data Grid
