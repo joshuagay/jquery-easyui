@@ -33,15 +33,24 @@ $('#mm').menu('show', {
 }}}
 
 = Options =
+
 Override defaults with $.fn.menu.defaults.
 
 == Properties ==
+
 || *Name* || *Type* || *Description* || *Default* ||
 || zIndex || number || Menu z-index style,increase from it. || 110000 ||
-|| left || number || Menu left position || 0 ||
-|| top || number Menu top position || 0 ||
+|| left || number || Menu left position. || 0 ||
+|| top || number Menu top position. || 0 ||
 
 == Events ==
+
+|| *Name* || *Parameters* || *Description* ||
+|| onShow || none || Fires after menu is showed. ||
+|| onHide || none || Fires after menu is hidded. ||
+
+== Methods ==
+
 || *Name* || *Parameter* || *Description* ||
-|| onShow || none || Fires after menu is showed ||
-|| onHide || none || Fires after menu is hidded ||
+|| show || pos || Show a menu on special position, pos parameter contains {left,top}. ||
+|| hide || none || Hide a menu. ||
