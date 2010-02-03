@@ -525,8 +525,4 @@
 			setSize(this);
 		});
 	};
-	
-	$(function(){
-		$('.layout-container').layout();
-	});
 })(jQuery);
