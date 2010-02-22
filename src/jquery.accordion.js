@@ -1,5 +1,5 @@
 /**
- * accordion - jQuery easyui 1.0.1
+ * accordion - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -67,7 +67,14 @@
 			cc.removeClass('accordion-noborder');
 		}
 		
-		var panels = [];	// the original panel DOM elements
+		// the original panel DOM elements
+		var panels = [];
+		
+		// if no panel selected set the first one active
+		if (cc.find('>div[selected=true]').length == 0){
+			cc.find('>div:first').attr('selected', 'true');
+		}
+		
 		cc.find('>div').each(function(){
 			var pp = $(this);
 			panels.push(pp);
@@ -135,11 +142,8 @@
 		}
 		
 		curr = getCurrent(container);
-		if (!curr){	// if not any panel selected, select the first one
-			$(panels[0]).panel('header').triggerHandler('click');
-		} else {
-			curr.panel('header').addClass('accordion-header-selected');
-		}
+		curr.panel('header').addClass('accordion-header-selected');
+		
 		
 		function getTitle(panel){
 			return $(panel).panel('options').title;
@@ -190,8 +194,4 @@
 		fit: false,
 		border: true
 	};
-	
-	$(function(){
-		$('.accordion-container').accordion();
-	});
 })(jQuery);

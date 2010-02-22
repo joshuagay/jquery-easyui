@@ -1,5 +1,5 @@
 /**
- * tabs - jQuery easyui 1.0.1
+ * tabs - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -115,8 +115,12 @@
 			panels.width('auto');
 		}
 		
-		// resize the children tabs container
-		$('div.tabs-container', container).tabs();	
+		if ($.parser){
+			$.parser.parse(container);
+		}
+		
+//		// resize the children tabs container
+//		$('div.tabs-container', container).tabs();	
 	}
 	
 	/**
@@ -410,10 +414,13 @@
 				var tabAttr = $.data(this, 'tabs.tab');
 				var panel = $('#' + tabAttr.id);
 				panel.css('display', 'block').focus();
-				$('div.tabs-container', panel).tabs('resize');
+//				$('div.easyui-tabs', panel).tabs('resize');
 				
 				if (tabAttr.href && (!tabAttr.loaded || !tabAttr.cache)) {
 					panel.load(tabAttr.href, null, function(){
+						if ($.parser){
+							$.parser.parse(panel);
+						}
 						opts.onLoad.apply(this, arguments);
 						tabAttr.loaded = true;
 					});
@@ -454,8 +461,4 @@
 		onSelect: function(title){},
 		onClose: function(title){}
 	};
-	
-	$(function(){
-		$('.tabs-container').tabs();
-	});
 })(jQuery);

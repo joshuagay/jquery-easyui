@@ -1,5 +1,5 @@
 /**
- * linkbutton - jQuery easyui 1.0.1
+ * linkbutton - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -39,9 +39,6 @@
 				if (iconCls) {
 					cc.addClass(iconCls).css('padding-left', '20px');
 				}
-				if (/^[u4E00-u9FA5]/.test(cc.text()) == false && $.browser.msie) {
-					cc.css('padding-top', '2px');
-				}
 			}
 		}
 		
@@ -55,7 +52,10 @@
 				wrapButton(this);
 				opts = $.extend({}, $.fn.linkbutton.defaults, options || {});
 				
-				if ($(this).hasClass('l-btn-plain')) {
+//				if ($(this).hasClass('l-btn-plain')) {
+//					opts.plain = true;
+//				}
+				if ($(this).attr('plain') == 'true'){
 					opts.plain = true;
 				}
 				
@@ -105,8 +105,4 @@
 			disabled: false,
 			plain: false
 	};
-	
-	$(function(){
-		$('a.l-btn').linkbutton();
-	});
 })(jQuery);

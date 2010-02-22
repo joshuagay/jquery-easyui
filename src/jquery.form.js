@@ -1,5 +1,5 @@
 /**
- * form - jQuery easyui 1.0.1
+ * form - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -63,16 +63,19 @@
 					data = pre.html();
 				}
 			}
-			try{
-				eval('data='+data);
-				if (options.success){
-					options.success(data);
-				}
-			} catch(e) {
-				if (options.failure){
-					options.failure(data);
-				}
+			if (options.success){
+				options.success(data);
 			}
+//			try{
+//				eval('data='+data);
+//				if (options.success){
+//					options.success(data);
+//				}
+//			} catch(e) {
+//				if (options.failure){
+//					options.failure(data);
+//				}
+//			}
 			setTimeout(function(){
 				frame.unbind();
 				frame.remove();
@@ -169,6 +172,6 @@
 	$.fn.form.defaults = {
 		url: null,
 		onSubmit: function(){},
-		success: function(){}
+		success: function(data){}
 	};
 })(jQuery);

@@ -1,5 +1,5 @@
 /**
- * shadow 1.0 - jQuery Plug-in
+ * shadow - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

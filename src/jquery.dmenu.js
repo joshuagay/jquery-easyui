@@ -1,5 +1,5 @@
 /**
- * dmenu 1.0 - jQuery Plug-in
+ * dmenu - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

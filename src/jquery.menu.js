@@ -1,5 +1,5 @@
 /**
- * menu - jQuery easyui 1.0.1
+ * menu - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -12,6 +12,7 @@
 	 * initialize the target menu, the function can be invoked only once
 	 */
 	function init(target){
+		$(target).appendTo('body');
 		$(target).addClass('menu-top');	// the top menu
 		
 		var menus = [];
