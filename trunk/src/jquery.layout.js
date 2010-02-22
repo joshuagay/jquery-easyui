@@ -1,5 +1,5 @@
 /**
- * layout - jQuery easyui 1.0.1
+ * layout - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -314,6 +314,7 @@
 					);
 					panels.expandEast.panel('header').find('.layout-button-left').click(function(){
 						panels.expandEast.panel('close');
+						panels.east.panel('panel').stop(true,true);
 						panels.east.panel('open').panel('resize', {left:cc.width()});
 						panels.east.panel('panel').animate({
 							left: cc.width() - panels.east.panel('options').width
@@ -358,6 +359,7 @@
 					);
 					panels.expandWest.panel('header').find('.layout-button-right').click(function(){
 						panels.expandWest.panel('close');
+						panels.west.panel('panel').stop(true,true);
 						panels.west.panel('open').panel('resize', {left: -panels.west.panel('options').width});
 						panels.west.panel('panel').animate({
 							left: 0
@@ -408,6 +410,7 @@
 					);
 					panels.expandNorth.panel('header').find('.layout-button-down').click(function(){
 						panels.expandNorth.panel('close');
+						panels.north.panel('panel').stop(true,true);
 						panels.north.panel('open').panel('resize', {top:-panels.north.panel('options').height});
 						panels.north.panel('panel').animate({top:0}, function(){
 							setSize(container);
@@ -456,6 +459,7 @@
 					);
 					panels.expandSouth.panel('header').find('.layout-button-up').click(function(){
 						panels.expandSouth.panel('close');
+						panels.south.panel('panel').stop(true,true);
 						panels.south.panel('open').panel('resize', {top:cc.height()});
 						panels.south.panel('panel').animate({top:cc.height()-panels.south.panel('options').height}, function(){
 							setSize(container);

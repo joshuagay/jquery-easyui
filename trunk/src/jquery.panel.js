@@ -1,5 +1,5 @@
 /**
- * panel - jQuery easyui 1.0.1
+ * panel - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -178,6 +178,9 @@
 			var pbody = state.panel.find('>.panel-body');
 			pbody.html($('<div class="panel-loading"></div>').html(state.options.loadingMessage));
 			pbody.load(state.options.href, null, function(){
+				if ($.parser){
+					$.parser.parse(pbody);
+				}
 				state.options.onLoad.apply(target, arguments);
 				state.isLoaded = true;
 			});
@@ -437,6 +440,11 @@
 		minimized: false,
 		maximized: false,
 		closed: false,
+		
+		// custom tools, every tool can contain two properties: iconCls and handler
+		// iconCls is a icon CSS class
+		// handler is a function, which will be run when tool button is clicked
+		tools: [],	
 		
 		href: null,
 		loadingMessage: 'Loading...',

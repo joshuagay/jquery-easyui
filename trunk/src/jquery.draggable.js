@@ -1,5 +1,5 @@
 /**
- * draggable - jQuery easyui 1.0.1
+ * draggable - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -142,8 +142,8 @@
 			disabled: false,
 			edge:0,
 			axis:null,	// v or h
-			onStartDrag: function(){},
-			onDrag: function(){},
-			onStopDrag: function(){}
+			onStartDrag: function(e){},
+			onDrag: function(e){},
+			onStopDrag: function(e){}
 	};
 })(jQuery);

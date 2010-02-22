@@ -1,5 +1,5 @@
 /**
- * datagrid - jQuery easyui 1.0.1
+ * datagrid - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -226,45 +226,6 @@
 		var grid = $.data(target, 'datagrid').grid;
 		var opts = $.data(target, 'datagrid').options;
 		var data = $.data(target, 'datagrid').data;
-		var selectedRows = $.data(target, 'datagrid').selectedRows;
-		
-		/**
-		 * add the selected row if idField property is defined
-		 */
-		function addSelectedRow(row){
-			if (opts.idField){
-				selectedRows.push(row);
-			}
-		}
-		
-		/**
-		 * clear the selected rows if idField property is defined
-		 */
-		function clearSelectedRows(){
-			if (opts.idField){
-				for(var i=0; i<selectedRows.length; i++){
-					selectedRows.pop();
-				}
-			}
-		}
-		
-		/**
-		 * remove a selected row by passing the record id field value
-		 */
-		function removeSelectedRow(row){
-			if (!opts.idField) return;
-			var tmp = [];
-			for(var i=0; i<selectedRows.length; i++){
-				var row1 = selectedRows[i];
-				if (row1[opts.idField] == row[opts.idField]){
-					for(var j=i+1; j<selectedRows.length; j++){
-						selectedRows[j-1] = selectedRows[j];
-					}
-					selectedRows.pop();
-					return;
-				}
-			}
-		}
 		
 		if (opts.striped) {
 			$('.datagrid-view1 .datagrid-body tr:odd', grid).addClass('datagrid-row-alt');
@@ -287,27 +248,10 @@
 			$('.datagrid-body tr[datagrid-row-index='+index+']',grid).removeClass('datagrid-row-over');
 		}).click(function(){
 			var index = $(this).attr('datagrid-row-index');
-			var tr = $('.datagrid-body tr[datagrid-row-index='+index+']',grid);
-			var ck = $('.datagrid-body tr[datagrid-row-index='+index+'] .datagrid-cell-check input[type=checkbox]',grid);
-			if (opts.singleSelect == true){
-				$('.datagrid-body tr.datagrid-row-selected', grid)
-						.removeClass('datagrid-row-selected')
-						.find('.datagrid-cell-check input[type=checkbox]')
-						.attr('checked', false);
-				tr.addClass('datagrid-row-selected');
-				ck.attr('checked', true);
-				clearSelectedRows();
-				addSelectedRow(data.rows[index]);
+			if ($(this).hasClass('datagrid-row-selected')){
+				unselectRow(target, index);
 			} else {
-				if ($(this).hasClass('datagrid-row-selected')){
-					tr.removeClass('datagrid-row-selected');
-					ck.attr('checked', false);
-					removeSelectedRow(data.rows[index]);
-				} else {
-					tr.addClass('datagrid-row-selected');
-					ck.attr('checked', true);
-					addSelectedRow(data.rows[index]);
-				}
+				selectRow(target, index);
 			}
 			if (opts.onClickRow){
 				opts.onClickRow.call(this, index, data.rows[index]);
@@ -621,7 +565,6 @@
 		$('.datagrid-body, .datagrid-header', grid).scrollLeft(0).scrollTop(0);
 		var fields = getColumnFields(opts.columns);
 		$('.datagrid-view2 .datagrid-body table', grid).html(getTBody(fields));
-//		$('.datagrid-view2 .datagrid-body table', grid)[0].innerHTML = (getTBody(fields));
 		if (opts.rownumbers || (opts.frozenColumns && opts.frozenColumns.length > 0)){
 			var frozenFields = getColumnFields(opts.frozenColumns);
 			$('.datagrid-view1 .datagrid-body table', grid).html(getTBody(frozenFields, opts.rownumbers));
@@ -650,6 +593,98 @@
 			}
 		});
 		return rows;
+	}
+	
+	/**
+	 * clear all the selection records
+	 */
+	function clearSelections(target){
+		var grid = $.data(target, 'datagrid').grid;
+		
+		$('.datagrid-body tr.datagrid-row-selected', grid).removeClass('datagrid-row-selected');
+		$('.datagrid-body .datagrid-cell-check input[type=checkbox]', grid).attr('checked', false);
+		var selectedRows = $.data(target, 'datagrid').selectedRows;
+		while(selectedRows.length > 0){
+			selectedRows.pop();
+		}
+	}
+	
+	/**
+	 * select a row with specified row index which start with 0.
+	 */
+	function selectRow(target, index){
+		var grid = $.data(target, 'datagrid').grid;
+		var opts = $.data(target, 'datagrid').options;
+		var data = $.data(target, 'datagrid').data;
+		var selectedRows = $.data(target, 'datagrid').selectedRows;
+		
+		var tr = $('.datagrid-body tr[datagrid-row-index='+index+']',grid);
+		var ck = $('.datagrid-body tr[datagrid-row-index='+index+'] .datagrid-cell-check input[type=checkbox]',grid);
+		if (opts.singleSelect == true){
+			clearSelections(target);
+		}
+		tr.addClass('datagrid-row-selected');
+		ck.attr('checked', true);
+		
+		if (opts.idField){
+			var row = data.rows[index];
+			for(var i=0; i<selectedRows.length; i++){
+				if (selectedRows[i][opts.idField] == row[opts.idField]){
+					return;
+				}
+			}
+			selectedRows.push(row);
+		}
+		opts.onSelect.call(target, index, data.rows[index]);
+	}
+	
+	/**
+	 * select record by idField.
+	 */
+	function selectRecord(target, idValue){
+		var opts = $.data(target, 'datagrid').options;
+		var data = $.data(target, 'datagrid').data;
+		if (opts.idField){
+			var index = -1;
+			for(var i=0; i<data.rows.length; i++){
+				if (data.rows[i][opts.idField] == idValue){
+					index = i;
+					break;
+				}
+			}
+			if (index >= 0){
+				selectRow(target, index);
+			}
+		}
+	}
+	
+	/**
+	 * unselect a row.
+	 */
+	function unselectRow(target, index){
+		var opts = $.data(target, 'datagrid').options;
+		var grid = $.data(target, 'datagrid').grid;
+		var selectedRows = $.data(target, 'datagrid').selectedRows;
+		
+		var tr = $('.datagrid-body tr[datagrid-row-index='+index+']',grid);
+		var ck = $('.datagrid-body tr[datagrid-row-index='+index+'] .datagrid-cell-check input[type=checkbox]',grid);
+		tr.removeClass('datagrid-row-selected');
+		ck.attr('checked', false);
+		
+		var row = $.data(target, 'datagrid').data.rows[index];
+		if (opts.idField){
+			for(var i=0; i<selectedRows.length; i++){
+				var row1 = selectedRows[i];
+				if (row1[opts.idField] == row[opts.idField]){
+					for(var j=i+1; j<selectedRows.length; j++){
+						selectedRows[j-1] = selectedRows[j];
+					}
+					selectedRows.pop();
+					break;
+				}
+			}
+		}
+		opts.onUnselect.call(target, index, row);
 	}
 	
 	/**
@@ -749,6 +784,26 @@
 					
 				case 'getSelections':
 					return getSelectedRows(this[0]);
+					
+				case 'clearSelections':
+					return this.each(function(){
+						clearSelections(this);
+					});
+				
+				case 'selectRow':
+					return this.each(function(){
+						selectRow(this, param);
+					});
+					
+				case 'selectRecord':
+					return this.each(function(){
+						selectRecord(this, param);
+					});
+					
+				case 'unselectRow':
+					return this.each(function(){
+						unselectRow(this, param);
+					});
 			}
 		}
 		
@@ -761,7 +816,13 @@
 				opts = $.extend(state.options, options);
 				state.options = opts;
 			} else {
-				opts = $.extend({}, $.fn.datagrid.defaults, options);
+				opts = $.extend({}, $.fn.datagrid.defaults, {
+					width: (parseInt($(this).css('width')) || 'auto'),
+					height: (parseInt($(this).css('height')) || 'auto'),
+					fit: $(this).attr('fit') == 'true'
+				}, options);
+				$(this).css('width', null).css('height', null);
+				
 				var wrapResult = wrapGrid(this, opts.rownumbers);
 				if (!opts.columns) opts.columns = wrapResult.columns;
 				if (!opts.frozenColumns) opts.frozenColumns = wrapResult.frozenColumns;
@@ -819,14 +880,16 @@
 					if (btn == '-') {
 						$('<div class="datagrid-btn-separator"></div>').appendTo(tb);
 					} else {
-						$('<a href="javascript:void(0)"></a>')
-								.addClass('l-btn')
-								.css('float', 'left')
-								.text(btn.text)
-								.attr('icon', btn.iconCls || '')
-								.bind('click', eval(btn.handler || function(){}))
-								.appendTo(tb)
-								.linkbutton({plain:true});
+						var tool = $('<a href="javascript:void(0)"></a>');
+						tool[0].onclick = eval(btn.handler || function(){});
+						tool.css('float', 'left')
+							.text(btn.text)
+							.attr('icon', btn.iconCls || '')
+							.appendTo(tb)
+							.linkbutton({
+								plain:true,
+								disabled:(btn.disabled || false)
+							});
 					}
 				}
 			}
@@ -874,6 +937,7 @@
 		striped: false,
 		method: 'post',
 		nowrap: true,
+		idField: null,
 		url: null,
 		loadMsg: 'Processing, please wait ...',
 		pagination: false,
@@ -891,6 +955,8 @@
 		onLoadError: function(){},
 		onClickRow: function(rowIndex, rowData){},
 		onDblClickRow: function(rowIndex, rowData){},
-		onSortColumn: function(sort, order){}
+		onSortColumn: function(sort, order){},
+		onSelect: function(rowIndex, rowData){},
+		onUnselect: function(rowIndex, rowData){}
 	};
 })(jQuery);

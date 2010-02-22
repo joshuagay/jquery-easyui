@@ -1,5 +1,5 @@
 /**
- * resizable - jQuery easyui 1.0.1
+ * resizable - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -188,9 +188,9 @@
 			maxWidth: 10000,//$(document).width(),
 			maxHeight: 10000,//$(document).height(),
 			edge:5,
-			onStartResize: function(){},
-			onResize: function(){},
-			onStopResize: function(){}
+			onStartResize: function(e){},
+			onResize: function(e){},
+			onStopResize: function(e){}
 	};
 	
 })(jQuery);

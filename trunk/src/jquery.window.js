@@ -1,5 +1,5 @@
 /**
- * window - jQuery easyui 1.0.1
+ * window - jQuery easyui
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
