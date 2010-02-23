@@ -343,7 +343,10 @@
 				opts = $.extend(state.options, options);
 				state.options = opts;
 			} else {
-				opts = $.extend({}, $.fn.tree.defaults, options);
+				opts = $.extend({}, $.fn.tree.defaults, {
+					url:$(this).attr('url'),
+					animate:($(this).attr('animate') == 'true')
+				}, options);
 				$.data(this, 'tree', {
 					options: opts,
 					tree: wrapTree(this)

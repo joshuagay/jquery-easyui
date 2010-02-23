@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>jQuery EasyUI</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
-		var index = 1;
+		var index = 0;
 		function addTab(){
 			index++;
 			$('#tt').tabs('add',{
@@ -16,29 +16,20 @@
 				closable:true
 			});
 		}
-		$(function(){
-			$('#tt2').tabs({
-				width:600,
-				height:200
-			});
-			$('#test').datagrid({
-				fit:true
-			});
-		});
 	</script>
 </head>
 <body>
 	<h1>Tabs</h1>
 	<div>
-		<a class="l-btn" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
+		<a class="easyui-linkbutton" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
 	</div>
 	<br/>
-	<div id="tt" class="tabs-container" style="width:500px;height:250px;">
+	<div id="tt" class="easyui-tabs" style="width:500px;height:250px;">
 		<div title="Tab1" style="padding:20px;display:none;">
 		</div>
 		<div title="Tab2" closable="true" style="overflow:auto;padding:20px;display:none;" cache="false" href="tabs_href_test.html"> This is Tab2 width close button.</div>
 		<div title="Tab3" icon="icon-reload" closable="true" style="padding:20px;display:none;">
-		<table id="test">
+		<table id="test" class="easyui-datagrid" fit="true">
 			<thead>
 				<tr>
 					<th field="f1" width="60">field1</th>
@@ -64,14 +55,12 @@
 			<iframe scrolling="yes" frameborder="0"  src="http://www.google.com" style="width:100%;height:100%;"></iframe>
 		</div>
 		<div title="Tab5 with sub tabs" closable="true" icon="icon-cut" style="padding:10px;display:none;">
-			<div class="tabs-container" plain="true" style="height:100px;width:300px;">
-				<div title="子标题1">子内容1</div>
-				<div title="子标题2">子内容2</div>
-				<div title="子标题3">子内容3</div>
+			<div class="easyui-tabs" fit="true" plain="true" style="height:100px;width:300px;">
+				<div title="Title1">Content 1</div>
+				<div title="Title2">Content 2</div>
+				<div title="Title3">Content 3</div>
 			</div>
 		</div>
 	</div>
-	
-
 </body>
 </html>

@@ -150,7 +150,7 @@
 	function transformData(target){
 		var opts = $.data(target, 'combobox').options;
 		var data = [];
-		$('option', target).each(function(){
+		$('>option', target).each(function(){
 			var item = {};
 			item[opts.valueField] = $(this).attr('value') || $(this).html();
 			item[opts.textField] = $(this).html();
