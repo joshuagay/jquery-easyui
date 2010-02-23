@@ -5,12 +5,9 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
-		$(function(){
-			$('#w').window();
-		});
 		function resize(){
 			$('#w').window({
 				title: 'New Title',
@@ -36,14 +33,14 @@
 		<a href="javascript:void(0)" onclick="open1()">open</a>
 		<a href="javascript:void(0)" onclick="close1()">close</a>
 	</div>
-	<div id="w" title="My Window" icon="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
-		<div class="layout-container" fit="true">
+	<div id="w" class="easyui-window" title="My Window" icon="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
+		<div class="easyui-layout" fit="true">
 			<div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
-				jQuery easyui framework help you build your web page easily.
+				jQuery EasyUI framework help you build your web page easily.
 			</div>
 			<div region="south" border="false" style="text-align:right;height:30px;line-height:30px;">
-				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Ok</a>
-				<a class="l-btn" href="javascript:void(0)" onclick="resize()">Cancel</a>
+				<a class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" onclick="resize()">Ok</a>
+				<a class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)" onclick="resize()">Cancel</a>
 			</div>
 		</div>
 	</div>

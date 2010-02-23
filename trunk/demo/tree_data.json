@@ -1,19 +1,30 @@
 [{
-	text:'文件夹1',
-	iconCls:'icon-save',
+	id:1,
+	text:'Folder1',
+	iconCls:'icon-ok',
 	children:[{
+		id:2,
 		text:'File1'
 	},{
-		text:'多媒体资料',
+		id:3,
+		text:'Folder2',
 		state:'open',
 		children:[{
-			text:'PhotoShop'
+			id:4,
+			text:'File3',
+			iconCls:'icon-reload'
 		},{
 			id: 8,
-			text:'异步加载测试项',
+			text:'Async Folder',
 			state:'closed'
 		}]
 	}]
 },{
-	text:'文件2'
+	text:'Languages',
+	state:'closed',
+	children:[{
+		text:'Java'
+	},{
+		text:'C#'
+	}]
 }]

@@ -2,14 +2,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>jQuery EasyUI</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<script type="text/javascript" src="../src/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#tt1').tree();
+			$('#tt1').tree({
+				animate:true,
+				onClick:function(node){
+					alert('you click '+node.text);
+				}
+			});
 			$('#tt2').tree({
 				url: 'tree_data.json',
 				onClick:function(node){
@@ -20,14 +25,47 @@
 		function reload(){
 			$('#tt2').tree('reload');
 		}
+		function getSelected(){
+			var node = $('#tt2').tree('getSelected');
+			alert(node.text);
+		}
+		function collapse(){
+			var node = $('#tt2').tree('getSelected');
+			$('#tt2').tree('collapse',node.target);
+		}
+		function expand(){
+			var node = $('#tt2').tree('getSelected');
+			$('#tt2').tree('expand',node.target);
+		}
+		function append(){
+			var node = $('#tt2').tree('getSelected');
+			$('#tt2').tree('append',{
+				parent: node.target,
+				data:[{
+					text:'new1'
+				},{
+					text:'new2',
+					state:'closed',
+					children:[{
+						text:'subnew1'
+					},{
+						text:'subnew2'
+					}]
+				}]
+			});
+		}
+		function remove(){
+			var node = $('#tt2').tree('getSelected');
+			$('#tt2').tree('remove', node.target);
+		}
 	</script>
 </head>
 <body>
 	<h1>Tree</h1>
-	<p>Create from html markup</p>
-	<ul id="tt1">
+	<p>Create from HTML markup</p>
+	<ul id="tt1" class="easyui-tree">
 		<li>
-			<span>文件夹</span>
+			<span>Folder</span>
 			<ul>
 				<li>
 					<span>Sub Folder 1</span>
@@ -56,9 +94,14 @@
 		</li>
 	</ul>
 	<hr></hr>
-	<p>Create from json data</p>
+	<p>Create from JSON data</p>
 	<div style="margin:10px;">
 		<a href="#" onclick="reload()">reload</a>
+		<a href="#" onclick="getSelected()">getSelected</a>
+		<a href="#" onclick="collapse()">collapse</a>
+		<a href="#" onclick="expand()">expand</a>
+		<a href="#" onclick="append()">append</a>
+		<a href="#" onclick="remove()">remove</a>
 	</div>
 
 	<ul id="tt2"></ul>
