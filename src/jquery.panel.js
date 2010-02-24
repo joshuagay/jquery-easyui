@@ -1,5 +1,5 @@
 /**
- * panel - jQuery easyui
+ * panel - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -365,8 +365,10 @@
 			} else {
 				var t = $(this);
 				opts = $.extend({}, $.fn.panel.defaults, {
-					width: (parseInt(t.css('width')) || t.outerWidth()),
-					height: (parseInt(t.css('height')) || t.outerHeight()),
+					width: (parseInt(t.css('width')) || 'auto'),
+					height: (parseInt(t.css('height')) || 'auto'),
+//					width: (parseInt(t.css('width')) || t.outerWidth()),
+//					height: (parseInt(t.css('height')) || t.outerHeight()),
 					left: (parseInt(t.css('left')) || null),
 					top: (parseInt(t.css('top')) || null),
 					title: t.attr('title'),

@@ -1,5 +1,5 @@
 /**
- * dialog - jQuery easyui
+ * dialog - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

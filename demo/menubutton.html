@@ -9,12 +9,6 @@
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		$(function(){
-			$('#mb1').menubutton({
-				menu:'#mm1'
-			});
-			$('#mb2').menubutton({
-				menu:'#mm2'
-			});
 			$('#dd1').click(function(){
 				$('#mb1,#mb2').menubutton({
 					disabled:true
@@ -49,8 +43,8 @@
 		<a href="javascript:void(0)" id="dd4">Plain</a>
 	</div>
 	<div style="background:#C9EDCC;padding:5px;width:600px;">
-		<a href="javascript:void(0)" id="mb1" icon="icon-edit">Edit</a>
-		<a href="javascript:void(0)" id="mb2" icon="icon-help">Help</a>
+		<a href="javascript:void(0)" id="mb1" class="easyui-menubutton" menu="#mm1" icon="icon-edit">Edit</a>
+		<a href="javascript:void(0)" id="mb2" class="easyui-menubutton" menu="#mm2" icon="icon-help">Help</a>
 	</div>
 	<div id="mm1" style="width:150px;">
 		<div icon="icon-undo">Undo</div>

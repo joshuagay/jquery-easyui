@@ -6,6 +6,8 @@
 				r = $('.easyui-linkbutton', context); if (r.length) r.linkbutton();
 				r = $('.easyui-accordion', context); if (r.length) r.accordion();
 				r = $('.easyui-menu', context); if (r.length) r.menu();
+				r = $('.easyui-menubutton', context); if (r.length) r.menubutton();
+				r = $('.easyui-splitbutton', context); if (r.length) r.splitbutton();
 				r = $('.easyui-layout', context); if (r.length) r.layout();
 				r = $('.easyui-panel', context); if (r.length) r.panel();
 				r = $('.easyui-tabs', context); if (r.length) r.tabs();

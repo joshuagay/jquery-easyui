@@ -1,5 +1,5 @@
 /**
- * pagination - jQuery easyui
+ * pagination - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

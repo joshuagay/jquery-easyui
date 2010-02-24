@@ -1,5 +1,5 @@
 /**
- * tabs - jQuery easyui
+ * tabs - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

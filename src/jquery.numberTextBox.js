@@ -1,5 +1,5 @@
 /**
- * numberTextBox - jQuery easyui
+ * numberTextBox - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
