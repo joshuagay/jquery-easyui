@@ -1,5 +1,5 @@
 /**
- * draggable - jQuery easyui
+ * draggable - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

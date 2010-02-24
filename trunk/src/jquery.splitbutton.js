@@ -1,5 +1,5 @@
 /**
- * splitbutton - jQuery easyui
+ * splitbutton - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -73,8 +73,14 @@
 				$.extend(state.options, options);
 			} else {
 				$.data(this, 'splitbutton', {
-					options: $.extend({}, $.fn.splitbutton.defaults, options)
+					options: $.extend({}, $.fn.splitbutton.defaults, {
+						disabled: $(this).attr('disabled') == 'true',
+						plain: ($(this).attr('plain')=='false' ? false : true),
+						menu: $(this).attr('menu'),
+						duration: (parseInt($(this).attr('duration')) || 100)
+					}, options)
 				});
+				$(this).removeAttr('disabled');
 				$(this).append('<span class="s-btn-downarrow">&nbsp;</span>');
 			}
 			init(this);

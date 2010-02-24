@@ -1,5 +1,5 @@
 /**
- * datagrid - jQuery easyui
+ * datagrid - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt

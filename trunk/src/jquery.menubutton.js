@@ -1,5 +1,5 @@
 /**
- * menubutton - jQuery easyui
+ * menubutton - jQuery EasyUI
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -69,8 +69,14 @@
 				$.extend(state.options, options);
 			} else {
 				$.data(this, 'menubutton', {
-					options: $.extend({}, $.fn.menubutton.defaults, options)
+					options: $.extend({}, $.fn.menubutton.defaults, {
+						disabled: $(this).attr('disabled') == 'true',
+						plain: ($(this).attr('plain')=='false' ? false : true),
+						menu: $(this).attr('menu'),
+						duration: (parseInt($(this).attr('duration')) || 100)
+					}, options)
 				});
+				$(this).removeAttr('disabled');
 				$(this).append('<span class="m-btn-downarrow">&nbsp;</span>');
 			}
 			
