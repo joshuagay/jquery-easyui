@@ -4,7 +4,7 @@
 <title>jQuery EasyUI</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		function reload(){
@@ -16,6 +16,10 @@
 				text:'File1'
 			});
 		}
+		function getValue(){
+			var val = $('#cc').combotree('getValue');
+			alert(val);
+		}
 	</script>
 </head>
 <body>
@@ -23,6 +27,7 @@
 	<div style="margin-bottom:10px;">
 		<a href="#" onclick="reload()">reload</a>
 		<a href="#" onclick="setValue()">setValue</a>
+		<a href="#" onclick="getValue()">getValue</a>
 	</div>
 	<span>Select:</span>
 	<select id="cc" class="easyui-combotree" url="tree_data.json" style="width:200px;"></select>
