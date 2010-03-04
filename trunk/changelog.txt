@@ -1,12 +1,29 @@
+Version 1.0.4
+-------------
+* Bug
+ * panel: When panel is invisible, it is abnormal when resized. fixed.
+ * panel: Memory leak in method 'destroy'. fixed.
+ * messager: Memory leak when messager box is closed. fixed.
+ * dialog: No onLoad event occurs when loading remote data. fixed.
+* Improvement
+ * panel: Add method 'setTitle'.
+ * window: Add method 'setTitle'.
+ * dialog: Add method 'setTitle'.
+ * combotree: Add method 'getValue'.
+ * combobox: Add method 'getValue'.
+ * form: The 'load' method can load data and fill combobox and combotree field correctly.
+ 
 Version 1.0.3
 -------------
-** Bug
-	* menu: When menu is show in a DIV container, it will be cropped. fixed.
-	* layout: If you collpase a region panel and then expand it immediately, the region panel will not show normally. fixed.
-	* accordion: If no panel selected then the first one will become selected. The first panel's body height will not set correctly. fixed.
-** Improvement
-	* tree: Add some methods to support CRUD operation.
-	* datagrid: Toolbar can accept a new property named 'disabled' to disable the specified tool button.
-** New Plugins
-	* combobox: Combines a textbox with a list of options that users are able to choose from.
-	* combotree: Combines combobox with drop-down tree component.
+* Bug
+ * menu: When menu is show in a DIV container, it will be cropped. fixed.
+ * layout: If you collpase a region panel and then expand it immediately, the region panel will not show normally. fixed.
+ * accordion: If no panel selected then the first one will become selected and the first panel's body height will not set correctly. fixed.
+* Improvement
+ * tree: Add some methods to support CRUD operation.
+ * datagrid: Toolbar can accept a new property named 'disabled' to disable the specified tool button.
+* New Plugins
+ * combobox: Combines a textbox with a list of options that users are able to choose from.
+ * combotree: Combines combobox with drop-down tree component.
+ * numberbox: Make input element can only enter number char.
+ * dialog: rewrite the dialog plugin, dialog can contains toolbar and buttons.
