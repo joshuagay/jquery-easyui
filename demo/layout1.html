@@ -40,9 +40,21 @@
 				rownumbers:true
 			});
 		});
+		function addmenu(){
+			var header = $('.layout-expand .layout-button-down').parent().parent();
+			var menu = $('<div style="position:absolute;left:0;top:0;background:#fafafa;"></div>').appendTo(header);
+			var btn = $('<a href="#">test</a>').appendTo(menu);
+			btn.menubutton({
+				menu:'#mymenu'
+			});
+		}
 	</script>
 </head>
 <body class="easyui-layout">
+	<div id="mymenu" style="width:150px;">
+		<div>item1</div>
+		<div>item2</div>
+	</div>
 		<div region="north" title="North Title" split="true" style="height:100px;padding:10px;">
 			<p>n1</p>
 			<p>n2</p>
@@ -59,7 +71,7 @@
 		<div region="east" icon="icon-reload" title="Tree Menu" split="true" style="width:180px;">
 			<ul class="easyui-tree" url="tree_data.json"></ul>
 		</div>
-		<div region="west" split="true" title="West Menu" style="width:280px;padding1:1px;">
+		<div region="west" split="true" title="West Menu" style="width:280px;padding1:1px;overflow:hidden;">
 			<div class="easyui-accordion" fit="true" border="false">
 				<div title="Title1" style="overflow:auto;">
 					<p>content1</p>
@@ -73,15 +85,16 @@
 				</div>
 				<div title="Title2" selected="true" style="padding:10px;">
 					content2
+					<a href="#" onclick="addmenu()">addmenu</a>
 				</div>
 				<div title="Title3">
 					content3
 				</div>
 			</div>
 		</div>
-		<div region="center" title="Main Title">
+		<div region="center" title="Main Title" style="overflow:hidden;">
 			<div class="easyui-tabs" fit="true" border="false">
-				<div title="Tab1" style="padding:20px;"> 
+				<div title="Tab1" style="padding:20px;overflow:hidden;"> 
 					<div style="margin-top:20px;">
 						<h3>jQuery EasyUI framework help you build your web page easily.</h3>
 						<li>easyui is a collection of user-interface plugin based on jQuery.</li> 
