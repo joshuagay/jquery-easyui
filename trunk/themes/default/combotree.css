@@ -8,8 +8,10 @@
 }
 .combotree-text{
 	font-size:12px;
-	padding:3px 2px 3px 2px;
 	border:0px;
+	line-height:20px;
+	height:20px;
+	padding:0px;
 }
 .combotree-arrow{
 	background:url('images/combo_arrow.gif') no-repeat 0 0;

@@ -1,0 +1,56 @@
+.validatebox{
+	display:inline-block;
+	white-space:nowrap;
+	font-size:12px;
+	margin:0;
+	padding:0;
+	border:1px solid #A4BED4;
+}
+.validatebox-text{
+	font-size:12px;
+	border:0px;
+	line-height:20px;
+	height:20px;
+	padding:0px 2px;
+	background:transparent;
+}
+.validatebox-invalid{
+	border:1px solid red;
+	background:url('images/validatebox_warning.png') no-repeat right 2px;
+}
+.validatebox-hint{
+	display:inline-block;
+	width:18px;
+	height:20px;
+	overflow:hidden;
+	vertical-align:top;
+	width:0;
+}
+.validatebox-tip{
+	position:absolute;
+	width:200px;
+	height:auto;
+	display:none;
+	z-index:9900000;
+}
+.validatebox-tip-content{
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	left:10px;
+	padding:3px 5px;
+	border:1px solid #CC9933;
+	background:#FFFFCC;
+	z-index:9900001;
+	font-size:12px;
+}
+.validatebox-tip-pointer{
+	background:url('images/validatebox_pointer.gif') no-repeat left top;
+	display:inline-block;
+	width:10px;
+	height:19px;
+	position:absolute;
+	left:1px;
+	top:0px;
+	z-index:9900002;
+}
