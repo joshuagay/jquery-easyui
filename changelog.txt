@@ -1,3 +1,13 @@
+Version 1.0.5
+* Bug
+ * panel: The fit property of panel performs incorrectly. fixed.
+* Improvement
+ * menu: Add a href attribute for menu item, with which user can display a different page in the current browser window.
+ * form: Add a validate method to do validation for validatebox component.
+ * dialog: The dialog can read collapsible,minimizable,maximizable and resizable attribute from markup.
+* New Plugins
+ * validatebox: A validation plugin that checks to make sure the user's input value is valid. 
+ 
 Version 1.0.4
 -------------
 * Bug
