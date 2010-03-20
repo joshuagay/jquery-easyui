@@ -1011,33 +1011,8 @@ a.s-btn-plain-active .s-btn-downarrow{
 .tree-node-selected{
 	background:#FBEC88;
 }
-.validatebox{
-	display:inline-block;
-	white-space:nowrap;
-	font-size:12px;
-	margin:0;
-	padding:0;
-	border:1px solid #A4BED4;
-}
-.validatebox-text{
-	font-size:12px;
-	border:0px;
-	line-height:20px;
-	height:20px;
-	padding:0px 2px;
-	background:transparent;
-}
 .validatebox-invalid{
-	border:1px solid red;
-	background:url('images/validatebox_warning.png') no-repeat right 2px;
-}
-.validatebox-hint{
-	display:inline-block;
-	width:18px;
-	height:20px;
-	overflow:hidden;
-	vertical-align:top;
-	width:0;
+	background:#FFFFEE url('images/validatebox_warning.png') no-repeat right 1px;
 }
 .validatebox-tip{
 	position:absolute;
