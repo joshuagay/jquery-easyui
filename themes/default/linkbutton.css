@@ -8,6 +8,7 @@ a.l-btn{
 	height:24px;
 	padding-right:18px;
 	cursor:pointer;
+	outline:none;
 }
 a.l-btn-plain{
 	background:transparent;
