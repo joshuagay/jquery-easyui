@@ -169,11 +169,12 @@
 				opts = $.extend(state.options, options);
 				state.opts = opts;
 			} else {
+				var t = $(this);
 				opts = $.extend({}, $.fn.accordion.defaults, {
-					width: (parseInt($(this).css('width')) || 'auto'),
-					height: (parseInt($(this).css('height')) || 'auto'),
-					fit: $(this).attr('fit') == 'true',
-					border: ($(this).attr('border') == 'false' ? false : true)
+					width: (parseInt(t.css('width')) || undefined),
+					height: (parseInt(t.css('height')) || undefined),
+					fit: (t.attr('fit') ? t.attr('fit') == 'true' : undefined),
+					border: (t.attr('border') ? t.attr('border') == 'true' : undefined)
 				}, options);
 				var r = wrapAccordion(this);
 				$.data(this, 'accordion', {
