@@ -10,101 +10,116 @@
 (function($){
 	
 	function init(target){
-		var span = $(target).addClass('validatebox-text').wrap('<span class="validatebox"></span>').parent();
-		span.append(
-			'<span>' +
-				'<span class="validatebox-hint">' +
-				'</span>' +
-			'</span>'
-		);
-		var tip = $(
+		$(target).addClass('validatebox-text');
+	}
+	
+	/**
+	 * destroy the box, including it's tip object.
+	 */
+	function destroyBox(target){
+		var tip = $.data(target, 'validatebox').tip;
+		if (tip){
+			tip.remove();
+		}
+		$(target).remove();
+	}
+	
+	function bindEvents(target){
+		var box = $(target);
+		var tip = $.data(target, 'validatebox').tip;
+		
+		var time = null;
+		box.unbind('.validatebox').bind('focus.validatebox', function(){
+			if (time){
+				clearInterval(time);
+			}
+			time = setInterval(function(){
+				validate(target);
+			}, 200);
+		}).bind('blur.validatebox', function(){
+			clearInterval(time);
+			time = null;
+			hideTip(target);
+		}).bind('mouseover.validatebox', function(){
+			if (box.hasClass('validatebox-invalid')){
+				showTip(target);
+			}
+		}).bind('mouseout.validatebox', function(){
+			hideTip(target);
+		});
+	}
+	
+	/**
+	 * show tip message.
+	 */
+	function showTip(target){
+		var box = $(target);
+		var msg = $.data(target, 'validatebox').message;
+		var tip = $.data(target, 'validatebox').tip;
+		if (!tip){
+			tip = $(
 				'<div class="validatebox-tip">' +
 					'<span class="validatebox-tip-content">' +
 					'</span>' +
 					'<span class="validatebox-tip-pointer">' +
 					'</span>' +
 				'</div>'
-				).appendTo('body');
-		
-		return {
-			validatebox:span,
-			tip:tip
+			).appendTo('body');
+			$.data(target, 'validatebox').tip = tip;
 		}
-	}
-	
-	function setSize(target){
-		var opts = $.data(target, 'validatebox').options;
-		var validatebox = $.data(target, 'validatebox').validatebox;
-		var box = validatebox.find('.validatebox-text');
-		
-		if (isNaN(opts.width)){
-			opts.width = box.outerWidth();
-		}
-		var width = opts.width - (validatebox.outerWidth()-validatebox.width());
-		box.width(width);
-	}
-	
-	function bindEvents(target){
-		var opts = $.data(target, 'validatebox').options;
-		var validatebox = $.data(target, 'validatebox').validatebox;
-		var tip = $.data(target, 'validatebox').tip;
-		
-		var time = null;
-		validatebox.find('.validatebox-text')
-		.unbind('.validatebox')
-		.bind('focus.validatebox', function(e){
-			time = setInterval(function(){
-				validate(target);
-			}, 200);
-		}).bind('blur.validatebox', function(e){
-			clearInterval(time);
-			tip.hide();
-		});
-		
-		validatebox
-		.unbind('.validatebox')
-		.bind('mousemove.validatebox', function(e){
-			if (validatebox.hasClass('validatebox-invalid')){
-				showTip(target);
-			}
-		}).bind('mouseout.validatebox', function(){
-			tip.hide();
-		});
-	}
-	
-	function showTip(target, msg){
-		var hint = $.data(target, 'validatebox').validatebox.find('.validatebox-hint');
-		var tip = $.data(target, 'validatebox').tip;
-		if (msg){
-			tip.find('.validatebox-tip-content').html(msg);
-		}
+		tip.find('.validatebox-tip-content').html(msg);
 		tip.css({
 			display:'block',
-			left:hint.offset().left,
-			top:hint.offset().top
+			left:box.offset().left + box.outerWidth(),
+			top:box.offset().top
 		})
 	}
 	
+	/**
+	 * hide tip message.
+	 */
+	function hideTip(target){
+		var tip = $.data(target, 'validatebox').tip;
+		if (tip){
+			tip.remove();
+			$.data(target, 'validatebox').tip = null;
+		}
+	}
+	
+	/**
+	 * do validate action
+	 */
 	function validate(target){
 		var opts = $.data(target, 'validatebox').options;
-		var validatebox = $.data(target, 'validatebox').validatebox;
 		var tip = $.data(target, 'validatebox').tip;
-		var value = validatebox.find('.validatebox-text').val();
+		var box = $(target);
+		var value = box.val();
+		
+		function setTipMessage(msg){
+			$.data(target, 'validatebox').message = msg;
+		}
+		
+		// if the box is disabled, skip validate action.
+		var disabled = box.attr('disabled');
+		if (disabled == true || disabled == 'true'){
+			return true;
+		}
 		
 		if (opts.required){
 			if (value == ''){
-				validatebox.addClass('validatebox-invalid');
-				showTip(target, opts.missingMessage);
+				box.addClass('validatebox-invalid');
+				setTipMessage(opts.missingMessage);
+				showTip(target);
 				return false;
 			}
 		}
 		if (opts.validType){
 			var result = /([a-zA-Z_]+)(.*)/.exec(opts.validType);
 			var rule = opts.rules[result[1]];
-			if (rule){
+			if (value && rule){
 				var param = eval(result[2]);
 				if (!rule['validator'](value, param)){
-					validatebox.addClass('validatebox-invalid');
+					box.addClass('validatebox-invalid');
 					
 					var message = rule['message'];
 					if (param){
@@ -112,20 +127,25 @@
 							message = message.replace(new RegExp("\\{" + i + "\\}", "g"), param[i]);
 						}
 					}
-					showTip(target, opts.invalidMessage || message);
+					setTipMessage(opts.invalidMessage || message);
+					showTip(target);
 					return false;
 				}
 			}
 		}
 		
-		validatebox.removeClass('validatebox-invalid');
-		tip.hide();
+		box.removeClass('validatebox-invalid');
+		hideTip(target);
 		return true;
 	}
 	
 	$.fn.validatebox = function(options){
 		if (typeof options == 'string'){
 			switch(options){
+			case 'destroy':
+				return this.each(function(){
+					destroyBox(this);
+				});
 			case 'validate':
 				return this.each(function(){
 					validate(this);
@@ -141,28 +161,23 @@
 			if (state){
 				$.extend(state.options, options);
 			} else {
-				var r = init(this);
+				init(this);
 				var t = $(this);
 				state = $.data(this, 'validatebox', {
 					options: $.extend({}, $.fn.validatebox.defaults, {
-						width: (parseInt(t.css('width')) || undefined),
 						required: (t.attr('required') ? (t.attr('required') == 'true' || t.attr('required') == true) : undefined),
 						validType: (t.attr('validType') || undefined),
 						missingMessage: (t.attr('missingMessage') || undefined),
 						invalidMessage: (t.attr('invalidMessage') || undefined)
-					}, options),
-					validatebox: r.validatebox,
-					tip: r.tip
+					}, options)
 				});
 			}
 			
-			setSize(this);
 			bindEvents(this);
 		});
 	};
 	
 	$.fn.validatebox.defaults = {
-		width:'auto',
 		required: false,
 		validType: null,
 		missingMessage: 'This field is required.',
