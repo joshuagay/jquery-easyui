@@ -7,62 +7,217 @@
  * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  */
 (function($){
-	$.fn.draggable = function(options){
-		function drag(e){
-			var dragData = e.data;
-			var left = dragData.startLeft + e.pageX - dragData.startX;
-			var top = dragData.startTop + e.pageY - dragData.startY;
-			
-			if (e.data.parnet != document.body) {
-				if ($.boxModel == true) {
-					left += $(e.data.parent).scrollLeft();
-					top += $(e.data.parent).scrollTop();
+	function drag(e){
+		var opts = $.data(e.data.target, 'draggable').options;
+		
+		var dragData = e.data;
+		var left = dragData.startLeft + e.pageX - dragData.startX;
+		var top = dragData.startTop + e.pageY - dragData.startY;
+		
+		if (opts.deltaX != null && opts.deltaX != undefined){
+			left = e.pageX + opts.deltaX;
+		}
+		if (opts.deltaY != null && opts.deltaY != undefined){
+			top = e.pageY + opts.deltaY;
+		}
+		
+		if (e.data.parnet != document.body) {
+			if ($.boxModel == true) {
+				left += $(e.data.parent).scrollLeft();
+				top += $(e.data.parent).scrollTop();
+			}
+		}
+		
+		if (opts.axis == 'h') {
+			dragData.left = left;
+		} else if (opts.axis == 'v') {
+			dragData.top = top;
+		} else {
+			dragData.left = left;
+			dragData.top = top;
+		}
+	}
+	
+	function applyDrag(e){
+		var opts = $.data(e.data.target, 'draggable').options;
+		var proxy = $.data(e.data.target, 'draggable').proxy;
+		if (proxy){
+			proxy.css('cursor', opts.cursor);
+		} else {
+			proxy = $(e.data.target);
+			$.data(e.data.target, 'draggable').handle.css('cursor', opts.cursor);
+		}
+		proxy.css({
+			left:e.data.left,
+			top:e.data.top
+		});
+	}
+	
+	function doDown(e){
+		var opts = $.data(e.data.target, 'draggable').options;
+		
+		var droppables = $('.droppable').filter(function(){
+			return e.data.target != this;
+		}).filter(function(){
+			var accept = $.data(this, 'droppable').options.accept;
+			if (accept){
+				return $(accept).filter(function(){
+					return this == e.data.target;
+				}).length > 0;
+			} else {
+				return true;
+			}
+		});
+		$.data(e.data.target, 'draggable').droppables = droppables;
+		
+		var proxy = $.data(e.data.target, 'draggable').proxy;
+		if (!proxy){
+			if (opts.proxy){
+				if (opts.proxy == 'clone'){
+					proxy = $(e.data.target).clone().insertAfter(e.data.target);
+				} else {
+					proxy = opts.proxy();
+				}
+				$.data(e.data.target, 'draggable').proxy = proxy;
+			} else {
+				proxy = $(e.data.target);
+			}
+		}
+		
+		proxy.css('position', 'absolute');
+		drag(e);
+		applyDrag(e);
+		
+		opts.onStartDrag.call(e.data.target, e);
+		return false;
+	}
+	
+	function doMove(e){
+		
+		drag(e);
+		if ($.data(e.data.target, 'draggable').options.onDrag.call(e.data.target, e) != false){
+			applyDrag(e);
+		}
+		
+		var source = e.data.target;
+		$.data(e.data.target, 'draggable').droppables.each(function(){
+			var dropObj = $(this);
+			var p2 = $(this).offset();
+			if (e.pageX > p2.left && e.pageX < p2.left + dropObj.outerWidth()
+					&& e.pageY > p2.top && e.pageY < p2.top + dropObj.outerHeight()){
+				if (!this.entered){
+					$(this).trigger('_dragenter', [source]);
+					this.entered = true;
+				}
+				$(this).trigger('_dragover', [source]);
+			} else {
+				if (this.entered){
+					$(this).trigger('_dragleave', [source]);
+					this.entered = false;
 				}
 			}
-			
-			var opts = $.data(e.data.target, 'draggable').options;
-			if (opts.axis == 'h') {
-				dragData.left = left;
-			} else if (opts.axis == 'v') {
-				dragData.top = top;
+		});
+		
+		return false;
+	}
+	
+	function doUp(e){
+		drag(e);
+		
+		var proxy = $.data(e.data.target, 'draggable').proxy;
+		var opts = $.data(e.data.target, 'draggable').options;
+		if (opts.revert){
+			if (checkDrop() == true){
+				removeProxy();
+				$(e.data.target).css({
+					position:e.data.startPosition,
+					left:e.data.startLeft,
+					top:e.data.startTop
+				});
 			} else {
-				dragData.left = left;
-				dragData.top = top;
+				if (proxy){
+					proxy.animate({
+						left:e.data.startLeft,
+						top:e.data.startTop
+					}, function(){
+						removeProxy();
+					});
+				} else {
+					$(e.data.target).animate({
+						left:e.data.startLeft,
+						top:e.data.startTop
+					}, function(){
+						$(e.data.target).css('position', e.data.startPosition);
+					});
+				}
 			}
-		}
-		
-		function applyDrag(e){
-			var dragData = e.data;
-			$(dragData.target).css({
-				left: dragData.left,
-				top: dragData.top
+		} else {
+			$(e.data.target).css({
+				position:'absolute',
+				left:e.data.left,
+				top:e.data.top
 			});
+			removeProxy();
+			checkDrop();
 		}
 		
-		function doDown(e){
-			$.data(e.data.target, 'draggable').options.onStartDrag.call(e.data.target, e);
-			return false;
-		}
 		
-		function doMove(e){
-			drag(e);
-			if ($.data(e.data.target, 'draggable').options.onDrag.call(e.data.target, e) != false){
-				applyDrag(e);
+		
+		opts.onStopDrag.call(e.data.target, e);
+		
+		function removeProxy(){
+			if (proxy){
+				proxy.remove();
 			}
-			return false;
+			$.data(e.data.target, 'draggable').proxy = null;
 		}
 		
-		function doUp(e){
-			drag(e);
-			applyDrag(e);
-			$(document).unbind('.draggable');
-			$.data(e.data.target, 'draggable').options.onStopDrag.call(e.data.target, e);
-			return false;
+		function checkDrop(){
+			var dropped = false;
+			$.data(e.data.target, 'draggable').droppables.each(function(){
+				var dropObj = $(this);
+				var p2 = $(this).offset();
+				if (e.pageX > p2.left && e.pageX < p2.left + dropObj.outerWidth()
+						&& e.pageY > p2.top && e.pageY < p2.top + dropObj.outerHeight()){
+					if (opts.revert){
+						$(e.data.target).css({
+							position:e.data.startPosition,
+							left:e.data.startLeft,
+							top:e.data.startTop
+						});
+					}
+					$(this).trigger('_drop', [e.data.target]);
+					dropped = true;
+					this.entered = false;
+				}
+			});
+			return dropped;
 		}
 		
+		$(document).unbind('.draggable');
+		return false;
+	}
+	
+	$.fn.draggable = function(options){
+		if (typeof options == 'string'){
+			switch(options){
+			case 'options':
+				return $.data(this[0], 'draggable').options;
+			case 'proxy':
+				return $.data(this[0], 'draggable').proxy;
+			case 'enable':
+				return this.each(function(){
+					$(this).draggable({disabled:false});
+				});
+			case 'disable':
+				return this.each(function(){
+					$(this).draggable({disabled:true});
+				});
+			}
+		}
 		
 		return this.each(function(){
-			$(this).css('position','absolute');
+//			$(this).css('position','absolute');
 			
 			var opts;
 			var state = $.data(this, 'draggable');
@@ -98,6 +253,7 @@
 
 				var position = $(e.data.target).position();
 				var data = {
+					startPosition: $(e.data.target).css('position'),
 					startLeft: position.left,
 					startTop: position.top,
 					left: position.left,
@@ -115,7 +271,7 @@
 			
 			function onMouseMove(e) {
 				if (checkArea(e)){
-					$(this).css('cursor', 'move');
+					$(this).css('cursor', opts.cursor);
 				} else {
 					$(this).css('cursor', 'default');
 				}
@@ -138,10 +294,16 @@
 	};
 	
 	$.fn.draggable.defaults = {
+			proxy:null,
+			revert:false,
+			cursor:'move',
+			deltaX:null,
+			deltaY:null,
 			handle: null,
 			disabled: false,
 			edge:0,
 			axis:null,	// v or h
+			
 			onStartDrag: function(e){},
 			onDrag: function(e){},
 			onStopDrag: function(e){}
