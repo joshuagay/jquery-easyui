@@ -11,8 +11,171 @@
  * 
  */
 (function($){
-	$.fn.pagination = function(options) {
+	function buildToolbar(target){
+		var opts = $.data(target, 'pagination').options;
 		
+		var pager = $(target).addClass('pagination').empty();
+		var t = $('<table cellspacing="0" cellpadding="0" border="0"><tr></tr></table>').appendTo(pager);
+		var tr = $('tr', t);
+		
+		if (opts.showPageList){
+			var ps = $('<select class="pagination-page-list"></select>');
+			for(var i=0; i<opts.pageList.length; i++) {
+				$('<option></option>')
+						.text(opts.pageList[i])
+						.attr('selected', opts.pageList[i]==opts.pageSize ? 'selected' : '')
+						.appendTo(ps);
+			}
+			$('<td></td>').append(ps).appendTo(tr);
+			
+			opts.pageSize = parseInt(ps.val());
+			
+			$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+		}
+		
+		$('<td><a href="javascript:void(0)" icon="pagination-first"></a></td>').appendTo(tr);
+		$('<td><a href="javascript:void(0)" icon="pagination-prev"></a></td>').appendTo(tr);
+		$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+		
+		$('<span style="padding-left:6px;"></span>')
+				.html(opts.beforePageText)
+				.wrap('<td></td>')
+				.parent().appendTo(tr);
+		$('<td><input class="pagination-num" type="text" value="1" size="2"></td>').appendTo(tr);
+		$('<span style="padding-right:6px;"></span>')
+//				.html(opts.afterPageText)
+				.wrap('<td></td>')
+				.parent().appendTo(tr);
+		
+		$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+		$('<td><a href="javascript:void(0)" icon="pagination-next"></a></td>').appendTo(tr);
+		$('<td><a href="javascript:void(0)" icon="pagination-last"></a></td>').appendTo(tr);
+		
+		if (opts.showRefresh){
+			$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+			$('<td><a href="javascript:void(0)" icon="pagination-load"></a></td>').appendTo(tr);
+			
+//			if (opts.loading) {
+//				$('<td><a class="pagination-refresh" href="javascript:void(0)" icon="pagination-loading"></a></td>').appendTo(tr);
+//			} else {
+//				$('<td><a class="pagination-refresh" href="javascript:void(0)" icon="pagination-load"></a></td>').appendTo(tr);
+//			}
+		}
+		
+		if (opts.buttons){
+			$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+			for(var i=0; i<opts.buttons.length; i++){
+				var btn = opts.buttons[i];
+				if (btn == '-') {
+					$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
+				} else {
+					var td = $('<td></td>').appendTo(tr);
+					$('<a href="javascript:void(0)"></a>')
+							.addClass('l-btn')
+							.css('float', 'left')
+							.text(btn.text || '')
+							.attr('icon', btn.iconCls || '')
+							.bind('click', eval(btn.handler || function(){}))
+							.appendTo(td)
+							.linkbutton({plain:true});
+				}
+			}
+		}
+		
+		$('<div class="pagination-info"></div>').appendTo(pager);
+		$('<div style="clear:both;"></div>').appendTo(pager);
+		
+		
+		$('a[icon^=pagination]', pager).linkbutton({plain:true});
+		
+		pager.find('a[icon=pagination-first]').unbind('.pagination').bind('click.pagination', function(){
+			selectPage(target, 1);
+		});
+		pager.find('a[icon=pagination-prev]').unbind('.pagination').bind('click.pagination', function(){
+			selectPage(target, opts.pageNumber - 1);
+		});
+		pager.find('a[icon=pagination-next]').unbind('.pagination').bind('click.pagination', function(){
+			selectPage(target, opts.pageNumber + 1);
+		});
+		pager.find('a[icon=pagination-last]').unbind('.pagination').bind('click.pagination', function(){
+			var pageCount = Math.ceil(opts.total/opts.pageSize);
+			selectPage(target, pageCount);
+		});
+		pager.find('a[icon=pagination-load]').unbind('.pagination').bind('click.pagination', function(){
+			if (opts.onBeforeRefresh.call(target, opts.pageNumber, opts.pageSize) != false){
+				selectPage(target, opts.pageNumber, function(){
+					opts.onRefresh.call(target, opts.pageNumber, opts.pageSize);
+				});
+			}
+		});
+		pager.find('input.pagination-num').unbind('.pagination').bind('keydown.pagination', function(e){
+			if (e.keyCode == 13){
+				var pageNumber = parseInt($(this).val()) || 1;
+				selectPage(target, pageNumber);
+			}
+		});
+		pager.find('.pagination-page-list').unbind('.pagination').bind('change.pagination', function(){
+			opts.pageSize = $(this).val();
+			opts.onChangePageSize.call(target, opts.pageSize);
+			
+			var pageCount = Math.ceil(opts.total/opts.pageSize);
+			selectPage(target, opts.pageNumber);
+		});
+	}
+	
+	function selectPage(target, page, callback){
+		var opts = $.data(target, 'pagination').options;
+		
+		var loadBtn = $(target).find('a[icon=pagination-load]').find('.pagination-load');
+		loadBtn.addClass('pagination-loading');
+		
+		setTimeout(function(){
+			var pageCount = Math.ceil(opts.total/opts.pageSize);
+			opts.pageNumber = page;
+			if (page < 1) opts.pageNumber = 1;
+			if (page > pageCount) opts.pageNumber = pageCount;
+			
+			opts.onSelectPage.call(target, opts.pageNumber, opts.pageSize);
+			loadBtn.removeClass('pagination-loading');
+			showInfo(target);
+			
+			if (callback){
+				callback();
+			}
+		}, 0);
+	}
+	
+	function showInfo(target){
+		var opts = $.data(target, 'pagination').options;
+		
+		var pageCount = Math.ceil(opts.total/opts.pageSize);
+		var num = $(target).find('input.pagination-num');
+		num.val(opts.pageNumber);
+		num.parent().next().find('span').html(opts.afterPageText.replace(/{pages}/, pageCount));
+		
+		var pinfo = opts.displayMsg;
+		pinfo = pinfo.replace(/{from}/, opts.pageSize*(opts.pageNumber-1)+1);
+		pinfo = pinfo.replace(/{to}/, Math.min(opts.pageSize*(opts.pageNumber), opts.total));
+		pinfo = pinfo.replace(/{total}/, opts.total);
+		
+		$(target).find('.pagination-info').html(pinfo);
+		
+		$('a[icon=pagination-first],a[icon=pagination-prev]', target).linkbutton({
+			disabled: (opts.pageNumber == 1)
+		});
+		$('a[icon=pagination-next],a[icon=pagination-last]', target).linkbutton({
+			disabled: (opts.pageNumber == pageCount)
+		});
+		
+		if (opts.loading){
+			$(target).find('a[icon=pagination-load]').find('.pagination-load').addClass('pagination-loading');
+		} else {
+			$(target).find('a[icon=pagination-load]').find('.pagination-load').removeClass('pagination-loading');
+		}
+	}
+	
+	
+	$.fn.pagination = function(options) {
 		if (typeof options == 'string'){
 			switch(options){
 				case 'options':
@@ -21,14 +184,6 @@
 		}
 		
 		options = options || {};
-		
-		function contains(v, aa){
-			for(var i=0; i<aa.length; i++){
-				if (aa[i] == v) return true;
-			}
-			return false;
-		}
-		
 		return this.each(function(){
 			var opts;
 			var state = $.data(this, 'pagination');
@@ -36,141 +191,14 @@
 				opts = $.extend(state.options, options);
 			} else {
 				opts = $.extend({}, $.fn.pagination.defaults, options);
-				if (!contains(opts.pageSize, opts.pageList)){
-					opts.pageSize = opts.pageList[0];
-				}
 				$.data(this, 'pagination', {
 					options: opts
 				});
 			}
 			
-			var total = opts.total;
-			var pageNumber = opts.pageNumber;
-			var pageSize = opts.pageSize;
-			var pageCount = Math.ceil(total/pageSize);
+			buildToolbar(this);
+			showInfo(this);
 			
-			var pager = $(this);
-			render();
-			
-			function selectPage(page){
-				return function(){
-					pageNumber = page;
-					if (pageNumber < 1) pageNumber = 1;
-					if (pageNumber > pageCount) pageNumber = pageCount;
-					
-					opts.pageNumber = pageNumber;	// save the pageNumber state
-					opts.pageSize = pageSize;
-					opts.onSelectPage.call(pager, pageNumber, pageSize);
-					
-					render();
-				};
-			}
-			
-			function render(){
-				pager.addClass('pagination').empty();
-				var t = $('<table cellspacing="0" cellpadding="0" border="0"><tr></tr></table>').appendTo(pager);
-				var tr = $('tr', t);
-				
-				var ps = $('<select class="pagination-page-list"></select>');
-				for(var i=0; i<opts.pageList.length; i++) {
-					$('<option></option>')
-							.text(opts.pageList[i])
-							.attr('selected', opts.pageList[i]==pageSize ? 'selected' : '')
-							.appendTo(ps);
-				}
-				$('<td></td>').append(ps).appendTo(tr);
-				
-				$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-				$('<td><a icon="pagination-first"></a></td>').appendTo(tr);
-				$('<td><a icon="pagination-prev"></a></td>').appendTo(tr);
-				$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-				
-				$('<span style="padding-left:6px;"></span>')
-						.html(opts.beforePageText)
-						.wrap('<td></td>')
-						.parent().appendTo(tr);
-				$('<td><input class="pagination-num" type="text" value="1" size="2"></td>').appendTo(tr);
-				$('<span style="padding-right:6px;"></span>')
-						.html(opts.afterPageText.replace(/{pages}/, pageCount))
-						.wrap('<td></td>')
-						.parent().appendTo(tr);
-				
-				$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-				$('<td><a icon="pagination-next"></a></td>').appendTo(tr);
-				$('<td><a icon="pagination-last"></a></td>').appendTo(tr);
-				$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-				
-				if (opts.loading) {
-					$('<td><a icon="pagination-loading"></a></td>').appendTo(tr);
-				} else {
-					$('<td><a icon="pagination-load"></a></td>').appendTo(tr);
-				}
-				
-				if (opts.buttons){
-					$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-					for(var i=0; i<opts.buttons.length; i++){
-						var btn = opts.buttons[i];
-						if (btn == '-') {
-							$('<td><div class="pagination-btn-separator"></div></td>').appendTo(tr);
-						} else {
-							var td = $('<td></td>').appendTo(tr);
-							$('<a href="javascript:void(0)"></a>')
-									.addClass('l-btn')
-									.css('float', 'left')
-									.text(btn.text || '')
-									.attr('icon', btn.iconCls || '')
-									.bind('click', eval(btn.handler || function(){}))
-									.appendTo(td)
-									.linkbutton({plain:true});
-						}
-					}
-				}
-				
-				var pinfo = opts.displayMsg;
-				pinfo = pinfo.replace(/{from}/, pageSize*(pageNumber-1)+1);
-				pinfo = pinfo.replace(/{to}/, Math.min(pageSize*(pageNumber),total));
-				pinfo = pinfo.replace(/{total}/, total);
-				$('<div class="pagination-info"></div>')
-						.html(opts.displayMsg)
-						.html(pinfo)
-						.appendTo(pager);
-				
-				$('<div style="clear:both;"></div>').appendTo(pager);
-				
-				$('a', pager).attr('href','javascript:void(0)').linkbutton({plain:true});
-				
-				$('a[icon=pagination-first]', pager).bind('click', selectPage(1));
-				$('a[icon=pagination-prev]', pager).bind('click', selectPage(pageNumber-1));
-				$('a[icon=pagination-next]', pager).bind('click', selectPage(pageNumber+1));
-				$('a[icon=pagination-last]', pager).bind('click', selectPage(pageCount));
-				$('a[icon=pagination-load]', pager).bind('click', selectPage(pageNumber));
-				$('a[icon=pagination-loading]', pager).bind('click', selectPage(pageNumber));
-				if (pageNumber == 1){
-					$('a[icon=pagination-first],a[icon=pagination-prev]', pager)
-							.unbind('click')
-							.linkbutton({disabled:true});
-				}
-				if (pageNumber == pageCount){
-					$('a[icon=pagination-last],a[icon=pagination-next]', pager)
-							.unbind('click')
-							.linkbutton({disabled:true});
-				}
-				
-				$('input.pagination-num', pager)
-						.val(pageNumber)
-						.keydown(function(e){
-							if (e.keyCode == 13){
-								pageNumber = parseInt($(this).val()) || 1;
-								selectPage(pageNumber)();
-							}
-						});
-				$('.pagination-page-list', pager).change(function(){
-					pageSize = $(this).val();
-					pageCount = Math.ceil(total/pageSize);
-					pageNumber = opts.pageNumber;
-					selectPage(pageNumber)();
-				});
-			}
 		});
 	};
 	
@@ -181,7 +209,13 @@
 		pageList: [10,20,30,50],
 		loading: false,
 		buttons: null,
+		showPageList: true,
+		showRefresh: true,
+		
 		onSelectPage: function(pageNumber, pageSize){},
+		onBeforeRefresh: function(pageNumber, pageSize){},
+		onRefresh: function(pageNumber, pageSize){},
+		onChangePageSize: function(pageSize){},
 		
 		beforePageText: 'Page',
 		afterPageText: 'of {pages}',
