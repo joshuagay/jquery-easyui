@@ -89,23 +89,23 @@
 		$('a[icon^=pagination]', pager).linkbutton({plain:true});
 		
 		pager.find('a[icon=pagination-first]').unbind('.pagination').bind('click.pagination', function(){
-			selectPage(target, 1);
+			if (opts.pageNumber > 1) selectPage(target, 1);
 		});
 		pager.find('a[icon=pagination-prev]').unbind('.pagination').bind('click.pagination', function(){
-			selectPage(target, opts.pageNumber - 1);
+			if (opts.pageNumber > 1) selectPage(target, opts.pageNumber - 1);
 		});
 		pager.find('a[icon=pagination-next]').unbind('.pagination').bind('click.pagination', function(){
-			selectPage(target, opts.pageNumber + 1);
+			var pageCount = Math.ceil(opts.total/opts.pageSize);
+			if (opts.pageNumber < pageCount) selectPage(target, opts.pageNumber + 1);
 		});
 		pager.find('a[icon=pagination-last]').unbind('.pagination').bind('click.pagination', function(){
 			var pageCount = Math.ceil(opts.total/opts.pageSize);
-			selectPage(target, pageCount);
+			if (opts.pageNumber < pageCount) selectPage(target, pageCount);
 		});
 		pager.find('a[icon=pagination-load]').unbind('.pagination').bind('click.pagination', function(){
 			if (opts.onBeforeRefresh.call(target, opts.pageNumber, opts.pageSize) != false){
-				selectPage(target, opts.pageNumber, function(){
-					opts.onRefresh.call(target, opts.pageNumber, opts.pageSize);
-				});
+				selectPage(target, opts.pageNumber);
+				opts.onRefresh.call(target, opts.pageNumber, opts.pageSize);
 			}
 		});
 		pager.find('input.pagination-num').unbind('.pagination').bind('keydown.pagination', function(e){
@@ -123,26 +123,15 @@
 		});
 	}
 	
-	function selectPage(target, page, callback){
+	function selectPage(target, page){
 		var opts = $.data(target, 'pagination').options;
-		
-		var loadBtn = $(target).find('a[icon=pagination-load]').find('.pagination-load');
-		loadBtn.addClass('pagination-loading');
-		
-		setTimeout(function(){
-			var pageCount = Math.ceil(opts.total/opts.pageSize);
-			opts.pageNumber = page;
-			if (page < 1) opts.pageNumber = 1;
-			if (page > pageCount) opts.pageNumber = pageCount;
-			
-			opts.onSelectPage.call(target, opts.pageNumber, opts.pageSize);
-			loadBtn.removeClass('pagination-loading');
-			showInfo(target);
-			
-			if (callback){
-				callback();
-			}
-		}, 0);
+		var pageCount = Math.ceil(opts.total/opts.pageSize);
+		var pageNumber = page;
+		if (page < 1) pageNumber = 1;
+		if (page > pageCount) pageNumber = pageCount;
+		opts.onSelectPage.call(target, pageNumber, opts.pageSize);
+		opts.pageNumber = pageNumber;
+		showInfo(target);
 	}
 	
 	function showInfo(target){
@@ -174,12 +163,29 @@
 		}
 	}
 	
+	function setLoadStatus(target, loading){
+		var opts = $.data(target, 'pagination').options;
+		opts.loading = loading;
+		if (opts.loading){
+			$(target).find('a[icon=pagination-load]').find('.pagination-load').addClass('pagination-loading');
+		} else {
+			$(target).find('a[icon=pagination-load]').find('.pagination-load').removeClass('pagination-loading');
+		}
+	}
 	
 	$.fn.pagination = function(options) {
 		if (typeof options == 'string'){
 			switch(options){
 				case 'options':
 					return $.data(this[0], 'pagination').options;
+				case 'loading':
+					return this.each(function(){
+						setLoadStatus(this, true);
+					});
+				case 'loaded':
+					return this.each(function(){
+						setLoadStatus(this, false);
+					});
 			}
 		}
 		
