@@ -1,3 +1,24 @@
+Version 1.1
+-------------
+* Bug
+ * messager: When call show method with timeout property setted, an error occurs while clicking the close button. fixed.
+ * combobox: The editable property of combobox plugin is invalid. fixed.
+ * window: The proxy box will not be removed when dragging or resizing exceed browser border in ie. fixed.
+* Improvement
+ * menu: The menu item can use <a> markup to display a different page.
+ * tree: The tree node can use <a> markup to act as a tree menu.
+ * pagination: Add some event on refresh button and page list.
+ * datagrid: Add a 'param' parameter for reload method, with which users can pass query parameter when reload data.
+ * numberbox: Add required validation support, the usage is same as validatebox plugin.
+ * combobox: Add required validation support.
+ * combotree: Add required validation support.
+ * layout: Add some method that can get a region panel and attach event handlers.
+* New Plugins
+ * droppable: A droppable plugin that supports drag drop operation.
+ * calendar: A calendar plugin that can either be embedded within a page or popup.
+ * datebox: Combines a textbox with a calendar that let users to select date.
+ * EasyLoader: A JavaScript loader that allows you to load plugin and their dependencies into your page.
+ 
 Version 1.0.5
 * Bug
  * panel: The fit property of panel performs incorrectly. fixed.
