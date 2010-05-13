@@ -58,6 +58,11 @@
 			var node = $('#tt2').tree('getSelected');
 			$('#tt2').tree('remove', node.target);
 		}
+		function isLeaf(){
+			var node = $('#tt2').tree('getSelected');
+			var b = $('#tt2').tree('isLeaf', node.target);
+			alert(b)
+		}
 	</script>
 </head>
 <body>
@@ -102,6 +107,7 @@
 		<a href="#" onclick="expand()">expand</a>
 		<a href="#" onclick="append()">append</a>
 		<a href="#" onclick="remove()">remove</a>
+		<a href="#" onclick="isLeaf()">isLeaf</a>
 	</div>
 
 	<ul id="tt2"></ul>

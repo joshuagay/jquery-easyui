@@ -24,6 +24,9 @@
 		function close1(){
 			$('#w').window('close');
 		}
+		function test(){
+			$('#test').window('open');
+		}
 	</script>
 </head>
 <body style="height:100%;width:100%;overflow:hidden;border:none;" >
@@ -37,6 +40,8 @@
 		<div class="easyui-layout" fit="true">
 			<div region="center" border="false" style="padding:10px;background:#fff;border:1px solid #ccc;">
 				jQuery EasyUI framework help you build your web page easily.
+				<br/><br/>
+				click <a href="#" onclick="test()">here</a> to popup another window.
 			</div>
 			<div region="south" border="false" style="text-align:right;height:30px;line-height:30px;">
 				<a class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" onclick="resize()">Ok</a>
@@ -44,5 +49,6 @@
 			</div>
 		</div>
 	</div>
+	<div id="test" class="easyui-window" closed="true" modal="true" title="Test Window" style="width:300px;height:100px;"></div>
 </body>
 </html>
