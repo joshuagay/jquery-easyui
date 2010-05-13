@@ -1,3 +1,12 @@
+﻿/**
+ * jQuery EasyUI 1.1
+ * 
+ * Licensed under the GPL:
+ *   http://www.gnu.org/licenses/gpl.txt
+ *
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * 
+ */
 (function($){
 var _1=false;
 function _2(_3){

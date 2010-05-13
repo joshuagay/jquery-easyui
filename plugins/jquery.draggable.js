@@ -1,3 +1,12 @@
+﻿/**
+ * jQuery EasyUI 1.1
+ * 
+ * Licensed under the GPL:
+ *   http://www.gnu.org/licenses/gpl.txt
+ *
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * 
+ */
 (function($){
 function _1(e){
 var _2=$.data(e.data.target,"draggable").options;
