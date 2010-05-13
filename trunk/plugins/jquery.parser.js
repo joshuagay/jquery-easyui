@@ -1,3 +1,12 @@
+﻿/**
+ * jQuery EasyUI 1.1
+ * 
+ * Licensed under the GPL:
+ *   http://www.gnu.org/licenses/gpl.txt
+ *
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * 
+ */
 (function($){
 $.parser={auto:true,plugins:["linkbutton","accordion","menu","menubutton","splitbutton","layout","panel","tabs","tree","window","dialog","datagrid","combobox","combotree","numberbox","validatebox","calendar","datebox"],parse:function(_1){
 if($.parser.auto){

@@ -1,3 +1,12 @@
+﻿/**
+ * jQuery EasyUI 1.1
+ * 
+ * Licensed under the GPL:
+ *   http://www.gnu.org/licenses/gpl.txt
+ *
+ * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * 
+ */
 (function($){
 function _1(_2){
 var _3=$.data(_2,"combotree").options;
