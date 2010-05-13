@@ -18,7 +18,167 @@
 }
 .accordion-noborder .accordion-body{
 	border-width:0px;
-}.combobox{
+}.calendar{
+	border:1px solid #A4BED4;
+	padding:1px;
+	overflow:hidden;
+}
+.calendar-noborder{
+	border:0px;
+}
+.calendar-header{
+	position:relative;
+	background:#E0ECFF;
+	font-size:12px;
+	height:22px;
+}
+.calendar-title{
+	text-align:center;
+	height:22px;
+}
+.calendar-title span{
+	position:relative;
+	top:4px;
+	display:incline-block;
+	padding:3px;
+	cursor:pointer;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.calendar-prevmonth,.calendar-nextmonth,.calendar-prevyear,.calendar-nextyear{
+	position:absolute;
+	top:4px;
+	width:14px;
+	height:14px;
+	line-height:12px;
+	cursor:pointer;
+	font-size:1px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.calendar-prevmonth{
+	left:20px;
+	background:url('images/calendar_prevmonth.gif') no-repeat 3px 2px;
+}
+.calendar-nextmonth{
+	right:20px;
+	background:url('images/calendar_nextmonth.gif') no-repeat 3px 2px;
+}
+.calendar-prevyear{
+	left:3px;
+	background:url('images/calendar_prevyear.gif') no-repeat 1px 2px;
+}
+.calendar-nextyear{
+	right:3px;
+	background:url('images/calendar_nextyear.gif') no-repeat 1px 2px;
+}
+.calendar-body{
+	font-size:12px;
+	position:relative;
+}
+.calendar-body table{
+	width:100%;
+	height:100%;
+	border:1px solid #eee;
+	font-size:12px;
+	padding1:5px;
+}
+.calendar-body th,.calendar-body td{
+	text-align:center;
+}
+.calendar-body th{
+	background:#fafafa;
+	color:#888;
+	border-bottom1:1px solid #ccc;
+}
+.calendar-day{
+	color:#222;
+	cursor:pointer;
+	border:1px solid #fff;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.calendar-sunday{
+	color:#CC2222;
+}
+.calendar-saturday{
+	color:#00ee00;
+}
+.calendar-today{
+	color:#0000ff;
+}
+.calendar-other-month{
+	opacity:0.3;
+	filter:alpha(opacity=30);
+}
+.calendar-hover{
+	border:1px solid red;
+}
+.calendar-selected{
+	background:#FBEC88;
+	border:1px solid red;
+}
+.calendar-nav-hover{
+	background-color:#FBEC88;
+}
+
+
+.calendar-menu{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:180px;
+	height:150px;
+	padding:5px;
+	font-size:12px;
+	background:#fafafa;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	display:none;
+}
+.calendar-menu-year-inner{
+	text-align:center;
+	padding-bottom:5px;
+}
+.calendar-menu-year{
+	width:40px;
+	text-align:center;
+	border:1px solid #ccc;
+	padding:2px;
+	font-weight:bold;
+}
+.calendar-menu-prev,.calendar-menu-next{
+	display:inline-block;
+	width:21px;
+	height:21px;
+	vertical-align:top;
+	cursor:pointer;
+}
+.calendar-menu-prev{
+	margin-right:10px;
+	background:url('images/calendar_prevyear.gif') no-repeat 5px 6px;
+}	
+.calendar-menu-next{
+	margin-left:10px;
+	background:url('images/calendar_nextyear.gif') no-repeat 5px 6px;
+}
+.calendar-menu-hover{
+	background-color:#FBEC88;
+}
+.calendar-menu-month-inner table{
+	width:100%;
+	height:100%;
+}
+.calendar-menu-month{
+	text-align:center;
+	cursor:pointer;
+	border:1px solid #fafafa;
+	font-weight:bold;
+	color:#666;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+}
+.combobox{
 	display:inline-block;
 	white-space:nowrap;
 	font-size:12px;
@@ -215,7 +375,7 @@
 	padding-right:20px;
 	margin-bottom:-1px;
 }
-.datagrid-header th{
+.datagrid-header td{
 	border-right:1px dotted #ccc;
 	font-size:12px;
 	font-weight:normal;
@@ -223,22 +383,24 @@
 	border-bottom:1px dotted #ccc;
 	border-top:1px dotted #fff;
 }
-.datagrid-header th.datagrid-header-over{
+.datagrid-header td.datagrid-header-over{
 	background:#EBF3FD;
 }
 .datagrid-header .datagrid-cell{
 	margin:0;
-	padding:4px 2px;
+	padding:4px 2px 4px 4px;
 	white-space:nowrap;
 	word-wrap:normal;
 	overflow:hidden;
+	text-align:center;
 }
 .datagrid-header .datagrid-cell-group{
 	margin:0;
-	padding:4px 2px;
+	padding:4px 2px 4px 4px;
 	white-space:nowrap;
 	word-wrap:normal;
 	overflow:hidden;
+	text-align:center;
 }
 .datagrid-header-rownumber{
 	width:25px;
@@ -309,6 +471,32 @@
 	background:red;
 	cursor:e-resize;
 	display:none;
+}
+.datebox-calendar{
+	position:absolute;
+	border:1px solid #A4BED4;
+	width:180px;
+}
+.datebox-calendar-inner{
+	height:180px;
+}
+.datebox-button{
+	height:18px;
+	padding:2px 5px;
+	font-size:12px;
+	background-color:#fafafa;
+}
+.datebox-current,.datebox-close{
+	float:left;
+	color:#888;
+	text-decoration:none;
+	font-weight:bold;
+}
+.datebox-close{
+	float:right;
+}
+.datebox-button-hover{
+	color:#A4BED4;
 }
 .dialog-content{
 	overflow:auto;
@@ -1100,4 +1288,3 @@ a.s-btn-plain-active .s-btn-downarrow{
 	*zoom:1;
 	overflow:hidden;
 }
-
