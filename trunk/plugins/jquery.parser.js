@@ -9,8 +9,8 @@ if(r.length){
 if(r[_2]){
 r[_2]();
 }else{
-if(window.EasyLoader){
-EasyLoader.load(_2,function(){
+if(window.easyloader){
+easyloader.load(_2,function(){
 r[_2]();
 });
 }
