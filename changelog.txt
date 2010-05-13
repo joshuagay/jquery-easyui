@@ -17,7 +17,7 @@ Version 1.1
  * droppable: A droppable plugin that supports drag drop operation.
  * calendar: A calendar plugin that can either be embedded within a page or popup.
  * datebox: Combines a textbox with a calendar that let users to select date.
- * EasyLoader: A JavaScript loader that allows you to load plugin and their dependencies into your page.
+ * easyloader: A JavaScript loader that allows you to load plugin and their dependencies into your page.
  
 Version 1.0.5
 * Bug
