@@ -6,7 +6,8 @@
 	"text":"text2"
 },{
 	"id":3,
-	"text":"text3"
+	"text":"text3",
+	"selected":true
 },{
 	"id":4,
 	"text":"text4"
