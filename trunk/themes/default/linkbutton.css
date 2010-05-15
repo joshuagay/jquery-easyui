@@ -53,7 +53,7 @@ a:hover.l-btn span.l-btn-left{
 }
 
 a:hover.l-btn-plain{
-	border:1px solid #7eabcd;
+	border:1px solid #d3d3d3;
 	background:url('images/button_plain_hover.png') repeat-x left bottom;
 }
 a:hover.l-btn-disabled{
