@@ -13,173 +13,184 @@ $(_2).appendTo("body");
 $(_2).addClass("menu-top");
 var _3=[];
 _4($(_2));
+var _5=null;
 for(var i=0;i<_3.length;i++){
-var _5=_3[i];
-_6(_5);
-_5.find(">div.menu-item").each(function(){
-_7($(this));
+var _6=_3[i];
+_7(_6);
+_6.find(">div.menu-item").each(function(){
+_8($(this));
 });
-_5.find("div.menu-item").click(function(){
+_6.find("div.menu-item").click(function(){
 if(!this.submenu){
-_15(_2);
-var _8=$(this).attr("href");
-if(_8){
-location.href=_8;
+_16(_2);
+var _9=$(this).attr("href");
+if(_9){
+location.href=_9;
 }
 }
 });
+_6.bind("mouseenter",function(){
+if(_5){
+clearTimeout(_5);
+_5=null;
 }
-function _4(_9){
-_3.push(_9);
-_9.find(">div").each(function(){
-var _a=$(this);
-var _b=_a.find(">div");
-if(_b.length){
-_b.insertAfter(_2);
-_a[0].submenu=_b;
-_4(_b);
+}).bind("mouseleave",function(){
+_5=setTimeout(function(){
+_16(_2);
+},100);
+});
+}
+function _4(_a){
+_3.push(_a);
+_a.find(">div").each(function(){
+var _b=$(this);
+var _c=_b.find(">div");
+if(_c.length){
+_c.insertAfter(_2);
+_b[0].submenu=_c;
+_4(_c);
 }
 });
 };
-function _7(_c){
-_c.hover(function(){
-_c.siblings().each(function(){
+function _8(_d){
+_d.hover(function(){
+_d.siblings().each(function(){
 if(this.submenu){
-_18(this.submenu);
+_19(this.submenu);
 }
 $(this).removeClass("menu-active");
 });
-_c.addClass("menu-active");
-var _d=_c[0].submenu;
-if(_d){
-var _e=_c.offset().left+_c.outerWidth()-2;
-if(_e+_d.outerWidth()>$(window).width()){
-_e=_c.offset().left-_d.outerWidth()+2;
+_d.addClass("menu-active");
+var _e=_d[0].submenu;
+if(_e){
+var _f=_d.offset().left+_d.outerWidth()-2;
+if(_f+_e.outerWidth()>$(window).width()){
+_f=_d.offset().left-_e.outerWidth()+2;
 }
-_1c(_d,{left:_e,top:_c.offset().top-3});
+_1d(_e,{left:_f,top:_d.offset().top-3});
 }
 },function(e){
-_c.removeClass("menu-active");
-var _f=_c[0].submenu;
-if(_f){
-if(e.pageX>=parseInt(_f.css("left"))){
-_c.addClass("menu-active");
+_d.removeClass("menu-active");
+var _10=_d[0].submenu;
+if(_10){
+if(e.pageX>=parseInt(_10.css("left"))){
+_d.addClass("menu-active");
 }else{
-_18(_f);
+_19(_10);
 }
 }else{
-_c.removeClass("menu-active");
+_d.removeClass("menu-active");
 }
 });
-_c.unbind(".menu").bind("mousedown.menu",function(){
+_d.unbind(".menu").bind("mousedown.menu",function(){
 return false;
 });
 };
-function _6(_10){
-_10.addClass("menu").find(">div").each(function(){
-var _11=$(this);
-if(_11.hasClass("menu-sep")){
-_11.html("&nbsp;");
+function _7(_11){
+_11.addClass("menu").find(">div").each(function(){
+var _12=$(this);
+if(_12.hasClass("menu-sep")){
+_12.html("&nbsp;");
 }else{
-var _12=_11.addClass("menu-item").html();
-_11.empty().append($("<div class=\"menu-text\"></div>").html(_12));
-var _13=_11.attr("icon");
-if(_13){
-$("<div class=\"menu-icon\"></div>").addClass(_13).appendTo(_11);
+var _13=_12.addClass("menu-item").html();
+_12.empty().append($("<div class=\"menu-text\"></div>").html(_13));
+var _14=_12.attr("icon");
+if(_14){
+$("<div class=\"menu-icon\"></div>").addClass(_14).appendTo(_12);
 }
-if(_11[0].submenu){
-$("<div class=\"menu-rightarrow\"></div>").appendTo(_11);
+if(_12[0].submenu){
+$("<div class=\"menu-rightarrow\"></div>").appendTo(_12);
 }
 if($.boxModel==true){
-var _14=_11.height();
-_11.height(_14-(_11.outerHeight()-_11.height()));
+var _15=_12.height();
+_12.height(_15-(_12.outerHeight()-_12.height()));
 }
 }
 });
-_10.hide();
+_11.hide();
 };
 };
-function _15(_16){
-var _17=$.data(_16,"menu").options;
-_18($(_16));
+function _16(_17){
+var _18=$.data(_17,"menu").options;
+_19($(_17));
 $(document).unbind(".menu");
-_17.onHide.call(_16);
+_18.onHide.call(_17);
 return false;
 };
-function _19(_1a,pos){
-var _1b=$.data(_1a,"menu").options;
+function _1a(_1b,pos){
+var _1c=$.data(_1b,"menu").options;
 if(pos){
-_1b.left=pos.left;
-_1b.top=pos.top;
+_1c.left=pos.left;
+_1c.top=pos.top;
 }
-_1c($(_1a),{left:_1b.left,top:_1b.top},function(){
+_1d($(_1b),{left:_1c.left,top:_1c.top},function(){
 $(document).unbind(".menu").bind("mousedown.menu",function(){
-_15(_1a);
+_16(_1b);
 $(document).unbind(".menu");
 return false;
 });
-_1b.onShow.call(_1a);
+_1c.onShow.call(_1b);
 });
 };
-function _1c(_1d,pos,_1e){
-if(!_1d){
+function _1d(_1e,pos,_1f){
+if(!_1e){
 return;
 }
 if(pos){
-_1d.css(pos);
+_1e.css(pos);
 }
-_1d.show(1,function(){
-if(!_1d[0].shadow){
-_1d[0].shadow=$("<div class=\"menu-shadow\"></div>").insertAfter(_1d);
+_1e.show(1,function(){
+if(!_1e[0].shadow){
+_1e[0].shadow=$("<div class=\"menu-shadow\"></div>").insertAfter(_1e);
 }
-_1d[0].shadow.css({display:"block",zIndex:$.fn.menu.defaults.zIndex++,left:_1d.css("left"),top:_1d.css("top"),width:_1d.outerWidth(),height:_1d.outerHeight()});
-_1d.css("z-index",$.fn.menu.defaults.zIndex++);
-if(_1e){
-_1e();
+_1e[0].shadow.css({display:"block",zIndex:$.fn.menu.defaults.zIndex++,left:_1e.css("left"),top:_1e.css("top"),width:_1e.outerWidth(),height:_1e.outerHeight()});
+_1e.css("z-index",$.fn.menu.defaults.zIndex++);
+if(_1f){
+_1f();
 }
 });
 };
-function _18(_1f){
-if(!_1f){
+function _19(_20){
+if(!_20){
 return;
 }
-_20(_1f);
-_1f.find("div.menu-item").each(function(){
+_21(_20);
+_20.find("div.menu-item").each(function(){
 if(this.submenu){
-_18(this.submenu);
+_19(this.submenu);
 }
 $(this).removeClass("menu-active");
 });
-function _20(m){
+function _21(m){
 if(m[0].shadow){
 m[0].shadow.hide();
 }
 m.hide();
 };
 };
-$.fn.menu=function(_21,_22){
-if(typeof _21=="string"){
-switch(_21){
+$.fn.menu=function(_22,_23){
+if(typeof _22=="string"){
+switch(_22){
 case "show":
 return this.each(function(){
-_19(this,_22);
+_1a(this,_23);
 });
 case "hide":
 return this.each(function(){
-_15(this);
+_16(this);
 });
 }
 }
-_21=_21||{};
+_22=_22||{};
 return this.each(function(){
-var _23=$.data(this,"menu");
-if(_23){
-$.extend(_23.options,_21);
+var _24=$.data(this,"menu");
+if(_24){
+$.extend(_24.options,_22);
 }else{
-_23=$.data(this,"menu",{options:$.extend({},$.fn.menu.defaults,_21)});
+_24=$.data(this,"menu",{options:$.extend({},$.fn.menu.defaults,_22)});
 _1(this);
 }
-$(this).css({left:_23.options.left,top:_23.options.top});
+$(this).css({left:_24.options.left,top:_24.options.top});
 });
 };
 $.fn.menu.defaults={zIndex:110000,left:0,top:0,onShow:function(){

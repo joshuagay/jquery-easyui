@@ -67,6 +67,9 @@ _11.find(".panel-tool-collapse").triggerHandler("click");
 }
 pp.panel("header").addClass("accordion-header-selected");
 },onExpand:function(){
+if($.parser){
+$.parser.parse(pp.panel("body"));
+}
 pp.panel("body").find(">div").triggerHandler("_resize");
 },onBeforeCollapse:function(){
 pp.panel("header").removeClass("accordion-header-selected");
