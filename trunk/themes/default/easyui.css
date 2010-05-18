@@ -1199,7 +1199,21 @@ a.s-btn-plain-active .s-btn-downarrow{
 .tree-node-selected{
 	background:#FBEC88;
 }
-.validatebox-invalid{
+.tree-checkbox{
+	display:inline-block;
+	width:16px;
+	height:18px;
+	vertical-align:middle;
+}
+.tree-checkbox0{
+	background:url('images/tree_checkbox_0.gif') no-repeat;
+}
+.tree-checkbox1{
+	background:url('images/tree_checkbox_1.gif') no-repeat;
+}
+.tree-checkbox2{
+	background:url('images/tree_checkbox_2.gif') no-repeat;
+}.validatebox-invalid{
 	background:#FFFFEE url('images/validatebox_warning.png') no-repeat right 1px;
 }
 .validatebox-tip{
