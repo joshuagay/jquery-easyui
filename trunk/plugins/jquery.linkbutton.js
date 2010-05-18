@@ -77,7 +77,7 @@ if(_b){
 $.extend(_b.options,_a);
 }else{
 var t=$(this);
-$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,{disabled:(t.attr("disabled")?t.attr("disabled")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html().replace(/&nbsp;/g," ")),iconCls:t.attr("icon")},_a)});
+$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,{disabled:(t.attr("disabled")?t.attr("disabled")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html()),iconCls:t.attr("icon")},_a)});
 t.removeAttr("disabled");
 }
 _1(this);
