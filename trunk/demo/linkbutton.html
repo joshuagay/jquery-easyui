@@ -15,10 +15,13 @@
 	</style>
 	<script>
 		function enable(){
-			$('a.easyui-linkbutton').linkbutton({disabled:false});
+			$('a.easyui-linkbutton').linkbutton('enable');
 		}
 		function disable(){
-			$('a.easyui-linkbutton').linkbutton({disabled:true});
+			$('a.easyui-linkbutton').linkbutton('disable');
+		}
+		function changetext(){
+			$('#add').linkbutton({text:'new add'});
 		}
 	</script>
 </head>
@@ -27,6 +30,7 @@
 	<div style="padding:5px;">
 		<a href="#" onclick="enable()">enable</a> |
 		<a href="#" onclick="disable()">disable</a> |
+		<a href="#" onclick="changetext()">change add text</a> |
 		<a href="#" onclick="javascript:$('#add').linkbutton({disabled:true})">disable add button</a> |
 		<a href="#" onclick="javascript:$('#add').linkbutton({disabled:false})">enable add button</a> | 
 		<a href="#" onclick="javascript:$('a.easyui-linkbutton').linkbutton({plain:true})">make to plain</a> | 

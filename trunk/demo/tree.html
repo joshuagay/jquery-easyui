@@ -16,6 +16,7 @@
 				}
 			});
 			$('#tt2').tree({
+				checkbox: true,
 				url: 'tree_data.json',
 				onClick:function(node){
 					alert('you click '+node.text);
@@ -24,6 +25,15 @@
 		});
 		function reload(){
 			$('#tt2').tree('reload');
+		}
+		function getChecked(){
+			var nodes = $('#tt2').tree('getChecked');
+			var s = '';
+			for(var i=0; i<nodes.length; i++){
+				if (s != '') s += ',';
+				s += nodes[i].text;
+			}
+			alert(s);
 		}
 		function getSelected(){
 			var node = $('#tt2').tree('getSelected');
@@ -102,6 +112,7 @@
 	<p>Create from JSON data</p>
 	<div style="margin:10px;">
 		<a href="#" onclick="reload()">reload</a>
+		<a href="#" onclick="getChecked()">getChecked</a>
 		<a href="#" onclick="getSelected()">getSelected</a>
 		<a href="#" onclick="collapse()">collapse</a>
 		<a href="#" onclick="expand()">expand</a>
