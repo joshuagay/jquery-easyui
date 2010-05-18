@@ -4,7 +4,8 @@
 	"iconCls":"icon-ok",
 	"children":[{
 		"id":2,
-		"text":"File1"
+		"text":"File1",
+		"checked":true
 	},{
 		"id":3,
 		"text":"Folder2",
@@ -12,6 +13,7 @@
 		"children":[{
 			"id":4,
 			"text":"File3",
+			"checked":true,
 			"iconCls":"icon-reload"
 		},{
 			"id": 8,
