@@ -20,6 +20,12 @@
 			var val = $('#cc').combotree('getValue');
 			alert(val);
 		}
+		function disable(){
+			$('#cc').combotree('disable');
+		}
+		function enable(){
+			$('#cc').combotree('enable');
+		}
 	</script>
 </head>
 <body>
@@ -28,6 +34,8 @@
 		<a href="#" onclick="reload()">reload</a>
 		<a href="#" onclick="setValue()">setValue</a>
 		<a href="#" onclick="getValue()">getValue</a>
+		<a href="#" onclick="disable()">disable</a>
+		<a href="#" onclick="enable()">enable</a>
 	</div>
 	<span>Select:</span>
 	<select id="cc" class="easyui-combotree" url="tree_data.json" style="width:200px;" required="true"></select>
