@@ -32,142 +32,182 @@ $(_9).hide();
 var _a=$("<span class=\"combotree\"></span>").insertAfter(_9);
 $("<input type=\"hidden\" class=\"combotree-value\"></input>").appendTo(_a);
 $("<input class=\"combotree-text\" readonly=\"true\"></input>").appendTo(_a);
-var _b=$("<span><span class=\"combotree-arrow\"></span></span>").appendTo(_a);
-var _c=$("<div class=\"combotree-content\"><ul></ul></div>").appendTo("body");
-var _d=$(_9).attr("name");
-if(_d){
-_a.find("input.combotree-value").attr("name",_d);
-$(_9).removeAttr("name").attr("combotreeName",_d);
+$("<span><span class=\"combotree-arrow\"></span></span>").appendTo(_a);
+var _b=$("<div class=\"combotree-content\"><ul></ul></div>").appendTo("body");
+var _c=$(_9).attr("name");
+if(_c){
+_a.find("input.combotree-value").attr("name",_c);
+$(_9).removeAttr("name").attr("combotreeName",_c);
 }
-function _e(){
-_c.css({display:"block",left:_a.offset().left,top:_a.offset().top+_a.outerHeight()});
-if($.fn.window){
-_c.css("z-index",$.fn.window.defaults.zIndex++);
-}
+return {combotree:_a,content:_b};
 };
-$(document).unbind(".combotree").bind("mousedown.combotree",function(){
+function _d(_e){
+var _f=$.data(_e,"combotree").options;
+var _10=$.data(_e,"combotree").combotree;
+var _11=$.data(_e,"combotree").content;
+var _12=_10.find(".combotree-arrow");
+$(document).unbind(".combotree");
+_10.unbind(".combotree");
+_11.unbind(".combotree");
+_12.unbind(".combotree");
+if(!_f.disabled){
+$(document).bind("mousedown.combotree",function(){
 $(".combotree-content").hide();
 });
-_c.mousedown(function(){
+_11.bind("mousedown.combotree",function(){
 return false;
 });
-_a.click(function(){
-_e();
+_10.bind("click.combotree",function(){
+_13();
 return false;
 });
-_b.find(".combotree-arrow").hover(function(){
+_12.bind("mouseenter.combotree",function(){
 $(this).addClass("combotree-arrow-hover");
-},function(){
+}).bind("mouseleave.combotree",function(){
 $(this).removeClass("combotree-arrow-hover");
 });
-return {combotree:_a,content:_c};
+}
+function _13(){
+_11.css({display:"block",left:_10.offset().left,top:_10.offset().top+_10.outerHeight()});
+if($.fn.window){
+_11.css("z-index",$.fn.window.defaults.zIndex++);
+}
 };
-function _f(_10){
-var _11=$.data(_10,"combotree").options;
-var _12=$.data(_10,"combotree").combotree;
-var _13=$.data(_10,"combotree").content;
-_13.find(">ul").tree({url:_11.url,onClick:function(_14){
-if(_11.onBeforeSelect.call(_10,_14)==false){
+};
+function _14(_15){
+var _16=$.data(_15,"combotree").options;
+var _17=$.data(_15,"combotree").combotree;
+var _18=$.data(_15,"combotree").content;
+_18.find(">ul").tree({url:_16.url,onClick:function(_19){
+if(_16.onBeforeSelect.call(_15,_19)==false){
 return;
 }
-var _15=_12.find("input.combotree-value").val();
-_12.find("input.combotree-value").val(_14.id);
-_12.find("input.combotree-text").val(_14.text);
-_13.hide();
-_16(_10,true);
-_11.onSelect.call(_10,_14);
-if(_15!=_14.id){
-_11.onChange.call(_10,_14.id,_15);
+var _1a=_17.find("input.combotree-value").val();
+_17.find("input.combotree-value").val(_19.id);
+_17.find("input.combotree-text").val(_19.text);
+_18.hide();
+_1b(_15,true);
+_16.onSelect.call(_15,_19);
+if(_1a!=_19.id){
+_16.onChange.call(_15,_19.id,_1a);
 }
 }});
 };
-function _17(_18,_19){
-var _1a=$.data(_18,"combotree").options;
-var _1b=$.data(_18,"combotree").combotree;
-var _1c=$.data(_18,"combotree").content.find(">ul");
-var _1d,_1e;
-var _1f=_1b.find("input.combotree-value").val();
-if(typeof _19=="object"){
-_1d=_19.id;
-_1e=_19.text;
+function _1c(_1d,_1e){
+var _1f=$.data(_1d,"combotree").options;
+var _20=$.data(_1d,"combotree").combotree;
+var _21=$.data(_1d,"combotree").content.find(">ul");
+var _22,_23;
+var _24=_20.find("input.combotree-value").val();
+if(typeof _1e=="object"){
+_22=_1e.id;
+_23=_1e.text;
 }else{
-_1d=_19;
+_22=_1e;
 }
-var _20=_1c.find("div.tree-node[node-id="+_1d+"]")[0];
-_1c.tree("select",_20);
-var _21=_1c.tree("getSelected");
-if(_21){
-_1d=_21.id;
-_1e=_21.text;
+var _25=_21.find("div.tree-node[node-id="+_22+"]")[0];
+_21.tree("select",_25);
+var _26=_21.tree("getSelected");
+if(_26){
+_22=_26.id;
+_23=_26.text;
 }
-_1b.find("input.combotree-value").val(_1d);
-_1b.find("input.combotree-text").val(_1e);
-_16(_18,true);
-if(_1f!=_1d){
-_1a.onChange.call(_18,_1d,_1f);
+_20.find("input.combotree-value").val(_22);
+_20.find("input.combotree-text").val(_23);
+_1b(_1d,true);
+if(_24!=_22){
+_1f.onChange.call(_1d,_22,_24);
 }
 };
-function _22(_23){
-var _24=$.data(_23,"combotree").combotree;
-return _24.find("input.combotree-value").val();
+function _27(_28){
+var _29=$.data(_28,"combotree").combotree;
+return _29.find("input.combotree-value").val();
 };
-function _25(_26,url){
-var _27=$.data(_26,"combotree").options;
-var _28=$.data(_26,"combotree").content;
+function _2a(_2b,url){
+var _2c=$.data(_2b,"combotree").options;
+var _2d=$.data(_2b,"combotree").content;
 if(url){
-_27.url=url;
+_2c.url=url;
 }
-_28.find(">ul").tree({url:_27.url}).tree("reload");
+_2d.find(">ul").tree({url:_2c.url}).tree("reload");
 };
-function _16(_29,_2a){
+function _1b(_2e,_2f){
 if($.fn.validatebox){
-var _2b=$.data(_29,"combotree").options;
-var _2c=$.data(_29,"combotree").combotree.find("input.combotree-text");
-_2c.validatebox(_2b);
-if(_2a){
-_2c.validatebox("validate");
+var _30=$.data(_2e,"combotree").options;
+var _31=$.data(_2e,"combotree").combotree.find("input.combotree-text");
+_31.validatebox(_30);
+if(_2f){
+_31.validatebox("validate");
 }
 }
 };
-function _2d(_2e){
-var _2f=$.data(_2e,"combotree").content;
-return _2f.find(">ul.tree");
+function _32(_33){
+var _34=$.data(_33,"combotree").content;
+return _34.find(">ul.tree");
 };
-$.fn.combotree=function(_30,_31){
-if(typeof _30=="string"){
-switch(_30){
+function _35(_36,_37){
+var _38=$.data(_36,"combotree").options;
+var _39=$.data(_36,"combotree").combotree;
+if(_37){
+_38.disabled=true;
+$(_36).attr("disabled",true);
+_39.find("input.combotree-value").attr("disabled",true);
+_39.find("input.combotree-text").attr("disabled",true);
+}else{
+_38.disabled=false;
+$(_36).removeAttr("disabled");
+_39.find("input.combotree-value").removeAttr("disabled");
+_39.find("input.combotree-text").removeAttr("disabled");
+}
+};
+$.fn.combotree=function(_3a,_3b){
+if(typeof _3a=="string"){
+switch(_3a){
 case "tree":
-return _2d(this[0]);
+return _32(this[0]);
 case "setValue":
 return this.each(function(){
-_17(this,_31);
+_1c(this,_3b);
 });
 case "getValue":
-return _22(this[0]);
+return _27(this[0]);
 case "reload":
 return this.each(function(){
-_25(this,_31);
+_2a(this,_3b);
+});
+case "disable":
+return this.each(function(){
+_35(this,true);
+_d(this);
+});
+case "enable":
+return this.each(function(){
+_35(this,false);
+_d(this);
 });
 }
 }
-_30=_30||{};
+_3a=_3a||{};
 return this.each(function(){
-var _32=$.data(this,"combotree");
-if(_32){
-$.extend(_32.options,_30);
+var _3c=$.data(this,"combotree");
+if(_3c){
+$.extend(_3c.options,_3a);
 }else{
 var r=_8(this);
 var t=$(this);
-_32=$.data(this,"combotree",{options:$.extend({},$.fn.combotree.defaults,{width:(parseInt(t.css("width"))||undefined),treeWidth:t.attr("treeWidth"),treeHeight:t.attr("treeHeight"),url:t.attr("url"),required:(t.attr("required")?(t.attr("required")=="true"||t.attr("required")==true):undefined),missingMessage:(t.attr("missingMessage")||undefined)},_30),combotree:r.combotree,content:r.content});
+_3c=$.data(this,"combotree",{options:$.extend({},$.fn.combotree.defaults,{width:(parseInt(t.css("width"))||undefined),treeWidth:t.attr("treeWidth"),treeHeight:t.attr("treeHeight"),url:t.attr("url"),disabled:(t.attr("disabled")?true:undefined),required:(t.attr("required")?(t.attr("required")=="true"||t.attr("required")==true):undefined),missingMessage:(t.attr("missingMessage")||undefined)},_3a),combotree:r.combotree,content:r.content});
+t.removeAttr("disabled");
 }
-_f(this);
+_14(this);
+_35(this,_3c.options.disabled);
+_d(this);
 _1(this);
-_16(this);
+_1b(this);
 });
 };
-$.fn.combotree.defaults={width:"auto",treeWidth:null,treeHeight:200,url:null,required:false,missingMessage:"This field is required.",onBeforeSelect:function(_33){
-},onSelect:function(_34){
-},onChange:function(_35,_36){
+$.fn.combotree.defaults={width:"auto",treeWidth:null,treeHeight:200,url:null,disabled:false,required:false,missingMessage:"This field is required.",onBeforeSelect:function(_3d){
+},onSelect:function(_3e){
+},onChange:function(_3f,_40){
 }};
 })(jQuery);
 
