@@ -7,9 +7,21 @@
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
+	<script>
+		function disable(){
+			$('#dd').datebox('disable');
+		}
+		function enable(){
+			$('#dd').datebox('enable');
+		}
+	</script>
 </head>
 <body>
 	<h1>DateBox</h1>
-	<input class="easyui-datebox" required="true"></input>
+	<div style="margin-bottom:10px;">
+		<a href="#" onclick="disable()">disable</a>
+		<a href="#" onclick="enable()">enable</a>
+	</div>
+	<input id="dd" class="easyui-datebox" required="true"></input>
 </body>
 </html>

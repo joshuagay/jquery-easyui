@@ -21,6 +21,12 @@
 			var val = $('#cc').combobox('getValue');
 			alert(val);
 		}
+		function disable(){
+			$('#cc').combobox('disable');
+		}
+		function enable(){
+			$('#cc').combobox('enable');
+		}
 	</script>
 </head>
 <body>
@@ -29,6 +35,8 @@
 		<a href="#" onclick="loadData()">loadData</a>
 		<a href="#" onclick="setValue()">setValue</a>
 		<a href="#" onclick="getValue()">getValue</a>
+		<a href="#" onclick="disable()">disable</a>
+		<a href="#" onclick="enable()">enable</a>
 	</div>
 	
 	<span>Options: </span>
