@@ -9,6 +9,7 @@
  * Node is a javascript object which contains following properties:
  * 1 id: An identity value bind to the node.
  * 2 text: Text to be showed.
+ * 3 checked: Indicate whether the node is checked selected.
  * 3 attributes: Custom attributes bind to the node.
  * 4 target: Target DOM object.
  */
@@ -102,7 +103,21 @@
 		var opts = $.data(target, 'tree').options;
 		var tree = $.data(target, 'tree').tree;
 		
-		$('.tree-node', tree).unbind('.tree').bind('click.tree', function(){
+		$('.tree-node', tree).unbind('.tree').bind('dblclick.tree', function(){
+			$('.tree-node-selected', tree).removeClass('tree-node-selected');
+			$(this).addClass('tree-node-selected');
+			
+			if (opts.onDblClick){
+				var target = this;	// the target HTML DIV element
+				var data = $.data(this, 'tree-node');
+				opts.onDblClick.call(this, {
+					id: data.id,
+					text: data.text,
+					attributes: data.attributes,
+					target: target
+				});
+			}
+		}).bind('click.tree', function(){
 			$('.tree-node-selected', tree).removeClass('tree-node-selected');
 			$(this).addClass('tree-node-selected');
 			
@@ -116,7 +131,7 @@
 					target: target
 				});
 			}
-			return false;
+//			return false;
 		}).bind('mouseenter.tree', function(){
 			$(this).addClass('tree-node-hover');
 			return false;
@@ -142,9 +157,77 @@
 				$(this).removeClass('tree-collapsed-hover');
 			}
 		});
+		
+		$('.tree-checkbox', tree).unbind('.tree').bind('click.tree', function(){
+			if ($(this).hasClass('tree-checkbox0')){
+				$(this).removeClass('tree-checkbox0').addClass('tree-checkbox1');
+			} else if ($(this).hasClass('tree-checkbox1')){
+				$(this).removeClass('tree-checkbox1').addClass('tree-checkbox0');
+			} else if ($(this).hasClass('tree-checkbox2')){
+				$(this).removeClass('tree-checkbox2').addClass('tree-checkbox1');
+			}
+			setParentCheckbox($(this).parent());
+			setChildCheckbox($(this).parent());
+			return false;
+		});
+		
+		function setChildCheckbox(node){
+			var childck = node.next().find('.tree-checkbox');
+			childck.removeClass('tree-checkbox0 tree-checkbox1 tree-checkbox2')
+			if (node.find('.tree-checkbox').hasClass('tree-checkbox1')){
+				childck.addClass('tree-checkbox1');
+			} else {
+				childck.addClass('tree-checkbox0');
+			}
+		}
+		
+		function setParentCheckbox(node){
+			var pnode = getParentNode(target, node[0]);
+			if (pnode){
+				var ck = $(pnode.target).find('.tree-checkbox');
+				ck.removeClass('tree-checkbox0 tree-checkbox1 tree-checkbox2');
+				if (isAllSelected(node)){
+					ck.addClass('tree-checkbox1');
+				} else if (isAllNull(node)){
+					ck.addClass('tree-checkbox0');
+				} else {
+					ck.addClass('tree-checkbox2');
+				}
+				setParentCheckbox($(pnode.target));
+			}
+			
+			function isAllSelected(n){
+				var ck = n.find('.tree-checkbox');
+				if (ck.hasClass('tree-checkbox0') || ck.hasClass('tree-checkbox2')) return false;
+				var b = true;
+				n.parent().siblings().each(function(){
+					if (!$(this).find('.tree-checkbox').hasClass('tree-checkbox1')){
+						b = false;
+					}
+				});
+				return b;
+			}
+			function isAllNull(n){
+				var ck = n.find('.tree-checkbox');
+				if (ck.hasClass('tree-checkbox1') || ck.hasClass('tree-checkbox2')) return false;
+				var b = true;
+				n.parent().siblings().each(function(){
+					if (!$(this).find('.tree-checkbox').hasClass('tree-checkbox0')){
+						b = false;
+					}
+				});
+				return b;
+			}
+		}
 	}
 	
-	function loadData(ul, data){
+	function loadData(target, ul, data){
+		// clear the tree when loading to the root
+		if (target == ul) {
+			$(target).empty();
+		}
+		
+		var opts = $.data(target, 'tree').options;
 		function appendNodes(ul, children, depth){
 			for(var i=0; i<children.length; i++){
 				var li = $('<li></li>').appendTo(ul);
@@ -166,6 +249,13 @@
 				});
 				
 				$('<span class="tree-title"></span>').html(item.text).appendTo(node);
+				if (opts.checkbox){
+					if (item.checked){
+						$('<span class="tree-checkbox tree-checkbox1"></span>').prependTo(node);
+					} else {
+						$('<span class="tree-checkbox tree-checkbox0"></span>').prependTo(node);
+					}
+				}
 				if (item.children){
 					var subul = $('<ul></ul>').appendTo(li);
 					if (item.state == 'open'){
@@ -182,6 +272,7 @@
 						$('<span class="tree-folder"></span>').addClass(item.iconCls).prependTo(node);
 						$('<span class="tree-hit tree-collapsed"></span>').prependTo(node);
 					} else {
+//						$('<input type="checkbox" style="vertical-align:bottom;margin:0;height:18px;">').prependTo(node);
 						$('<span class="tree-file"></span>').addClass(item.iconCls).prependTo(node);
 						$('<span class="tree-indent"></span>').prependTo(node);
 					}
@@ -194,6 +285,7 @@
 
 		var depth = $(ul).prev().find('>span.tree-indent,>span.tree-hit').length;
 		appendNodes(ul, data, depth);
+		
 	}
 	
 	/**
@@ -214,7 +306,7 @@
 			dataType: 'json',
 			success: function(data){
 				folder.removeClass('tree-loading');
-				loadData(ul, data);
+				loadData(target, ul, data);
 				bindTreeEvents(target);
 				if (opts.onLoadSuccess){
 					opts.onLoadSuccess.apply(this, arguments);
@@ -230,13 +322,42 @@
 	}
 	
 	/**
+	 * get the parent node
+	 * param: DOM object, from which to search it's parent node 
+	 */
+	function getParentNode(target, param){
+		var node = $(param).parent().parent().prev();
+		if (node.length){
+			return $.extend({}, $.data(node[0], 'tree-node'), {
+				target: node[0],
+				checked: node.find('.tree-checkbox').hasClass('tree-checkbox1')
+			});
+		} else {
+			return null;
+		}
+	}
+	
+	function getCheckedNode(target){
+		var nodes = [];
+		$(target).find('.tree-checkbox1').each(function(){
+			var node = $(this).parent();
+			nodes.push($.extend({}, $.data(node[0], 'tree-node'), {
+				target: node[0],
+				checked: node.find('.tree-checkbox').hasClass('tree-checkbox1')
+			}));
+		});
+		return nodes;
+	}
+	
+	/**
 	 * Get the selected node data which contains following properties: id,text,attributes,target
 	 */
 	function getSelectedNode(target){
 		var node = $(target).find('div.tree-node-selected');
 		if (node.length){
 			return $.extend({}, $.data(node[0], 'tree-node'), {
-				target: node[0]
+				target: node[0],
+				checked: node.find('.tree-checkbox').hasClass('tree-checkbox1')
 			});
 		} else {
 			return null;
@@ -268,7 +389,7 @@
 			}
 		}
 		
-		loadData(ul, param.data);
+		loadData(target, ul, param.data);
 		bindTreeEvents(target);
 	}
 	
@@ -301,17 +422,35 @@
 		$(param).addClass('tree-node-selected');
 	}
 	
+	/**
+	 * Check if the specified node is leaf.
+	 * param: DOM object, indicate the node to be checked.
+	 */
+	function isLeaf(target, param){
+		var node = $(param);
+		var hit = $('>span.tree-hit', node);
+		return hit.length == 0;
+	}
+	
 	
 	$.fn.tree = function(options, param){
 		if (typeof options == 'string'){
 			switch(options){
+				case 'options':
+					return $.data(this[0], 'tree').options;
 				case 'reload':
 					return this.each(function(){
 						$(this).empty();
 						request(this, this);
 					});
+				case 'getParent':
+					return getParentNode(this[0], param);
+				case 'getChecked':
+					return getCheckedNode(this[0]);
 				case 'getSelected':
 					return getSelectedNode(this[0]);
+				case 'isLeaf':
+					return isLeaf(this[0], param);	// param is the node object
 				case 'select':
 					return this.each(function(){
 						selectNode(this, param);
@@ -327,6 +466,10 @@
 				case 'append':
 					return this.each(function(){
 						appendNodes(this, param);
+					});
+				case 'toggle':
+					return this.each(function(){
+						toggleNode(this, $(param));
 					});
 				case 'remove':
 					return this.each(function(){
@@ -345,19 +488,18 @@
 			} else {
 				opts = $.extend({}, $.fn.tree.defaults, {
 					url:$(this).attr('url'),
-					animate:($(this).attr('animate') == 'true')
+					animate:($(this).attr('animate') ? $(this).attr('animate') == 'true' : undefined)
 				}, options);
 				$.data(this, 'tree', {
 					options: opts,
 					tree: wrapTree(this)
 				});
-				request(this, this);
+//				request(this, this);
 			}
 			
-//			if (opts.url){
-//				$(this).empty();
-//				request(this, this);
-//			}
+			if (opts.url){
+				request(this, this);
+			}
 			bindTreeEvents(this);
 		});
 	};
@@ -365,9 +507,11 @@
 	$.fn.tree.defaults = {
 		url: null,
 		animate: false,
+		checkbox: false,
 		
 		onLoadSuccess: function(){},
 		onLoadError: function(){},
-		onClick: function(node){}	// node: id,text,attributes,target
+		onClick: function(node){},	// node: id,text,attributes,target
+		onDblClick: function(node){}	// node: id,text,attributes,target
 	};
 })(jQuery);
