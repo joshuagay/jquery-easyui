@@ -14,6 +14,7 @@ a.l-btn-plain{
 	background:transparent;
 	padding-right:5px;
 	border:1px solid transparent;
+	_border:1px solid #efefef;
 }
 
 a.l-btn-disabled{
