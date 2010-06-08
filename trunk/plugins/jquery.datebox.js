@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1
+ * jQuery EasyUI 1.1.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -16,6 +16,7 @@ var _6=$.data(_2,"datebox").options;
 var v=_6.formatter(_5);
 $(_2).val(v);
 _4.hide();
+_1b(_2,true);
 _6.onSelect.call(_2,_5);
 }});
 _4.hide().mousedown(function(){
@@ -24,106 +25,127 @@ return false;
 return _4;
 };
 function _7(_8){
-var _9=$.data(_8,"datebox").options;
-var _a=$(_8);
+var _9=$(_8);
 $(document).unbind(".datebox");
-_a.unbind(".datebox");
-if(!_9.disabled){
+_9.unbind(".datebox");
+$.data(_8,"datebox").calendar.remove();
+_9.remove();
+};
+function _a(_b){
+var _c=$.data(_b,"datebox").options;
+var _d=$(_b);
+$(document).unbind(".datebox");
+_d.unbind(".datebox");
+if(!_c.disabled){
 $(document).bind("mousedown.datebox",function(){
-_15(_8);
+$("body>div.datebox-calendar").hide();
 });
-_a.bind("focus.datebox",function(){
-_b(_8);
+_d.bind("focus.datebox",function(){
+_e(_b);
 }).bind("click.datebox",function(){
-_b(_8);
+_e(_b);
 });
 }
 };
-function _c(_d){
-var _e=$.data(_d,"datebox").options;
-var _f=$.data(_d,"datebox").calendar;
-var _10=_f.find("div.datebox-button");
-_10.empty();
-$("<a href=\"javascript:void(0)\" class=\"datebox-current\"></a>").html(_e.currentText).appendTo(_10);
-$("<a href=\"javascript:void(0)\" class=\"datebox-close\"></a>").html(_e.closeText).appendTo(_10);
-_10.find(".datebox-current,.datebox-close").hover(function(){
+function _f(_10){
+var _11=$.data(_10,"datebox").options;
+var _12=$.data(_10,"datebox").calendar;
+var _13=_12.find("div.datebox-button");
+_13.empty();
+$("<a href=\"javascript:void(0)\" class=\"datebox-current\"></a>").html(_11.currentText).appendTo(_13);
+$("<a href=\"javascript:void(0)\" class=\"datebox-close\"></a>").html(_11.closeText).appendTo(_13);
+_13.find(".datebox-current,.datebox-close").hover(function(){
 $(this).addClass("datebox-button-hover");
 },function(){
 $(this).removeClass("datebox-button-hover");
 });
-_10.find(".datebox-current").click(function(){
-_f.find("div.datebox-calendar-inner>div").calendar({year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date()});
+_13.find(".datebox-current").click(function(){
+_12.find("div.datebox-calendar-inner>div").calendar({year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date()});
 });
-_10.find(".datebox-close").click(function(){
-_f.hide();
+_13.find(".datebox-close").click(function(){
+_12.hide();
 });
 };
-function _b(_11){
-var _12=$.data(_11,"datebox").options;
-var _13=$.data(_11,"datebox").calendar;
-_13.css({display:"block",left:$(_11).offset().left,top:$(_11).offset().top+$(_11).outerHeight()});
-var _14=_12.parser($(_11).val());
-_13.find("div.datebox-calendar-inner>div").calendar({year:_14.getFullYear(),month:_14.getMonth()+1,current:_14});
+function _e(_14){
+var _15=$.data(_14,"datebox").options;
+var _16=$.data(_14,"datebox").calendar;
+_16.show();
 if($.fn.window){
-_13.css("z-index",$.fn.window.defaults.zIndex++);
+_16.css("z-index",$.fn.window.defaults.zIndex++);
 }
-};
-function _15(_16){
-var _17=$.data(_16,"datebox").calendar;
-_17.hide();
+(function(){
+if(_16.is(":visible")){
+_16.css({display:"block",left:$(_14).offset().left,top:$(_14).offset().top+$(_14).outerHeight()});
+setTimeout(arguments.callee,200);
+}
+})();
+var _17=_15.parser($(_14).val());
+_16.find("div.datebox-calendar-inner>div").calendar({year:_17.getFullYear(),month:_17.getMonth()+1,current:_17});
 };
 function _18(_19){
-if($.fn.validatebox){
-var _1a=$.data(_19,"datebox").options;
-$(_19).validatebox(_1a);
-}
+var _1a=$.data(_19,"datebox").calendar;
+_1a.hide();
 };
 function _1b(_1c,_1d){
+if($.fn.validatebox){
 var _1e=$.data(_1c,"datebox").options;
+$(_1c).validatebox(_1e);
 if(_1d){
-_1e.disabled=true;
-$(_1c).attr("disabled",true);
-}else{
-_1e.disabled=false;
-$(_1c).removeAttr("disabled");
+$(_1c).validatebox("validate");
+$(_1c).trigger("mouseleave");
+}
 }
 };
-$.fn.datebox=function(_1f){
-if(typeof _1f=="string"){
-switch(_1f){
+function _1f(_20,_21){
+var _22=$.data(_20,"datebox").options;
+if(_21){
+_22.disabled=true;
+$(_20).attr("disabled",true);
+}else{
+_22.disabled=false;
+$(_20).removeAttr("disabled");
+}
+};
+$.fn.datebox=function(_23){
+if(typeof _23=="string"){
+switch(_23){
+case "destroy":
+return this.each(function(){
+_7(this);
+});
 case "disable":
 return this.each(function(){
-_1b(this,true);
-_7(this);
+_1f(this,true);
+_a(this);
 });
 case "enable":
 return this.each(function(){
-_1b(this,false);
-_7(this);
+_1f(this,false);
+_a(this);
 });
 }
 }
-_1f=_1f||{};
+_23=_23||{};
 return this.each(function(){
-var _20=$.data(this,"datebox");
-if(_20){
-$.extend(_20.options,_1f);
+var _24=$.data(this,"datebox");
+if(_24){
+$.extend(_24.options,_23);
 }else{
-var _21=_1(this);
+var _25=_1(this);
 var t=$(this);
-_20=$.data(this,"datebox",{options:$.extend({},$.fn.datebox.defaults,{disabled:(t.attr("disabled")?true:undefined),required:(t.attr("required")?(t.attr("required")=="true"||t.attr("required")==true):undefined),missingMessage:(t.attr("missingMessage")||undefined)},_1f),calendar:_21});
+_24=$.data(this,"datebox",{options:$.extend({},$.fn.datebox.defaults,{disabled:(t.attr("disabled")?true:undefined),required:(t.attr("required")?(t.attr("required")=="true"||t.attr("required")==true):undefined),missingMessage:(t.attr("missingMessage")||undefined)},_23),calendar:_25});
 t.removeAttr("disabled");
 }
-_c(this);
-_1b(this,_20.options.disabled);
-_7(this);
-_18(this);
+_f(this);
+_1f(this,_24.options.disabled);
+_a(this);
+_1b(this);
 });
 };
-$.fn.datebox.defaults={currentText:"Today",closeText:"Close",disabled:false,required:false,missingMessage:"This field is required.",formatter:function(_22){
-var y=_22.getFullYear();
-var m=_22.getMonth()+1;
-var d=_22.getDate();
+$.fn.datebox.defaults={currentText:"Today",closeText:"Close",disabled:false,required:false,missingMessage:"This field is required.",formatter:function(_26){
+var y=_26.getFullYear();
+var m=_26.getMonth()+1;
+var d=_26.getDate();
 return m+"/"+d+"/"+y;
 },parser:function(s){
 var t=Date.parse(s);
@@ -132,7 +154,7 @@ return new Date(t);
 }else{
 return new Date();
 }
-},onSelect:function(_23){
+},onSelect:function(_27){
 }};
 })(jQuery);
 

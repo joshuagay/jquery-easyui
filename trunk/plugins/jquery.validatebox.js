@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1
+ * jQuery EasyUI 1.1.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -16,43 +16,44 @@ var _5=$.data(_4,"validatebox").tip;
 if(_5){
 _5.remove();
 }
+$(_4).unbind(".validatebox");
 $(_4).remove();
 };
 function _6(_7){
 var _8=$(_7);
-var _9=$.data(_7,"validatebox").tip;
-var _a=null;
+var _9=$.data(_7,"validatebox");
+_9.validating=false;
 _8.unbind(".validatebox").bind("focus.validatebox",function(){
-if(_a){
-clearInterval(_a);
-}
-_a=setInterval(function(){
+_9.validating=true;
+(function(){
+if(_9.validating){
 _11(_7);
-},200);
-}).bind("blur.validatebox",function(){
-clearInterval(_a);
-_a=null;
-_b(_7);
-}).bind("mouseover.validatebox",function(){
-if(_8.hasClass("validatebox-invalid")){
-_c(_7);
+setTimeout(arguments.callee,200);
 }
-}).bind("mouseout.validatebox",function(){
+})();
+}).bind("blur.validatebox",function(){
+_9.validating=false;
+_a(_7);
+}).bind("mouseenter.validatebox",function(){
+if(_8.hasClass("validatebox-invalid")){
 _b(_7);
+}
+}).bind("mouseleave.validatebox",function(){
+_a(_7);
 });
 };
-function _c(_d){
-var _e=$(_d);
-var _f=$.data(_d,"validatebox").message;
-var tip=$.data(_d,"validatebox").tip;
-if(!tip){
-tip=$("<div class=\"validatebox-tip\">"+"<span class=\"validatebox-tip-content\">"+"</span>"+"<span class=\"validatebox-tip-pointer\">"+"</span>"+"</div>").appendTo("body");
-$.data(_d,"validatebox").tip=tip;
+function _b(_c){
+var _d=$(_c);
+var _e=$.data(_c,"validatebox").message;
+var _f=$.data(_c,"validatebox").tip;
+if(!_f){
+_f=$("<div class=\"validatebox-tip\">"+"<span class=\"validatebox-tip-content\">"+"</span>"+"<span class=\"validatebox-tip-pointer\">"+"</span>"+"</div>").appendTo("body");
+$.data(_c,"validatebox").tip=_f;
 }
-tip.find(".validatebox-tip-content").html(_f);
-tip.css({display:"block",left:_e.offset().left+_e.outerWidth(),top:_e.offset().top});
+_f.find(".validatebox-tip-content").html(_e);
+_f.css({display:"block",left:_d.offset().left+_d.outerWidth(),top:_d.offset().top});
 };
-function _b(_10){
+function _a(_10){
 var tip=$.data(_10,"validatebox").tip;
 if(tip){
 tip.remove();
@@ -75,7 +76,7 @@ if(_13.required){
 if(_14==""){
 box.addClass("validatebox-invalid");
 _15(_13.missingMessage);
-_c(_12);
+_b(_12);
 return false;
 }
 }
@@ -93,13 +94,13 @@ _1a=_1a.replace(new RegExp("\\{"+i+"\\}","g"),_19[i]);
 }
 }
 _15(_13.invalidMessage||_1a);
-_c(_12);
+_b(_12);
 return false;
 }
 }
 }
 box.removeClass("validatebox-invalid");
-_b(_12);
+_a(_12);
 return true;
 };
 $.fn.validatebox=function(_1b){
