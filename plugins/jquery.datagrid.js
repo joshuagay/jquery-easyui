@@ -736,10 +736,11 @@ if(_b3.indexOf(row)==-1){
 _b3.push(row);
 }
 }
-_b0.onAfterEdit.call(_ad,_ae,row,_b6);
 }
 if(_af){
 _b0.onCancelEdit.call(_ad,_ae,row);
+}else{
+_b0.onAfterEdit.call(_ad,_ae,row,_b6);
 }
 };
 function _ab(_bb,_bc){
