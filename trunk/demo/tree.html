@@ -26,6 +26,17 @@
 		function reload(){
 			$('#tt2').tree('reload');
 		}
+		function getChildNodes(){
+			var node = $('#tt2').tree('getSelected');
+			if (node){
+				var children = $('#tt2').tree('getChildNodes', node.target);
+				var s = '';
+				for(var i=0; i<children.length; i++){
+					s += children[i].text + ',';
+				}
+				alert(s);
+			}
+		}
 		function getChecked(){
 			var nodes = $('#tt2').tree('getChecked');
 			var s = '';
@@ -47,12 +58,19 @@
 			var node = $('#tt2').tree('getSelected');
 			$('#tt2').tree('expand',node.target);
 		}
+		function collapseAll(){
+			$('#tt2').tree('collapseAll');
+		}
+		function expandAll(){
+			$('#tt2').tree('expandAll');
+		}
 		function append(){
 			var node = $('#tt2').tree('getSelected');
 			$('#tt2').tree('append',{
 				parent: node.target,
 				data:[{
-					text:'new1'
+					text:'new1',
+					checked:true
 				},{
 					text:'new2',
 					state:'closed',
@@ -68,6 +86,14 @@
 			var node = $('#tt2').tree('getSelected');
 			$('#tt2').tree('remove', node.target);
 		}
+		function update(){
+			var node = $('#tt2').tree('getSelected');
+			if (node){
+				node.text = '<span style="font-weight:bold">new text</span>';
+				node.iconCls = 'icon-save';
+				$('#tt2').tree('update', node);
+			}
+		}
 		function isLeaf(){
 			var node = $('#tt2').tree('getSelected');
 			var b = $('#tt2').tree('isLeaf', node.target);
@@ -78,7 +104,7 @@
 <body>
 	<h1>Tree</h1>
 	<p>Create from HTML markup</p>
-	<ul id="tt1" class="easyui-tree">
+	<ul id="tt1">
 		<li>
 			<span>Folder</span>
 			<ul>
@@ -102,6 +128,8 @@
 				<li>
 					<span>File 3</span>
 				</li>
+				<li>File 4</li>
+				<li>File 5</li>
 			</ul>
 		</li>
 		<li>
@@ -112,12 +140,16 @@
 	<p>Create from JSON data</p>
 	<div style="margin:10px;">
 		<a href="#" onclick="reload()">reload</a>
+		<a href="#" onclick="getChildNodes()">getChildNodes</a>
 		<a href="#" onclick="getChecked()">getChecked</a>
 		<a href="#" onclick="getSelected()">getSelected</a>
 		<a href="#" onclick="collapse()">collapse</a>
 		<a href="#" onclick="expand()">expand</a>
+		<a href="#" onclick="collapseAll()">collapseAll</a>
+		<a href="#" onclick="expandAll()">expandAll</a>
 		<a href="#" onclick="append()">append</a>
 		<a href="#" onclick="remove()">remove</a>
+		<a href="#" onclick="update()">update</a>
 		<a href="#" onclick="isLeaf()">isLeaf</a>
 	</div>
 
