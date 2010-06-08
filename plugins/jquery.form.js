@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1
+ * jQuery EasyUI 1.1.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -46,7 +46,7 @@ return;
 }
 var ta=_8.find(">textarea");
 if(ta.length){
-_9=ta.value();
+_9=ta.val();
 }else{
 var _a=_8.find(">pre");
 if(_a.length){
@@ -89,7 +89,7 @@ $("select[combotreeName="+_12+"]",_11).combotree("setValue",val);
 function _13(_14){
 $("input,select,textarea",_14).each(function(){
 var t=this.type,tag=this.tagName.toLowerCase();
-if(t=="text"||t=="password"||tag=="textarea"){
+if(t=="text"||t=="hidden"||t=="password"||tag=="textarea"){
 this.value="";
 }else{
 if(t=="checkbox"||t=="radio"){
@@ -101,6 +101,12 @@ this.selectedIndex=-1;
 }
 }
 });
+if($.fn.combobox){
+$("select[comboboxName]",_14).combobox("clear");
+}
+if($.fn.combotree){
+$("select[combotreeName]",_14).combotree("clear");
+}
 };
 function _15(_16){
 var _17=$.data(_16,"form").options;

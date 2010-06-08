@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1
+ * jQuery EasyUI 1.1.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -67,37 +67,37 @@ _11.height=p.height();
 cc.width(_11.width).height(_11.height);
 var _12=$(">div.tabs-header",_10);
 if($.boxModel==true){
-var _13=_12.outerWidth()-_12.width();
-_12.width(cc.width()-_13);
+_12.width(cc.width()-(_12.outerWidth()-_12.width()));
 }else{
 _12.width(cc.width());
 }
 _a(_10);
-var _14=$(">div.tabs-panels",_10);
-var _15=_11.height;
-if(!isNaN(_15)){
+var _13=$(">div.tabs-panels",_10);
+var _14=_11.height;
+if(!isNaN(_14)){
 if($.boxModel==true){
-var _13=_14.outerHeight()-_14.height();
-_14.css("height",(_15-_12.outerHeight()-_13)||"auto");
+var _15=_13.outerHeight()-_13.height();
+_13.css("height",(_14-_12.outerHeight()-_15)||"auto");
 }else{
-_14.css("height",_15-_12.outerHeight());
+_13.css("height",_14-_12.outerHeight());
 }
 }else{
-_14.height("auto");
+_13.height("auto");
 }
 var _16=_11.width;
 if(!isNaN(_16)){
 if($.boxModel==true){
-var _13=_14.outerWidth()-_14.width();
-_14.width(_16-_13);
+_13.width(_16-(_13.outerWidth()-_13.width()));
 }else{
-_14.width(_16);
+_13.width(_16);
 }
 }else{
-_14.width("auto");
+_13.width("auto");
 }
 if($.parser){
+setTimeout(function(){
 $.parser.parse(_10);
+},0);
 }
 };
 function _17(_18){
