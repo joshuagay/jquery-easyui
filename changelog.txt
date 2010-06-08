@@ -1,3 +1,13 @@
+Version 1.1.1
+* Bug
+ * form: Cannot clear the value of combobox and combotree component. fixed.
+* Improvement
+ * tree: Add some useful methods such as 'getRoot','getChildren','update',etc.
+ * datagrid: Add editable feature, improve performance while loading data.
+ * datebox: Add destroy method.
+ * combobox: Add destroy and clear method.
+ * combotree: Add destroy and clear method.
+ 
 Version 1.1
 -------------
 * Bug
