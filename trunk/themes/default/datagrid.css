@@ -225,10 +225,6 @@
 	height:auto!important;
 	*height:auto;
 }
-.datagrid-body .datagrid-editable table{
-	width:100%;
-	height:100%;
-}
 .datagrid-body .datagrid-editable td{
 	border:0;
 	padding:0;
