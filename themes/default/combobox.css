@@ -4,7 +4,7 @@
 	font-size:12px;
 	margin:0;
 	padding:0;
-	border:1px solid #d3d3d3;
+	border:1px solid #A4BED4;
 }
 .combobox-text{
 	font-size:12px;
@@ -32,7 +32,7 @@
 	position:absolute;
 	background:#fff;
 	display:none;
-	border:1px solid #d3d3d3;
+	border:1px solid #A4BED4;
 	overflow-x:hidden;
 	overflow-y:auto;
 }
