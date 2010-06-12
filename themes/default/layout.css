@@ -32,7 +32,7 @@
 	position:absolute;
 	padding:0px 5px;
 	padding:0px;
-	background:#efefef;
+	background:#D2E0F2;
 	font-size:1px;
 	cursor:pointer;
 	z-index:1;
@@ -48,7 +48,7 @@
 	overflow:hidden;
 }
 .layout-expand-over{
-	background:#fafafa;
+	background:#E1F0F2;
 }
 .layout-body{
 	overflow:auto;
@@ -73,16 +73,16 @@
 	z-index:5;
 }
 .layout-split-north{
-	border-bottom:5px solid #efefef;
+	border-bottom:5px solid #D2E0F2;
 }
 .layout-split-south{
-	border-top:5px solid #efefef;
+	border-top:5px solid #D2E0F2;
 }
 .layout-split-east{
-	border-left:5px solid #efefef;
+	border-left:5px solid #D2E0F2;
 }
 .layout-split-west{
-	border-right:5px solid #efefef;
+	border-right:5px solid #D2E0F2;
 }
 .layout-mask{
 	position:absolute;

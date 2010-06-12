@@ -5,20 +5,20 @@
 .panel-header{
 	padding:5px;
 	line-height:15px;
-	color:#3F3F3F;
+	color:#15428b;
 	font-weight:bold;
 	font-size:12px;
-	background:url('images/panel_title.gif') repeat-x;
+	background:url('images/panel_title.png') repeat-x;
 	position:relative;
-	border:1px solid #D3D3D3;
+	border:1px solid #99BBE8;
 }
 .panel-header-noborder{
 	border-width:0px;
-	border-bottom:1px solid #D3D3D3;
+	border-bottom:1px solid #99BBE8;
 }
 .panel-body{
 	overflow:auto;
-	border:1px solid #D3D3D3;
+	border:1px solid #99BBE8;
 	border-top-width:0px;
 }
 .panel-body-noheader{
