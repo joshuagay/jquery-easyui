@@ -8,6 +8,15 @@
  * 
  */
 (function($){
+	function removeNode(node){
+		node.each(function(){
+			$(this).remove();
+			if ($.browser.msie){
+				this.outerHTML = '';
+			}
+		});
+	}
+	
 	function setSize(target, param){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
@@ -90,7 +99,7 @@
 	function wrapPanel(target){
 		var panel = $(target).addClass('panel-body').wrap('<div class="panel"></div>').parent();
 		panel.bind('_resize', function(){
-			var opts = $.data(target, 'panel');
+			var opts = $.data(target, 'panel').options;
 			if (opts.fit == true){
 				setSize(target);
 			}
@@ -102,7 +111,8 @@
 	function addHeader(target){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
-		panel.find('>div.panel-header').remove();
+//		panel.find('>div.panel-header').remove();
+		removeNode(panel.find('>div.panel-header'));
 		if (opts.title){
 			var header = $('<div class="panel-header"><div class="panel-title">'+opts.title+'</div></div>').prependTo(panel);
 			if (opts.iconCls){
@@ -197,6 +207,10 @@
 		panel.show();
 		opts.closed = false;
 		opts.onOpen.call(target);
+		
+		if (opts.maximized == true) maximizePanel(target);
+		if (opts.minimized == true) minimizePanel(target);
+		if (opts.collapsed == true) collapsePanel(target);
 	}
 	
 	function closePanel(target, forceClose){
@@ -218,23 +232,29 @@
 		if (forceDestroy != true){
 			if (opts.onBeforeDestroy.call(target) == false) return;
 		}
-		panel.remove();
+		removeNode(panel);
 		opts.onDestroy.call(target);
 	}
 	
 	function collapsePanel(target, animate){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
+		var body = panel.find('>div.panel-body');
+		var tool = panel.find('>div.panel-header .panel-tool-collapse');
+		
+		if (tool.hasClass('panel-tool-expand')) return;
+		
+		body.stop(true, true);	// stop animation
 		if (opts.onBeforeCollapse.call(target) == false) return;
 		
-		panel.find('>div.panel-header .panel-tool-collapse').addClass('panel-tool-expand');
+		tool.addClass('panel-tool-expand');
 		if (animate == true){
-			panel.find('>div.panel-body').slideUp('normal', function(){
+			body.slideUp('normal', function(){
 				opts.collapsed = true;
 				opts.onCollapse.call(target);
 			});
 		} else {
-			panel.find('>div.panel-body').hide();
+			body.hide();
 			opts.collapsed = true;
 			opts.onCollapse.call(target);
 		}
@@ -243,16 +263,22 @@
 	function expandPanel(target, animate){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
+		var body = panel.find('>div.panel-body');
+		var tool = panel.find('>div.panel-header .panel-tool-collapse');
+		
+		if (!tool.hasClass('panel-tool-expand')) return;
+		
+		body.stop(true, true);	// stop animation
 		if (opts.onBeforeExpand.call(target) == false) return;
 		
-		panel.find('>div.panel-header .panel-tool-collapse').removeClass('panel-tool-expand');
+		tool.removeClass('panel-tool-expand');
 		if (animate == true){
-			panel.find('>div.panel-body').slideDown('normal', function(){
+			body.slideDown('normal', function(){
 				opts.collapsed = false;
 				opts.onExpand.call(target);
 			});
 		} else {
-			panel.find('>div.panel-body').show();
+			body.show();
 			opts.collapsed = false;
 			opts.onExpand.call(target);
 		}
@@ -261,7 +287,12 @@
 	function maximizePanel(target){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
-		panel.find('>div.panel-header .panel-tool-max').addClass('panel-tool-restore');
+		var tool = panel.find('>div.panel-header .panel-tool-max');
+		
+		if (tool.hasClass('panel-tool-restore')) return;
+		
+		tool.addClass('panel-tool-restore');
+		
 		$.data(target, 'panel').original = {
 			width: opts.width,
 			height: opts.height,
@@ -290,8 +321,12 @@
 	function restorePanel(target){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
+		var tool = panel.find('>div.panel-header .panel-tool-max');
+		
+		if (!tool.hasClass('panel-tool-restore')) return;
+		
 		panel.show();
-		panel.find('>div.panel-header .panel-tool-max').removeClass('panel-tool-restore');
+		tool.removeClass('panel-tool-restore');
 		var original = $.data(target, 'panel').original;
 		opts.width = original.width;
 		opts.height = original.height;
@@ -316,6 +351,11 @@
 		}
 	}
 	
+	function setTitle(target, title){
+		$.data(target, 'panel').options.title = title;
+		$(target).panel('header').find('div.panel-title').html(title);
+	}
+	
 	
 	$.fn.panel = function(options, param){
 		if (typeof options == 'string'){
@@ -328,6 +368,10 @@
 				return $.data(this[0], 'panel').panel.find('>div.panel-header');
 			case 'body':
 				return $.data(this[0], 'panel').panel.find('>div.panel-body');
+			case 'setTitle':
+				return this.each(function(){
+					setTitle(this, param);
+				});
 			case 'open':
 				return this.each(function(){
 					openPanel(this, param);
@@ -353,6 +397,26 @@
 				return this.each(function(){
 					movePanel(this, param);
 				});
+			case 'maximize':
+				return this.each(function(){
+					maximizePanel(this);
+				});
+			case 'minimize':
+				return this.each(function(){
+					minimizePanel(this);
+				});
+			case 'restore':
+				return this.each(function(){
+					restorePanel(this);
+				});
+			case 'collapse':
+				return this.each(function(){
+					collapsePanel(this, param);	// param: boolean,indicate animate or not
+				});
+			case 'expand':
+				return this.each(function(){
+					expandPanel(this, param);	// param: boolean,indicate animate or not
+				});
 			}
 		}
 		
@@ -365,25 +429,26 @@
 			} else {
 				var t = $(this);
 				opts = $.extend({}, $.fn.panel.defaults, {
-					width: (parseInt(t.css('width')) || 'auto'),
-					height: (parseInt(t.css('height')) || 'auto'),
-//					width: (parseInt(t.css('width')) || t.outerWidth()),
-//					height: (parseInt(t.css('height')) || t.outerHeight()),
-					left: (parseInt(t.css('left')) || null),
-					top: (parseInt(t.css('top')) || null),
+					width: (parseInt(t.css('width')) || undefined),
+					height: (parseInt(t.css('height')) || undefined),
+					left: (parseInt(t.css('left')) || undefined),
+					top: (parseInt(t.css('top')) || undefined),
 					title: t.attr('title'),
 					iconCls: t.attr('icon'),
+					cls: t.attr('cls'),
+					headerCls: t.attr('headerCls'),
+					bodyCls: t.attr('bodyCls'),
 					href: t.attr('href'),
-					fit: t.attr('fit') == 'true',
-					border: (t.attr('border') == 'false' ? false : true),
-					collapsible: t.attr('collapsible') == 'true',
-					minimizable: t.attr('minimizable') == 'true',
-					maximizable: t.attr('maximizable') == 'true',
-					closable: t.attr('closable') == 'true',
-					collapsed: t.attr('collapsed') == 'true',
-					minimized: t.attr('minimized') == 'true',
-					maximized: t.attr('maximized') == 'true',
-					closed: t.attr('closed') == 'true'
+					fit: (t.attr('fit') ? t.attr('fit') == 'true' : undefined),
+					border: (t.attr('border') ? t.attr('border') == 'true' : undefined),
+					collapsible: (t.attr('collapsible') ? t.attr('collapsible') == 'true' : undefined),
+					minimizable: (t.attr('minimizable') ? t.attr('minimizable') == 'true' : undefined),
+					maximizable: (t.attr('maximizable') ? t.attr('maximizable') == 'true' : undefined),
+					closable: (t.attr('closable') ? t.attr('closable') == 'true' : undefined),
+					collapsed: (t.attr('collapsed') ? t.attr('collapsed') == 'true' : undefined),
+					minimized: (t.attr('minimized') ? t.attr('minimized') == 'true' : undefined),
+					maximized: (t.attr('maximized') ? t.attr('maximized') == 'true' : undefined),
+					closed: (t.attr('closed') ? t.attr('closed') == 'true' : undefined)
 				}, options);
 				t.attr('title', '');
 				state = $.data(this, 'panel', {
@@ -398,16 +463,18 @@
 			loadData(this);
 			
 			if (opts.doSize == true){
+				state.panel.css('display','block');
 				setSize(this);
 			}
 			if (opts.closed == true){
 				state.panel.hide();
 			} else {
 				openPanel(this);
-				if (opts.maximized == true) maximizePanel(this);
-				if (opts.minimized == true) minimizePanel(this);
-				if (opts.collapsed == true) collapsePanel(this);
+//				if (opts.maximized == true) maximizePanel(this);
+//				if (opts.minimized == true) minimizePanel(this);
+//				if (opts.collapsed == true) collapsePanel(this);
 			}
+			
 			
 //			if (opts.doSize == true) setSize(this);
 ////			setSize(this);
