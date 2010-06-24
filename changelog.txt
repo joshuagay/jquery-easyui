@@ -1,4 +1,17 @@
+Version 1.1.2
+-------------
+* Bug
+ * messager: When call show method in layout, the message window will be blocked. fixed.
+* Improvement
+ * datagrid: Add validateRow method, remember the current editing row status when do editing action.
+ * form: Add callback functions when loading data.
+ * panel,window,dialog: Add maximize,minimize,restore,collapse,expand methods.
+ * panel,tabs,accordion: The lazy loading feature is supported.
+ * tabs: Add getSelected,update,getTab methods.
+ * accordion: Add crud methods.
+ 
 Version 1.1.1
+-------------
 * Bug
  * form: Cannot clear the value of combobox and combotree component. fixed.
 * Improvement
