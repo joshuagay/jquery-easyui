@@ -9,6 +9,7 @@ Version 1.1.2
  * panel,tabs,accordion: The lazy loading feature is supported.
  * tabs: Add getSelected,update,getTab methods.
  * accordion: Add crud methods.
+ * linkbutton: Accept an id option to set the id attribute.
  
 Version 1.1.1
 -------------
