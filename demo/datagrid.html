@@ -40,22 +40,28 @@
 				rownumbers:true,
 				singleSelect:true,
 				toolbar:[{
+					id:'btnadd',
 					text:'Add',
 					iconCls:'icon-add',
 					handler:function(){
+						$('#btnsave').linkbutton('enable');
 						alert('add')
 					}
 				},{
+					id:'btncut',
 					text:'Cut',
 					iconCls:'icon-cut',
-					disabled:true,
 					handler:function(){
+						$('#btnsave').linkbutton('enable');
 						alert('cut')
 					}
 				},'-',{
+					id:'btnsave',
 					text:'Save',
+					disabled:true,
 					iconCls:'icon-save',
 					handler:function(){
+						$('#btnsave').linkbutton('disable');
 						alert('save')
 					}
 				}]

@@ -23,12 +23,11 @@
 				title:'Editable DataGrid',
 				iconCls:'icon-edit',
 				width:650,
-				height:250,
+				height:'auto',
 				singleSelect:true,
 				idField:'itemid',
 				url:'datagrid_data2.json',
-				frozenColumns1:[[
-				]],
+				pagination:true,
 				columns:[[
 					{field:'itemid',title:'Item ID',width:80},
 					{field:'productid',title:'Product ID',width:100,
@@ -63,8 +62,9 @@
 				]],
 				toolbar:[{
 					text:'append',
+					iconCls:'icon-add',
 					handler:function(){
-						$('#tt').datagrid('cancelEdit', lastIndex);
+					$('#tt').datagrid('endEdit', lastIndex);
 						$('#tt').datagrid('appendRow',{
 							itemid:'',
 							productid:'',
@@ -73,39 +73,42 @@
 							attr1:'',
 							status:'P'
 						});
-						var lastRowIndex = $('#tt').datagrid('getRows').length-1;
-						$('#tt').datagrid('beginEdit', lastRowIndex);
-						lastIndex = lastRowIndex;
+						var lastIndex = $('#tt').datagrid('getRows').length-1;
+						$('#tt').datagrid('beginEdit', lastIndex);
 					}
 				},'-',{
 					text:'delete',
+					iconCls:'icon-remove',
 					handler:function(){
-						$('#tt').datagrid('cancelEdit', lastIndex);
 						$('#tt').datagrid('deleteRow', lastIndex);
 					}
 				},'-',{
 					text:'accept',
+					iconCls:'icon-save',
 					handler:function(){
 						$('#tt').datagrid('acceptChanges');
 					}
 				},'-',{
 					text:'reject',
+					iconCls:'icon-undo',
 					handler:function(){
 						$('#tt').datagrid('rejectChanges');
 					}
 				},'-',{
 					text:'getChanges',
+					iconCls:'icon-search',
 					handler:function(){
 						var rows = $('#tt').datagrid('getChanges');
 						alert('changed rows: ' + rows.length + ' lines');
 					}
 				}],
+				onBeforeLoad:function(){
+					$(this).datagrid('rejectChanges');
+				},
 				onClickRow:function(rowIndex){
 					if (lastIndex != rowIndex){
-						var t1=new Date().getTime()
 						$('#tt').datagrid('endEdit', lastIndex);
 						$('#tt').datagrid('beginEdit', rowIndex);
-						var t2=new Date().getTime()
 					}
 					lastIndex = rowIndex;
 				}
