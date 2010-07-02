@@ -143,10 +143,12 @@
 	margin:0px;
 	padding:3px 0px;
 }
+.datagrid-td-rownumber{
+	background:#fafafa url('images/datagrid_header_bg.gif') repeat-x left bottom;
+}
 .datagrid-cell-rownumber{
 	width:25px;
 	text-align:center;
-	background:#fafafa url('images/datagrid_header_bg.gif') repeat-x left bottom;
 	margin:0px;
 	padding:3px 0px;
 }
@@ -195,11 +197,6 @@
 	width:15px;
 	height:15px;
 }
-.datagrid-body .datagrid-cell-height{
-	height:16px!important;
-	*height:22px;
-	line-height:16px;
-}
 .datagrid-row-alt{
 	background:#EEEEFF;
 }
@@ -222,8 +219,6 @@
 }
 .datagrid-body .datagrid-editable{
 	padding:0;
-	height:auto!important;
-	*height:auto;
 }
 .datagrid-body .datagrid-editable table{
 	width:100%;
