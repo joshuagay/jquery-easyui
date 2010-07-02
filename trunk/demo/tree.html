@@ -9,33 +9,30 @@
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#tt1').tree({
-				animate:true,
-				onClick:function(node){
-					alert('you click '+node.text);
-				}
-			});
 			$('#tt2').tree({
 				checkbox: true,
 				url: 'tree_data.json',
 				onClick:function(node){
-					alert('you click '+node.text);
+					$(this).tree('toggle', node.target);
+					//alert('you dbclick '+node.text);
 				}
 			});
 		});
 		function reload(){
 			$('#tt2').tree('reload');
 		}
-		function getChildNodes(){
+		function getChildren(){
 			var node = $('#tt2').tree('getSelected');
 			if (node){
-				var children = $('#tt2').tree('getChildNodes', node.target);
-				var s = '';
-				for(var i=0; i<children.length; i++){
-					s += children[i].text + ',';
-				}
-				alert(s);
+				var children = $('#tt2').tree('getChildren', node.target);
+			} else {
+				var children = $('#tt2').tree('getChildren');
 			}
+			var s = '';
+			for(var i=0; i<children.length; i++){
+				s += children[i].text + ',';
+			}
+			alert(s);
 		}
 		function getChecked(){
 			var nodes = $('#tt2').tree('getChecked');
@@ -104,11 +101,11 @@
 <body>
 	<h1>Tree</h1>
 	<p>Create from HTML markup</p>
-	<ul id="tt1">
+	<ul id="tt1" class="easyui-tree" animate="true">
 		<li>
 			<span>Folder</span>
 			<ul>
-				<li>
+				<li state="closed">
 					<span>Sub Folder 1</span>
 					<ul>
 						<li>
@@ -140,7 +137,7 @@
 	<p>Create from JSON data</p>
 	<div style="margin:10px;">
 		<a href="#" onclick="reload()">reload</a>
-		<a href="#" onclick="getChildNodes()">getChildNodes</a>
+		<a href="#" onclick="getChildren()">getChildren</a>
 		<a href="#" onclick="getChecked()">getChecked</a>
 		<a href="#" onclick="getSelected()">getSelected</a>
 		<a href="#" onclick="collapse()">collapse</a>
