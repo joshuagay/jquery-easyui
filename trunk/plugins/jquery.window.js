@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.1
+ * jQuery EasyUI 1.1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -234,6 +234,26 @@ $(this).panel("resize",_1c);
 case "move":
 return this.each(function(){
 $(this).panel("move",_1c);
+});
+case "maximize":
+return this.each(function(){
+$(this).panel("maximize");
+});
+case "minimize":
+return this.each(function(){
+$(this).panel("minimize");
+});
+case "restore":
+return this.each(function(){
+$(this).panel("restore");
+});
+case "collapse":
+return this.each(function(){
+$(this).panel("collapse",_1c);
+});
+case "expand":
+return this.each(function(){
+$(this).panel("expand",_1c);
 });
 }
 }

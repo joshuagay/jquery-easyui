@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.1
+ * jQuery EasyUI 1.1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -12,6 +12,11 @@ function _1(_2){
 var _3=$.data(_2,"linkbutton").options;
 $(_2).empty();
 $(_2).addClass("l-btn");
+if(_3.id){
+$(_2).attr("id",_3.id);
+}else{
+$(_2).removeAttr("id");
+}
 if(_3.plain){
 $(_2).addClass("l-btn-plain");
 }else{
@@ -77,12 +82,12 @@ if(_b){
 $.extend(_b.options,_a);
 }else{
 var t=$(this);
-$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,{disabled:(t.attr("disabled")?true:undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html()),iconCls:t.attr("icon")},_a)});
+$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,{id:t.attr("id"),disabled:(t.attr("disabled")?true:undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html()),iconCls:t.attr("icon")},_a)});
 t.removeAttr("disabled");
 }
 _1(this);
 });
 };
-$.fn.linkbutton.defaults={disabled:false,plain:false,text:"",iconCls:null};
+$.fn.linkbutton.defaults={id:null,disabled:false,plain:false,text:"",iconCls:null};
 })(jQuery);
 
