@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.1
+ * jQuery EasyUI 1.1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -63,31 +63,43 @@ _6.remove();
 };
 };
 function _b(_c,_d){
+if(!$.data(_c,"form")){
+$.data(_c,"form",{options:$.extend({},$.fn.form.defaults)});
+}
+var _e=$.data(_c,"form").options;
 if(typeof _d=="string"){
-$.ajax({url:_d,dataType:"json",success:function(_e){
-_f(_e);
+var _f={};
+if(_e.onBeforeLoad.call(_c,_f)==false){
+return;
+}
+$.ajax({url:_d,data:_f,dataType:"json",success:function(_10){
+_11(_10);
+},error:function(){
+_e.onLoadError.apply(_c,arguments);
 }});
 }else{
-_f(_d);
+_11(_d);
 }
-function _f(_10){
-var _11=$(_c);
-for(var _12 in _10){
-var val=_10[_12];
-$("input[name="+_12+"]",_11).val(val);
-$("textarea[name="+_12+"]",_11).val(val);
-$("select[name="+_12+"]",_11).val(val);
+function _11(_12){
+var _13=$(_c);
+for(var _14 in _12){
+var val=_12[_14];
+$("input[name="+_14+"]",_13).val(val);
+$("textarea[name="+_14+"]",_13).val(val);
+$("select[name="+_14+"]",_13).val(val);
 if($.fn.combobox){
-$("select[comboboxName="+_12+"]",_11).combobox("setValue",val);
+$("select[comboboxName="+_14+"]",_13).combobox("setValue",val);
 }
 if($.fn.combotree){
-$("select[combotreeName="+_12+"]",_11).combotree("setValue",val);
+$("select[combotreeName="+_14+"]",_13).combotree("setValue",val);
 }
 }
+_e.onLoadSuccess.call(_c,_12);
+_15(_c);
 };
 };
-function _13(_14){
-$("input,select,textarea",_14).each(function(){
+function _16(_17){
+$("input,select,textarea",_17).each(function(){
 var t=this.type,tag=this.tagName.toLowerCase();
 if(t=="text"||t=="hidden"||t=="password"||tag=="textarea"){
 this.value="";
@@ -102,63 +114,66 @@ this.selectedIndex=-1;
 }
 });
 if($.fn.combobox){
-$("select[comboboxName]",_14).combobox("clear");
+$("select[comboboxName]",_17).combobox("clear");
 }
 if($.fn.combotree){
-$("select[combotreeName]",_14).combotree("clear");
+$("select[combotreeName]",_17).combotree("clear");
 }
 };
-function _15(_16){
-var _17=$.data(_16,"form").options;
-var _18=$(_16);
-_18.unbind(".form").bind("submit.form",function(){
+function _18(_19){
+var _1a=$.data(_19,"form").options;
+var _1b=$(_19);
+_1b.unbind(".form").bind("submit.form",function(){
 setTimeout(function(){
-_1(_16,_17);
+_1(_19,_1a);
 },0);
 return false;
 });
 };
-function _19(_1a){
+function _15(_1c){
 if($.fn.validatebox){
-var box=$(".validatebox-text",_1a);
+var box=$(".validatebox-text",_1c);
 if(box.length){
 box.validatebox("validate");
 box.trigger("blur");
-var _1b=$(".validatebox-invalid:first",_1a).focus();
-return _1b.length==0;
+var _1d=$(".validatebox-invalid:first",_1c).focus();
+return _1d.length==0;
 }
 }
 return true;
 };
-$.fn.form=function(_1c,_1d){
-if(typeof _1c=="string"){
-switch(_1c){
+$.fn.form=function(_1e,_1f){
+if(typeof _1e=="string"){
+switch(_1e){
 case "submit":
 return this.each(function(){
-_1(this,$.extend({},$.fn.form.defaults,_1d||{}));
+_1(this,$.extend({},$.fn.form.defaults,_1f||{}));
 });
 case "load":
 return this.each(function(){
-_b(this,_1d);
+_b(this,_1f);
 });
 case "clear":
 return this.each(function(){
-_13(this);
+_16(this);
 });
 case "validate":
-return _19(this[0]);
+return _15(this[0]);
 }
 }
-_1c=_1c||{};
+_1e=_1e||{};
 return this.each(function(){
 if(!$.data(this,"form")){
-$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_1c)});
+$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_1e)});
 }
-_15(this);
+_18(this);
 });
 };
 $.fn.form.defaults={url:null,onSubmit:function(){
-},success:function(_1e){
+},success:function(_20){
+},onBeforeLoad:function(_21){
+},onLoadSuccess:function(_22){
+},onLoadError:function(){
 }};
 })(jQuery);
 

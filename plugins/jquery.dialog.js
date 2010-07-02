@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.1
+ * jQuery EasyUI 1.1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -47,14 +47,10 @@ var _a=$("<div class=\"dialog-button\"></div>").appendTo(_5);
 for(var i=0;i<_6.buttons.length;i++){
 var p=_6.buttons[i];
 var _b=$("<a href=\"javascript:void(0)\"></a>").appendTo(_a);
-_b.text(p.text);
-if(p.iconCls){
-_b.attr("icon",p.iconCls);
-}
 if(p.handler){
 _b[0].onclick=p.handler;
 }
-_b.linkbutton();
+_b.linkbutton(p);
 }
 }
 if(_6.href){
@@ -107,6 +103,26 @@ $(this).window("resize",_13);
 case "move":
 return this.each(function(){
 $(this).window("move",_13);
+});
+case "maximize":
+return this.each(function(){
+$(this).window("maximize");
+});
+case "minimize":
+return this.each(function(){
+$(this).window("minimize");
+});
+case "restore":
+return this.each(function(){
+$(this).window("restore");
+});
+case "collapse":
+return this.each(function(){
+$(this).window("collapse",_13);
+});
+case "expand":
+return this.each(function(){
+$(this).window("expand",_13);
 });
 }
 }
