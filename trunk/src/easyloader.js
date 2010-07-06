@@ -30,7 +30,7 @@
 		datagrid:{
 			js:'jquery.datagrid.js',
 			css:'datagrid.css',
-			dependencies:['resizable','linkbutton','pagination']
+			dependencies:['panel','resizable','linkbutton','pagination']
 		},
 		panel: {
 			js:'jquery.panel.js',
@@ -65,7 +65,8 @@
 		},
 		tabs:{
 			js:'jquery.tabs.js',
-			css:'tabs.css'
+			css:'tabs.css',
+			dependencies:['panel']
 		},
 		splitbutton:{
 			js:'jquery.splitbutton.js',
@@ -121,8 +122,13 @@
 	var locales = {
 		'af':'easyui-lang-af.js',
 		'bg':'easyui-lang-bg.js',
-		'en':'easyui-lang-en.js',
+		'ca':'easyui-lang-ca.js',
+		'cs':'easyui-lang-cs.js',
+		'da':'easyui-lang-da.js',
 		'de':'easyui-lang-de.js',
+		'en':'easyui-lang-en.js',
+		'fr':'easyui-lang-fr.js',
+		'nl':'easyui-lang-nl.js',
 		'zh_CN':'easyui-lang-zh_CN.js',
 		'zh_TW':'easyui-lang-zh_TW.js'
 	};
