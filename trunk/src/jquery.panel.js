@@ -105,15 +105,15 @@
 			}
 			return false;
 		});
+		
 		return panel;
 	}
 	
 	function addHeader(target){
 		var opts = $.data(target, 'panel').options;
 		var panel = $.data(target, 'panel').panel;
-//		panel.find('>div.panel-header').remove();
 		removeNode(panel.find('>div.panel-header'));
-		if (opts.title){
+		if (opts.title && !opts.noheader){
 			var header = $('<div class="panel-header"><div class="panel-title">'+opts.title+'</div></div>').prependTo(panel);
 			if (opts.iconCls){
 				header.find('.panel-title').addClass('panel-with-icon');
@@ -183,9 +183,9 @@
 	 */
 	function loadData(target){
 		var state = $.data(target, 'panel');
-		if (state.options.href && !state.isLoaded){
+		if (state.options.href && (!state.isLoaded || !state.options.cache)){
 			state.isLoaded = false;
-			var pbody = state.panel.find('>.panel-body');
+			var pbody = state.panel.find('>div.panel-body');
 			pbody.html($('<div class="panel-loading"></div>').html(state.options.loadingMessage));
 			pbody.load(state.options.href, null, function(){
 				if ($.parser){
@@ -211,6 +211,10 @@
 		if (opts.maximized == true) maximizePanel(target);
 		if (opts.minimized == true) minimizePanel(target);
 		if (opts.collapsed == true) collapsePanel(target);
+		
+		if (!opts.collapsed){
+			loadData(target);
+		}
 	}
 	
 	function closePanel(target, forceClose){
@@ -276,11 +280,13 @@
 			body.slideDown('normal', function(){
 				opts.collapsed = false;
 				opts.onExpand.call(target);
+				loadData(target);
 			});
 		} else {
 			body.show();
 			opts.collapsed = false;
 			opts.onExpand.call(target);
+			loadData(target);
 		}
 	}
 	
@@ -356,6 +362,14 @@
 		$(target).panel('header').find('div.panel-title').html(title);
 	}
 	
+	$(window).unbind('.panel').bind('resize.panel', function(){
+		var layout = $('body.layout');
+		if (layout.length){
+			layout.layout('resize');
+		} else {
+			$('body>div.panel').triggerHandler('_resize');
+		}
+	});
 	
 	$.fn.panel = function(options, param){
 		if (typeof options == 'string'){
@@ -439,8 +453,10 @@
 					headerCls: t.attr('headerCls'),
 					bodyCls: t.attr('bodyCls'),
 					href: t.attr('href'),
+					cache: (t.attr('cache') ? t.attr('cache') == 'true' : undefined),
 					fit: (t.attr('fit') ? t.attr('fit') == 'true' : undefined),
 					border: (t.attr('border') ? t.attr('border') == 'true' : undefined),
+					noheader: (t.attr('noheader') ? t.attr('noheader') == 'true' : undefined),
 					collapsible: (t.attr('collapsible') ? t.attr('collapsible') == 'true' : undefined),
 					minimizable: (t.attr('minimizable') ? t.attr('minimizable') == 'true' : undefined),
 					maximizable: (t.attr('maximizable') ? t.attr('maximizable') == 'true' : undefined),
@@ -458,9 +474,16 @@
 				});
 			}
 			
+			if (opts.content){
+				$(this).html(opts.content);
+				if ($.parser){
+					$.parser.parse(this);
+				}
+			}
+			
 			addHeader(this);
 			setBorder(this);
-			loadData(this);
+//			loadData(this);
 			
 			if (opts.doSize == true){
 				state.panel.css('display','block');
@@ -470,19 +493,7 @@
 				state.panel.hide();
 			} else {
 				openPanel(this);
-//				if (opts.maximized == true) maximizePanel(this);
-//				if (opts.minimized == true) minimizePanel(this);
-//				if (opts.collapsed == true) collapsePanel(this);
 			}
-			
-			
-//			if (opts.doSize == true) setSize(this);
-////			setSize(this);
-//			
-//			if (opts.maximized == true) maximizePanel(this);
-//			if (opts.minimized == true) minimizePanel(this);
-//			if (opts.collapsed == true) collapsePanel(this);
-//			if (opts.closed == true) closePanel(this);
 		});
 	};
 	
@@ -497,9 +508,13 @@
 		headerCls: null,
 		bodyCls: null,
 		style: {},
+		href: null,
+		cache: true,
 		fit: false,
 		border: true,
 		doSize: true,	// true to set size and do layout
+		noheader: false,
+		content: null,	// the body content if specified
 		
 		collapsible: false,
 		minimizable: false,
