@@ -30,7 +30,7 @@
 				pagination:true,
 				columns:[[
 					{field:'itemid',title:'Item ID',width:80},
-					{field:'productid',title:'Product ID',width:100,
+					{field:'productid',title:'Product',width:100,
 						formatter:function(value){
 							for(var i=0; i<products.length; i++){
 								if (products[i].productid == value) return products[i].name;
@@ -80,7 +80,11 @@
 					text:'delete',
 					iconCls:'icon-remove',
 					handler:function(){
-						$('#tt').datagrid('deleteRow', lastIndex);
+						var row = $('#tt').datagrid('getSelected');
+						if (row){
+							var index = $('#tt').datagrid('getRowIndex', row);
+							$('#tt').datagrid('deleteRow', index);
+						}
 					}
 				},'-',{
 					text:'accept',
