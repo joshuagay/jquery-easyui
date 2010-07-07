@@ -241,19 +241,26 @@ _4b.addClass("combobox-item-selected");
 _4b.hide();
 }
 });
-_49.show();
-if($.fn.window){
-_49.css("z-index",$.fn.window.defaults.zIndex++);
-}
-(function(){
-if(_49.is(":visible")){
-_49.css({display:"block",left:_48.offset().left,top:_48.offset().top+_48.outerHeight()});
-setTimeout(arguments.callee,200);
-}
-})();
 if(_49.find("div.combobox-item-selected").length==0){
 _49.find("div.combobox-item:visible:first").addClass("combobox-item-selected");
 }
+if($.fn.window){
+_49.css("z-index",$.fn.window.defaults.zIndex++);
+}
+_49.show();
+(function(){
+if(_49.is(":visible")){
+var top=_48.offset().top+_48.outerHeight();
+if(top+_49.outerHeight()>$(window).height()+$(document).scrollTop()){
+top=_48.offset().top-_49.outerHeight();
+}
+if(top<$(document).scrollTop()){
+top=_48.offset().top+_48.outerHeight();
+}
+_49.css({display:"block",left:_48.offset().left,top:top});
+setTimeout(arguments.callee,200);
+}
+})();
 };
 function _22(_4c,_4d){
 if($.fn.validatebox){
