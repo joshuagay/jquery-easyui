@@ -4,12 +4,14 @@ Version 1.1.2
  * messager: When call show method in layout, the message window will be blocked. fixed.
 * Improvement
  * datagrid: Add validateRow method, remember the current editing row status when do editing action.
+ * datagrid: Add the ability to create merged cells.
  * form: Add callback functions when loading data.
  * panel,window,dialog: Add maximize,minimize,restore,collapse,expand methods.
  * panel,tabs,accordion: The lazy loading feature is supported.
  * tabs: Add getSelected,update,getTab methods.
  * accordion: Add crud methods.
  * linkbutton: Accept an id option to set the id attribute.
+ * tree: Enhance tree node operation.
  
 Version 1.1.1
 -------------
