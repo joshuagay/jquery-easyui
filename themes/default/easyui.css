@@ -264,14 +264,8 @@
 	display:none;
 	border:1px solid #A4BED4;
 	overflow:auto;
-}.datagrid{
-	font-size:12px;
-	border:1px solid #8DB2E3;
-	overflow1:hidden;
-	background:#fff;
-}
-.datagrid-noborder{
-	border-width:0px;
+}.datagrid .panel-body{
+	overflow:hidden;
 }
 .datagrid-wrap{
 	position:relative;
@@ -389,7 +383,7 @@
 }
 .datagrid-header .datagrid-cell{
 	margin:0;
-	padding:4px 2px 4px 4px;
+	padding:3px 4px;
 	white-space:nowrap;
 	word-wrap:normal;
 	overflow:hidden;
