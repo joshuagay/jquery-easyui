@@ -653,7 +653,8 @@ a.l-btn-plain{
 	background:transparent;
 	padding-right:5px;
 	border:1px solid transparent;
-	_border:1px solid #efefef;
+	_border:0px solid #efefef;
+	_padding:1px 6px 1px 1px;
 }
 
 a.l-btn-disabled{
@@ -695,6 +696,7 @@ a:hover.l-btn span.l-btn-left{
 a:hover.l-btn-plain{
 	border:1px solid #7eabcd;
 	background:url('images/button_plain_hover.png') repeat-x left bottom;
+	_padding:0px 5px 0px 0px;
 }
 a:hover.l-btn-disabled{
 	background-position:top right;
