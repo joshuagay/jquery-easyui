@@ -195,9 +195,6 @@ _2(_d);
 }
 return false;
 });
-$(window).resize(function(){
-_2(_d);
-});
 return _19;
 };
 function _1b(_1c,_1d){
@@ -453,6 +450,10 @@ return false;
 $.fn.layout=function(_28,_29){
 if(typeof _28=="string"){
 switch(_28){
+case "resize":
+return this.each(function(){
+_2(this);
+});
 case "panel":
 return $.data(this[0],"layout").panels[_29];
 case "collapse":

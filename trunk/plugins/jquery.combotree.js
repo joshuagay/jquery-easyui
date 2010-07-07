@@ -76,13 +76,20 @@ $(this).removeClass("combotree-arrow-hover");
 });
 }
 function _15(){
-_13.show();
 if($.fn.window){
 _13.css("z-index",$.fn.window.defaults.zIndex++);
 }
+_13.show();
 (function(){
 if(_13.is(":visible")){
-_13.css({display:"block",left:_12.offset().left,top:_12.offset().top+_12.outerHeight()});
+var top=_12.offset().top+_12.outerHeight();
+if(top+_13.outerHeight()>$(window).height()+$(document).scrollTop()){
+top=_12.offset().top-_13.outerHeight();
+}
+if(top<$(document).scrollTop()){
+top=_12.offset().top+_12.outerHeight();
+}
+_13.css({display:"block",left:_12.offset().left,top:top});
 setTimeout(arguments.callee,200);
 }
 })();

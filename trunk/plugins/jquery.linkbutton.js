@@ -51,6 +51,7 @@ $(_5).attr("onclick",null);
 }
 $(_5).addClass("l-btn-disabled");
 }else{
+_7.options.disabled=false;
 if(_7.href){
 $(_5).attr("href",_7.href);
 }
