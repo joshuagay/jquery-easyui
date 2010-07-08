@@ -6,12 +6,9 @@
  *
  * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  * 
- * usage: <input class="easyui-numberbox" min="1" max="100" precision="2">
- * The plugin will make the input can only input number chars
- * Options:
- * 	 min: The minimum allowed value
- *   max: The maximum allowed value
- *   precision: The maximum precision to display after the decimal separator
+ * Dependencies:
+ * 	 validatebox
+ * 
  */
 (function($){
 	function fixValue(target){
@@ -22,9 +19,9 @@
 			return;
 		}
 		
-		if (opts.min && val < opts.min){
+		if (opts.min != null && opts.min != undefined && val < opts.min){
 			$(target).val(opts.min.toFixed(opts.precision));
-		} else if (opts.max && val > opts.max){
+		} else if (opts.max != null && opts.max != undefined && val > opts.max){
 			$(target).val(opts.max.toFixed(opts.precision));
 		} else {
 			$(target).val(val);
@@ -64,28 +61,68 @@
 		});
 	}
 	
+	/**
+	 * do the validate if necessary.
+	 */
+	function validate(target){
+		if ($.fn.validatebox){
+			var opts = $.data(target, 'numberbox').options;
+			$(target).validatebox(opts);
+		}
+	}
+	
+	function setDisabled(target, disabled){
+		var opts = $.data(target, 'numberbox').options;
+		if (disabled){
+			opts.disabled = true;
+			$(target).attr('disabled', true);
+		} else {
+			opts.disabled = false;
+			$(target).removeAttr('disabled');
+		}
+	}
+	
 	$.fn.numberbox = function(options){
+		if (typeof options == 'string'){
+			switch(options){
+			case 'disable':
+				return this.each(function(){
+					setDisabled(this, true);
+				});
+			case 'enable':
+				return this.each(function(){
+					setDisabled(this, false);
+				});
+			}
+		}
+		
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'numberbox');
 			if (state){
 				$.extend(state.options, options);
 			} else {
-				$.data(this, 'numberbox', {
+				var t = $(this);
+				state = $.data(this, 'numberbox', {
 					options: $.extend({}, $.fn.numberbox.defaults, {
-						min: (parseFloat($(this).attr('min')) || undefined),
-						max: (parseFloat($(this).attr('max')) || undefined),
-						precision: (parseInt($(this).attr('precision')) || undefined)
+						disabled: (t.attr('disabled') ? true : undefined),
+						min: (t.attr('min')=='0' ? 0 : parseFloat(t.attr('min')) || undefined),
+						max: (t.attr('max')=='0' ? 0 : parseFloat(t.attr('max')) || undefined),
+						precision: (parseInt(t.attr('precision')) || undefined)
 					}, options)
 				});
+				t.removeAttr('disabled');
 				$(this).css({imeMode:"disabled"});
 			}
 			
+			setDisabled(this, state.options.disabled);
 			bindEvents(this);
+			validate(this);
 		});
 	};
 	
 	$.fn.numberbox.defaults = {
+		disabled: false,
 		min: null,
 		max: null,
 		precision: 0
