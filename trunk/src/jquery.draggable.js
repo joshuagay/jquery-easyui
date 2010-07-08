@@ -76,7 +76,7 @@
 				if (opts.proxy == 'clone'){
 					proxy = $(e.data.target).clone().insertAfter(e.data.target);
 				} else {
-					proxy = opts.proxy();
+					proxy = opts.proxy.call(e.data.target, e.data.target);
 				}
 				$.data(e.data.target, 'draggable').proxy = proxy;
 			} else {
@@ -294,7 +294,8 @@
 	};
 	
 	$.fn.draggable.defaults = {
-			proxy:null,
+			proxy:null,	// 'clone' or a function that will create the proxy object, 
+						// the function has the source parameter that indicate the source object dragged.
 			revert:false,
 			cursor:'move',
 			deltaX:null,
