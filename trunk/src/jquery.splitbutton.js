@@ -72,12 +72,13 @@
 			if (state){
 				$.extend(state.options, options);
 			} else {
+				var t = $(this);
 				$.data(this, 'splitbutton', {
 					options: $.extend({}, $.fn.splitbutton.defaults, {
-						disabled: $(this).attr('disabled') == 'true',
-						plain: ($(this).attr('plain')=='false' ? false : true),
-						menu: $(this).attr('menu'),
-						duration: (parseInt($(this).attr('duration')) || 100)
+						disabled: (t.attr('disabled') ? t.attr('disabled') == 'true' : undefined),
+						plain: (t.attr('plain') ? t.attr('plain') == 'true' : undefined),
+						menu: t.attr('menu'),
+						duration: t.attr('duration')
 					}, options)
 				});
 				$(this).removeAttr('disabled');
