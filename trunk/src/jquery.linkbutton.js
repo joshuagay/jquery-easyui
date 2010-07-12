@@ -7,102 +7,121 @@
  * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  */
 (function($){
-	$.fn.linkbutton = function(options){
+	
+	function createButton(target) {
+		var opts = $.data(target, 'linkbutton').options;
 		
-		// wrap the link button, make sure to execute once
-		function wrapButton(target) {
-			$(target).addClass('l-btn');
-			
-			if ($.trim($(target).html().replace(/&nbsp;/g,' ')) == ''){
-				$(target).html('&nbsp;').wrapInner(
-						'<span class="l-btn-left">' +
-						'<span class="l-btn-text">' +
-						'<span class="l-btn-empty"></span>' +
-						'</span>' +
-						'</span>'
-				);
-				
-				var iconCls = $(target).attr('icon');
-				if (iconCls) {
-					$('.l-btn-empty', target).addClass(iconCls);
-				}
-			} else {
-				$(target).wrapInner(
-						'<span class="l-btn-left">' +
-						'<span class="l-btn-text">' +
-						'</span>' +
-						'</span>'
-				);
-			
-				var cc = $('.l-btn-text', target);
-				var iconCls = $(target).attr('icon');
-				if (iconCls) {
-					cc.addClass(iconCls).css('padding-left', '20px');
-				}
+		$(target).empty();
+		$(target).addClass('l-btn');
+		if (opts.id){
+			$(target).attr('id', opts.id);
+		} else {
+			$(target).removeAttr('id');
+		}
+		if (opts.plain){
+			$(target).addClass('l-btn-plain');
+		} else {
+			$(target).removeClass('l-btn-plain');
+		}
+		
+		if (opts.text){
+			$(target).html(opts.text).wrapInner(
+					'<span class="l-btn-left">' +
+					'<span class="l-btn-text">' +
+					'</span>' +
+					'</span>'
+			);
+			if (opts.iconCls){
+				$(target).find('.l-btn-text').addClass(opts.iconCls).css('padding-left', '20px');
+			}
+		} else {
+			$(target).html('&nbsp;').wrapInner(
+					'<span class="l-btn-left">' +
+					'<span class="l-btn-text">' +
+					'<span class="l-btn-empty"></span>' +
+					'</span>' +
+					'</span>'
+			);
+			if (opts.iconCls){
+				$(target).find('.l-btn-empty').addClass(opts.iconCls);
 			}
 		}
 		
+		setDisabled(target, opts.disabled);
+	}
+	
+	function setDisabled(target, disabled){
+		var state = $.data(target, 'linkbutton');
+		if (disabled){
+			state.options.disabled = true;
+			var href = $(target).attr('href');
+			if (href){
+				state.href = href;
+				$(target).attr('href', 'javascript:void(0)');
+			}
+			var onclick = $(target).attr('onclick');
+			if (onclick) {
+				state.onclick = onclick;
+				$(target).attr('onclick', null);
+			}
+			$(target).addClass('l-btn-disabled');
+		} else {
+			state.options.disabled = false;
+			if (state.href) {
+				$(target).attr('href', state.href);
+			}
+			if (state.onclick) {
+				target.onclick = state.onclick;
+			}
+			$(target).removeClass('l-btn-disabled');
+		}
+	}
+	
+	$.fn.linkbutton = function(options){
+		if (typeof options == 'string'){
+			switch(options){
+			case 'options':
+				return $.data(this[0], 'linkbutton').options;
+			case 'enable':
+				return this.each(function(){
+					setDisabled(this, false);
+				});
+			case 'disable':
+				return this.each(function(){
+					setDisabled(this, true);
+				});
+			}
+		}
+		
+		options = options || {};
 		return this.each(function(){
-			var opts;
 			var state = $.data(this, 'linkbutton');
-			if (state) {
-				opts = $.extend(state.options, options || {});
-				state.options = opts;
+			if (state){
+				$.extend(state.options, options);
 			} else {
-				wrapButton(this);
-				opts = $.extend({}, $.fn.linkbutton.defaults, options || {});
-				
-//				if ($(this).hasClass('l-btn-plain')) {
-//					opts.plain = true;
-//				}
-				if ($(this).attr('plain') == 'true'){
-					opts.plain = true;
-				}
-				
-				// the button initialize state is disabled
-				if ($(this).attr('disabled')) {
-					opts.disabled = true;
-					$(this).removeAttr('disabled');
-				}
-				
-				state = {options: opts};
-				
+				var t = $(this);
+				$.data(this, 'linkbutton', {
+					options: $.extend({}, $.fn.linkbutton.defaults, {
+						id: t.attr('id'),
+						disabled: (t.attr('disabled') ? true : undefined),
+						plain: (t.attr('plain') ? t.attr('plain') == 'true' : undefined),
+						text: $.trim(t.html()),
+						iconCls: t.attr('icon')
+					}, options)
+				});
+				t.removeAttr('disabled');
 			}
 			
-			if (state.options.disabled) {
-				var href = $(this).attr('href');
-				if (href) {
-					state.href = href;
-					$(this).removeAttr('href');
-				}
-				var onclick = $(this).attr('onclick');
-				if (onclick) {
-					state.onclick = onclick;
-					$(this).attr('onclick', null);
-				}
-				$(this).addClass('l-btn-disabled');
-			} else {
-				if (state.href) {
-					$(this).attr('href', state.href);
-				}
-				if (state.onclick) {
-					this.onclick = state.onclick;
-				}
-				$(this).removeClass('l-btn-disabled');
-			}
-			
-			if (state.options.plain == true) {
-				$(this).addClass('l-btn-plain');
-			} else {
-				$(this).removeClass('l-btn-plain');
-			}
-			
-			$.data(this, 'linkbutton', state);	// save the button state
+			createButton(this);
 		});
 	};
 	
 	$.fn.linkbutton.defaults = {
+			id: null,
 			disabled: false,
-			plain: false
+			plain: false,
+			text: '',
+			iconCls: null
 	};
+	
 })(jQuery);
