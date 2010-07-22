@@ -32,6 +32,9 @@
 		});
 	}
 	
+	/**
+	 * create the combo component.
+	 */
 	function init(target){
 		$(target).hide();
 		
@@ -129,6 +132,9 @@
 		}
 	}
 	
+	/**
+	 * show the drop down panel.
+	 */
 	function showPanel(target){
 		var combo = $.data(target, 'combo').combo;
 		var panel = $.data(target, 'combo').panel;
@@ -157,6 +163,9 @@
 		})();
 	}
 	
+	/**
+	 * hide the drop down panel.
+	 */
 	function hidePanel(target){
 		var panel = $.data(target, 'combo').panel;
 		panel.panel('close');
@@ -263,6 +272,24 @@
 		setValues(target, [value]);
 	}
 	
+	/**
+	 * parse options from markup.
+	 */
+	function parseOptions(target){
+		var t = $(target);
+		return {
+			width: (parseInt(target.style.width) || undefined),
+			panelWidth: (parseInt(t.attr('panelWidth')) || undefined),
+			panelHeight: (t.attr('panelHeight')=='auto' ? 'auto' : parseInt(t.attr('panelHeight')) || undefined),
+			separator: (t.attr('separator') || undefined),
+			multiple: (t.attr('multiple') ? (t.attr('multiple') == 'true' || t.attr('multiple') == true) : undefined),
+			editable: (t.attr('editable') ? t.attr('editable') == 'true' : undefined),
+			disabled: (t.attr('disabled') ? true : undefined),
+			required: (t.attr('required') ? (t.attr('required') == 'true' || t.attr('required') == true) : undefined),
+			missingMessage: (t.attr('missingMessage') || undefined)
+		};
+	}
+	
 	$.fn.combo = function(options, param){
 		if (typeof options == 'string'){
 			return $.fn.combo.methods[options](this, param);
@@ -275,21 +302,12 @@
 				$.extend(state.options, options);
 			} else {
 				var r = init(this);
-				var t = $(this);
 				state = $.data(this, 'combo', {
-					options: $.extend({}, $.fn.combo.defaults, {
-						width: (parseInt(this.style.width) || undefined),
-						separator: (t.attr('separator') || undefined),
-						multiple: (t.attr('multiple') ? (t.attr('multiple') == 'true' || t.attr('multiple') == true) : undefined),
-						editable: (t.attr('editable') ? t.attr('editable') == 'true' : undefined),
-						disabled: (t.attr('disabled') ? true : undefined),
-						required: (t.attr('required') ? (t.attr('required') == 'true' || t.attr('required') == true) : undefined),
-						missingMessage: (t.attr('missingMessage') || undefined)
-					}, options),
+					options: $.extend({}, $.fn.combo.defaults, parseOptions(this), options),
 					combo: r.combo,
 					panel: r.panel
 				});
-				t.removeAttr('disabled');
+				$(this).removeAttr('disabled');
 			}
 			$('input.combo-text', state.combo).attr('readonly', !state.options.editable);
 			setDisabled(this, state.options.disabled);
@@ -300,6 +318,9 @@
 	};
 	
 	$.fn.combo.methods = {
+		parseOptions: function(jq){
+			return parseOptions(jq[0]);
+		},
 		options: function(jq){
 			return $.data(jq[0], 'combo').options;
 		},
