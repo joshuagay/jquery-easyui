@@ -377,7 +377,7 @@
 		panelWidth: null,
 		panelHeight: 200,
 		multiple: false,
-		separator: ';',
+		separator: ',',
 		editable: true,
 		disabled: false,
 		required: false,
