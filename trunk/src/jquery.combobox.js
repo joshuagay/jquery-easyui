@@ -7,202 +7,160 @@
  * Copyright 2010 stworthy [ stworthy@gmail.com ] 
  * 
  * Dependencies:
- *   validatebox
+ *   combo
  * 
  */
 (function($){
-	
-	function setSize(target, width){
-		var opts = $.data(target, 'combobox').options;
-		var combo = $.data(target, 'combobox').combobox;
-		var content = $.data(target, 'combobox').content;
-		
-		if (width) opts.width = width;
-		
-		if (isNaN(opts.width)){
-			opts.width = combo.find('input.combobox-text').outerWidth();
-		}
-		var arrowWidth = combo.find('.combobox-arrow').outerWidth();
-		var width = opts.width - arrowWidth - (combo.outerWidth() - combo.width());
-		combo.find('input.combobox-text').width(width);
-		if (opts.listWidth){
-			content.width(opts.listWidth);
+	/**
+	 * select previous item
+	 */
+	function selectPrev(target){
+		var panel = $(target).combo('panel');
+		var values = $(target).combo('getValues');
+		var item = panel.find('div.combobox-item[value=' + values.pop() + ']');
+		if (item.length){
+			var prev = item.prev(':visible');
+			if (prev.length){
+				item = prev;
+			}
 		} else {
-			content.width($.boxModel==true ? combo.outerWidth()-(content.outerWidth()-content.width()) : combo.outerWidth());
+			item = panel.find('div.combobox-item:visible:last');
 		}
-		if (opts.listHeight){
-			content.height(opts.listHeight);
-		}
-	}
-	
-	function init(target){
-		$(target).hide();
+		var value = item.attr('value');
+		setValues(target, [value]);
 		
-		var span = $('<span class="combobox"></span>').insertAfter(target);
-		$('<input type="hidden" class="combobox-value"></input>').appendTo(span);
-		var input = $('<input type="text" class="combobox-text"></input>').appendTo(span);
-		$('<span><span class="combobox-arrow"></span></span>').appendTo(span);
-		var content = $('<div class="combobox-content"></div>').appendTo('body');
-		
-		var name = $(target).attr('name');
-		if (name){
-			span.find('input.combobox-value').attr('name', name);
-			$(target).removeAttr('name').attr('comboboxName', name);
-		}
-		input.attr('autocomplete', 'off')
-		
-		
-		return {
-			combobox: span,
-			content: content
-		};
-	}
-	
-	function destroy(target){
-		$.data(target, 'combobox').content.remove();
-		$.data(target, 'combobox').combobox.remove();
-		$(target).remove();
-	}
-	
-	function bindEvents(target){
-		var opts = $.data(target, 'combobox').options;
-		var combo = $.data(target, 'combobox').combobox;
-		var content = $.data(target, 'combobox').content;
-		var input = combo.find('.combobox-text');
-		var arrow = combo.find('.combobox-arrow');
-		
-		$(document).unbind('.combobox');
-		content.unbind('.combobox');
-		input.unbind('.combobox');
-		arrow.unbind('.combobox');
-		
-		if (!opts.disabled){
-			$(document).bind('mousedown.combobox', function(){
-				$('body>div.combobox-content').hide();
-			});
-			content.bind('mousedown.combobox', function(){
-				return false;
-			});
-			input.bind('focus.combobox',function(){
-				show(target, '');
-			}).bind('keyup.combobox', function(e){
-				var selected = content.find('div.combobox-item-selected');
-				switch(e.keyCode){
-				case 38:	// up
-					var prev = selected.prev();
-					if (prev.length){
-						selected.removeClass('combobox-item-selected');
-						prev.addClass('combobox-item-selected');
-					}
-					break;
-				case 40:	// down
-					var next = selected.next();
-					if (next.length){
-						selected.removeClass('combobox-item-selected');
-						next.addClass('combobox-item-selected');
-					}
-					break;
-				case 13:	// enter
-					select(target, selected.attr('value'));
-					content.hide();
-					break;
-				case 27:	// esc
-					content.hide();
-					break;
-				default:
-					show(target, $(this).val());
-				}
-				return false;
-			});
-			arrow.bind('click.combobox', function(){
-				input.focus();
-			}).bind('mouseenter.combobox', function(){
-				$(this).addClass('combobox-arrow-hover');
-			}).bind('mouseleave.combobox', function(){
-				$(this).removeClass('combobox-arrow-hover');
-			});
+		if (item.position().top <= 0){
+			var h = panel.scrollTop() + item.position().top;
+			panel.scrollTop(h);
+		} else if (item.position().top + item.outerHeight() > panel.height()){
+			var h = panel.scrollTop() + item.position().top + item.outerHeight() - panel.height();
+			panel.scrollTop(h);
 		}
 	}
 	
 	/**
-	 * select item by value
+	 * select next item
+	 */
+	function selectNext(target){
+		var panel = $(target).combo('panel');
+		var values = $(target).combo('getValues');
+		var item = panel.find('div.combobox-item[value=' + values.pop() + ']');
+		if (item.length){
+			var next = item.next(':visible');
+			if (next.length){
+				item = next;
+			}
+		} else {
+			item = panel.find('div.combobox-item:visible:first');
+		}
+		var value = item.attr('value');
+		setValues(target, [value]);
+		
+		if (item.position().top <= 0){
+			var h = panel.scrollTop() + item.position().top;
+			panel.scrollTop(h);
+		} else if (item.position().top + item.outerHeight() > panel.height()){
+			var h = panel.scrollTop() + item.position().top + item.outerHeight() - panel.height();
+			panel.scrollTop(h);
+		}
+	}
+	
+	function selectCurr(target){
+		var panel = $(target).combo('panel');
+		var item = panel.find('div.combobox-item-selected');
+		setValues(target, [item.attr('value')]);
+		$(target).combo('hidePanel');
+	}
+	
+	/**
+	 * select the specified value
 	 */
 	function select(target, value){
-		var data = $.data(target, 'combobox').data;
 		var opts = $.data(target, 'combobox').options;
-		var combo = $.data(target, 'combobox').combobox;
-		var content = $.data(target, 'combobox').content;
-		content.find('div.combobox-item-selected').removeClass('combobox-item-selected');
+		var data = $.data(target, 'combobox').data;
+		
+		if (opts.multiple){
+			var values = $(target).combo('getValues');
+			for(var i=0; i<values.length; i++){
+				if (values[i] == value) return;
+			}
+			values.push(value);
+			setValues(target, values);
+		} else {
+			setValues(target, [value]);
+			$(target).combo('hidePanel');
+		}
+		
 		for(var i=0; i<data.length; i++){
-			var rec = data[i];
-			if (rec[opts.valueField] == value){
-				var oldValue = combo.find('input.combobox-value').val();
-				combo.find('input.combobox-value').val(rec[opts.valueField]);
-				combo.find('input.combobox-text').val(rec[opts.textField]);
-				content.find('div.combobox-item[value='+value+']').addClass('combobox-item-selected');
-				opts.onSelect.call(target, rec);
-				if (oldValue != value){
-					opts.onChange.call(target, value, oldValue);
-				}
-				validate(target, true);
+			if (data[i][opts.valueField] == value){
+				opts.onSelect.call(target, data[i]);
 				return;
 			}
 		}
 	}
 	
 	/**
-	 * clear the value/text
+	 * unselect the specified value
 	 */
-	function clear(target){
-		var combo = $.data(target, 'combobox').combobox;
-		combo.find('input.combobox-value').val('');
-		combo.find('input.combobox-text').val('');
+	function unselect(target, value){
+		var opts = $.data(target, 'combobox').options;
+		var data = $.data(target, 'combobox').data;
+		var values = $(target).combo('getValues');
+		for(var i=0; i<values.length; i++){
+			if (values[i] == value){
+				values.splice(i, 1);
+				setValues(target, values);
+				break;
+			}
+		}
+		for(var i=0; i<data.length; i++){
+			if (data[i][opts.valueField] == value){
+				opts.onUnselect.call(target, data[i]);
+				return;
+			}
+		}
 	}
 	
 	/**
-	 * set item value
+	 * set values
 	 */
-	function setValue(target, param){
-		var combo = $.data(target, 'combobox').combobox;
+	function setValues(target, values, remainText){
 		var opts = $.data(target, 'combobox').options;
 		var data = $.data(target, 'combobox').data;
+		var panel = $(target).combo('panel');
 		
-		var value,text;
-		var oldValue = combo.find('input.combobox-value').val();
-		if (typeof param == 'object'){
-			value = param[opts.valueField];
-			text = param[opts.textField];
-		} else {
-			value = param;
-			for(var i=0; i<data.length; i++){
-				if (data[i][opts.valueField] == value){
-					text = data[i][opts.textField];
+		panel.find('div.combobox-item-selected').removeClass('combobox-item-selected');
+		var vv = [], ss = [];
+		for(var i=0; i<values.length; i++){
+			var v = values[i];
+			var s = v;
+			for(var j=0; j<data.length; j++){
+				if (data[j][opts.valueField] == v){
+					s = data[j][opts.textField];
 					break;
 				}
 			}
+			vv.push(v);
+			ss.push(s);
+			panel.find('div.combobox-item[value=' + v + ']').addClass('combobox-item-selected');
 		}
-		if (text == undefined){
-			text = value;
-		}
 		
-		combo.find('input.combobox-value').val(value);
-		combo.find('input.combobox-text').val(text);
-		
-		validate(target, true);
-		
-		if (oldValue != value){
-			opts.onChange.call(target, value, oldValue);
+		$(target).combo('setValues', vv);
+		if (!remainText){
+			$(target).combo('setText', ss.join(opts.separator));
 		}
 	}
 	
-	function getValue(target){
-		var combo = $.data(target, 'combobox').combobox;
-		return combo.find('input.combobox-value').val();
-	}
-	
-	function getText(target){
-		var combo = $.data(target, 'combobox').combobox;
-		return combo.find('input.combobox-text').val();
+	/**
+	 * set value
+	 */
+	function setValue(target, value){
+		var opts = $.data(target, 'combobox').options;
+		var v = value;
+		if (typeof value == 'object'){
+			v = value[opts.valueField];
+		}
+		setValues(target, [v]);
 	}
 	
 	function transformData(target){
@@ -223,33 +181,46 @@
 	 */
 	function loadData(target, data){
 		var opts = $.data(target, 'combobox').options;
+		var panel = $(target).combo('panel');
 		
 		$.data(target, 'combobox').data = data;
-		var opts = $.data(target, 'combobox').options;
-		var content = $.data(target, 'combobox').content;
 		
-		var selected = null;
-		content.empty();	// remove old data
+		var selected = [];
+		panel.empty();	// clear old data
 		for(var i=0; i<data.length; i++){
-			var item = $('<div class="combobox-item"></div>').appendTo(content);
+			var item = $('<div class="combobox-item"></div>').appendTo(panel);
 			item.attr('value', data[i][opts.valueField]);
 			item.html(data[i][opts.textField]);
 			if (data[i]['selected']){
-				selected = data[i];
+				selected.push(data[i][opts.valueField]);
 			}
 		}
-		if (selected){
-			setValue(target, selected);
+		if (opts.multiple){
+			setValues(target, selected);
+		} else {
+			if (selected.length){
+				setValues(target, [selected[0]]);
+			} else {
+				setValues(target, []);
+			}
 		}
 		
 		opts.onLoadSuccess.call(target, data);
 		
-		$('.combobox-item', content).hover(
+		$('.combobox-item', panel).hover(
 			function(){$(this).addClass('combobox-item-hover');},
 			function(){$(this).removeClass('combobox-item-hover');}
 		).click(function(){
-			content.hide();
-			select(target, $(this).attr('value'));
+			var item = $(this);
+			if (opts.multiple){
+				if (item.hasClass('combobox-item-selected')){
+					unselect(target, item.attr('value'));
+				} else {
+					select(target, item.attr('value'));
+				}
+			} else {
+				select(target, item.attr('value'));
+			}
 		});
 	}
 	
@@ -275,131 +246,48 @@
 		})
 	}
 	
-	/**
-	 * show list items with special filter.
-	 */
-	function show(target, filter){
-		filter = filter || '';
-		var combobox = $.data(target, 'combobox').combobox;
-		var content = $.data(target, 'combobox').content;
-		
-		var currText = combobox.find('input.combobox-text').val();
-		content.find('div.combobox-item-selected').removeClass('combobox-item-selected');
-		content.find('div.combobox-item').each(function(){
+	function filter(target, query){
+		$(target).combo('showPanel');
+		var data = $.data(target, 'combobox').data;
+		var panel = $(target).combo('panel');
+		setValues(target, [], true);
+		panel.find('div.combobox-item').each(function(){
 			var item = $(this);
-			if (item.text().indexOf(filter) == 0){
+			if (item.text().indexOf(query) == 0){
 				item.show();
-				if (item.text() == currText){
+				if (item.text() == query){
 					item.addClass('combobox-item-selected');
 				}
 			} else {
 				item.hide();
 			}
 		});
-		
-		// if no item matched select the first visible item
-		if (content.find('div.combobox-item-selected').length == 0){
-			content.find('div.combobox-item:visible:first').addClass('combobox-item-selected');
-		}
-		
-		if ($.fn.window){
-			content.css('z-index', $.fn.window.defaults.zIndex++);
-		}
-		
-		content.show();
-		
-		(function(){
-			if (content.is(':visible')){
-				var top = combobox.offset().top + combobox.outerHeight(); 
-				if (top + content.outerHeight() > $(window).height() + $(document).scrollTop()){
-					top = combobox.offset().top - content.outerHeight();
-				}
-				if (top < $(document).scrollTop()){
-					top = combobox.offset().top + combobox.outerHeight(); 
-				}
-				content.css({
-					display:'block',
-					left:combobox.offset().left,
-					top:top
-				});
-				setTimeout(arguments.callee, 200);
-			}
-		})();
 	}
 	
-	function validate(target, doit){
-		if ($.fn.validatebox){
-			var opts = $.data(target, 'combobox').options;
-			var input = $.data(target, 'combobox').combobox.find('input.combobox-text');
-			input.validatebox(opts);
-			if (doit){
-				input.validatebox('validate');
-				input.trigger('mouseleave');
-			}
-		}
-	}
-	
-	function setDisabled(target, disabled){
+	function create(target){
 		var opts = $.data(target, 'combobox').options;
-		var combo = $.data(target, 'combobox').combobox;
-		if (disabled){
-			opts.disabled = true;
-			$(target).attr('disabled', true);
-			combo.find('.combobox-value').attr('disabled', true);
-			combo.find('.combobox-text').attr('disabled', true);
-		} else {
-			opts.disabled = false;
-			$(target).removeAttr('disabled');
-			combo.find('.combobox-value').removeAttr('disabled');
-			combo.find('.combobox-text').removeAttr('disabled');
-		}
+		$(target).combo(opts);
+	}
+	
+	/**
+	 * parse options from markup.
+	 */
+	function parseOptions(target){
+		var t = $(target);
+		return $.extend({}, t.combo('parseOptions'), {
+			valueField: t.attr('valueField'),
+			textField: t.attr('textField'),
+			url: t.attr('url')
+		});
 	}
 	
 	$.fn.combobox = function(options, param){
 		if (typeof options == 'string'){
-			switch(options){
-				case 'destroy':
-					return this.each(function(){
-						destroy(this);
-					});
-				case 'resize':
-					return this.each(function(){
-						setSize(this, param);
-					});
-				case 'select':
-					return this.each(function(){
-						select(this, param);
-					});
-				case 'clear':
-					return this.each(function(){
-						clear(this);
-					});
-				case 'setValue':
-					return this.each(function(){
-						setValue(this, param);
-					});
-				case 'getValue':
-					return getValue(this[0]);
-				case 'getText':
-					return getText(this[0]);
-				case 'loadData':
-					return this.each(function(){
-						loadData(this, param);
-					});
-				case 'reload':
-					return this.each(function(){
-						request(this, param);
-					});
-				case 'disable':
-					return this.each(function(){
-						setDisabled(this, true);
-						bindEvents(this);
-					});
-				case 'enable':
-					return this.each(function(){
-						setDisabled(this, false);
-						bindEvents(this);
-					});
+			var method = $.fn.combobox.methods[options];
+			if (method){
+				return method(this, param);
+			} else {
+				return this.combo(options, param);
 			}
 		}
 		
@@ -408,57 +296,78 @@
 			var state = $.data(this, 'combobox');
 			if (state){
 				$.extend(state.options, options);
+				create(this);
 			} else {
-				var r = init(this);
-				var t = $(this);
 				state = $.data(this, 'combobox', {
-					options: $.extend({}, $.fn.combobox.defaults, {
-						width:(parseInt(t.css('width')) || undefined),
-						listWidth: t.attr('listWidth'),
-						listHeight: t.attr('listHeight'),
-						valueField: t.attr('valueField'),
-						textField: t.attr('textField'),
-						editable: (t.attr('editable') ? t.attr('editable') == 'true' : undefined),
-						disabled: (t.attr('disabled') ? true : undefined),
-						url: t.attr('url'),
-						required: (t.attr('required') ? (t.attr('required') == 'true' || t.attr('required') == true) : undefined),
-						missingMessage: (t.attr('missingMessage') || undefined)
-					}, options),
-					combobox: r.combobox,
-					content: r.content
+					options: $.extend({}, $.fn.combo.defaults, $.fn.combobox.defaults, parseOptions(this), options)
 				});
-				t.removeAttr('disabled');
+				create(this);
 				loadData(this, transformData(this));
 			}
-			$('input.combobox-text', state.combobox).attr('readonly', !state.options.editable);
 			if (state.options.data){
 				loadData(this, state.options.data);
 			}
 			request(this);
-			setDisabled(this, state.options.disabled);
-			bindEvents(this);
-			setSize(this);
-			validate(this);
 		});
 	};
 	
+	
+	$.fn.combobox.methods = {
+		parseOptions: function(jq){
+			return parseOptions(jq[0]);
+		},
+		options: function(jq){
+			return $.data(jq[0], 'combobox').options;
+		},
+		getData: function(jq){
+			return $.data(jq[0], 'combobox').data;
+		},
+		setValues: function(jq, values){
+			return jq.each(function(){
+				setValues(this, values);
+			});
+		},
+		setValue: function(jq, value){
+			return jq.each(function(){
+				setValue(this, value);
+			});
+		},
+		loadData: function(jq, data){
+			return jq.each(function(){
+				loadData(this, data);
+			});
+		},
+		reload: function(jq, url){
+			return jq.each(function(){
+				request(this, url);
+			});
+		},
+		select: function(jq, value){
+			return jq.each(function(){
+				select(this, value);
+			});
+		},
+		unselect: function(jq, value){
+			return jq.each(function(){
+				unselect(this, value);
+			});
+		}
+	};
+	
 	$.fn.combobox.defaults = {
-		width: 'auto',
-		listWidth: null,
-		listHeight: null,
 		valueField: 'value',
 		textField: 'text',
-		editable: true,
-		disabled: false,
 		url: null,
 		data: null,
 		
-		required: false,
-		missingMessage: 'This field is required.',
+		selectPrev: function(){selectPrev(this);},
+		selectNext: function(){selectNext(this);},
+		selectCurr: function(){selectCurr(this);},
+		filter: function(query){filter(this, query);},
 		
 		onLoadSuccess: function(){},
 		onLoadError: function(){},
 		onSelect: function(record){},
-		onChange: function(newValue, oldValue){}
+		onUnselect: function(record){}
 	};
 })(jQuery);
