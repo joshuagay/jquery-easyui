@@ -26,15 +26,16 @@
 		if (state){
 			opts = $.extend(state.opts, options);
 		} else {
+			var t = $(target);
 			opts = $.extend({}, $.fn.window.defaults, {
-				title: $(target).attr('title'),
-				collapsible: ($(target).attr('collapsible') == 'false' ? false : true),
-				minimizable: ($(target).attr('minimizable') == 'false' ? false : true),
-				maximizable: ($(target).attr('maximizable') == 'false' ? false : true),
-				closable: ($(target).attr('closable') == 'false' ? false : true),
-				closed: $(target).attr('closed') == 'true',
-				shadow: ($(target).attr('shadow') == 'false' ? false : true),
-				modal: $(target).attr('modal') == 'true'
+				title: t.attr('title'),
+				collapsible: (t.attr('collapsible') ? t.attr('collapsible') == 'true' : undefined),
+				minimizable: (t.attr('minimizable') ? t.attr('minimizable') == 'true' : undefined),
+				maximizable: (t.attr('maximizable') ? t.attr('maximizable') == 'true' : undefined),
+				closable: (t.attr('closable') ? t.attr('closable') == 'true' : undefined),
+				closed: (t.attr('closed') ? t.attr('closed') == 'true' : undefined),
+				shadow: (t.attr('shadow') ? t.attr('shadow') == 'true' : undefined),
+				modal: (t.attr('modal') ? t.attr('modal') == 'true' : undefined)
 			}, options);
 			$(target).attr('title', '');
 			state = $.data(target, 'window', {});
@@ -65,16 +66,24 @@
 			},
 			onOpen: function(){
 				var state = $.data(target, 'window');
+				if (state.mask){
+					state.mask.css({
+						display:'block',
+						zIndex: $.fn.window.defaults.zIndex++
+					});
+				}
 				if (state.shadow){
 					state.shadow.css({
 						display:'block',
+						zIndex: $.fn.window.defaults.zIndex++,
 						left: state.options.left,
 						top: state.options.top,
 						width: state.window.outerWidth(),
 						height: state.window.outerHeight()
 					});
 				}
-				if (state.mask) state.mask.show();
+				state.window.css('z-index', $.fn.window.defaults.zIndex++);
+//				if (state.mask) state.mask.show();
 				
 				if (opts.onOpen) opts.onOpen.call(target);
 			},
@@ -133,7 +142,7 @@
 		if (opts.modal == true){
 			state.mask = $('<div class="window-mask"></div>').appendTo('body');
 			state.mask.css({
-				zIndex: $.fn.window.defaults.zIndex++,
+//				zIndex: $.fn.window.defaults.zIndex++,
 				width: getPageArea().width,
 				height: getPageArea().height,
 				display: 'none'
@@ -145,12 +154,12 @@
 		if (opts.shadow == true){
 			state.shadow = $('<div class="window-shadow"></div>').insertAfter(state.window);
 			state.shadow.css({
-				zIndex: $.fn.window.defaults.zIndex++,
+//				zIndex: $.fn.window.defaults.zIndex++,
 				display: 'none'
 			});
 		}
 		
-		state.window.css('z-index', $.fn.window.defaults.zIndex++);
+//		state.window.css('z-index', $.fn.window.defaults.zIndex++);
 		
 		
 		// if require center the window
@@ -182,14 +191,16 @@
 		var state = $.data(target, 'window');
 		
 		state.window.draggable({
-			handle: '>div.panel-header',
+			handle: '>div.panel-header>div.panel-title',
 			disabled: state.options.draggable == false,
 			onStartDrag: function(e){
 				if (state.mask) state.mask.css('z-index', $.fn.window.defaults.zIndex++);
 				if (state.shadow) state.shadow.css('z-index', $.fn.window.defaults.zIndex++);
 				state.window.css('z-index', $.fn.window.defaults.zIndex++);
 				
-				state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
+				if (!state.proxy){
+					state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
+				}
 				state.proxy.css({
 					display:'none',
 					zIndex: $.fn.window.defaults.zIndex++,
@@ -199,7 +210,7 @@
 					height: ($.boxModel==true ? (state.window.outerHeight()-(state.proxy.outerHeight()-state.proxy.height())) : state.window.outerHeight())
 				});
 				setTimeout(function(){
-					state.proxy.show();
+					if (state.proxy) state.proxy.show();
 				}, 500);
 			},
 			onDrag: function(e){
@@ -215,13 +226,16 @@
 				state.options.top = e.data.top;
 				$(target).window('move');
 				state.proxy.remove();
+				state.proxy = null;
 			}
 		});
 		
 		state.window.resizable({
 			disabled: state.options.resizable == false,
 			onStartResize:function(e){
-				state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
+				if (!state.proxy){
+					state.proxy = $('<div class="window-proxy"></div>').insertAfter(state.window);
+				}
 				state.proxy.css({
 					zIndex: $.fn.window.defaults.zIndex++,
 					left: e.data.left,
@@ -246,6 +260,7 @@
 				state.options.height = e.data.height;
 				setSize(target);
 				state.proxy.remove();
+				state.proxy = null;
 			}
 		});
 	}
@@ -285,6 +300,10 @@
 				return $.data(this[0], 'window').options;
 			case 'window':
 				return $.data(this[0], 'window').window;
+			case 'setTitle':
+				return this.each(function(){
+					$(this).panel('setTitle', param);
+				});
 			case 'open':
 				return this.each(function(){
 					$(this).panel('open', param);
@@ -308,6 +327,26 @@
 			case 'move':
 				return this.each(function(){
 					$(this).panel('move', param);
+				});
+			case 'maximize':
+				return this.each(function(){
+					$(this).panel('maximize');
+				});
+			case 'minimize':
+				return this.each(function(){
+					$(this).panel('minimize');
+				});
+			case 'restore':
+				return this.each(function(){
+					$(this).panel('restore');
+				});
+			case 'collapse':
+				return this.each(function(){
+					$(this).panel('collapse', param);
+				});
+			case 'expand':
+				return this.each(function(){
+					$(this).panel('expand', param);
 				});
 			}
 		}
