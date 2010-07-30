@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -155,74 +155,74 @@ return _16;
 $(document).unbind(".draggable");
 return false;
 };
-$.fn.draggable=function(_18){
+$.fn.draggable=function(_18,_19){
 if(typeof _18=="string"){
-switch(_18){
-case "options":
-return $.data(this[0],"draggable").options;
-case "proxy":
-return $.data(this[0],"draggable").proxy;
-case "enable":
-return this.each(function(){
-$(this).draggable({disabled:false});
-});
-case "disable":
-return this.each(function(){
-$(this).draggable({disabled:true});
-});
-}
+return $.fn.draggable.methods[_18](this,_19);
 }
 return this.each(function(){
-var _19;
-var _1a=$.data(this,"draggable");
-if(_1a){
-_1a.handle.unbind(".draggable");
-_19=$.extend(_1a.options,_18);
+var _1a;
+var _1b=$.data(this,"draggable");
+if(_1b){
+_1b.handle.unbind(".draggable");
+_1a=$.extend(_1b.options,_18);
 }else{
-_19=$.extend({},$.fn.draggable.defaults,_18||{});
+_1a=$.extend({},$.fn.draggable.defaults,_18||{});
 }
-if(_19.disabled==true){
+if(_1a.disabled==true){
 $(this).css("cursor","default");
 return;
 }
-var _1b=null;
-if(typeof _19.handle=="undefined"||_19.handle==null){
-_1b=$(this);
+var _1c=null;
+if(typeof _1a.handle=="undefined"||_1a.handle==null){
+_1c=$(this);
 }else{
-_1b=(typeof _19.handle=="string"?$(_19.handle,this):_1b);
+_1c=(typeof _1a.handle=="string"?$(_1a.handle,this):_1c);
 }
-$.data(this,"draggable",{options:_19,handle:_1b});
-_1b.bind("mousedown.draggable",{target:this},_1c);
-_1b.bind("mousemove.draggable",{target:this},_1d);
-function _1c(e){
-if(_1e(e)==false){
-return;
-}
-var _1f=$(e.data.target).position();
-var _20={startPosition:$(e.data.target).css("position"),startLeft:_1f.left,startTop:_1f.top,left:_1f.left,top:_1f.top,startX:e.pageX,startY:e.pageY,target:e.data.target,parent:$(e.data.target).parent()[0]};
-$(document).bind("mousedown.draggable",_20,_9);
-$(document).bind("mousemove.draggable",_20,_e);
-$(document).bind("mouseup.draggable",_20,_11);
-};
+$.data(this,"draggable",{options:_1a,handle:_1c});
+_1c.bind("mousedown.draggable",{target:this},_1d);
+_1c.bind("mousemove.draggable",{target:this},_1e);
 function _1d(e){
-if(_1e(e)){
-$(this).css("cursor",_19.cursor);
-}else{
-$(this).css("cursor","default");
+if(_1f(e)==false){
+return;
 }
+var _20=$(e.data.target).position();
+var _21={startPosition:$(e.data.target).css("position"),startLeft:_20.left,startTop:_20.top,left:_20.left,top:_20.top,startX:e.pageX,startY:e.pageY,target:e.data.target,parent:$(e.data.target).parent()[0]};
+$(document).bind("mousedown.draggable",_21,_9);
+$(document).bind("mousemove.draggable",_21,_e);
+$(document).bind("mouseup.draggable",_21,_11);
 };
 function _1e(e){
-var _21=$(_1b).offset();
-var _22=$(_1b).outerWidth();
-var _23=$(_1b).outerHeight();
-var t=e.pageY-_21.top;
-var r=_21.left+_22-e.pageX;
-var b=_21.top+_23-e.pageY;
-var l=e.pageX-_21.left;
-return Math.min(t,r,b,l)>_19.edge;
+if(_1f(e)){
+$(this).css("cursor",_1a.cursor);
+}else{
+$(this).css("cursor","default");
+}
+};
+function _1f(e){
+var _22=$(_1c).offset();
+var _23=$(_1c).outerWidth();
+var _24=$(_1c).outerHeight();
+var t=e.pageY-_22.top;
+var r=_22.left+_23-e.pageX;
+var b=_22.top+_24-e.pageY;
+var l=e.pageX-_22.left;
+return Math.min(t,r,b,l)>_1a.edge;
 };
 });
 };
+$.fn.draggable.methods={options:function(jq){
+return $.data(jq[0],"draggable").options;
+},proxy:function(jq){
+return $.data(jq[0],"draggable").proxy;
+},enable:function(jq){
+return jq.each(function(){
+$(this).draggable({disabled:false});
+});
+},disable:function(jq){
+return jq.each(function(){
+$(this).draggable({disabled:true});
+});
+}};
 $.fn.draggable.defaults={proxy:null,revert:false,cursor:"move",deltaX:null,deltaY:null,handle:null,disabled:false,edge:0,axis:null,onStartDrag:function(e){
 },onDrag:function(e){
 },onStopDrag:function(e){

@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -61,33 +61,36 @@ _5.onclick=_7.onclick;
 $(_5).removeClass("l-btn-disabled");
 }
 };
-$.fn.linkbutton=function(_a){
+$.fn.linkbutton=function(_a,_b){
 if(typeof _a=="string"){
-switch(_a){
-case "options":
-return $.data(this[0],"linkbutton").options;
-case "enable":
-return this.each(function(){
-_4(this,false);
-});
-case "disable":
-return this.each(function(){
-_4(this,true);
-});
-}
+return $.fn.linkbutton.methods[_a](this,_b);
 }
 _a=_a||{};
 return this.each(function(){
-var _b=$.data(this,"linkbutton");
-if(_b){
-$.extend(_b.options,_a);
+var _c=$.data(this,"linkbutton");
+if(_c){
+$.extend(_c.options,_a);
 }else{
-var t=$(this);
-$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,{id:t.attr("id"),disabled:(t.attr("disabled")?true:undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html()),iconCls:t.attr("icon")},_a)});
-t.removeAttr("disabled");
+$.data(this,"linkbutton",{options:$.extend({},$.fn.linkbutton.defaults,$.fn.linkbutton.parseOptions(this),_a)});
+$(this).removeAttr("disabled");
 }
 _1(this);
 });
+};
+$.fn.linkbutton.methods={options:function(jq){
+return $.data(jq[0],"linkbutton").options;
+},enable:function(jq){
+return jq.each(function(){
+_4(this,false);
+});
+},disable:function(jq){
+return jq.each(function(){
+_4(this,true);
+});
+}};
+$.fn.linkbutton.parseOptions=function(_d){
+var t=$(_d);
+return {id:t.attr("id"),disabled:(t.attr("disabled")?true:undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined),text:$.trim(t.html()),iconCls:(t.attr("icon")||t.attr("iconCls"))};
 };
 $.fn.linkbutton.defaults={id:null,disabled:false,plain:false,text:"",iconCls:null};
 })(jQuery);

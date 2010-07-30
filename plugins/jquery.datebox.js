@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -16,7 +16,7 @@ var _6=$.data(_2,"datebox").options;
 var v=_6.formatter(_5);
 $(_2).val(v);
 _4.hide();
-_1b(_2,true);
+_1a(_2,true);
 _6.onSelect.call(_2,_5);
 }});
 _4.hide().mousedown(function(){
@@ -25,127 +25,132 @@ return false;
 return _4;
 };
 function _7(_8){
-var _9=$(_8);
 $(document).unbind(".datebox");
-_9.unbind(".datebox");
 $.data(_8,"datebox").calendar.remove();
-_9.remove();
+$(_8).validatebox("destroy");
 };
-function _a(_b){
-var _c=$.data(_b,"datebox").options;
-var _d=$(_b);
+function _9(_a){
+var _b=$.data(_a,"datebox").options;
+var _c=$(_a);
 $(document).unbind(".datebox");
-_d.unbind(".datebox");
-if(!_c.disabled){
+_c.unbind(".datebox");
+if(!_b.disabled){
 $(document).bind("mousedown.datebox",function(){
 $("body>div.datebox-calendar").hide();
 });
-_d.bind("focus.datebox",function(){
-_e(_b);
+_c.bind("focus.datebox",function(){
+_d(_a);
 }).bind("click.datebox",function(){
-_e(_b);
+_d(_a);
 });
 }
 };
-function _f(_10){
-var _11=$.data(_10,"datebox").options;
-var _12=$.data(_10,"datebox").calendar;
-var _13=_12.find("div.datebox-button");
-_13.empty();
-$("<a href=\"javascript:void(0)\" class=\"datebox-current\"></a>").html(_11.currentText).appendTo(_13);
-$("<a href=\"javascript:void(0)\" class=\"datebox-close\"></a>").html(_11.closeText).appendTo(_13);
-_13.find(".datebox-current,.datebox-close").hover(function(){
+function _e(_f){
+var _10=$.data(_f,"datebox").options;
+var _11=$.data(_f,"datebox").calendar;
+var _12=_11.find("div.datebox-button");
+_12.empty();
+$("<a href=\"javascript:void(0)\" class=\"datebox-current\"></a>").html(_10.currentText).appendTo(_12);
+$("<a href=\"javascript:void(0)\" class=\"datebox-close\"></a>").html(_10.closeText).appendTo(_12);
+_12.find(".datebox-current,.datebox-close").hover(function(){
 $(this).addClass("datebox-button-hover");
 },function(){
 $(this).removeClass("datebox-button-hover");
 });
-_13.find(".datebox-current").click(function(){
-_12.find("div.datebox-calendar-inner>div").calendar({year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date()});
+_12.find(".datebox-current").click(function(){
+_11.find("div.datebox-calendar-inner>div").calendar({year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date()});
 });
-_13.find(".datebox-close").click(function(){
-_12.hide();
+_12.find(".datebox-close").click(function(){
+_11.hide();
 });
 };
-function _e(_14){
-var _15=$.data(_14,"datebox").options;
-var _16=$.data(_14,"datebox").calendar;
-_16.show();
+function _d(_13){
+var _14=$.data(_13,"datebox").options;
+var _15=$.data(_13,"datebox").calendar;
+_15.show();
 if($.fn.window){
-_16.css("z-index",$.fn.window.defaults.zIndex++);
+_15.css("z-index",$.fn.window.defaults.zIndex++);
 }
 (function(){
-if(_16.is(":visible")){
-_16.css({display:"block",left:$(_14).offset().left,top:$(_14).offset().top+$(_14).outerHeight()});
+if(_15.is(":visible")){
+_15.css({display:"block",left:$(_13).offset().left,top:$(_13).offset().top+$(_13).outerHeight()});
 setTimeout(arguments.callee,200);
 }
 })();
-var _17=_15.parser($(_14).val());
-_16.find("div.datebox-calendar-inner>div").calendar({year:_17.getFullYear(),month:_17.getMonth()+1,current:_17});
+var _16=_14.parser($(_13).val());
+_15.find("div.datebox-calendar-inner>div").calendar({year:_16.getFullYear(),month:_16.getMonth()+1,current:_16});
 };
-function _18(_19){
-var _1a=$.data(_19,"datebox").calendar;
-_1a.hide();
+function _17(_18){
+var _19=$.data(_18,"datebox").calendar;
+_19.hide();
 };
-function _1b(_1c,_1d){
+function _1a(_1b,_1c){
 if($.fn.validatebox){
-var _1e=$.data(_1c,"datebox").options;
-$(_1c).validatebox(_1e);
-if(_1d){
-$(_1c).validatebox("validate");
-$(_1c).trigger("mouseleave");
+var _1d=$.data(_1b,"datebox").options;
+$(_1b).validatebox(_1d);
+if(_1c){
+$(_1b).validatebox("validate");
+$(_1b).trigger("mouseleave");
 }
 }
 };
-function _1f(_20,_21){
-var _22=$.data(_20,"datebox").options;
-if(_21){
-_22.disabled=true;
-$(_20).attr("disabled",true);
+function _1e(_1f,_20){
+var _21=$.data(_1f,"datebox").options;
+if(_20){
+_21.disabled=true;
+$(_1f).attr("disabled",true);
 }else{
-_22.disabled=false;
-$(_20).removeAttr("disabled");
+_21.disabled=false;
+$(_1f).removeAttr("disabled");
 }
 };
-$.fn.datebox=function(_23){
-if(typeof _23=="string"){
-switch(_23){
-case "destroy":
+$.fn.datebox=function(_22,_23){
+if(typeof _22=="string"){
+var _24=$.fn.datebox.methods[_22];
+if(_24){
+return _24(this,_23);
+}else{
+return this.validatebox(_22,_23);
+}
+}
+_22=_22||{};
 return this.each(function(){
+var _25=$.data(this,"datebox");
+if(_25){
+$.extend(_25.options,_22);
+}else{
+_25=$.data(this,"datebox",{options:$.extend({},$.fn.datebox.defaults,$.fn.datebox.parseOptions(this),_22),calendar:_1(this)});
+$(this).removeAttr("disabled");
+}
+_e(this);
+_1e(this,_25.options.disabled);
+_9(this);
+_1a(this);
+});
+};
+$.fn.datebox.methods={destroy:function(jq){
+return jq.each(function(){
 _7(this);
 });
-case "disable":
-return this.each(function(){
-_1f(this,true);
-_a(this);
+},disable:function(jq){
+return jq.each(function(){
+_1e(this,true);
+_9(this);
 });
-case "enable":
-return this.each(function(){
-_1f(this,false);
-_a(this);
+},enable:function(jq){
+return jq.each(function(){
+_1e(this,false);
+_9(this);
 });
-}
-}
-_23=_23||{};
-return this.each(function(){
-var _24=$.data(this,"datebox");
-if(_24){
-$.extend(_24.options,_23);
-}else{
-var _25=_1(this);
-var t=$(this);
-_24=$.data(this,"datebox",{options:$.extend({},$.fn.datebox.defaults,{disabled:(t.attr("disabled")?true:undefined),required:(t.attr("required")?(t.attr("required")=="true"||t.attr("required")==true):undefined),missingMessage:(t.attr("missingMessage")||undefined)},_23),calendar:_25});
-t.removeAttr("disabled");
-}
-_f(this);
-_1f(this,_24.options.disabled);
-_a(this);
-_1b(this);
-});
+}};
+$.fn.datebox.parseOptions=function(_26){
+var t=$(_26);
+return $.extend({},$.fn.validatebox.parseOptions(_26),{disabled:(t.attr("disabled")?true:undefined)});
 };
-$.fn.datebox.defaults={currentText:"Today",closeText:"Close",disabled:false,required:false,missingMessage:"This field is required.",formatter:function(_26){
-var y=_26.getFullYear();
-var m=_26.getMonth()+1;
-var d=_26.getDate();
+$.fn.datebox.defaults=$.extend({},$.fn.validatebox.defaults,{currentText:"Today",closeText:"Close",disabled:false,formatter:function(_27){
+var y=_27.getFullYear();
+var m=_27.getMonth()+1;
+var d=_27.getDate();
 return m+"/"+d+"/"+y;
 },parser:function(s){
 var t=Date.parse(s);
@@ -154,7 +159,7 @@ return new Date(t);
 }else{
 return new Date();
 }
-},onSelect:function(_27){
-}};
+},onSelect:function(_28){
+}});
 })(jQuery);
 

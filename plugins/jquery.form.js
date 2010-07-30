@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -144,22 +144,7 @@ return true;
 };
 $.fn.form=function(_1e,_1f){
 if(typeof _1e=="string"){
-switch(_1e){
-case "submit":
-return this.each(function(){
-_1(this,$.extend({},$.fn.form.defaults,_1f||{}));
-});
-case "load":
-return this.each(function(){
-_b(this,_1f);
-});
-case "clear":
-return this.each(function(){
-_16(this);
-});
-case "validate":
-return _15(this[0]);
-}
+return $.fn.form.methods[_1e](this,_1f);
 }
 _1e=_1e||{};
 return this.each(function(){
@@ -169,10 +154,25 @@ $.data(this,"form",{options:$.extend({},$.fn.form.defaults,_1e)});
 _18(this);
 });
 };
+$.fn.form.methods={submit:function(jq,_20){
+return jq.each(function(){
+_1(this,$.extend({},$.fn.form.defaults,_20||{}));
+});
+},load:function(jq,_21){
+return jq.each(function(){
+_b(this,_21);
+});
+},clear:function(jq){
+return jq.each(function(){
+_16(this);
+});
+},validate:function(jq){
+return _15(jq[0]);
+}};
 $.fn.form.defaults={url:null,onSubmit:function(){
-},success:function(_20){
-},onBeforeLoad:function(_21){
-},onLoadSuccess:function(_22){
+},success:function(_22){
+},onBeforeLoad:function(_23){
+},onLoadSuccess:function(_24){
 },onLoadError:function(){
 }};
 })(jQuery);

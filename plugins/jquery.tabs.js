@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -311,39 +311,7 @@ return _42(_58,_59)!=null;
 };
 $.fn.tabs=function(_5a,_5b){
 if(typeof _5a=="string"){
-switch(_5a){
-case "options":
-return $.data(this[0],"tabs").options;
-case "tabs":
-return $.data(this[0],"tabs").tabs;
-case "resize":
-return this.each(function(){
-_c(this);
-_14(this);
-});
-case "add":
-return this.each(function(){
-_34(this,_5b);
-});
-case "close":
-return this.each(function(){
-_2a(this,_5b);
-});
-case "getTab":
-return _42(this[0],_5b);
-case "getSelected":
-return _17(this[0]);
-case "select":
-return this.each(function(){
-_39(this,_5b);
-});
-case "exists":
-return _57(this[0],_5b);
-case "update":
-return this.each(function(){
-_3a(this,_5b);
-});
-}
+return $.fn.tabs.methods[_5a](this,_5b);
 }
 _5a=_5a||{};
 return this.each(function(){
@@ -353,25 +321,58 @@ if(_5c){
 _5d=$.extend(_5c.options,_5a);
 _5c.options=_5d;
 }else{
-var t=$(this);
-_5d=$.extend({},$.fn.tabs.defaults,{width:(parseInt(t.css("width"))||undefined),height:(parseInt(t.css("height"))||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined)},_5a);
-var _5e=_1b(this);
-_5c=$.data(this,"tabs",{options:_5d,tabs:_5e});
+$.data(this,"tabs",{options:$.extend({},$.fn.tabs.defaults,$.fn.tabs.parseOptions(this),_5a),tabs:_1b(this)});
 }
 _20(this);
 _c(this);
-var _5f=this;
+var _5e=this;
 setTimeout(function(){
-_4a(_5f);
+_4a(_5e);
 },0);
 });
 };
-$.fn.tabs.defaults={width:"auto",height:"auto",idSeed:0,plain:false,fit:false,border:true,scrollIncrement:100,scrollDuration:400,onLoad:function(_60){
-},onSelect:function(_61){
-},onBeforeClose:function(_62){
-},onClose:function(_63){
-},onAdd:function(_64){
-},onUpdate:function(_65){
+$.fn.tabs.methods={options:function(jq){
+return $.data(jq[0],"tabs").options;
+},tabs:function(jq){
+return $.data(jq[0],"tabs").tabs;
+},resize:function(jq){
+return jq.each(function(){
+_c(this);
+_14(this);
+});
+},add:function(jq,_5f){
+return jq.each(function(){
+_34(this,_5f);
+});
+},close:function(jq,_60){
+return jq.each(function(){
+_2a(this,_60);
+});
+},getTab:function(jq,_61){
+return _42(jq[0],_61);
+},getSelected:function(jq){
+return _17(jq[0]);
+},select:function(jq,_62){
+return jq.each(function(){
+_39(this,_62);
+});
+},exists:function(jq,_63){
+return _57(jq[0],_63);
+},update:function(jq,_64){
+return jq.each(function(){
+_3a(this,_64);
+});
+}};
+$.fn.tabs.parseOptions=function(_65){
+var t=$(_65);
+return {width:(parseInt(_65.style.width)||undefined),height:(parseInt(_65.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined)};
+};
+$.fn.tabs.defaults={width:"auto",height:"auto",idSeed:0,plain:false,fit:false,border:true,scrollIncrement:100,scrollDuration:400,onLoad:function(_66){
+},onSelect:function(_67){
+},onBeforeClose:function(_68){
+},onClose:function(_69){
+},onAdd:function(_6a){
+},onUpdate:function(_6b){
 }};
 })(jQuery);
 

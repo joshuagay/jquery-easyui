@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -8,124 +8,127 @@
  * 
  */
 (function($){
-$.fn.resizable=function(_1){
-function _2(e){
-var _3=e.data;
-var _4=$.data(_3.target,"resizable").options;
-if(_3.dir.indexOf("e")!=-1){
-var _5=_3.startWidth+e.pageX-_3.startX;
-_5=Math.min(Math.max(_5,_4.minWidth),_4.maxWidth);
-_3.width=_5;
+$.fn.resizable=function(_1,_2){
+if(typeof _1=="string"){
+return $.fn.resizable.methods[_1](this,_2);
 }
-if(_3.dir.indexOf("s")!=-1){
-var _6=_3.startHeight+e.pageY-_3.startY;
-_6=Math.min(Math.max(_6,_4.minHeight),_4.maxHeight);
-_3.height=_6;
+function _3(e){
+var _4=e.data;
+var _5=$.data(_4.target,"resizable").options;
+if(_4.dir.indexOf("e")!=-1){
+var _6=_4.startWidth+e.pageX-_4.startX;
+_6=Math.min(Math.max(_6,_5.minWidth),_5.maxWidth);
+_4.width=_6;
 }
-if(_3.dir.indexOf("w")!=-1){
-_3.width=_3.startWidth-e.pageX+_3.startX;
-if(_3.width>=_4.minWidth&&_3.width<=_4.maxWidth){
-_3.left=_3.startLeft+e.pageX-_3.startX;
+if(_4.dir.indexOf("s")!=-1){
+var _7=_4.startHeight+e.pageY-_4.startY;
+_7=Math.min(Math.max(_7,_5.minHeight),_5.maxHeight);
+_4.height=_7;
+}
+if(_4.dir.indexOf("w")!=-1){
+_4.width=_4.startWidth-e.pageX+_4.startX;
+if(_4.width>=_5.minWidth&&_4.width<=_5.maxWidth){
+_4.left=_4.startLeft+e.pageX-_4.startX;
 }
 }
-if(_3.dir.indexOf("n")!=-1){
-_3.height=_3.startHeight-e.pageY+_3.startY;
-if(_3.height>=_4.minHeight&&_3.height<=_4.maxHeight){
-_3.top=_3.startTop+e.pageY-_3.startY;
+if(_4.dir.indexOf("n")!=-1){
+_4.height=_4.startHeight-e.pageY+_4.startY;
+if(_4.height>=_5.minHeight&&_4.height<=_5.maxHeight){
+_4.top=_4.startTop+e.pageY-_4.startY;
 }
 }
 };
-function _7(e){
-var _8=e.data;
-var _9=_8.target;
+function _8(e){
+var _9=e.data;
+var _a=_9.target;
 if($.boxModel==true){
-$(_9).css({width:_8.width-_8.deltaWidth,height:_8.height-_8.deltaHeight,left:_8.left,top:_8.top});
+$(_a).css({width:_9.width-_9.deltaWidth,height:_9.height-_9.deltaHeight,left:_9.left,top:_9.top});
 }else{
-$(_9).css({width:_8.width,height:_8.height,left:_8.left,top:_8.top});
+$(_a).css({width:_9.width,height:_9.height,left:_9.left,top:_9.top});
 }
 };
-function _a(e){
+function _b(e){
 $.data(e.data.target,"resizable").options.onStartResize.call(e.data.target,e);
 return false;
 };
-function _b(e){
-_2(e);
+function _c(e){
+_3(e);
 if($.data(e.data.target,"resizable").options.onResize.call(e.data.target,e)!=false){
-_7(e);
+_8(e);
 }
 return false;
 };
-function _c(e){
-_2(e,true);
-_7(e);
+function _d(e){
+_3(e,true);
+_8(e);
 $(document).unbind(".resizable");
 $.data(e.data.target,"resizable").options.onStopResize.call(e.data.target,e);
 return false;
 };
 return this.each(function(){
-var _d=null;
-var _e=$.data(this,"resizable");
-if(_e){
+var _e=null;
+var _f=$.data(this,"resizable");
+if(_f){
 $(this).unbind(".resizable");
-_d=$.extend(_e.options,_1||{});
+_e=$.extend(_f.options,_1||{});
 }else{
-_d=$.extend({},$.fn.resizable.defaults,_1||{});
+_e=$.extend({},$.fn.resizable.defaults,_1||{});
 }
-if(_d.disabled==true){
+if(_e.disabled==true){
 return;
 }
-$.data(this,"resizable",{options:_d});
-var _f=this;
-$(this).bind("mousemove.resizable",_10).bind("mousedown.resizable",_11);
-function _10(e){
-var dir=_12(e);
-if(dir==""){
-$(_f).css("cursor","default");
-}else{
-$(_f).css("cursor",dir+"-resize");
-}
-};
+$.data(this,"resizable",{options:_e});
+var _10=this;
+$(this).bind("mousemove.resizable",_11).bind("mousedown.resizable",_12);
 function _11(e){
-var dir=_12(e);
+var dir=_13(e);
 if(dir==""){
-return;
+$(_10).css("cursor","default");
+}else{
+$(_10).css("cursor",dir+"-resize");
 }
-var _13={target:this,dir:dir,startLeft:_14("left"),startTop:_14("top"),left:_14("left"),top:_14("top"),startX:e.pageX,startY:e.pageY,startWidth:$(_f).outerWidth(),startHeight:$(_f).outerHeight(),width:$(_f).outerWidth(),height:$(_f).outerHeight(),deltaWidth:$(_f).outerWidth()-$(_f).width(),deltaHeight:$(_f).outerHeight()-$(_f).height()};
-$(document).bind("mousedown.resizable",_13,_a);
-$(document).bind("mousemove.resizable",_13,_b);
-$(document).bind("mouseup.resizable",_13,_c);
 };
 function _12(e){
+var dir=_13(e);
+if(dir==""){
+return;
+}
+var _14={target:this,dir:dir,startLeft:_15("left"),startTop:_15("top"),left:_15("left"),top:_15("top"),startX:e.pageX,startY:e.pageY,startWidth:$(_10).outerWidth(),startHeight:$(_10).outerHeight(),width:$(_10).outerWidth(),height:$(_10).outerHeight(),deltaWidth:$(_10).outerWidth()-$(_10).width(),deltaHeight:$(_10).outerHeight()-$(_10).height()};
+$(document).bind("mousedown.resizable",_14,_b);
+$(document).bind("mousemove.resizable",_14,_c);
+$(document).bind("mouseup.resizable",_14,_d);
+};
+function _13(e){
 var dir="";
-var _15=$(_f).offset();
-var _16=$(_f).outerWidth();
-var _17=$(_f).outerHeight();
-var _18=_d.edge;
-if(e.pageY>_15.top&&e.pageY<_15.top+_18){
+var _16=$(_10).offset();
+var _17=$(_10).outerWidth();
+var _18=$(_10).outerHeight();
+var _19=_e.edge;
+if(e.pageY>_16.top&&e.pageY<_16.top+_19){
 dir+="n";
 }else{
-if(e.pageY<_15.top+_17&&e.pageY>_15.top+_17-_18){
+if(e.pageY<_16.top+_18&&e.pageY>_16.top+_18-_19){
 dir+="s";
 }
 }
-if(e.pageX>_15.left&&e.pageX<_15.left+_18){
+if(e.pageX>_16.left&&e.pageX<_16.left+_19){
 dir+="w";
 }else{
-if(e.pageX<_15.left+_16&&e.pageX>_15.left+_16-_18){
+if(e.pageX<_16.left+_17&&e.pageX>_16.left+_17-_19){
 dir+="e";
 }
 }
-var _19=_d.handles.split(",");
-for(var i=0;i<_19.length;i++){
-var _1a=_19[i].replace(/(^\s*)|(\s*$)/g,"");
-if(_1a=="all"||_1a==dir){
+var _1a=_e.handles.split(",");
+for(var i=0;i<_1a.length;i++){
+var _1b=_1a[i].replace(/(^\s*)|(\s*$)/g,"");
+if(_1b=="all"||_1b==dir){
 return dir;
 }
 }
 return "";
 };
-function _14(css){
-var val=parseInt($(_f).css(css));
+function _15(css){
+var val=parseInt($(_10).css(css));
 if(isNaN(val)){
 return 0;
 }else{
@@ -134,6 +137,7 @@ return val;
 };
 });
 };
+$.fn.resizable.methods={};
 $.fn.resizable.defaults={disabled:false,handles:"n, e, s, w, ne, se, sw, nw, all",minWidth:10,minHeight:10,maxWidth:10000,maxHeight:10000,edge:5,onStartResize:function(e){
 },onResize:function(e){
 },onStopResize:function(e){
