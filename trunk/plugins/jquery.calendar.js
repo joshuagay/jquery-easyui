@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -263,14 +263,16 @@ _2f.onSelect.call(_2e,_2f.current);
 });
 };
 $.fn.calendar=function(_36){
+if(typeof _36=="string"){
+return $.fn.calendar.methods[_36](this,param);
+}
 _36=_36||{};
 return this.each(function(){
 var _37=$.data(this,"calendar");
 if(_37){
 $.extend(_37.options,_36);
 }else{
-var t=$(this);
-_37=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,{width:(parseInt(t.css("width"))||undefined),height:(parseInt(t.css("height"))||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)},_36)});
+_37=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,$.fn.calendar.parseOptions(this),_36)});
 _7(this);
 }
 if(_37.options.border==false){
@@ -281,7 +283,12 @@ _f(this);
 $(this).find("div.calendar-menu").hide();
 });
 };
-$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_38){
+$.fn.calendar.methods={};
+$.fn.calendar.parseOptions=function(_38){
+var t=$(_38);
+return {width:(parseInt(_38.style.width)||undefined),height:(parseInt(_38.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)};
+};
+$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_39){
 }};
 })(jQuery);
 

@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -77,35 +77,43 @@ _d.disabled=false;
 $(_b).removeAttr("disabled");
 }
 };
-$.fn.numberbox=function(_e){
+$.fn.numberbox=function(_e,_f){
 if(typeof _e=="string"){
-switch(_e){
-case "disable":
-return this.each(function(){
-_a(this,true);
-});
-case "enable":
-return this.each(function(){
-_a(this,false);
-});
+var _10=$.fn.numberbox.methods[_e];
+if(_10){
+return _10(this,_f);
+}else{
+return this.validatebox(_e,_f);
 }
 }
 _e=_e||{};
 return this.each(function(){
-var _f=$.data(this,"numberbox");
-if(_f){
-$.extend(_f.options,_e);
+var _11=$.data(this,"numberbox");
+if(_11){
+$.extend(_11.options,_e);
 }else{
-var t=$(this);
-_f=$.data(this,"numberbox",{options:$.extend({},$.fn.numberbox.defaults,{disabled:(t.attr("disabled")?true:undefined),min:(t.attr("min")=="0"?0:parseFloat(t.attr("min"))||undefined),max:(t.attr("max")=="0"?0:parseFloat(t.attr("max"))||undefined),precision:(parseInt(t.attr("precision"))||undefined)},_e)});
-t.removeAttr("disabled");
+_11=$.data(this,"numberbox",{options:$.extend({},$.fn.numberbox.defaults,$.fn.numberbox.parseOptions(this),_e)});
+$(this).removeAttr("disabled");
 $(this).css({imeMode:"disabled"});
 }
-_a(this,_f.options.disabled);
+_a(this,_11.options.disabled);
 _5(this);
 _7(this);
 });
 };
-$.fn.numberbox.defaults={disabled:false,min:null,max:null,precision:0};
+$.fn.numberbox.methods={disable:function(jq){
+return jq.each(function(){
+_a(this,true);
+});
+},enable:function(jq){
+return jq.each(function(){
+_a(this,false);
+});
+}};
+$.fn.numberbox.parseOptions=function(_12){
+var t=$(_12);
+return $.extend({},$.fn.validatebox.parseOptions(_12),{disabled:(t.attr("disabled")?true:undefined),min:(t.attr("min")=="0"?0:parseFloat(t.attr("min"))||undefined),max:(t.attr("max")=="0"?0:parseFloat(t.attr("max"))||undefined),precision:(parseInt(t.attr("precision"))||undefined)});
+};
+$.fn.numberbox.defaults=$.extend({},$.fn.validatebox.defaults,{disabled:false,min:null,max:null,precision:0});
 })(jQuery);
 

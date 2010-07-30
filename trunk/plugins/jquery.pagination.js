@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -134,39 +134,39 @@ $(_16).find("a[icon=pagination-load]").find(".pagination-load").addClass("pagina
 $(_16).find("a[icon=pagination-load]").find(".pagination-load").removeClass("pagination-loading");
 }
 };
-$.fn.pagination=function(_19){
+$.fn.pagination=function(_19,_1a){
 if(typeof _19=="string"){
-switch(_19){
-case "options":
-return $.data(this[0],"pagination").options;
-case "loading":
-return this.each(function(){
-_15(this,true);
-});
-case "loaded":
-return this.each(function(){
-_15(this,false);
-});
-}
+return $.fn.pagination.methods[_19](this,_1a);
 }
 _19=_19||{};
 return this.each(function(){
-var _1a;
-var _1b=$.data(this,"pagination");
-if(_1b){
-_1a=$.extend(_1b.options,_19);
+var _1b;
+var _1c=$.data(this,"pagination");
+if(_1c){
+_1b=$.extend(_1c.options,_19);
 }else{
-_1a=$.extend({},$.fn.pagination.defaults,_19);
-$.data(this,"pagination",{options:_1a});
+_1b=$.extend({},$.fn.pagination.defaults,_19);
+$.data(this,"pagination",{options:_1b});
 }
 _1(this);
 _10(this);
 });
 };
-$.fn.pagination.defaults={total:1,pageSize:10,pageNumber:1,pageList:[10,20,30,50],loading:false,buttons:null,showPageList:true,showRefresh:true,onSelectPage:function(_1c,_1d){
-},onBeforeRefresh:function(_1e,_1f){
-},onRefresh:function(_20,_21){
-},onChangePageSize:function(_22){
+$.fn.pagination.methods={options:function(jq){
+return $.data(jq[0],"pagination").options;
+},loading:function(jq){
+return jq.each(function(){
+_15(this,true);
+});
+},loaded:function(jq){
+return jq.each(function(){
+_15(this,false);
+});
+}};
+$.fn.pagination.defaults={total:1,pageSize:10,pageNumber:1,pageList:[10,20,30,50],loading:false,buttons:null,showPageList:true,showRefresh:true,onSelectPage:function(_1d,_1e){
+},onBeforeRefresh:function(_1f,_20){
+},onRefresh:function(_21,_22){
+},onChangePageSize:function(_23){
 },beforePageText:"Page",afterPageText:"of {pages}",displayMsg:"Displaying {from} to {to} of {total} items"};
 })(jQuery);
 

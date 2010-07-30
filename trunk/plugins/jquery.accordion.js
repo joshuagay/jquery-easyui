@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.1.2
+ * jQuery EasyUI 1.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -163,32 +163,7 @@ _2c.onRemove.call(_2a,_2b);
 };
 $.fn.accordion=function(_30,_31){
 if(typeof _30=="string"){
-switch(_30){
-case "options":
-return $.data(this[0],"accordion").options;
-case "panels":
-return $.data(this[0],"accordion").panels;
-case "resize":
-return this.each(function(){
-_1(this);
-});
-case "getSelected":
-return _9(this[0]);
-case "getPanel":
-return _d(this[0],_31);
-case "select":
-return this.each(function(){
-_1e(this,_31);
-});
-case "add":
-return this.each(function(){
-add(this,_31);
-});
-case "remove":
-return this.each(function(){
-_29(this,_31);
-});
-}
+return $.fn.accordion.methods[_30](this,_31);
 }
 _30=_30||{};
 return this.each(function(){
@@ -198,8 +173,7 @@ if(_32){
 _33=$.extend(_32.options,_30);
 _32.opts=_33;
 }else{
-var t=$(this);
-_33=$.extend({},$.fn.accordion.defaults,{width:(parseInt(t.css("width"))||undefined),height:(parseInt(t.css("height"))||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),animate:(t.attr("animate")?t.attr("animate")=="true":undefined)},_30);
+_33=$.extend({},$.fn.accordion.defaults,$.fn.accordion.parseOptions(this),_30);
 var r=_13(this);
 $.data(this,"accordion",{options:_33,accordion:r.accordion,panels:r.panels});
 }
@@ -207,10 +181,39 @@ _1(this);
 _1e(this);
 });
 };
-$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_34){
-},onAdd:function(_35){
-},onBeforeRemove:function(_36){
-},onRemove:function(_37){
+$.fn.accordion.methods={options:function(jq){
+return $.data(jq[0],"accordion").options;
+},panels:function(jq){
+return $.data(jq[0],"accordion").panels;
+},resize:function(jq){
+return jq.each(function(){
+_1(this);
+});
+},getSelected:function(jq){
+return _9(jq[0]);
+},getPanel:function(jq,_34){
+return _d(jq[0],_34);
+},select:function(jq,_35){
+return jq.each(function(){
+_1e(this,_35);
+});
+},add:function(jq,_36){
+return jq.each(function(){
+add(this,_36);
+});
+},remove:function(jq,_37){
+return jq.each(function(){
+_29(this,_37);
+});
+}};
+$.fn.accordion.parseOptions=function(_38){
+var t=$(_38);
+return {width:(parseInt(_38.style.width)||undefined),height:(parseInt(_38.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),animate:(t.attr("animate")?t.attr("animate")=="true":undefined)};
+};
+$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_39){
+},onAdd:function(_3a){
+},onBeforeRemove:function(_3b){
+},onRemove:function(_3c){
 }};
 })(jQuery);
 
