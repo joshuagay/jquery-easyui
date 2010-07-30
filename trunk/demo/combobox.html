@@ -15,7 +15,7 @@
 			});
 		}
 		function setValue(){
-			$('#cc').combobox('setValue','bitem2');
+			$('#cc').combobox('setValue','bitem3');
 		}
 		function getValue(){
 			var val = $('#cc').combobox('getValue');
@@ -42,10 +42,19 @@
 	<span>Options: </span>
 	<select id="cc" class="easyui-combobox" name="dept" style="width:200px;" required="true">
 		<option value="aa">aitem1</option>
-		<option>bitem2</option>
+		<option selected>bitem2</option>
 		<option>bitem3</option>
 		<option>ditem4</option>
 		<option>eitem5</option>
 	</select>
+	
+	<span>Multiple: </span>
+	<input class="easyui-combobox" 
+			name="language"
+			url="combobox_data.json" 
+			valueField="id" 
+			textField="text" 
+			multiple="true" 
+			panelHeight="auto">
 </body>
 </html>

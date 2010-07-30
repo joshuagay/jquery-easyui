@@ -64,7 +64,7 @@
 		function append(){
 			var node = $('#tt2').tree('getSelected');
 			$('#tt2').tree('append',{
-				parent: node.target,
+				parent: (node?node.target:null),
 				data:[{
 					text:'new1',
 					checked:true
