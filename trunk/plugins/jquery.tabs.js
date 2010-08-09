@@ -218,7 +218,8 @@ $.data(_3b,"tabs").options.onUpdate.call(_3b,_3d.title);
 function _2a(_3e,_3f){
 var _40=$.data(_3e,"tabs").options;
 var _41=$.data(_3e,"tabs").tabs;
-var tab=_42(_3e,_3f,true);
+var _42=$.data(_3e,"tabs").selectHis;
+var tab=_43(_3e,_3f,true);
 if(!tab){
 return;
 }
@@ -229,105 +230,113 @@ tab.panel("options").tab.remove();
 tab.panel("destroy");
 _40.onClose.call(_3e,_3f);
 _7(_3e);
-var _43=_17(_3e);
-if(_43){
-_39(_3e,_43.panel("options").title);
+for(var i=0;i<_42.length;i++){
+if(_42[i]==_3f){
+_42.splice(i,1);
+i--;
+}
+}
+var _44=_42.pop();
+if(_44){
+_39(_3e,_44);
 }else{
 if(_41.length){
 _39(_3e,_41[0].panel("options").title);
 }
 }
 };
-function _42(_44,_45,_46){
-var _47=$.data(_44,"tabs").tabs;
-for(var i=0;i<_47.length;i++){
-var tab=_47[i];
-if(tab.panel("options").title==_45){
-if(_46){
-_47.splice(i,1);
+function _43(_45,_46,_47){
+var _48=$.data(_45,"tabs").tabs;
+for(var i=0;i<_48.length;i++){
+var tab=_48[i];
+if(tab.panel("options").title==_46){
+if(_47){
+_48.splice(i,1);
 }
 return tab;
 }
 }
 return null;
 };
-function _17(_48){
-var _49=$.data(_48,"tabs").tabs;
-for(var i=0;i<_49.length;i++){
-var tab=_49[i];
+function _17(_49){
+var _4a=$.data(_49,"tabs").tabs;
+for(var i=0;i<_4a.length;i++){
+var tab=_4a[i];
 if(tab.panel("options").closed==false){
 return tab;
 }
 }
 return null;
 };
-function _4a(_4b){
-var _4c=$.data(_4b,"tabs").tabs;
-for(var i=0;i<_4c.length;i++){
-var tab=_4c[i];
+function _4b(_4c){
+var _4d=$.data(_4c,"tabs").tabs;
+for(var i=0;i<_4d.length;i++){
+var tab=_4d[i];
 if(tab.panel("options").selected){
-_39(_4b,tab.panel("options").title);
+_39(_4c,tab.panel("options").title);
 return;
 }
 }
-if(_4c.length){
-_39(_4b,_4c[0].panel("options").title);
+if(_4d.length){
+_39(_4c,_4d[0].panel("options").title);
 }
 };
-function _39(_4d,_4e){
-var _4f=$.data(_4d,"tabs").options;
-var _50=$.data(_4d,"tabs").tabs;
-if(_50.length==0){
+function _39(_4e,_4f){
+var _50=$.data(_4e,"tabs").options;
+var _51=$.data(_4e,"tabs").tabs;
+var _52=$.data(_4e,"tabs").selectHis;
+if(_51.length==0){
 return;
 }
-var _51=_42(_4d,_4e);
-if(!_51){
+var _53=_43(_4e,_4f);
+if(!_53){
 return;
 }
-var _52=_17(_4d);
-if(_52){
-_52.panel("close");
-_52.panel("options").tab.removeClass("tabs-selected");
+var _54=_17(_4e);
+if(_54){
+_54.panel("close");
+_54.panel("options").tab.removeClass("tabs-selected");
 }
-_51.panel("open");
-var tab=_51.panel("options").tab;
+_53.panel("open");
+var tab=_53.panel("options").tab;
 tab.addClass("tabs-selected");
-var _53=$(_4d).find(">div.tabs-header div.tabs-wrap");
-var _54=tab.position().left+_53.scrollLeft();
-var _55=_54-_53.scrollLeft();
-var _56=_55+tab.outerWidth();
-if(_55<0||_56>_53.innerWidth()){
-var pos=Math.min(_54-(_53.width()-tab.width())/2,_1(_4d));
-_53.animate({scrollLeft:pos},_4f.scrollDuration);
+var _55=$(_4e).find(">div.tabs-header div.tabs-wrap");
+var _56=tab.position().left+_55.scrollLeft();
+var _57=_56-_55.scrollLeft();
+var _58=_57+tab.outerWidth();
+if(_57<0||_58>_55.innerWidth()){
+var pos=Math.min(_56-(_55.width()-tab.width())/2,_1(_4e));
+_55.animate({scrollLeft:pos},_50.scrollDuration);
 }else{
-var pos=Math.min(_53.scrollLeft(),_1(_4d));
-_53.animate({scrollLeft:pos},_4f.scrollDuration);
+var pos=Math.min(_55.scrollLeft(),_1(_4e));
+_55.animate({scrollLeft:pos},_50.scrollDuration);
 }
-_14(_4d);
-_4f.onSelect.call(_4d,_4e);
+_14(_4e);
+_52.push(_4f);
+_50.onSelect.call(_4e,_4f);
 };
-function _57(_58,_59){
-return _42(_58,_59)!=null;
+function _59(_5a,_5b){
+return _43(_5a,_5b)!=null;
 };
-$.fn.tabs=function(_5a,_5b){
-if(typeof _5a=="string"){
-return $.fn.tabs.methods[_5a](this,_5b);
+$.fn.tabs=function(_5c,_5d){
+if(typeof _5c=="string"){
+return $.fn.tabs.methods[_5c](this,_5d);
 }
-_5a=_5a||{};
+_5c=_5c||{};
 return this.each(function(){
-var _5c=$.data(this,"tabs");
-var _5d;
-if(_5c){
-_5d=$.extend(_5c.options,_5a);
-_5c.options=_5d;
+var _5e=$.data(this,"tabs");
+var _5f;
+if(_5e){
+_5f=$.extend(_5e.options,_5c);
+_5e.options=_5f;
 }else{
-$.data(this,"tabs",{options:$.extend({},$.fn.tabs.defaults,$.fn.tabs.parseOptions(this),_5a),tabs:_1b(this)});
+$.data(this,"tabs",{options:$.extend({},$.fn.tabs.defaults,$.fn.tabs.parseOptions(this),_5c),tabs:_1b(this),selectHis:[]});
 }
 _20(this);
 _c(this);
-var _5e=this;
+var _60=this;
 setTimeout(function(){
-_4a(_5e);
+_4b(_60);
 },0);
 });
 };
@@ -340,39 +349,39 @@ return jq.each(function(){
 _c(this);
 _14(this);
 });
-},add:function(jq,_5f){
+},add:function(jq,_61){
 return jq.each(function(){
-_34(this,_5f);
+_34(this,_61);
 });
-},close:function(jq,_60){
+},close:function(jq,_62){
 return jq.each(function(){
-_2a(this,_60);
+_2a(this,_62);
 });
-},getTab:function(jq,_61){
-return _42(jq[0],_61);
+},getTab:function(jq,_63){
+return _43(jq[0],_63);
 },getSelected:function(jq){
 return _17(jq[0]);
-},select:function(jq,_62){
+},select:function(jq,_64){
 return jq.each(function(){
-_39(this,_62);
+_39(this,_64);
 });
-},exists:function(jq,_63){
-return _57(jq[0],_63);
-},update:function(jq,_64){
+},exists:function(jq,_65){
+return _59(jq[0],_65);
+},update:function(jq,_66){
 return jq.each(function(){
-_3a(this,_64);
+_3a(this,_66);
 });
 }};
-$.fn.tabs.parseOptions=function(_65){
-var t=$(_65);
-return {width:(parseInt(_65.style.width)||undefined),height:(parseInt(_65.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined)};
+$.fn.tabs.parseOptions=function(_67){
+var t=$(_67);
+return {width:(parseInt(_67.style.width)||undefined),height:(parseInt(_67.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined)};
 };
-$.fn.tabs.defaults={width:"auto",height:"auto",idSeed:0,plain:false,fit:false,border:true,scrollIncrement:100,scrollDuration:400,onLoad:function(_66){
-},onSelect:function(_67){
-},onBeforeClose:function(_68){
-},onClose:function(_69){
-},onAdd:function(_6a){
-},onUpdate:function(_6b){
+$.fn.tabs.defaults={width:"auto",height:"auto",plain:false,fit:false,border:true,scrollIncrement:100,scrollDuration:400,onLoad:function(_68){
+},onSelect:function(_69){
+},onBeforeClose:function(_6a){
+},onClose:function(_6b){
+},onAdd:function(_6c){
+},onUpdate:function(_6d){
 }};
 })(jQuery);
 

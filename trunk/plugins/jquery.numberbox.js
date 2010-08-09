@@ -109,6 +109,10 @@ _a(this,true);
 return jq.each(function(){
 _a(this,false);
 });
+},fix:function(jq){
+return jq.each(function(){
+_1(this);
+});
 }};
 $.fn.numberbox.parseOptions=function(_12){
 var t=$(_12);
