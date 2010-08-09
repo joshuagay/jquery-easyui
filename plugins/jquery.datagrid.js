@@ -1345,53 +1345,26 @@ _160.width(_15f);
 }
 }},combobox:{init:function(_161,_162){
 var _163=$("<input type=\"text\">").appendTo(_161);
-_163.combobox($.extend({},(_162||{}),{onLoadSuccess:function(){
-_163[0].loaded=true;
-if(_162&&_162.onLoadSuccess){
-_162.onLoadSuccess.apply(this,arguments);
-}
-}}));
-if(!_162.url){
-_163[0].loaded=true;
-}
+_163.combobox(_162||{});
 return _163;
 },destroy:function(elem){
 $(elem).combobox("destroy");
 },getValue:function(elem){
 return $(elem).combobox("getValue");
 },setValue:function(elem,_164){
-(function(){
-if($(elem)[0].loaded){
 $(elem).combobox("setValue",_164);
-}else{
-setTimeout(arguments.callee,100);
-}
-})();
 },resize:function(elem,_165){
 $(elem).combobox("resize",_165);
 }},combotree:{init:function(_166,_167){
 var _168=$("<input type=\"text\">").appendTo(_166);
 _168.combotree(_167);
-var tree=_168.combotree("tree");
-tree.tree({onLoadSuccess:function(){
-_168[0].loaded=true;
-}});
-if(!tree.tree("options").url){
-_168[0].loaded=true;
-}
 return _168;
 },destroy:function(elem){
 $(elem).combotree("destroy");
 },getValue:function(elem){
 return $(elem).combotree("getValue");
 },setValue:function(elem,_169){
-(function(){
-if($(elem)[0].loaded){
 $(elem).combotree("setValue",_169);
-}else{
-setTimeout(arguments.callee,100);
-}
-})();
 },resize:function(elem,_16a){
 $(elem).combotree("resize",_16a);
 }}};
