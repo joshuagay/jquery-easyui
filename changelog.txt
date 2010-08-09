@@ -4,10 +4,14 @@ Version 1.2
  * tree: Add cascadeCheck,onlyLeafCheck properties and select event.
  * combobox: Enable multiple selection.
  * combotree: Enable multiple selection.
+ * tabs: Remember the trace of selection, when current tab panel is closed, the previous selected tab will be selected.
 * New Plugins
  * treegrid: Represent tabular data in hierarchical view, combines tree view and datagrid.
- * combo: The basic component that allows user to extend their combo component such as combobox,combotree,etc.
+ * combo: The basic component that allow user to extend their combo component such as combobox,combotree,etc.
  * combogrid: Combines combobox with drop-down datagrid component.
+ * spinner: The basic plugin to create numberspinner,timespinner,etc.
+ * numberspinner: The numberbox that allow user to change value by clicking up and down spin buttons.
+ * timespinner: The time selector that allow user to quickly inc/dec a time.
  
 Version 1.1.2
 -------------
