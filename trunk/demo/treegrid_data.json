@@ -31,8 +31,7 @@
 		"state":"closed",
 		"children":[{
 			"code":"02013",
-			"name":"jdk1",
-			"state":"closed"
+			"name":"jdk1"
 		},{
 			"code":"02014",
 			"name":"jdk2"
