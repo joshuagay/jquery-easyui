@@ -41,6 +41,7 @@ $(this).removeClass("spinner-arrow-hover");
 }).bind("click.spinner",function(){
 _c.spin.call(_b,false);
 _c.onSpinUp.call(_b);
+$(_b).validatebox("validate");
 });
 _d.find(".spinner-arrow-down").bind("mouseenter.spinner",function(){
 $(this).addClass("spinner-arrow-hover");
@@ -49,6 +50,7 @@ $(this).removeClass("spinner-arrow-hover");
 }).bind("click.spinner",function(){
 _c.spin.call(_b,true);
 _c.onSpinDown.call(_b);
+$(_b).validatebox("validate");
 });
 }
 };
@@ -128,7 +130,7 @@ $(this).val("");
 }};
 $.fn.spinner.parseOptions=function(_1c){
 var t=$(_1c);
-return $.extend({},$.fn.validatebox.parseOptions(_1c),{width:(parseInt(_1c.style.width)||undefined),value:(t.val()||undefined),min:(t.attr("min")=="0"?0:parseFloat(t.attr("min"))||undefined),max:(t.attr("max")=="0"?0:parseFloat(t.attr("max"))||undefined),increment:(parseInt(t.attr("increment"))||undefined),editable:(t.attr("editable")?t.attr("editable")=="true":undefined),disabled:(t.attr("disabled")?true:undefined)});
+return $.extend({},$.fn.validatebox.parseOptions(_1c),{width:(parseInt(_1c.style.width)||undefined),value:(t.val()||undefined),min:t.attr("min"),max:t.attr("max"),increment:(parseFloat(t.attr("increment"))||undefined),editable:(t.attr("editable")?t.attr("editable")=="true":undefined),disabled:(t.attr("disabled")?true:undefined)});
 };
 $.fn.spinner.defaults=$.extend({},$.fn.validatebox.defaults,{width:"auto",value:"",min:null,max:null,increment:1,editable:true,disabled:false,spin:function(_1d){
 },onSpinUp:function(){
