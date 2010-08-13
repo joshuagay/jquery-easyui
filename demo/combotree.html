@@ -11,10 +11,7 @@
 			$('#cc').combotree('reload');
 		}
 		function setValue(){
-			$('#cc').combotree('setValue',{
-				id:2,
-				text:'File1'
-			});
+			$('#cc').combotree('setValue', 2);
 		}
 		function getValue(){
 			var val = $('#cc').combotree('getValue');
@@ -38,7 +35,7 @@
 		<a href="#" onclick="enable()">enable</a>
 	</div>
 	<span>Select:</span>
-	<input id="cc" class="easyui-combotree" url="tree_data.json" value="2" style="width:200px;" required="true">
+	<input id="cc" class="easyui-combotree" url="tree_data.json" value="2" required="true" style="width:200px;">
 	<select class="easyui-combotree" name="language" url="tree_data.json" multiple="true" cascadeCheck="false" style="width:200px;"></select>
 </body>
 </html>
