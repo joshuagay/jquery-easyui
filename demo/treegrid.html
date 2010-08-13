@@ -3,23 +3,22 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>jQuery EasyUI</title>
-	<link rel="stylesheet" type="text/css" href="../themes/gray/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		$(function(){
 			$('#test').treegrid({
-				title:'My Title',
+				title:'TreeGrid',
 				iconCls:'icon-save',
 				width:500,
 				height:350,
 				nowrap: false,
-				striped: true,
+				rownumbers: true,
 				animate:true,
+				collapsible:true,
 				url:'treegrid_data.json',
-				sortName: 'code',
-				sortOrder: 'desc',
 				idField:'code',
 				treeField:'code',
 				frozenColumns:[[
@@ -37,15 +36,10 @@
 				}
 			});
 		});
-		function test(){
-			var row = $('#test').treegrid('expandTo', '02014');
-			console.log(row)
-		}
 	</script>
 </head>
 <body>
 	<h1>TreeGrid</h1>
-	<a href="#" onclick="test()">test</a>
 	
 	<table id="test"></table>
 	

@@ -16,6 +16,7 @@
 				height:350,
 				nowrap: false,
 				striped: true,
+				collapsible:true,
 				url:'datagrid_data.json',
 				sortName: 'code',
 				sortOrder: 'desc',
@@ -78,9 +79,6 @@
 					}
 				});
 			}
-			$('#test').datagrid('getPanel').panel({
-				collapsible:true
-			});
 		});
 		function resize(){
 			$('#test').datagrid('resize', {
