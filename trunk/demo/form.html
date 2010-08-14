@@ -21,7 +21,8 @@
 				name:'name2',
 				email:'mymail@gmail.com',
 				subject:'subject2',
-				message:'message2'
+				message:'message2',
+				language:5
 			});
 		}
 		function cleardata(){
@@ -53,6 +54,15 @@
         <div>
             <label for="message">Message:</label>
             <textarea name="message" style="height:60px;"></textarea>
+        </div>
+        <div>
+            <label for="language">Language:</label>
+			<input class="easyui-combobox" 
+					name="language"
+					url="combobox_data.json" 
+					valueField="id" 
+					textField="text" 
+					panelHeight="auto">
         </div>
         <div>
             <input type="submit" value="Submit">
