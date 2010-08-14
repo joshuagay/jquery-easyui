@@ -27,7 +27,7 @@ _5.find("input.combo-text").width(_3);
 _6.panel("resize",{width:(_4.panelWidth?_4.panelWidth:_5.outerWidth()),height:_4.panelHeight});
 };
 function _8(_9){
-$(_9).hide();
+$(_9).addClass("combo-f").hide();
 var _a=$("<span class=\"combo\"></span>").insertAfter(_9);
 var _b=$("<input type=\"text\" class=\"combo-text\">").appendTo(_a);
 $("<span><span class=\"combo-arrow\"></span></span>").appendTo(_a);
