@@ -11,6 +11,7 @@
 function _1(_2){
 var _3=$.data(_2,"combogrid").options;
 var _4=$.data(_2,"combogrid").grid;
+$(_2).addClass("combogrid-f");
 $(_2).combo(_3);
 var _5=$(_2).combo("panel");
 if(!_4){

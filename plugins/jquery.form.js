@@ -87,19 +87,28 @@ var val=_12[_14];
 $("input[name="+_14+"]",_13).val(val);
 $("textarea[name="+_14+"]",_13).val(val);
 $("select[name="+_14+"]",_13).val(val);
-if($.fn.combobox){
-$("select[comboboxName="+_14+"]",_13).combobox("setValue",val);
-}
-if($.fn.combotree){
-$("select[combotreeName="+_14+"]",_13).combotree("setValue",val);
+var cc=["combo","combobox","combotree","combogrid"];
+for(var i=0;i<cc.length;i++){
+_15(cc[i],_14,val);
 }
 }
 _e.onLoadSuccess.call(_c,_12);
-_15(_c);
+_1f(_c);
+};
+function _15(_16,_17,val){
+var _18=$(_c);
+var c=_18.find("."+_16+"-f[comboName="+_17+"]");
+if(c.length&&c[_16]){
+if(c[_16]("options").multiple){
+c[_16]("setValues",val);
+}else{
+c[_16]("setValue",val);
+}
+}
 };
 };
-function _16(_17){
-$("input,select,textarea",_17).each(function(){
+function _19(_1a){
+$("input,select,textarea",_1a).each(function(){
 var t=this.type,tag=this.tagName.toLowerCase();
 if(t=="text"||t=="hidden"||t=="password"||tag=="textarea"){
 this.value="";
@@ -113,66 +122,72 @@ this.selectedIndex=-1;
 }
 }
 });
+if($.fn.combo){
+$(".combo-f",_1a).combo("clear");
+}
 if($.fn.combobox){
-$("select[comboboxName]",_17).combobox("clear");
+$(".combobox-f",_1a).combobox("clear");
 }
 if($.fn.combotree){
-$("select[combotreeName]",_17).combotree("clear");
+$(".combotree-f",_1a).combotree("clear");
+}
+if($.fn.combogrid){
+$(".combogrid-f",_1a).combogrid("clear");
 }
 };
-function _18(_19){
-var _1a=$.data(_19,"form").options;
-var _1b=$(_19);
-_1b.unbind(".form").bind("submit.form",function(){
+function _1b(_1c){
+var _1d=$.data(_1c,"form").options;
+var _1e=$(_1c);
+_1e.unbind(".form").bind("submit.form",function(){
 setTimeout(function(){
-_1(_19,_1a);
+_1(_1c,_1d);
 },0);
 return false;
 });
 };
-function _15(_1c){
+function _1f(_20){
 if($.fn.validatebox){
-var box=$(".validatebox-text",_1c);
+var box=$(".validatebox-text",_20);
 if(box.length){
 box.validatebox("validate");
 box.trigger("blur");
-var _1d=$(".validatebox-invalid:first",_1c).focus();
-return _1d.length==0;
+var _21=$(".validatebox-invalid:first",_20).focus();
+return _21.length==0;
 }
 }
 return true;
 };
-$.fn.form=function(_1e,_1f){
-if(typeof _1e=="string"){
-return $.fn.form.methods[_1e](this,_1f);
+$.fn.form=function(_22,_23){
+if(typeof _22=="string"){
+return $.fn.form.methods[_22](this,_23);
 }
-_1e=_1e||{};
+_22=_22||{};
 return this.each(function(){
 if(!$.data(this,"form")){
-$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_1e)});
+$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_22)});
 }
-_18(this);
+_1b(this);
 });
 };
-$.fn.form.methods={submit:function(jq,_20){
+$.fn.form.methods={submit:function(jq,_24){
 return jq.each(function(){
-_1(this,$.extend({},$.fn.form.defaults,_20||{}));
+_1(this,$.extend({},$.fn.form.defaults,_24||{}));
 });
-},load:function(jq,_21){
+},load:function(jq,_25){
 return jq.each(function(){
-_b(this,_21);
+_b(this,_25);
 });
 },clear:function(jq){
 return jq.each(function(){
-_16(this);
+_19(this);
 });
 },validate:function(jq){
-return _15(jq[0]);
+return _1f(jq[0]);
 }};
 $.fn.form.defaults={url:null,onSubmit:function(){
-},success:function(_22){
-},onBeforeLoad:function(_23){
-},onLoadSuccess:function(_24){
+},success:function(_26){
+},onBeforeLoad:function(_27){
+},onLoadSuccess:function(_28){
 },onLoadError:function(){
 }};
 })(jQuery);
