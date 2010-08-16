@@ -32,14 +32,71 @@
 				onBeforeLoad:function(row,param){
 					if (row){
 						$(this).treegrid('options').url = 'treegrid_subdata.json';
+					} else {
+						$(this).treegrid('options').url = 'treegrid_data.json';
 					}
 				}
 			});
 		});
+
+		function reload(){
+			$('#test').treegrid('reload');
+		}
+		function getChildren(){
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				var nodes = $('#test').treegrid('getChildren', node.code);
+			} else {
+				var nodes = $('#test').treegrid('getChildren');
+			}
+			var s = '';
+			for(var i=0; i<nodes.length; i++){
+				s += nodes[i].code + ',';
+			}
+			alert(s);
+		}
+		function getSelected(){
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				alert(node.code+":"+node.name);
+			}
+		}
+		function collapse(){
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('collapse', node.code);
+			}
+		}
+		function expand(){
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('expand', node.code);
+			}
+		}
+		function collapseAll(){
+			$('#test').treegrid('collapseAll');
+		}
+		function expandAll(){
+			$('#test').treegrid('expandAll');
+		}
+		function expandTo(){
+			$('#test').treegrid('expandTo', '02013');
+			$('#test').treegrid('select', '02013');
+		}
 	</script>
 </head>
 <body>
 	<h1>TreeGrid</h1>
+	<div style="margin:10px;">
+		<a href="#" onclick="reload()">reload</a>
+		<a href="#" onclick="getChildren()">getChildren</a>
+		<a href="#" onclick="getSelected()">getSelected</a>
+		<a href="#" onclick="collapse()">collapse</a>
+		<a href="#" onclick="expand()">expand</a>
+		<a href="#" onclick="collapseAll()">collapseAll</a>
+		<a href="#" onclick="expandAll()">expandAll</a>
+		<a href="#" onclick="expandTo()">expandTo</a>
+	</div>
 	
 	<table id="test"></table>
 	
