@@ -5,6 +5,7 @@ Version 1.2
  * combobox: Enable multiple selection.
  * combotree: Enable multiple selection.
  * tabs: Remember the trace of selection, when current tab panel is closed, the previous selected tab will be selected.
+ * datagrid: Extend from panel, so many properties defined in panel can be used for datagrid.
 * New Plugins
  * treegrid: Represent tabular data in hierarchical view, combines tree view and datagrid.
  * combo: The basic component that allow user to extend their combo component such as combobox,combotree,etc.
