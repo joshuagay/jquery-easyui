@@ -94,7 +94,7 @@ _12.html("&nbsp;");
 }else{
 var _13=_12.addClass("menu-item").html();
 _12.empty().append($("<div class=\"menu-text\"></div>").html(_13));
-var _14=_12.attr("icon");
+var _14=_12.attr("iconCls")||_12.attr("icon");
 if(_14){
 $("<div class=\"menu-icon\"></div>").addClass(_14).appendTo(_12);
 }
