@@ -17,49 +17,15 @@
 		    {productid:'FL-DLH-02',name:'Persian'},
 		    {productid:'AV-CB-01',name:'Amazon Parrot'}
 		];
+		function productFormatter(value){
+			for(var i=0; i<products.length; i++){
+				if (products[i].productid == value) return products[i].name;
+			}
+			return value;
+		}
 		$(function(){
 			var lastIndex;
 			$('#tt').datagrid({
-				title:'Editable DataGrid',
-				iconCls:'icon-edit',
-				width:650,
-				height:'auto',
-				singleSelect:true,
-				idField:'itemid',
-				url:'datagrid_data2.json',
-				pagination:true,
-				columns:[[
-					{field:'itemid',title:'Item ID',width:80},
-					{field:'productid',title:'Product',width:100,
-						formatter:function(value){
-							for(var i=0; i<products.length; i++){
-								if (products[i].productid == value) return products[i].name;
-							}
-							return value;
-						},
-						editor:{
-							type:'combobox',
-							options:{
-								valueField:'productid',
-								textField:'name',
-								data:products,
-								required:true
-							}
-						}
-					},
-					{field:'listprice',title:'List Price',width:80,align:'right',editor:{type:'numberbox',options:{precision:1}}},
-					{field:'unitcost',title:'Unit Cost',width:80,align:'right',editor:'numberbox'},
-					{field:'attr1',title:'Attribute',width:150,editor:'text'},
-					{field:'status',title:'Status',width:60,align:'center',
-						editor:{
-							type:'checkbox',
-							options:{
-								on: 'P',
-								off: ''
-							}
-						}
-					}
-				]],
 				toolbar:[{
 					text:'append',
 					iconCls:'icon-add',
@@ -123,7 +89,20 @@
 <body>
 	<h1>Editable DataGrid</h1>
 	
-	<table id="tt"></table>
+	<table id="tt" style="width:650px;height:auto"
+			title="Editable DataGrid" iconCls="icon-edit" singleSelect="true"
+			idField="itemid" url="datagrid_data2.json">
+		<thead>
+			<tr>
+				<th field="itemid" width="80">Item ID</th>
+				<th field="productid" width="100" formatter="productFormatter" editor="{type:'combobox',options:{valueField:'productid',textField:'name',data:products,required:true}}">Product</th>
+				<th field="listprice" width="80" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
+				<th field="unitcost" width="80" align="right" editor="numberbox">Unit Cost</th>
+				<th field="attr1" width="150" editor="text">Attribute</th>
+				<th field="status" width="60" align="center" editor="{type:'checkbox',options:{on:'P',off:''}}">Status</th>
+			</tr>
+		</thead>
+	</table>
 	
 </body>
 </html>
