@@ -88,7 +88,7 @@ function _17(_18,_19){
 var mm=[];
 var _1a=false;
 if(typeof _18=="string"){
-mm.push(_18);
+add(_18);
 }else{
 for(var i=0;i<_18.length;i++){
 add(_18[i]);
