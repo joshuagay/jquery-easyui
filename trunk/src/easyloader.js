@@ -247,7 +247,7 @@
 		var doLoad = false;
 		
 		if (typeof name == 'string'){
-			mm.push(name);
+			add(name);
 		} else {
 			for(var i=0; i<name.length; i++){
 				add(name[i]);
