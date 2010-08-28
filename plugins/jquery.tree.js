@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2
+ * jQuery EasyUI 1.2.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -154,9 +154,17 @@ var _24=$.data(_22,"tree").options;
 var _25=$(_23);
 if(_26(_22,_23)){
 var ck=_25.find(".tree-checkbox");
-if(!ck.length){
+if(ck.length){
+if(ck.hasClass("tree-checkbox1")){
+_12(_22,_23,true);
+}else{
+_12(_22,_23,false);
+}
+}else{
+if(_24.onlyLeafCheck){
 $("<span class=\"tree-checkbox tree-checkbox0\"></span>").insertBefore(_25.find(".tree-title"));
 _c(_22);
+}
 }
 }else{
 var ck=_25.find(".tree-checkbox");
@@ -537,9 +545,9 @@ _8c.find(".tree-icon").addClass(_8d.iconCls);
 var ck=_8c.find(".tree-checkbox");
 ck.removeClass("tree-checkbox0 tree-checkbox1 tree-checkbox2");
 if(_8d.checked){
-ck.addClass("tree-checkbox1");
+_12(_8a,_8b.target,true);
 }else{
-ck.addClass("tree-checkbox0");
+_12(_8a,_8b.target,false);
 }
 };
 function _8e(_8f,id){
