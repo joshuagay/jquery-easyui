@@ -1,3 +1,9 @@
+Version 1.2.1
+-------------
+* Bug
+ * easyloader: Some dependencies cannot be loaded by their order. fixed.
+ * tree: The checkbox is setted correctly when removing a node. fixed.
+  
 Version 1.2
 -------------
 * Improvement
