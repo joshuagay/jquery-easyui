@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2
+ * jQuery EasyUI 1.2.1
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -557,7 +557,8 @@ var _90=_33(_84,true);
 _8c.find(">div.datagrid-body>div.datagrid-body-inner").html(_8f(_90,_86.rownumbers));
 }
 _86.onLoadSuccess.call(_84,_85);
-_8d.find(">div.datagrid-body").scrollLeft(0).scrollTop(0);
+_8d.find(">div.datagrid-body").scrollLeft(0);
+_8d.find(">div.datagrid-body").scrollTop(0);
 var _91=$(">div.datagrid-pager",_87);
 if(_91.length){
 if(_91.pagination("options").total!=_85.total){
