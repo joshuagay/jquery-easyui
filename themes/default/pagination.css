@@ -3,6 +3,7 @@
 }
 .pagination table{
 	float:left;
+	height:30px;
 }
 .pagination-btn-separator{
 	float:left;
