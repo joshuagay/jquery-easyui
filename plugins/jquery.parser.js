@@ -8,29 +8,41 @@
  * 
  */
 (function($){
-$.parser={auto:true,plugins:["linkbutton","menu","menubutton","splitbutton","layout","tree","window","dialog","datagrid","combobox","combotree","numberbox","validatebox","numberspinner","timespinner","calendar","datebox","panel","tabs","accordion"],parse:function(_1){
-if($.parser.auto){
+$.parser={auto:true,onComplete:function(_1){
+},plugins:["linkbutton","menu","menubutton","splitbutton","layout","tree","window","dialog","datagrid","combobox","combotree","numberbox","validatebox","numberspinner","timespinner","calendar","datebox","panel","tabs","accordion"],parse:function(_2){
+var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
-(function(){
-var _2=$.parser.plugins[i];
-var r=$(".easyui-"+_2,_1);
+var _3=$.parser.plugins[i];
+var r=$(".easyui-"+_3,_2);
 if(r.length){
-if(r[_2]){
-r[_2]();
+if(r[_3]){
+r[_3]();
 }else{
-if(window.easyloader){
-easyloader.load(_2,function(){
-r[_2]();
+aa.push({name:_3,jq:r});
+}
+}
+}
+if(aa.length&&window.easyloader){
+var _4=[];
+for(var i=0;i<aa.length;i++){
+_4.push(aa[i].name);
+}
+easyloader.load(_4,function(){
+for(var i=0;i<aa.length;i++){
+var _5=aa[i].name;
+var jq=aa[i].jq;
+jq[_5]();
+}
+$.parser.onComplete.call($.parser,_2);
 });
-}
-}
-}
-})();
-}
+}else{
+$.parser.onComplete.call($.parser,_2);
 }
 }};
 $(function(){
+if(!window.easyloader&&$.parser.auto){
 $.parser.parse();
+}
 });
 })(jQuery);
 
