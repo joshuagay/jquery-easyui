@@ -181,7 +181,9 @@ easyloader.base=src.substring(0,m.index);
 window.using=easyloader.load;
 if(window.jQuery){
 jQuery(function(){
-easyloader.load("parser");
+easyloader.load("parser",function(){
+jQuery.parser.parse();
+});
 });
 }
 })();
