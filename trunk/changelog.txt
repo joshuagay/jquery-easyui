@@ -2,7 +2,9 @@ Version 1.2.1
 -------------
 * Bug
  * easyloader: Some dependencies cannot be loaded by their order. fixed.
- * tree: The checkbox is setted correctly when removing a node. fixed.
+ * tree: The checkbox is setted incorrectly when removing a node. fixed.
+* Improvement
+ * parser: Add onComplete callback function that can indicate whether the parse action is complete. 
   
 Version 1.2
 -------------
