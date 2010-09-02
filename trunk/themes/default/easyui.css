@@ -781,6 +781,7 @@ a.m-btn-plain-active{
 }
 .pagination table{
 	float:left;
+	height:30px;
 }
 .pagination-btn-separator{
 	float:left;
