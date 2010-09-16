@@ -1212,7 +1212,6 @@ a.s-btn-plain-active .s-btn-downarrow{
 }
 .tree-title{
 	display:inline-block;
-	line-height1:18px;
 	text-decoration:none;
 	vertical-align:middle;
 	padding:1px 2px 1px 2px;
@@ -1239,6 +1238,27 @@ a.s-btn-plain-active .s-btn-downarrow{
 }
 .tree-checkbox2{
 	background:url('images/tree_checkbox_2.gif') no-repeat;
+}
+.tree-node-proxy{
+	font-size:12px;
+	padding:1px 2px 1px 18px;
+	background:#fafafa;
+	border:1px solid #ccc;
+}
+.tree-dnd-yes{
+	background:url('images/tree_dnd_yes.png') no-repeat 0 center;
+}
+.tree-dnd-no{
+	background:url('images/tree_dnd_no.png') no-repeat 0 center;
+}
+.tree-node-top{
+	border-top:1px dotted red;
+}
+.tree-node-bottom{
+	border-bottom:1px dotted red;
+}
+.tree-node-append .tree-title{
+	border:1px dotted red;
 }.validatebox-invalid{
 	background:#FFFFEE url('images/validatebox_warning.png') no-repeat right 1px;
 }
