@@ -408,6 +408,8 @@
 }
 .datagrid-cell-check{
 	padding:3px 6px;
+	font-size:1px;
+	overflow:hidden;
 }
 .datagrid-header-check input{
 	margin:0;
@@ -1018,6 +1020,14 @@ a.s-btn-plain-active .s-btn-downarrow{
 	cursor:pointer;
 	background:#E0ECFF url('images/tabs_rightarrow.png') no-repeat 2px 5px;
 }
+.tabs-tool{
+	position:absolute;
+	top:-1px;
+	border:1px solid #8DB2E3;
+	padding:1px;
+	background:#E0ECFF;
+	overflow:hidden;
+}
 .tabs-header-plain .tabs-scroller-left{
 	top:2px;
 	height:25px!important;
@@ -1027,6 +1037,10 @@ a.s-btn-plain-active .s-btn-downarrow{
 	top:2px;
 	height:25px!important;
 	height:27px;
+}
+.tabs-header-plain .tabs-tool{
+	top:2px;
+	padding-top:0;
 }
 .tabs-scroller-over{
 	background-color:#ECF9F9;
