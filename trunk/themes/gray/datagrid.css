@@ -178,6 +178,8 @@
 }
 .datagrid-cell-check{
 	padding:3px 6px;
+	font-size:1px;
+	overflow:hidden;
 }
 .datagrid-header-check input{
 	margin:0;
