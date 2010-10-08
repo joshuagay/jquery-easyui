@@ -39,8 +39,9 @@
 }
 .calendar-title span{
 	position:relative;
-	top:4px;
-	display:incline-block;
+	top:2px;
+	line-height:12px;
+	display:inline-block;
 	padding:3px;
 	cursor:pointer;
 	-moz-border-radius:4px;
