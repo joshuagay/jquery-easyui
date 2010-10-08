@@ -423,6 +423,12 @@
 	width:15px;
 	height:15px;
 }
+.datagrid-row-collapse{
+	background:url('images/datagrid_row_collapse.gif') no-repeat center center;
+}
+.datagrid-row-expand{
+	background:url('images/datagrid_row_expand.gif') no-repeat center center;
+}
 .datagrid-row-alt{
 	background:#EEEEFF;
 }
