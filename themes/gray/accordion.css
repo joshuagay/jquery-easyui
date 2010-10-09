@@ -19,3 +19,9 @@
 .accordion-noborder .accordion-body{
 	border-width:0px;
 }
+.accordion-collapse{
+	background:url('images/accordion_collapse.png') no-repeat;
+}
+.accordion-expand{
+	background:url('images/accordion_expand.png') no-repeat;
+}

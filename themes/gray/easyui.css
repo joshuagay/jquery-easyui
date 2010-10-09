@@ -18,7 +18,14 @@
 }
 .accordion-noborder .accordion-body{
 	border-width:0px;
-}.calendar{
+}
+.accordion-collapse{
+	background:url('images/accordion_collapse.png') no-repeat;
+}
+.accordion-expand{
+	background:url('images/accordion_expand.png') no-repeat;
+}
+.calendar{
 	background:#fff;
 	border:1px solid #d3d3d3;
 	padding:1px;
