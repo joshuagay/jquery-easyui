@@ -14,7 +14,7 @@ t.wrapInner("<div class=\"dialog-content\"></div>");
 var _3=t.find(">div.dialog-content");
 _3.css("padding",t.css("padding"));
 t.css("padding",0);
-_3.panel({border:false});
+_3.panel({border:false,doSize:false});
 return _3;
 };
 function _4(_5){

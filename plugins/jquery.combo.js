@@ -15,6 +15,7 @@ var _6=$.data(_2,"combo").panel;
 if(_3){
 _4.width=_3;
 }
+_5.appendTo("body");
 if(isNaN(_4.width)){
 _4.width=_5.find("input.combo-text").outerWidth();
 }
@@ -25,6 +26,7 @@ _3-=_5.outerWidth()-_5.width();
 }
 _5.find("input.combo-text").width(_3);
 _6.panel("resize",{width:(_4.panelWidth?_4.panelWidth:_5.outerWidth()),height:_4.panelHeight});
+_5.insertAfter(_2);
 };
 function _8(_9){
 $(_9).addClass("combo-f").hide();
