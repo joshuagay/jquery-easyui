@@ -142,7 +142,7 @@ _16.find(">div.panel-body").removeClass("panel-body-noheader");
 _16.find(">div.panel-body").addClass("panel-body-noheader");
 }
 function _1c(){
-if($(this).hasClass("panel-tool-expand")){
+if(_15.collapsed==true){
 _38(_14,true);
 }else{
 _28(_14,true);
@@ -154,7 +154,7 @@ _43(_14);
 return false;
 };
 function _1a(){
-if($(this).hasClass("panel-tool-restore")){
+if(_15.maximized==true){
 _47(_14);
 }else{
 _27(_14);
@@ -194,9 +194,11 @@ _25.closed=false;
 _25.minimized=false;
 _25.onOpen.call(_23);
 if(_25.maximized==true){
+_25.maximized=false;
 _27(_23);
 }
 if(_25.collapsed==true){
+_25.collapsed=false;
 _28(_23);
 }
 if(!_25.collapsed){
@@ -229,9 +231,9 @@ _30.onDestroy.call(_2e);
 function _28(_32,_33){
 var _34=$.data(_32,"panel").options;
 var _35=$.data(_32,"panel").panel;
-var _36=_35.find(">div.panel-body");
-var _37=_35.find(">div.panel-header .panel-tool-collapse");
-if(_37.hasClass("panel-tool-expand")){
+var _36=_35.children("div.panel-body");
+var _37=_35.children("div.panel-header").find("div.panel-tool-collapse");
+if(_34.collapsed==true){
 return;
 }
 _36.stop(true,true);
@@ -253,9 +255,9 @@ _34.onCollapse.call(_32);
 function _38(_39,_3a){
 var _3b=$.data(_39,"panel").options;
 var _3c=$.data(_39,"panel").panel;
-var _3d=_3c.find(">div.panel-body");
-var _3e=_3c.find(">div.panel-header .panel-tool-collapse");
-if(!_3e.hasClass("panel-tool-expand")){
+var _3d=_3c.children("div.panel-body");
+var _3e=_3c.children("div.panel-header").find("div.panel-tool-collapse");
+if(_3b.collapsed==false){
 return;
 }
 _3d.stop(true,true);
@@ -279,8 +281,8 @@ _1e(_39);
 function _27(_3f){
 var _40=$.data(_3f,"panel").options;
 var _41=$.data(_3f,"panel").panel;
-var _42=_41.find(">div.panel-header .panel-tool-max");
-if(_42.hasClass("panel-tool-restore")){
+var _42=_41.children("div.panel-header").find("div.panel-tool-max");
+if(_40.maximized==true){
 return;
 }
 _42.addClass("panel-tool-restore");
@@ -304,8 +306,8 @@ _45.onMinimize.call(_44);
 function _47(_48){
 var _49=$.data(_48,"panel").options;
 var _4a=$.data(_48,"panel").panel;
-var _4b=_4a.find(">div.panel-header .panel-tool-max");
-if(!_4b.hasClass("panel-tool-restore")){
+var _4b=_4a.children("div.panel-header").find("div.panel-tool-max");
+if(_49.maximized==false){
 return;
 }
 _4a.show();
@@ -325,11 +327,11 @@ function _4d(_4e){
 var _4f=$.data(_4e,"panel").options;
 var _50=$.data(_4e,"panel").panel;
 if(_4f.border==true){
-_50.find(">div.panel-header").removeClass("panel-header-noborder");
-_50.find(">div.panel-body").removeClass("panel-body-noborder");
+_50.children("div.panel-header").removeClass("panel-header-noborder");
+_50.children("div.panel-body").removeClass("panel-body-noborder");
 }else{
-_50.find(">div.panel-header").addClass("panel-header-noborder");
-_50.find(">div.panel-body").addClass("panel-body-noborder");
+_50.children("div.panel-header").addClass("panel-header-noborder");
+_50.children("div.panel-body").addClass("panel-body-noborder");
 }
 };
 function _51(_52,_53){
