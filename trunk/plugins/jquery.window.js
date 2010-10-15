@@ -211,6 +211,7 @@ if(_19){
 $.extend(_19.options,_16);
 }else{
 _19=$.data(this,"window",{options:$.extend({},$.fn.window.defaults,$.fn.window.parseOptions(this),_16)});
+$(this).appendTo("body");
 }
 _9(this);
 _13(this);
@@ -233,7 +234,7 @@ _5(this,_1d);
 }};
 $.fn.window.parseOptions=function(_1e){
 var t=$(_1e);
-return $.extend({},$.fn.panel.parseOptions(_1e),{draggable:(t.attr("draggable")!=undefined?(t.attr("draggable")==true||t.attr("draggable")=="true"):undefined),resizable:(t.attr("resizable")?t.attr("resizable")=="true":undefined),shadow:(t.attr("shadow")?t.attr("shadow")=="true":undefined),modal:(t.attr("modal")?t.attr("modal")=="true":undefined)});
+return $.extend({},$.fn.panel.parseOptions(_1e),{draggable:(t.attr("draggable")?t.attr("draggable")=="true":undefined),resizable:(t.attr("resizable")?t.attr("resizable")=="true":undefined),shadow:(t.attr("shadow")?t.attr("shadow")=="true":undefined),modal:(t.attr("modal")?t.attr("modal")=="true":undefined)});
 };
 $.fn.window.defaults=$.extend({},$.fn.panel.defaults,{zIndex:9000,draggable:true,resizable:true,shadow:true,modal:false,title:"New Window",collapsible:true,minimizable:true,maximizable:true,closable:true,closed:false});
 })(jQuery);
