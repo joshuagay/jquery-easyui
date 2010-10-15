@@ -15,11 +15,24 @@
 				onClick:function(node){
 					$(this).tree('toggle', node.target);
 					//alert('you dbclick '+node.text);
+				},
+				onContextMenu: function(e, node){
+					e.preventDefault();
+					$('#tt2').tree('select', node.target);
+					$('#mm').menu('show', {
+						left: e.pageX,
+						top: e.pageY
+					});
 				}
 			});
 		});
 		function reload(){
-			$('#tt2').tree('reload');
+			var node = $('#tt2').tree('getSelected');
+			if (node){
+				$('#tt2').tree('reload', node.target);
+			} else {
+				$('#tt2').tree('reload');
+			}
 		}
 		function getChildren(){
 			var node = $('#tt2').tree('getSelected');
@@ -56,10 +69,20 @@
 			$('#tt2').tree('expand',node.target);
 		}
 		function collapseAll(){
-			$('#tt2').tree('collapseAll');
+			var node = $('#tt2').tree('getSelected');
+			if (node){
+				$('#tt2').tree('collapseAll', node.target);
+			} else {
+				$('#tt2').tree('collapseAll');
+			}
 		}
 		function expandAll(){
-			$('#tt2').tree('expandAll');
+			var node = $('#tt2').tree('getSelected');
+			if (node){
+				$('#tt2').tree('expandAll', node.target);
+			} else {
+				$('#tt2').tree('expandAll');
+			}
 		}
 		function append(){
 			var node = $('#tt2').tree('getSelected');
@@ -101,7 +124,7 @@
 <body>
 	<h1>Tree</h1>
 	<p>Create from HTML markup</p>
-	<ul id="tt1" class="easyui-tree" animate="true">
+	<ul id="tt1" class="easyui-tree" animate="true" dnd="true">
 		<li>
 			<span>Folder</span>
 			<ul>
@@ -151,5 +174,13 @@
 	</div>
 
 	<ul id="tt2"></ul>
+	
+	<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="append()" iconCls="icon-add">Append</div>
+		<div onclick="remove()" iconCls="icon-remove">Remove</div>
+		<div class="menu-sep"></div>
+		<div onclick="expand()">Expand</div>
+		<div onclick="collapse()">Collapse</div>
+	</div>
 </body>
 </html>
