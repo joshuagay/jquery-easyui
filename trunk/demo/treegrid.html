@@ -22,7 +22,11 @@
 				idField:'code',
 				treeField:'code',
 				frozenColumns:[[
-	                {title:'code',field:'code',width:150}
+	                {title:'code',field:'code',width:150,
+		                formatter:function(value){
+		                	return '<span style="color:red">'+value+'</span>';
+		                }
+	                }
 				]],
 				columns:[[
 					{field:'name',title:'Name',width:120},
@@ -35,12 +39,26 @@
 					} else {
 						$(this).treegrid('options').url = 'treegrid_data.json';
 					}
+				},
+				onContextMenu: function(e,row){
+					e.preventDefault();
+					$(this).treegrid('unselectAll');
+					$(this).treegrid('select', row.code);
+					$('#mm').menu('show', {
+						left: e.pageX,
+						top: e.pageY
+					});
 				}
 			});
 		});
 
 		function reload(){
-			$('#test').treegrid('reload');
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('reload', node.code);
+			} else {
+				$('#test').treegrid('reload');
+			}
 		}
 		function getChildren(){
 			var node = $('#test').treegrid('getSelected');
@@ -74,14 +92,45 @@
 			}
 		}
 		function collapseAll(){
-			$('#test').treegrid('collapseAll');
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('collapseAll', node.code);
+			} else {
+				$('#test').treegrid('collapseAll');
+			}
 		}
 		function expandAll(){
-			$('#test').treegrid('expandAll');
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('expandAll', node.code);
+			} else {
+				$('#test').treegrid('expandAll');
+			}
 		}
 		function expandTo(){
 			$('#test').treegrid('expandTo', '02013');
 			$('#test').treegrid('select', '02013');
+		}
+		var codeIndex = 1000;
+		function append(){
+			codeIndex++;
+			var data = [{
+				code: 'code'+codeIndex,
+				name: 'name'+codeIndex,
+				addr: 'address'+codeIndex,
+				col4: 'col4 data'
+			}];
+			var node = $('#test').treegrid('getSelected');
+			$('#test').treegrid('append', {
+				parent: (node?node.code:null),
+				data: data
+			});
+		}
+		function remove(){
+			var node = $('#test').treegrid('getSelected');
+			if (node){
+				$('#test').treegrid('remove', node.code);
+			}
 		}
 	</script>
 </head>
@@ -96,9 +145,14 @@
 		<a href="#" onclick="collapseAll()">collapseAll</a>
 		<a href="#" onclick="expandAll()">expandAll</a>
 		<a href="#" onclick="expandTo()">expandTo</a>
+		<a href="#" onclick="append()">append</a>
 	</div>
 	
 	<table id="test"></table>
 	
+	<div id="mm" class="easyui-menu" style="width:120px;">
+		<div onclick="append()">Append</div>
+		<div onclick="remove()">Remove</div>
+	</div>
 </body>
 </html>
