@@ -35,7 +35,7 @@ var _b=$("<input type=\"text\" class=\"combo-text\">").appendTo(_a);
 $("<span><span class=\"combo-arrow\"></span></span>").appendTo(_a);
 $("<input type=\"hidden\" class=\"combo-value\">").appendTo(_a);
 var _c=$("<div class=\"combo-panel\"></div>").appendTo("body");
-_c.panel({doSize:false,closed:true,style:{position:"absolute"},onOpen:function(){
+_c.panel({doSize:false,closed:true,style:{position:"absolute",zIndex:10},onOpen:function(){
 $(this).panel("resize");
 }});
 var _d=$(_9).attr("name");

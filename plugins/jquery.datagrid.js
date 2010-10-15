@@ -753,12 +753,14 @@ _cb.scrollTop(_cb.scrollTop()+top+tr.outerHeight()-_cb.height()+18);
 }
 if(_c6.idField){
 var row=_c7.rows[_c4];
+(function(){
 for(var i=0;i<_c8.length;i++){
 if(_c8[i][_c6.idField]==row[_c6.idField]){
 return;
 }
 }
 _c8.push(row);
+})();
 }
 _c6.onSelect.call(_c3,_c4,_c7.rows[_c4]);
 };
