@@ -249,7 +249,7 @@ for(var i=0;i<_50.length;i++){
 var _54=_50[i];
 var col=$(_35).datagrid("getColumnOption",_54);
 if(col){
-var _55="width:"+(col.width)+"px;";
+var _55="width:"+(col.boxWidth)+"px;";
 _55+="text-align:"+(col.align||"left")+";";
 _55+=_39.nowrap==false?"white-space:normal;":"";
 _53.push("<td field=\""+_54+"\">");
