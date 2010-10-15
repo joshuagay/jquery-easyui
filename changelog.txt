@@ -3,8 +3,18 @@ Version 1.2.1
 * Bug
  * easyloader: Some dependencies cannot be loaded by their order. fixed.
  * tree: The checkbox is setted incorrectly when removing a node. fixed.
+ * dialog: The dialog layout incorrectly when 'closed' property is setted to true. fixed.
 * Improvement
- * parser: Add onComplete callback function that can indicate whether the parse action is complete. 
+ * parser: Add onComplete callback function that can indicate whether the parse action is complete.
+ * menu: Add onClick callback function and some other methods.
+ * tree: Add some useful methods.
+ * tree: Drag and Drop feature is supported now.
+ * tree: Add onContextMenu callback function.
+ * tabs: Add onContextMenu callback function.
+ * tabs: Add 'tools' property that can create buttons on right bar.
+ * datagrid: Add onHeaderContextMenu and onRowContextMenu callback functions.
+ * datagrid: Custom view is supported.
+ * treegrid: Add onContextMenu callback function and append,remove methods.
   
 Version 1.2
 -------------
