@@ -71,7 +71,7 @@
 		tabs:{
 			js:'jquery.tabs.js',
 			css:'tabs.css',
-			dependencies:['panel']
+			dependencies:['panel','linkbutton']
 		},
 		splitbutton:{
 			js:'jquery.splitbutton.js',
@@ -133,7 +133,8 @@
 		},
 		tree:{
 			js:'jquery.tree.js',
-			css:'tree.css'
+			css:'tree.css',
+			dependencies:['draggable','droppable']
 		},
 		datebox:{
 			js:'jquery.datebox.js',
@@ -306,67 +307,6 @@
 		loadMm();
 	}
 	
-//	function loadModule1(name, callback){
-//		var p = [];
-//		var doLoad = false;
-//		
-//		if (typeof name == 'string'){
-//			add(name);
-//		} else {
-//			for(var i=0; i<name.length; i++){
-//				add(name[i]);
-//			}
-//		}
-//		
-//		function add(name){
-//			if (!modules[name]) return;
-//			
-//			var d = modules[name]['dependencies'];
-//			if (d){
-//				for(var i=0; i<d.length; i++){
-//					add(d[i]);
-//				}
-//			}
-//			p.push(name);
-//			if (!queues[name]){
-//				loadSingle(name);
-//				doLoad = true;
-//			}
-//		}
-//		function finish(){
-//			if (callback){
-//				callback();
-//			}
-//			easyloader.onLoad(name);
-//		}
-//		
-//		var time = 0;
-//		(function(){
-//			var b = true;
-//			for(var i=0; i<p.length; i++){
-//				if (queues[p[i]] == 'loading'){
-//					b = false;
-//					break;
-//				}
-//			}
-//			if (b == true){
-//				if (easyloader.locale && doLoad == true && locales[easyloader.locale]){
-//					var url = easyloader.base + 'locale/' + locales[easyloader.locale];
-//					runJs(url, function(){
-//						finish();
-//					});
-//				} else {
-//					finish();
-//				}
-//			} else {
-//				if (time < easyloader.timeout){
-//					time += 10;
-//					setTimeout(arguments.callee, 10);
-//				}
-//			}
-//		})();
-//	}
-	
 	easyloader = {
 		modules:modules,
 		locales:locales,
@@ -413,7 +353,9 @@
 	
 	if (window.jQuery){
 		jQuery(function(){
-			easyloader.load('parser');
+			easyloader.load('parser', function(){
+				jQuery.parser.parse();
+			});
 		});
 	}
 	
