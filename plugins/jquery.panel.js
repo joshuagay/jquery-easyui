@@ -19,8 +19,8 @@ this.outerHTML="";
 function _3(_4,_5){
 var _6=$.data(_4,"panel").options;
 var _7=$.data(_4,"panel").panel;
-var _8=_7.find(">div.panel-header");
-var _9=_7.find(">div.panel-body");
+var _8=_7.children("div.panel-header");
+var _9=_7.children("div.panel-body");
 if(_5){
 if(_5.width){
 _6.width=_5.width;
@@ -41,10 +41,6 @@ _6.width=p.width();
 _6.height=p.height();
 }
 _7.css({left:_6.left,top:_6.top});
-_7.css(_6.style);
-_7.addClass(_6.cls);
-_8.addClass(_6.headerCls);
-_9.addClass(_6.bodyCls);
 if(!isNaN(_6.width)){
 if($.boxModel==true){
 _7.width(_6.width-(_7.outerWidth()-_7.width()));
@@ -333,6 +329,10 @@ _50.children("div.panel-body").removeClass("panel-body-noborder");
 _50.children("div.panel-header").addClass("panel-header-noborder");
 _50.children("div.panel-body").addClass("panel-body-noborder");
 }
+_50.css(_4f.style);
+_50.addClass(_4f.cls);
+_50.children("div.panel-header").addClass(_4f.headerCls);
+_50.children("div.panel-body").addClass(_4f.bodyCls);
 };
 function _51(_52,_53){
 $.data(_52,"panel").options.title=_53;
