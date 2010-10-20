@@ -408,7 +408,7 @@ $.fn.tabs.parseOptions=function(_75){
 var t=$(_75);
 return {width:(parseInt(_75.style.width)||undefined),height:(parseInt(_75.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),plain:(t.attr("plain")?t.attr("plain")=="true":undefined)};
 };
-$.fn.tabs.defaults={width:"auto",height:"auto",plain:false,fit:false,border:true,scrollIncrement:100,scrollDuration:400,onLoad:function(_76){
+$.fn.tabs.defaults={width:"auto",height:"auto",plain:false,fit:false,border:true,tools:null,scrollIncrement:100,scrollDuration:400,onLoad:function(_76){
 },onSelect:function(_77){
 },onBeforeClose:function(_78){
 },onClose:function(_79){
