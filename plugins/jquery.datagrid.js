@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.1
+ * jQuery EasyUI 1.2.2
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
@@ -436,7 +436,7 @@ var _73=0;
 var _74=_37(_6f,false);
 for(var i=0;i<_74.length;i++){
 var col=_6c(_6f,_74[i]);
-if(!col.hidden){
+if(!col.hidden&&!col.checkbox){
 _73+=col.width;
 }
 }
