@@ -236,6 +236,9 @@ _13b(_39);
 _3a.pageSize=_42.pagination("options").pageSize;
 }
 function _40(_45,_46,_47){
+if(!_46){
+return;
+}
 $(_45).empty();
 var t=$("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tbody></tbody></table>").appendTo(_45);
 for(var i=0;i<_46.length;i++){
@@ -281,7 +284,6 @@ td.wrap("<tr></tr>").parent().appendTo($("tbody",t));
 td.prependTo($("tr:first",t));
 }
 }
-return t;
 };
 };
 function _4b(_4c){
