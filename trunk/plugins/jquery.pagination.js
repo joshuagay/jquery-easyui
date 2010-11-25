@@ -94,7 +94,7 @@ _a(_2,_3.pageNumber);
 };
 function _a(_b,_c){
 var _d=$.data(_b,"pagination").options;
-var _e=Math.ceil(_d.total/_d.pageSize);
+var _e=Math.ceil(_d.total/_d.pageSize)||1;
 var _f=_c;
 if(_c<1){
 _f=1;
@@ -108,7 +108,7 @@ _10(_b);
 };
 function _10(_11){
 var _12=$.data(_11,"pagination").options;
-var _13=Math.ceil(_12.total/_12.pageSize);
+var _13=Math.ceil(_12.total/_12.pageSize)||1;
 var num=$(_11).find("input.pagination-num");
 num.val(_12.pageNumber);
 num.parent().next().find("span").html(_12.afterPageText.replace(/{pages}/,_13));

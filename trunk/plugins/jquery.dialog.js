@@ -66,46 +66,46 @@ _6.onLoad.apply(_5,arguments);
 }});
 _6.href=_c;
 };
-function _10(_11){
-var _12=$.data(_11,"dialog").contentPanel;
-_12.panel("refresh");
+function _10(_11,_12){
+var _13=$.data(_11,"dialog").contentPanel;
+_13.panel("refresh",_12);
 };
-$.fn.dialog=function(_13,_14){
-if(typeof _13=="string"){
-var _15=$.fn.dialog.methods[_13];
-if(_15){
-return _15(this,_14);
-}else{
-return this.window(_13,_14);
-}
-}
-_13=_13||{};
-return this.each(function(){
-var _16=$.data(this,"dialog");
+$.fn.dialog=function(_14,_15){
+if(typeof _14=="string"){
+var _16=$.fn.dialog.methods[_14];
 if(_16){
-$.extend(_16.options,_13);
+return _16(this,_15);
 }else{
-$.data(this,"dialog",{options:$.extend({},$.fn.dialog.defaults,$.fn.dialog.parseOptions(this),_13),contentPanel:_1(this)});
+return this.window(_14,_15);
+}
+}
+_14=_14||{};
+return this.each(function(){
+var _17=$.data(this,"dialog");
+if(_17){
+$.extend(_17.options,_14);
+}else{
+$.data(this,"dialog",{options:$.extend({},$.fn.dialog.defaults,$.fn.dialog.parseOptions(this),_14),contentPanel:_1(this)});
 }
 _4(this);
 });
 };
 $.fn.dialog.methods={options:function(jq){
-var _17=$.data(jq[0],"dialog").options;
-var _18=jq.panel("options");
-$.extend(_17,{closed:_18.closed,collapsed:_18.collapsed,minimized:_18.minimized,maximized:_18.maximized});
-var _19=$.data(jq[0],"dialog").contentPanel;
-return _17;
+var _18=$.data(jq[0],"dialog").options;
+var _19=jq.panel("options");
+$.extend(_18,{closed:_19.closed,collapsed:_19.collapsed,minimized:_19.minimized,maximized:_19.maximized});
+var _1a=$.data(jq[0],"dialog").contentPanel;
+return _18;
 },dialog:function(jq){
 return jq.window("window");
-},refresh:function(jq){
+},refresh:function(jq,_1b){
 return jq.each(function(){
-_10(this);
+_10(this,_1b);
 });
 }};
-$.fn.dialog.parseOptions=function(_1a){
-var t=$(_1a);
-return $.extend({},$.fn.window.parseOptions(_1a),{});
+$.fn.dialog.parseOptions=function(_1c){
+var t=$(_1c);
+return $.extend({},$.fn.window.parseOptions(_1c),{});
 };
 $.fn.dialog.defaults=$.extend({},$.fn.window.defaults,{title:"New Dialog",collapsible:false,minimizable:false,maximizable:false,resizable:false,toolbar:null,buttons:null});
 })(jQuery);
