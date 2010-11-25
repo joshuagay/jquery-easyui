@@ -9,7 +9,7 @@
  */
 (function($){
 $.parser={auto:true,onComplete:function(_1){
-},plugins:["linkbutton","menu","menubutton","splitbutton","tree","combobox","combotree","numberbox","validatebox","numberspinner","timespinner","calendar","datebox","layout","panel","datagrid","tabs","accordion","window","dialog"],parse:function(_2){
+},plugins:["linkbutton","menu","menubutton","splitbutton","tree","combobox","combotree","numberbox","validatebox","numberspinner","timespinner","calendar","datebox","datetimebox","layout","panel","datagrid","tabs","accordion","window","dialog"],parse:function(_2){
 var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
 var _3=$.parser.plugins[i];

@@ -15,10 +15,10 @@ if(isNaN(_4)){
 $(_2).val("");
 return;
 }
-if(_3.min!=null&&_3.min!=undefined&&_4<_3.min){
+if(_3.min!=null&&_3.min!=undefined&&_3.min!=""&&_4<_3.min){
 $(_2).val(_3.min.toFixed(_3.precision));
 }else{
-if(_3.max!=null&&_3.max!=undefined&&_4>_3.max){
+if(_3.max!=null&&_3.max!=undefined&&_3.max!=""&&_4>_3.max){
 $(_2).val(_3.max.toFixed(_3.precision));
 }else{
 $(_2).val(_4);

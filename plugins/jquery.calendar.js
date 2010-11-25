@@ -262,20 +262,20 @@ _2f.current=new Date(_35[0],parseInt(_35[1])-1,_35[2]);
 _2f.onSelect.call(_2e,_2f.current);
 });
 };
-$.fn.calendar=function(_36){
+$.fn.calendar=function(_36,_37){
 if(typeof _36=="string"){
-return $.fn.calendar.methods[_36](this,param);
+return $.fn.calendar.methods[_36](this,_37);
 }
 _36=_36||{};
 return this.each(function(){
-var _37=$.data(this,"calendar");
-if(_37){
-$.extend(_37.options,_36);
+var _38=$.data(this,"calendar");
+if(_38){
+$.extend(_38.options,_36);
 }else{
-_37=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,$.fn.calendar.parseOptions(this),_36)});
+_38=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,$.fn.calendar.parseOptions(this),_36)});
 _7(this);
 }
-if(_37.options.border==false){
+if(_38.options.border==false){
 $(this).addClass("calendar-noborder");
 }
 _1(this);
@@ -283,12 +283,22 @@ _f(this);
 $(this).find("div.calendar-menu").hide();
 });
 };
-$.fn.calendar.methods={};
-$.fn.calendar.parseOptions=function(_38){
-var t=$(_38);
-return {width:(parseInt(_38.style.width)||undefined),height:(parseInt(_38.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)};
+$.fn.calendar.methods={options:function(jq){
+return $.data(jq[0],"calendar").options;
+},resize:function(jq){
+return jq.each(function(){
+_1(this);
+});
+},moveTo:function(jq,_39){
+return jq.each(function(){
+$(this).calendar({year:_39.getFullYear(),month:_39.getMonth()+1,current:_39});
+});
+}};
+$.fn.calendar.parseOptions=function(_3a){
+var t=$(_3a);
+return {width:(parseInt(_3a.style.width)||undefined),height:(parseInt(_3a.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)};
 };
-$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_39){
+$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_3b){
 }};
 })(jQuery);
 
