@@ -1,3 +1,18 @@
+Version 1.2.2
+-------------
+* Bug
+  * datagrid: Apply fitColumns cannot work fine while set checkbox column. fixed.
+  * datagrid: The validateRow method cannot return boolean type value. fixed.
+  * numberbox: Cannot fix value in chrome when min or max property isn't defined. fixed.
+* Improvement
+  * combo: Add hasDownArrow property to determine whether to display the down arrow button.
+  * tree: Supports inline editing.
+  * calendar: Add some useful methods such as 'resize', 'moveTo' etc.
+  * timespinner: Add some useful methods.
+  * datebox: Refactoring based on combo and calendar plugin now.
+* New Plugins
+  * datetimebox: Combines datebox with timespinner component.
+  
 Version 1.2.1
 -------------
 * Bug
