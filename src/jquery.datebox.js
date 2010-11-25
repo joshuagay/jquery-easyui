@@ -8,140 +8,156 @@
  * 
  * Dependencies:
  * 	 calendar
- *   validatebox
+ *   combo
  * 
  */
 (function($){
-	function init(target){
-		var box = $(target);
-
-		$(document).unbind('.datebox').bind('mousedown.datebox', function(){
-			hide(target);
-		});
-		box.focus(function(){
-			show(target);
-		}).click(function(){
-			show(target);
-		});
+	/**
+	 * create date box
+	 */
+	function createBox(target){
+		var state = $.data(target, 'datebox');
+		var opts = state.options;
 		
-		var calendar = $(
-				'<div class="datebox-calendar">' +
-					'<div class="datebox-calendar-inner">' +
-						'<div></div>' +
-					'</div>' +
-					'<div class="datebox-button"></div>' +
-				'</div>'
-		).appendTo('body');
-		
-		calendar.find('div.datebox-calendar-inner>div').calendar({
-			fit:true,
-			border:false,
-			onSelect:function(date){
-				var opts = $.data(target, 'datebox').options;
-				var v = opts.formatter(date);
-				$(target).val(v);
-				calendar.hide();
-				opts.onSelect.call(target, date);
+		$(target).combo($.extend({}, opts, {
+			onShowPanel:function(){
+				state.calendar.calendar('resize');
+				opts.onShowPanel.call(target);
 			}
-		});
+		}));
+		$(target).combo('textbox').parent().addClass('datebox');
 		
-		calendar.hide().mousedown(function(){
-			return false;
-		});
+		/**
+		 * if the calendar isn't created, create it.
+		 */
+		if (!state.calendar){
+			createCalendar();
+		}
 		
-		return calendar;
-	}
-	
-	function buildButtons(target){
-		var opts = $.data(target, 'datebox').options;
-		var calendar = $.data(target, 'datebox').calendar;
-		var button = calendar.find('div.datebox-button');
-		button.empty();
-		$('<a href="javascript:void(0)" class="datebox-current"></a>').html(opts.currentText).appendTo(button);
-		$('<a href="javascript:void(0)" class="datebox-close"></a>').html(opts.closeText).appendTo(button);
-		button.find('.datebox-current,.datebox-close').hover(
-			function(){$(this).addClass('datebox-button-hover');},
-			function(){$(this).removeClass('datebox-button-hover');}
-		);
-		button.find('.datebox-current').click(function(){
-			calendar.find('div.datebox-calendar-inner>div').calendar({
-				year:new Date().getFullYear(),
-				month:new Date().getMonth()+1,
-				current:new Date()
+		function createCalendar(){
+			var panel = $(target).combo('panel');
+			state.calendar = $('<div></div>').appendTo(panel).wrap('<div class="datebox-calendar-inner"></div>');
+			state.calendar.calendar({
+				fit:true,
+				border:false,
+				onSelect:function(date){
+					var value = opts.formatter(date);
+					setValue(target, value);
+					$(target).combo('hidePanel');
+					opts.onSelect.call(target, date);
+				}
 			});
-		});
-		button.find('.datebox-close').click(function(){
-			calendar.hide();
-		});
+			setValue(target, opts.value);
+			
+			var button = $('<div class="datebox-button"></div>').appendTo(panel);
+			$('<a href="javascript:void(0)" class="datebox-current"></a>').html(opts.currentText).appendTo(button);
+			$('<a href="javascript:void(0)" class="datebox-close"></a>').html(opts.closeText).appendTo(button);
+			button.find('.datebox-current,.datebox-close').hover(
+					function(){$(this).addClass('datebox-button-hover');},
+					function(){$(this).removeClass('datebox-button-hover');}
+			);
+			button.find('.datebox-current').click(function(){
+				state.calendar.calendar({
+					year:new Date().getFullYear(),
+					month:new Date().getMonth()+1,
+					current:new Date()
+				});
+			});
+			button.find('.datebox-close').click(function(){
+				$(target).combo('hidePanel');
+			});
+		}
 	}
 	
-	function show(target){
+	/**
+	 * called when user inputs some value in text box
+	 */
+	function doQuery(target, q){
+		setValue(target, q);
+	}
+	
+	/**
+	 * called when user press enter key
+	 */
+	function doEnter(target){
 		var opts = $.data(target, 'datebox').options;
-		var calendar = $.data(target, 'datebox').calendar;
-		calendar.css({
-			display:'block',
-			left:$(target).offset().left,
-			top:$(target).offset().top+$(target).outerHeight()
-		});
-		var current = opts.parser($(target).val());
-		calendar.find('div.datebox-calendar-inner>div').calendar({
-			year:current.getFullYear(),
-			month:current.getMonth()+1,
-			current:current
-		});
-		if ($.fn.window){
-			calendar.css('z-index', $.fn.window.defaults.zIndex++);
+		var c = $.data(target, 'datebox').calendar;
+		var value = opts.formatter(c.calendar('options').current);
+		setValue(target, value);
+		$(target).combo('hidePanel');
+	}
+	
+	function setValue(target, value){
+		var state = $.data(target, 'datebox');
+		var opts = state.options;
+		$(target).combo('setValue', value).combo('setText', value);
+		state.calendar.calendar('moveTo', opts.parser(value));
+	}
+	
+	$.fn.datebox = function(options, param){
+		if (typeof options == 'string'){
+			var method = $.fn.datebox.methods[options];
+			if (method){
+				return method(this, param);
+			} else {
+				return this.combo(options, param);
+			}
 		}
-	}
-	
-	function hide(target){
-		var calendar = $.data(target, 'datebox').calendar;
-		calendar.hide();
-	}
-	
-	function validate(target){
-		if ($.fn.validatebox){
-			var opts = $.data(target, 'datebox').options;
-			$(target).validatebox(opts);
-		}
-	}
-	
-	$.fn.datebox = function(options){
+		
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'datebox');
 			if (state){
 				$.extend(state.options, options);
 			} else {
-				var calendar = init(this);
-				var t = $(this);
 				$.data(this, 'datebox', {
-					options:$.extend({}, $.fn.datebox.defaults, {
-						required: (t.attr('required') ? (t.attr('required') == 'true' || t.attr('required') == true) : undefined),
-						missingMessage: (t.attr('missingMessage') || undefined)
-					}, options),
-					calendar:calendar
+					options: $.extend({}, $.fn.datebox.defaults, $.fn.datebox.parseOptions(this), options)
 				});
 			}
-			
-			buildButtons(this);
-			validate(this);
+			createBox(this);
 		});
 	};
 	
-	$.fn.datebox.defaults = {
+	$.fn.datebox.methods = {
+		options: function(jq){
+			return $.data(jq[0], 'datebox').options;
+		},
+		calendar: function(jq){	// get the calendar object
+			return $.data(jq[0], 'datebox').calendar;
+		},
+		setValue: function(jq, value){
+			return jq.each(function(){
+				setValue(this, value);
+			});
+		}
+	};
+	
+	$.fn.datebox.parseOptions = function(target){
+		var t = $(target);
+		return $.extend({}, $.fn.combo.parseOptions(target), {
+		});
+	};
+	
+	$.fn.datebox.defaults = $.extend({}, $.fn.combo.defaults, {
+		panelWidth:180,
+		panelHeight:'auto',
+		
+		keyHandler: {
+			up:function(){},
+			down:function(){},
+			enter:function(){doEnter(this);},
+			query:function(q){doQuery(this, q);}
+		},
+		
 		currentText:'Today',
 		closeText:'Close',
-		
-		required: false,
-		missingMessage: 'This field is required.',
+		okText:'Ok',
 		
 		formatter:function(date){
 			var y = date.getFullYear();
 			var m = date.getMonth()+1;
 			var d = date.getDate();
 			return m+'/'+d+'/'+y;
-//			return y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d);
 		},
 		parser:function(s){
 			var t = Date.parse(s);
@@ -153,5 +169,5 @@
 		},
 		
 		onSelect:function(date){}
-	};
+	});
 })(jQuery);
