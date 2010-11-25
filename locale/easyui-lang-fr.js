@@ -32,5 +32,14 @@ if ($.fn.calendar){
 if ($.fn.datebox){
 	$.fn.datebox.defaults.currentText = "Aujourd'hui";
 	$.fn.datebox.defaults.closeText = 'Fermer';
+	$.fn.datebox.defaults.okText = 'Ok';
 	$.fn.datebox.defaults.missingMessage = 'Ce champ est obligatoire.';
+}
+if ($.fn.datetimebox && $.fn.datebox){
+	$.extend($.fn.datetimebox.defaults,{
+		currentText: $.fn.datebox.defaults.currentText,
+		closeText: $.fn.datebox.defaults.closeText,
+		okText: $.fn.datebox.defaults.okText,
+		missingMessage: $.fn.datebox.defaults.missingMessage
+	});
 }
