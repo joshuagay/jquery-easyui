@@ -116,3 +116,11 @@
 .tree-node-append .tree-title{
 	border:1px dotted red;
 }
+.tree-editor{
+	border:1px solid #ccc;
+	font-size:12px;
+	line-height:16px;
+	width:80px;
+	position:absolute;
+	top:0;
+}

@@ -474,10 +474,8 @@
 	border:1px solid #A4BED4;
 	padding:3px 2px;
 }
-.datebox-calendar{
-	position:absolute;
-	border:1px solid #A4BED4;
-	width:180px;
+.datebox .combo-arrow{
+	background:url('images/datebox_arrow.png') no-repeat center center;
 }
 .datebox-calendar-inner{
 	height:180px;
@@ -487,6 +485,7 @@
 	padding:2px 5px;
 	font-size:12px;
 	background-color:#fafafa;
+	text-align:center;
 }
 .datebox-current,.datebox-close{
 	float:left;
@@ -496,6 +495,11 @@
 }
 .datebox-close{
 	float:right;
+}
+.datebox-ok{
+	color:#888;
+	text-decoration:none;
+	font-weight:bold;
 }
 .datebox-button-hover{
 	color:#A4BED4;
@@ -1292,7 +1296,16 @@ a.s-btn-plain-active .s-btn-downarrow{
 }
 .tree-node-append .tree-title{
 	border:1px dotted red;
-}.validatebox-invalid{
+}
+.tree-editor{
+	border:1px solid #ccc;
+	font-size:12px;
+	line-height:16px;
+	width:80px;
+	position:absolute;
+	top:0;
+}
+.validatebox-invalid{
 	background:#FFFFEE url('images/validatebox_warning.png') no-repeat right 1px;
 }
 .validatebox-tip{
