@@ -43,8 +43,8 @@ _b.height(_d.height());
 function _e(_10){
 var tr1=_c.find("tr[node-id="+_10+"]");
 var tr2=_d.find("tr[node-id="+_10+"]");
-tr1.css("height",null);
-tr2.css("height",null);
+tr1.css("height","");
+tr2.css("height","");
 var _11=Math.max(tr1.height(),tr2.height());
 tr1.css("height",_11);
 tr2.css("height",_11);
