@@ -98,7 +98,7 @@ return false;
 _7(this,_12.showType,_12.showSpeed);
 return false;
 }});
-win.window("window").css({left:null,top:null,right:0,zIndex:$.fn.window.defaults.zIndex++,bottom:-document.body.scrollTop-document.documentElement.scrollTop});
+win.window("window").css({left:"",top:"",right:0,zIndex:$.fn.window.defaults.zIndex++,bottom:-document.body.scrollTop-document.documentElement.scrollTop});
 win.window("open");
 },alert:function(_13,msg,_14,fn){
 var _15="<div>"+msg+"</div>";

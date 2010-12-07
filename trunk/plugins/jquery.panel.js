@@ -68,7 +68,7 @@ _9.height(_7.height()-_8.outerHeight());
 }else{
 _9.height("auto");
 }
-_7.css("height",null);
+_7.css("height","");
 _6.onResize.apply(_4,[_6.width,_6.height]);
 _7.find(">div.panel-body>div").triggerHandler("_resize");
 };

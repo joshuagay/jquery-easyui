@@ -58,10 +58,10 @@ var _11=_f.children("div.datagrid-header");
 var _12=_10.children("div.datagrid-header");
 var _13=_11.find("table");
 var _14=_12.find("table");
-_11.css("height",null);
-_12.css("height",null);
-_13.css("height",null);
-_14.css("height",null);
+_11.css("height","");
+_12.css("height","");
+_13.css("height","");
+_14.css("height","");
 hh=Math.max(_13.height(),_14.height());
 _13.height(hh);
 _14.height(hh);
@@ -116,8 +116,8 @@ _1e.height(_20.height());
 function _21(_25){
 var tr1=_1f.find("tr[datagrid-row-index="+_25+"]");
 var tr2=_20.find("tr[datagrid-row-index="+_25+"]");
-tr1.css("height",null);
-tr2.css("height",null);
+tr1.css("height","");
+tr2.css("height","");
 var _26=Math.max(tr1.height(),tr2.height());
 tr1.css("height",_26);
 tr2.css("height",_26);
@@ -1242,7 +1242,7 @@ opts=$.extend(_14a.options,_148);
 _14a.options=opts;
 }else{
 opts=$.extend({},$.fn.datagrid.defaults,$.fn.datagrid.parseOptions(this),_148);
-$(this).css("width",null).css("height",null);
+$(this).css("width","").css("height","");
 var _14b=_27(this,opts.rownumbers);
 if(!opts.columns){
 opts.columns=_14b.columns;
