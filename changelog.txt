@@ -10,6 +10,7 @@ Version 1.2.2
   * calendar: Add some useful methods such as 'resize', 'moveTo' etc.
   * timespinner: Add some useful methods.
   * datebox: Refactoring based on combo and calendar plugin now.
+  * datagrid: Allow users to change row style in some conditions.
 * New Plugins
   * datetimebox: Combines datebox with timespinner component.
   
