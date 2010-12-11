@@ -20,28 +20,36 @@
 					{field:'itemid',title:'Item ID',width:80},
 					{field:'productid',title:'Product ID',width:100},
 					{field:'listprice',title:'List Price',width:80,align:'right',
-						formatter:function(value,row,index,css){
+						styler:function(value,row,index){
 							if (value < 20){
-								css.style = 'background-color:red';
+								return 'background-color:#ffee00';
 							}
-							return value;
 						}
 					},
 					{field:'unitcost',title:'Unit Cost',width:80,align:'right'},
 					{field:'attr1',title:'Attribute',width:150},
 					{field:'status',title:'Status',width:60,align:'center'}
 				]],
-				onStyleRow:function(index,row,css){
+				striped:true,
+				rowStyler:function(index,row,css){
 					if (row.listprice>80){
-						css.style = 'background-color:#FFAA55';
+						return 'background-color:#FFAA55';
 					}
 				}
 			});
 		});
+		function test1(){
+			var row = $('#tt').datagrid('getSelected');
+			row.listprice = 121;
+			var index = $('#tt').datagrid('getRowIndex',row);
+			$('#tt').datagrid('refreshRow',index);
+		}
 	</script>
 </head>
 <body>
 	<h1>DataGrid - Custom Row Style</h1>
+	<a href="#" onclick="test1()">test1</a>
+	<a href="#" onclick="test2()">test2</a>
 	
 	<table id="tt"></table>
 	
