@@ -179,7 +179,7 @@ _20.isLoaded=true;
 }
 };
 function _23(_24){
-$(_24).find("div.panel,div.accordion,div.tabs-container").each(function(){
+$(_24).find("div.panel:visible,div.accordion:visible,div.tabs-container:visible,div.layout:visible").each(function(){
 $(this).triggerHandler("_resize",[true]);
 });
 };
