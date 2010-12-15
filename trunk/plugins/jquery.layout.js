@@ -100,7 +100,7 @@ var cls="layout-panel layout-panel-"+_f;
 if(pp.attr("split")=="true"){
 cls+=" layout-split-"+_f;
 }
-pp.panel({cls:cls,doSize:false,border:(pp.attr("border")=="false"?false:true),tools:[{iconCls:_10,handler:function(){
+pp.panel({cls:cls,doSize:false,border:(pp.attr("border")=="false"?false:true),width:(pp.length?parseInt(pp[0].style.width)||pp.outerWidth():"auto"),height:(pp.length?parseInt(pp[0].style.height)||pp.outerHeight():"auto"),tools:[{iconCls:_10,handler:function(){
 _1c(_d,_f);
 }}]});
 if(pp.attr("split")=="true"){
