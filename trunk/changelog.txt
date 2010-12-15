@@ -11,6 +11,7 @@ Version 1.2.2
   * timespinner: Add some useful methods.
   * datebox: Refactoring based on combo and calendar plugin now.
   * datagrid: Allow users to change row style in some conditions.
+  * datagrid: Users can use the footer row to display summary information.
 * New Plugins
   * datetimebox: Combines datebox with timespinner component.
   
