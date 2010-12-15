@@ -395,7 +395,15 @@
 .datagrid-view1 .datagrid-body{
 	overflow:hidden;
 }
-.datagrid-body td{
+.datagrid-footer{
+	overflow:hidden;
+}
+.datagrid-footer-inner{
+	border-top:1px solid #ccc;
+	width:10000px;
+	float:left;
+}
+.datagrid-body td,.datagrid-footer td{
 	font-size:12px;
 	border-right:1px dotted #ccc;
 	border-bottom:1px dotted #ccc;
@@ -403,7 +411,7 @@
 	padding:0;
 	margin:0;
 }
-.datagrid-body .datagrid-cell{
+.datagrid-body .datagrid-cell,.datagrid-footer .datagrid-cell{
 	overflow:hidden;
 	margin:0;
 	padding:3px 4px;
@@ -1168,7 +1176,7 @@ a.s-btn-plain-active .s-btn-downarrow{
 	padding:0px;
 	border:1px solid #D3D3D3;
 	border-top:0px;
-	overflow:auto;
+	overflow:hidden;
 }
 .tabs-panels-noborder{
 	border:0px;

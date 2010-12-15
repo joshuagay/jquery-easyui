@@ -181,7 +181,7 @@
 	padding:0px;
 	border:1px solid #D3D3D3;
 	border-top:0px;
-	overflow:auto;
+	overflow:hidden;
 }
 .tabs-panels-noborder{
 	border:0px;
