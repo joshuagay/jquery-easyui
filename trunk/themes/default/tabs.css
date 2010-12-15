@@ -181,7 +181,7 @@
 	padding:0px;
 	border:1px solid #8DB2E3;
 	border-top:0px;
-	overflow:auto;
+	overflow:hidden;
 }
 .tabs-panels-noborder{
 	border:0px;
