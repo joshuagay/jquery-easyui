@@ -204,8 +204,8 @@ _28.collapsed=false;
 _2b(_26);
 }
 if(!_28.collapsed){
-_23(_26);
 _1e(_26);
+_23(_26);
 }
 };
 function _1d(_2c,_2d){
@@ -272,15 +272,15 @@ if(_3d==true){
 _40.slideDown("normal",function(){
 _3e.collapsed=false;
 _3e.onExpand.call(_3c);
-_23(_3c);
 _1e(_3c);
+_23(_3c);
 });
 }else{
 _40.show();
 _3e.collapsed=false;
 _3e.onExpand.call(_3c);
-_23(_3c);
 _1e(_3c);
+_23(_3c);
 }
 };
 function _2a(_42){
