@@ -11,9 +11,9 @@
 function _1(_2){
 var t=$(_2);
 t.wrapInner("<div class=\"dialog-content\"></div>");
-var _3=t.find(">div.dialog-content");
-_3.css("padding",t.css("padding"));
-t.css("padding",0);
+var _3=t.children("div.dialog-content");
+_3.attr("style",t.attr("style"));
+t.removeAttr("style");
 _3.panel({border:false,doSize:false});
 return _3;
 };

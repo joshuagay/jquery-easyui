@@ -101,7 +101,7 @@ $(this).draggable("proxy").css({left:-10000,top:-10000});
 },onDrag:function(e){
 $(this).draggable("proxy").show();
 this.pageY=e.pageY;
-}}).droppable({onDragOver:function(e,_1a){
+}}).droppable({accept:"div.tree-node",onDragOver:function(e,_1a){
 var _1b=_1a.pageY;
 var top=$(this).offset().top;
 var _1c=top+$(this).outerHeight();
