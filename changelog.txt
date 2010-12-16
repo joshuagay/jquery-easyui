@@ -5,6 +5,7 @@ Version 1.2.2
   * datagrid: The validateRow method cannot return boolean type value. fixed.
   * numberbox: Cannot fix value in chrome when min or max property isn't defined. fixed.
 * Improvement
+  * menu: Add some crud methods.
   * combo: Add hasDownArrow property to determine whether to display the down arrow button.
   * tree: Supports inline editing.
   * calendar: Add some useful methods such as 'resize', 'moveTo' etc.
