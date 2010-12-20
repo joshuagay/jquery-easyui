@@ -153,6 +153,9 @@ col.field=th.attr("field");
 if(th.attr("formatter")){
 col.formatter=eval(th.attr("formatter"));
 }
+if(th.attr("styler")){
+col.styler=eval(th.attr("styler"));
+}
 if(th.attr("editor")){
 var s=$.trim(th.attr("editor"));
 if(s.substr(0,1)=="{"){
