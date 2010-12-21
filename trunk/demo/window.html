@@ -31,10 +31,15 @@
 </head>
 <body style="height:100%;width:100%;overflow:hidden;border:none;" >
 	<h1>Window</h1>
-	<div>
+	<div style="margin-bottom:10px">
 		<a href="javascript:void(0)" onclick="resize()">resize</a>
 		<a href="javascript:void(0)" onclick="open1()">open</a>
 		<a href="javascript:void(0)" onclick="close1()">close</a>
+	</div>
+	<div style="position:relative;width:400px;height:400px;border:1px solid #ccc;overflow:auto;">
+		<div class="easyui-window" title="Inline Window" inline="true" modal="true" style="width:250px;height:150px;padding:10px">
+			This window stay inside its parent
+		</div>
 	</div>
 	<div id="w" class="easyui-window" title="My Window" iconCls="icon-save" style="width:500px;height:200px;padding:5px;background: #fafafa;">
 		<div class="easyui-layout" fit="true">
