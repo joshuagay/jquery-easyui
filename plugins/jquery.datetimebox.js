@@ -119,23 +119,21 @@ _9(this);
 },query:function(q){
 _d(this,q);
 }},formatter:function(_22){
-var y=_22.getFullYear();
-var m=_22.getMonth()+1;
-var d=_22.getDate();
 var h=_22.getHours();
 var M=_22.getMinutes();
 var s=_22.getSeconds();
 function _23(_24){
 return (_24<10?"0":"")+_24;
 };
-return m+"/"+d+"/"+y+" "+_23(h)+":"+_23(M)+":"+_23(s);
+return $.fn.datebox.defaults.formatter(_22)+" "+_23(h)+":"+_23(M)+":"+_23(s);
 },parser:function(s){
-var t=Date.parse(s);
-if(!isNaN(t)){
-return new Date(t);
-}else{
-return new Date();
-}
+var dt=s.split(" ");
+var d=$.fn.datebox.defaults.parser(dt[0]);
+var tt=dt[1].split(":");
+var _25=parseInt(tt[0],10);
+var _26=parseInt(tt[1],10);
+var _27=parseInt(tt[2],10);
+return new Date(d.getFullYear(),d.getMonth(),d.getDate(),_25,_26,_27);
 }});
 })(jQuery);
 
