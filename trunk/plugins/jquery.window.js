@@ -200,9 +200,9 @@ return {width:Math.max(document.documentElement.scrollWidth,document.documentEle
 }
 };
 $(window).resize(function(){
-$(".window-mask").css({width:$(window).width(),height:$(window).height()});
+$("body>div.window-mask").css({width:$(window).width(),height:$(window).height()});
 setTimeout(function(){
-$(".window-mask").css({width:_10().width,height:_10().height});
+$("body>div.window-mask").css({width:_10().width,height:_10().height});
 },50);
 });
 $.fn.window=function(_17,_18){
