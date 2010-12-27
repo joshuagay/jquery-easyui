@@ -172,24 +172,25 @@
 		},
 		
 		formatter:function(date){
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
 			var h = date.getHours();
 			var M = date.getMinutes();
 			var s = date.getSeconds();
 			function formatNumber(value){
 				return (value < 10 ? '0' : '') + value;
 			}
-			return m+'/'+d+'/'+y + ' ' + formatNumber(h)+':'+formatNumber(M)+':'+formatNumber(s);
+			return $.fn.datebox.defaults.formatter(date) + ' ' + formatNumber(h)+':'+formatNumber(M)+':'+formatNumber(s);
 		},
 		parser:function(s){
-			var t = Date.parse(s);
-			if (!isNaN(t)){
-				return new Date(t);
-			} else {
+			if ($.trim(s) == ''){
 				return new Date();
 			}
+			var dt = s.split(' ');
+			var d = $.fn.datebox.defaults.parser(dt[0]);
+			var tt = dt[1].split(':');
+			var hour = parseInt(tt[0], 10);
+			var minute = parseInt(tt[1], 10);
+			var second = parseInt(tt[2], 10);
+			return new Date(d.getFullYear(), d.getMonth(), d.getDate(), hour, minute, second);
 		}
 	});
 })(jQuery);
