@@ -127,6 +127,9 @@ return (_24<10?"0":"")+_24;
 };
 return $.fn.datebox.defaults.formatter(_22)+" "+_23(h)+":"+_23(M)+":"+_23(s);
 },parser:function(s){
+if($.trim(s)==""){
+return new Date();
+}
 var dt=s.split(" ");
 var d=$.fn.datebox.defaults.parser(dt[0]);
 var tt=dt[1].split(":");
