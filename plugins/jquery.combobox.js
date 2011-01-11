@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.2
+ * jQuery EasyUI 1.2.3
  * 
  * Licensed under the GPL:
  *   http://www.gnu.org/licenses/gpl.txt
