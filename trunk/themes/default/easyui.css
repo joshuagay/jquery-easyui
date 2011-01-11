@@ -383,6 +383,7 @@
 	text-align:center;
 	margin:0px;
 	padding:3px 0px;
+	color:#000;
 }
 .datagrid-body{
 	margin:0;
@@ -1289,6 +1290,7 @@ a.s-btn-plain-active .s-btn-downarrow{
 	padding:1px 2px 1px 18px;
 	background:#fafafa;
 	border:1px solid #ccc;
+	z-index:9900000;
 }
 .tree-dnd-yes{
 	background:url('images/tree_dnd_yes.png') no-repeat 0 center;
