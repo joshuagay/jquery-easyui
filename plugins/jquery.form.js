@@ -87,7 +87,7 @@ var val=_12[_14];
 $("input[name="+_14+"]",_13).val(val);
 $("textarea[name="+_14+"]",_13).val(val);
 $("select[name="+_14+"]",_13).val(val);
-var cc=["combo","combobox","combotree","combogrid"];
+var cc=["combo","combobox","combotree","combogrid","datebox","datetimebox"];
 for(var i=0;i<cc.length;i++){
 _15(cc[i],_14,val);
 }
