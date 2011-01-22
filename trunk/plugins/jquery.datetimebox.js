@@ -16,6 +16,7 @@ var _5=$(_2).datetimebox("getValue");
 _f(_2,_5,true);
 _4.onShowPanel.call(_2);
 }}));
+$(_2).removeClass("datebox-f").addClass("datetimebox-f");
 $(_2).datebox("calendar").calendar({onSelect:function(_6){
 _4.onSelect.call(_2,_6);
 }});

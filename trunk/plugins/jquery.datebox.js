@@ -11,6 +11,7 @@
 function _1(_2){
 var _3=$.data(_2,"datebox");
 var _4=_3.options;
+$(_2).addClass("datebox-f");
 $(_2).combo($.extend({},_4,{onShowPanel:function(){
 _3.calendar.calendar("resize");
 _4.onShowPanel.call(_2);

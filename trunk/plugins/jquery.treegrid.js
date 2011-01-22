@@ -123,11 +123,9 @@ _6e(_1a,id);
 }
 }
 _1b.onClickRow.call(_1a,_37(_1a,id));
-return false;
 }).bind("dblclick.treegrid",function(){
 var id=$(this).attr("node-id");
 _1b.onDblClickRow.call(_1a,_37(_1a,id));
-return false;
 }).bind("contextmenu.treegrid",function(e){
 var id=$(this).attr("node-id");
 _1b.onContextMenu.call(_1a,e,_37(_1a,id));
