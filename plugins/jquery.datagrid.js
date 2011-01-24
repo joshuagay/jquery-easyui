@@ -107,7 +107,7 @@ for(var i=0;i<_1c.length;i++){
 _22(i);
 }
 if(_1d.showFooter){
-var _23=$(_1a).datagrid("getFooterRows");
+var _23=$(_1a).datagrid("getFooterRows")||[];
 var c1=_20.children("div.datagrid-footer");
 var c2=_21.children("div.datagrid-footer");
 for(var i=0;i<_23.length;i++){
