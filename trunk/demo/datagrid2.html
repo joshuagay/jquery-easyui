@@ -40,6 +40,7 @@
 							status:'P'
 						});
 						var lastIndex = $('#tt').datagrid('getRows').length-1;
+						$('#tt').datagrid('selectRow', lastIndex);
 						$('#tt').datagrid('beginEdit', lastIndex);
 					}
 				},'-',{
