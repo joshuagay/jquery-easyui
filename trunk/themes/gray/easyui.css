@@ -334,12 +334,10 @@
 	overflow:hidden;
 	background:#fafafa url('images/datagrid_header_bg.gif') repeat-x left bottom;
 	border-bottom:1px solid #ccc;
-	margin-bottom:1px;
 }
 .datagrid-header-inner{
 	float:left;
-	padding-right:20px;
-	margin-bottom:-1px;
+	width:10000px;
 }
 .datagrid-header td{
 	border-right:1px dotted #ccc;
@@ -929,7 +927,27 @@ a.m-btn-plain-active{
 	background:url('images/panel_loading.gif') no-repeat 10px 10px;
 }
 
-.spinner{
+.propertygrid .datagrid-view1 .datagrid-body,.propertygrid .datagrid-group{
+	background:#fafafa;
+}
+.propertygrid .datagrid-group{
+	height:21px;
+	overflow:hidden;
+}
+.propertygrid .datagrid-view1 .datagrid-body td{
+	border-color:#fafafa;
+}
+.propertygrid .datagrid-view1 .datagrid-row-over,.propertygrid .datagrid-view1 .datagrid-row-selected{
+	background:#fafafa;
+}
+.propertygrid .datagrid-group span{
+	color:#3F3F3F;
+	font-weight:bold;
+	padding-left:4px;
+}
+.propertygrid .datagrid-row-collapse,.propertygrid .datagrid-row-expand{
+	background-position:3px center;
+}.spinner{
 	display:inline-block;
 	white-space:nowrap;
 	font-size:12px;
@@ -1383,6 +1401,12 @@ a.s-btn-plain-active .s-btn-downarrow{
 	overflow:hidden;
 	border:1px dashed #3F3F3F;
 }
+.window-proxy-mask{
+	position:absolute;
+	background:#fafafa;
+	filter:alpha(opacity=10);
+	opacity:0.10;
+}	
 .window-mask{
 	position:absolute;
 	left:0;

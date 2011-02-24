@@ -43,6 +43,12 @@
 	overflow:hidden;
 	border:1px dashed #15428b;
 }
+.window-proxy-mask{
+	position:absolute;
+	background:#fafafa;
+	filter:alpha(opacity=10);
+	opacity:0.10;
+}	
 .window-mask{
 	position:absolute;
 	left:0;
