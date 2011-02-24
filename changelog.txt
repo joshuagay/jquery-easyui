@@ -1,3 +1,16 @@
+Version 1.2.3
+-------------
+* Bug
+ * window: Cannot resize the window with iframe content. fixed.
+ * tree: The node will be removed when dragging to its child. fixed.
+* Improvement
+ * treegrid: The footer row and row styler features are supported now.
+ * treegrid: Add 'getLevel','reloadFooter','getFooterRows' methods.
+ * datagrid: Add 'getFooterRows','reloadFooter','insertRow' methods and improve editing performance.
+ * tree: Add 'onBeforeDrag' callback event function.
+* New Plugins
+ * propertygrid: Allow users to edit property value in datagrid. 
+
 Version 1.2.2
 -------------
 * Bug
