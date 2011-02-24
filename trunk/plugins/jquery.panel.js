@@ -362,7 +362,7 @@ var _58=$("body.layout");
 if(_58.length){
 _58.layout("resize");
 }else{
-$("body>div.panel").triggerHandler("_resize");
+$("body").children("div.panel,div.accordion,div.tabs-container,div.layout").triggerHandler("_resize");
 }
 _57=true;
 TO=false;

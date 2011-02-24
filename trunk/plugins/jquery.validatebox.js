@@ -12,48 +12,50 @@ function _1(_2){
 $(_2).addClass("validatebox-text");
 };
 function _3(_4){
-var _5=$.data(_4,"validatebox").tip;
-if(_5){
-_5.remove();
+var _5=$.data(_4,"validatebox");
+_5.validating=false;
+var _6=_5.tip;
+if(_6){
+_6.remove();
 }
 $(_4).unbind();
 $(_4).remove();
 };
-function _6(_7){
-var _8=$(_7);
-var _9=$.data(_7,"validatebox");
-_9.validating=false;
-_8.unbind(".validatebox").bind("focus.validatebox",function(){
-_9.validating=true;
+function _7(_8){
+var _9=$(_8);
+var _a=$.data(_8,"validatebox");
+_a.validating=false;
+_9.unbind(".validatebox").bind("focus.validatebox",function(){
+_a.validating=true;
 (function(){
-if(_9.validating){
-_11(_7);
+if(_a.validating){
+_11(_8);
 setTimeout(arguments.callee,200);
 }
 })();
 }).bind("blur.validatebox",function(){
-_9.validating=false;
-_a(_7);
+_a.validating=false;
+_b(_8);
 }).bind("mouseenter.validatebox",function(){
-if(_8.hasClass("validatebox-invalid")){
-_b(_7);
+if(_9.hasClass("validatebox-invalid")){
+_c(_8);
 }
 }).bind("mouseleave.validatebox",function(){
-_a(_7);
+_b(_8);
 });
 };
-function _b(_c){
-var _d=$(_c);
-var _e=$.data(_c,"validatebox").message;
-var _f=$.data(_c,"validatebox").tip;
-if(!_f){
-_f=$("<div class=\"validatebox-tip\">"+"<span class=\"validatebox-tip-content\">"+"</span>"+"<span class=\"validatebox-tip-pointer\">"+"</span>"+"</div>").appendTo("body");
-$.data(_c,"validatebox").tip=_f;
+function _c(_d){
+var _e=$(_d);
+var _f=$.data(_d,"validatebox").message;
+var tip=$.data(_d,"validatebox").tip;
+if(!tip){
+tip=$("<div class=\"validatebox-tip\">"+"<span class=\"validatebox-tip-content\">"+"</span>"+"<span class=\"validatebox-tip-pointer\">"+"</span>"+"</div>").appendTo("body");
+$.data(_d,"validatebox").tip=tip;
 }
-_f.find(".validatebox-tip-content").html(_e);
-_f.css({display:"block",left:_d.offset().left+_d.outerWidth(),top:_d.offset().top});
+tip.find(".validatebox-tip-content").html(_f);
+tip.css({display:"block",left:_e.offset().left+_e.outerWidth(),top:_e.offset().top});
 };
-function _a(_10){
+function _b(_10){
 var tip=$.data(_10,"validatebox").tip;
 if(tip){
 tip.remove();
@@ -76,7 +78,7 @@ if(_13.required){
 if(_14==""){
 box.addClass("validatebox-invalid");
 _15(_13.missingMessage);
-_b(_12);
+_c(_12);
 return false;
 }
 }
@@ -94,13 +96,13 @@ _1a=_1a.replace(new RegExp("\\{"+i+"\\}","g"),_19[i]);
 }
 }
 _15(_13.invalidMessage||_1a);
-_b(_12);
+_c(_12);
 return false;
 }
 }
 }
 box.removeClass("validatebox-invalid");
-_a(_12);
+_b(_12);
 return true;
 };
 $.fn.validatebox=function(_1b,_1c){
@@ -116,7 +118,7 @@ $.extend(_1d.options,_1b);
 _1(this);
 $.data(this,"validatebox",{options:$.extend({},$.fn.validatebox.defaults,$.fn.validatebox.parseOptions(this),_1b)});
 }
-_6(this);
+_7(this);
 });
 };
 $.fn.validatebox.methods={destroy:function(jq){

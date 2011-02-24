@@ -96,11 +96,15 @@ var p=$("<div class=\"tree-node-proxy tree-dnd-no\"></div>").appendTo("body");
 p.html($(_19).find(".tree-title").html());
 p.hide();
 return p;
-},deltaX:15,deltaY:15,onStartDrag:function(){
+},deltaX:15,deltaY:15,onBeforeDrag:function(){
+$(this).next("ul").find("div.tree-node").droppable({accept:"no-accept"});
+},onStartDrag:function(){
 $(this).draggable("proxy").css({left:-10000,top:-10000});
 },onDrag:function(e){
 $(this).draggable("proxy").show();
 this.pageY=e.pageY;
+},onStopDrag:function(){
+$(this).next("ul").find("div.tree-node").droppable({accept:"div.tree-node"});
 }}).droppable({accept:"div.tree-node",onDragOver:function(e,_1a){
 var _1b=_1a.pageY;
 var top=$(this).offset().top;
