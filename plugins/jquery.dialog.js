@@ -13,7 +13,7 @@ var t=$(_2);
 t.wrapInner("<div class=\"dialog-content\"></div>");
 var _3=t.children("div.dialog-content");
 _3.attr("style",t.attr("style"));
-t.removeAttr("style");
+t.removeAttr("style").css("overflow","hidden");
 _3.panel({border:false,doSize:false});
 return _3;
 };
@@ -51,14 +51,19 @@ _b.linkbutton(p);
 }
 var _c=_6.href;
 _6.href=null;
-$(_5).window($.extend({},_6,{onResize:function(_d,_e){
+$(_5).window($.extend({},_6,{onOpen:function(){
+_7.panel("open");
+if(_6.onOpen){
+_6.onOpen.call(_5);
+}
+},onResize:function(_d,_e){
 var _f=$(_5).panel("panel").find(">div.panel-body");
 _7.panel("resize",{width:_f.width(),height:(_e=="auto")?"auto":_f.height()-_f.find(">div.dialog-toolbar").outerHeight()-_f.find(">div.dialog-button").outerHeight()});
 if(_6.onResize){
 _6.onResize.call(_5,_d,_e);
 }
 }}));
-_7.panel({href:_c,onLoad:function(){
+_7.panel({closed:_6.closed,href:_c,onLoad:function(){
 if(_6.height=="auto"){
 $(_5).window("resize");
 }

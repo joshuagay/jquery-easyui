@@ -73,11 +73,11 @@ $(this).unbind(".resizable");
 _e=$.extend(_f.options,_1||{});
 }else{
 _e=$.extend({},$.fn.resizable.defaults,_1||{});
+$.data(this,"resizable",{options:_e});
 }
 if(_e.disabled==true){
 return;
 }
-$.data(this,"resizable",{options:_e});
 var _10=this;
 $(this).bind("mousemove.resizable",_11).bind("mousedown.resizable",_12);
 function _11(e){

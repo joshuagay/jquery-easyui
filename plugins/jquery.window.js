@@ -175,6 +175,8 @@ _16.proxy.remove();
 _16.proxy=null;
 }});
 _16.window.resizable({disabled:_16.options.resizable==false,onStartResize:function(e){
+_16.pmask=$("<div class=\"window-proxy-mask\"></div>").insertAfter(_16.window);
+_16.pmask.css({zIndex:$.fn.window.defaults.zIndex++,left:e.data.left,top:e.data.top,width:_16.window.outerWidth(),height:_16.window.outerHeight()});
 if(!_16.proxy){
 _16.proxy=$("<div class=\"window-proxy\"></div>").insertAfter(_16.window);
 }
@@ -188,6 +190,8 @@ _16.options.top=e.data.top;
 _16.options.width=e.data.width;
 _16.options.height=e.data.height;
 _1(_15);
+_16.pmask.remove();
+_16.pmask=null;
 _16.proxy.remove();
 _16.proxy=null;
 }});
