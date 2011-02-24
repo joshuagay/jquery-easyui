@@ -97,12 +97,10 @@
 	overflow:hidden;
 	background:#fafafa url('images/datagrid_header_bg.gif') repeat-x left bottom;
 	border-bottom:1px solid #ccc;
-	margin-bottom:1px;
 }
 .datagrid-header-inner{
 	float:left;
-	padding-right:20px;
-	margin-bottom:-1px;
+	width:10000px;
 }
 .datagrid-header td{
 	border-right:1px dotted #ccc;
