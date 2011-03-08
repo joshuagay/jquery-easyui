@@ -254,6 +254,9 @@ _3f(_4b,[_4c]);
 };
 function _4d(_4e){
 var _4f=$.data(_4e,"combo").options;
+var fn=_4f.onChange;
+_4f.onChange=function(){
+};
 if(_4f.multiple){
 if(_4f.value){
 if(typeof _4f.value=="object"){
@@ -267,6 +270,7 @@ _3f(_4e,[]);
 }else{
 _4a(_4e,_4f.value);
 }
+_4f.onChange=fn;
 };
 $.fn.combo=function(_50,_51){
 if(typeof _50=="string"){

@@ -34,7 +34,9 @@ _3.onUnselect.call(this,_d,_e);
 _c();
 _3.onSelectAll.call(this,_f);
 },onUnselectAll:function(_10){
+if(_3.multiple){
 _c();
+}
 _3.onUnselectAll.call(this,_10);
 }}));
 function _9(_11,row){
@@ -53,9 +55,10 @@ for(var i=0;i<_13.length;i++){
 vv.push(_13[i][_3.idField]);
 ss.push(_13[i][_3.textField]);
 }
+if(!_3.multiple){
+$(_2).combo("setValues",(vv.length?vv:[""]));
+}else{
 $(_2).combo("setValues",vv);
-if(!vv.length&&!_3.multiple){
-$(_2).combo("setValues",[""]);
 }
 if(!_12){
 $(_2).combo("setText",ss.join(_3.separator));
@@ -99,7 +102,6 @@ var _20=$.data(_1d,"combogrid").options;
 var _21=$.data(_1d,"combogrid").grid;
 var _22=_21.datagrid("getRows");
 var ss=[];
-_21.datagrid("clearSelections");
 for(var i=0;i<_1e.length;i++){
 var _23=_21.datagrid("getRowIndex",_1e[i]);
 if(_23>=0){
