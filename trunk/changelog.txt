@@ -3,6 +3,7 @@ Version 1.2.3
 * Bug
  * window: Cannot resize the window with iframe content. fixed.
  * tree: The node will be removed when dragging to its child. fixed.
+ * combogrid: The onChange event fires multiple times. fixed.
 * Improvement
  * treegrid: The footer row and row styler features are supported now.
  * treegrid: Add 'getLevel','reloadFooter','getFooterRows' methods.
