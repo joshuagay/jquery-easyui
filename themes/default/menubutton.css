@@ -1,7 +1,9 @@
 .m-btn-downarrow{
 	display:inline-block;
 	width:12px;
-	background:url('images/menu_downarrow.png') no-repeat 4px 6px;
+	line-height:14px;
+	*line-height:15px;
+	background:url('images/menu_downarrow.png') no-repeat 4px center;
 }
 
 a.m-btn-active{
