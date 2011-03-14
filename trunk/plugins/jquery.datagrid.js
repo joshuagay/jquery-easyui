@@ -493,22 +493,25 @@ _77=col;
 }
 }
 var _79=_75.children("div.datagrid-header-inner").show();
-var _7a=(_75.width()-_75.find("table").width()-_73.scrollbarSize)/_76;
+var _7a=_75.width()-_75.find("table").width()-_73.scrollbarSize;
+var _7b=_7a/_76;
 if(!_73.showHeader){
 _79.hide();
 }
 for(var i=0;i<_78.length;i++){
 var col=_6f(_72,_78[i]);
-var _7b=Math.floor(col.width*_7a);
-_7c(col,_7b);
+if(!col.hidden&&!col.checkbox){
+var _7c=Math.floor(col.width*_7b);
+_7d(col,_7c);
+_7a-=_7c;
+}
 }
 _34(_72);
-var _7d=_75.width()-_75.find("table").width()-_73.scrollbarSize;
-if(_7d){
-_7c(_77,_7d);
+if(_7a){
+_7d(_77,_7a);
 _34(_72,_77.field);
 }
-function _7c(col,_7e){
+function _7d(col,_7e){
 col.width+=_7e;
 col.boxWidth+=_7e;
 _75.find("td[field="+col.field+"] div.datagrid-cell").width(col.boxWidth);
@@ -958,7 +961,9 @@ if($.boxModel==true){
 _fc.width(_102-(_fc.outerWidth()-_fc.width()));
 }
 _fc.html("<table border=\"0\" cellspacing=\"0\" cellpadding=\"1\"><tr><td></td></tr></table>");
-_fc.find("table").attr("align",col.align);
+_fc.children("table").attr("align",col.align).click(function(e){
+e.stopPropagation();
+});
 $.data(_fc[0],"datagrid.editor",{actions:_100,target:_100.init(_fc.find("td"),_ff),field:_fd,type:_fe,oldHtml:_101});
 }
 }
