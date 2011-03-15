@@ -639,7 +639,6 @@ a.l-btn{
 	padding-right:18px;
 	cursor:pointer;
 	outline:none;
-	overflow:hidden;
 }
 a.l-btn-plain{
 	background:transparent;
@@ -656,10 +655,11 @@ a.l-btn-disabled{
 	cursor:default;
 }
 a.l-btn span.l-btn-left{
-	display:block;
+	display:inline-block;
 	background:url('images/button_span_bg.gif') no-repeat top left;
 	padding:4px 0px 4px 18px;
 	line-height:16px;
+	height:16px;
 }
 a.l-btn-plain span.l-btn-left{
 	background:transparent;
