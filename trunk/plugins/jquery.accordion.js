@@ -135,6 +135,9 @@ _23.onSelect.call(_21,_25.panel("options").title);
 function add(_27,_28){
 var _29=$.data(_27,"accordion").options;
 var _2a=$.data(_27,"accordion").panels;
+for(var i=0;i<_2a.length;i++){
+_2a[i].stop(true,true);
+}
 var pp=$("<div></div>").appendTo(_27);
 _2a.push(pp);
 _18(_27,pp,_28);

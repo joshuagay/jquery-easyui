@@ -27,9 +27,13 @@ var _a=$.data(_8,"validatebox");
 _a.validating=false;
 _9.unbind(".validatebox").bind("focus.validatebox",function(){
 _a.validating=true;
+_a.value=undefined;
 (function(){
 if(_a.validating){
+if(_a.value!=_9.val()){
+_a.value=_9.val();
 _11(_8);
+}
 setTimeout(arguments.callee,200);
 }
 })();
@@ -143,6 +147,11 @@ return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF
 },message:"Please enter a valid URL."},length:{validator:function(_21,_22){
 var len=$.trim(_21).length;
 return len>=_22[0]&&len<=_22[1];
-},message:"Please enter a value between {0} and {1}."}}};
+},message:"Please enter a value between {0} and {1}."},remote:{validator:function(_23,_24){
+var _25={};
+_25[_24[1]]=_23;
+var _26=$.ajax({url:_24[0],dataType:"json",data:_25,async:false,cache:false,type:"post"}).responseText;
+return _26=="true";
+},message:"Please fix this field."}}};
 })(jQuery);
 
