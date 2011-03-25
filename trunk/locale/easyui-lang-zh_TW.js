@@ -15,6 +15,7 @@ if ($.fn.validatebox){
 	$.fn.validatebox.defaults.rules.email.message = '請輸入有效的電子郵件地址';
 	$.fn.validatebox.defaults.rules.url.message = '請輸入有效的URL地址';
 	$.fn.validatebox.defaults.rules.length.message = '輸入內容長度必須介於{0}和{1}之間';
+	$.fn.validatebox.defaults.rules.remote.message = '請修正此欄位';
 }
 if ($.fn.numberbox){
 	$.fn.numberbox.defaults.missingMessage = '該輸入項為必輸項';
