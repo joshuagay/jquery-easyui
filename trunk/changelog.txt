@@ -4,6 +4,7 @@ Version 1.2.3
  * window: Cannot resize the window with iframe content. fixed.
  * tree: The node will be removed when dragging to its child. fixed.
  * combogrid: The onChange event fires multiple times. fixed.
+ * accordion: Cannot add batch new panels when animate property is set to true. fixed.
 * Improvement
  * treegrid: The footer row and row styler features are supported now.
  * treegrid: Add 'getLevel','reloadFooter','getFooterRows' methods.
