@@ -42,6 +42,7 @@ if ($.fn.datebox){
 		return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 	};
 	$.fn.datebox.defaults.parser = function(s){
+		if (!s) return new Date();
 		var ss = s.split('-');
 		var y = parseInt(ss[0],10);
 		var m = parseInt(ss[1],10);
