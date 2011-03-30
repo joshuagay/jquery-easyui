@@ -961,7 +961,8 @@ if($.boxModel==true){
 _fc.width(_102-(_fc.outerWidth()-_fc.width()));
 }
 _fc.html("<table border=\"0\" cellspacing=\"0\" cellpadding=\"1\"><tr><td></td></tr></table>");
-_fc.children("table").attr("align",col.align).click(function(e){
+_fc.children("table").attr("align",col.align);
+_fc.children("table").click(function(e){
 e.stopPropagation();
 });
 $.data(_fc[0],"datagrid.editor",{actions:_100,target:_100.init(_fc.find("td"),_ff),field:_fd,type:_fe,oldHtml:_101});
