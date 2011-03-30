@@ -1,10 +1,10 @@
 ﻿/**
  * jQuery EasyUI 1.2.3
  * 
- * Licensed under the GPL:
- *   http://www.gnu.org/licenses/gpl.txt
+ * Licensed under the GPL terms
+ * To use it on other terms please contact us
  *
- * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * Copyright(c) 2009-2011 stworthy [ stworthy@gmail.com ] 
  * 
  */
 (function($){
@@ -148,6 +148,9 @@ _20(_27,_28.title);
 function _2b(_2c,_2d){
 var _2e=$.data(_2c,"accordion").options;
 var _2f=$.data(_2c,"accordion").panels;
+for(var i=0;i<_2f.length;i++){
+_2f[i].stop(true,true);
+}
 if(_2e.onBeforeRemove.call(_2c,_2d)==false){
 return;
 }
