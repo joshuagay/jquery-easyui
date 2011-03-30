@@ -8,8 +8,10 @@ Version 1.2.3
 * Improvement
  * treegrid: The footer row and row styler features are supported now.
  * treegrid: Add 'getLevel','reloadFooter','getFooterRows' methods.
+ * treegrid: Support root nodes pagination.
  * datagrid: Add 'getFooterRows','reloadFooter','insertRow' methods and improve editing performance.
  * tree: Add 'onBeforeDrag' callback event function.
+ * validatebox: Add 'remote' validation type.
 * New Plugins
  * propertygrid: Allow users to edit property value in datagrid. 
 
