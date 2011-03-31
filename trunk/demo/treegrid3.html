@@ -8,22 +8,45 @@
 	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
+		function editNode(){
+			var node = $('#tt').treegrid('getSelected');
+			if (node){
+				$('#tt').treegrid('beginEdit',node.id);
+			}
+		}
+		function saveNode(){
+			var node = $('#tt').treegrid('getSelected');
+			if (node){
+				$('#tt').treegrid('endEdit',node.id);
+			}
+		}
+		function cancelNode(){
+			var node = $('#tt').treegrid('getSelected');
+			if (node){
+				$('#tt').treegrid('cancelEdit',node.id);
+			}
+		}
 	</script>
 </head>
 <body>
 	<h1>TreeGrid - Pagination</h1>
+	<div style="margin:10px 0">
+		<a href="javascript:editNode()">Edit</a>
+		<a href="javascript:saveNode()">Save</a>
+		<a href="javascript:cancelNode()">Cancel</a>
+	</div>
 	
-	<table title="TreeGrid" class="easyui-treegrid" style="width:600px;height:300px"
+	<table id="tt" title="TreeGrid" class="easyui-treegrid" style="width:600px;height:300px"
 			url="treegrid_data3.json" idField="id" treeField="code"
 			pagination="true" fitColumns="true">
 		<thead>
 			<tr>
-				<th field="code" rowspan="2" width="150">Code</th>
+				<th field="code" rowspan="2" width="150" editor="text">Code</th>
 				<th colspan="2">Group Fields</th>
 			</tr>
 			<tr>
-				<th field="name" width="200">Name</th>
-				<th field="addr" width="200">Addr</th>
+				<th field="name" width="200" editor="text">Name</th>
+				<th field="addr" width="200" editor="text">Addr</th>
 			</tr>
 		</thead>
 	</table>
