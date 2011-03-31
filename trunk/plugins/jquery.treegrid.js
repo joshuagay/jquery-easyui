@@ -99,9 +99,6 @@ return;
 }
 $(_22).datagrid("getPanel").find("div.datagrid-view1 div.datagrid-body div.datagrid-cell-rownumber").each(function(i){
 var _24=i+1;
-if(_23.pagination){
-_24+=(_23.pageNumber-1)*_23.pageSize;
-}
 $(this).html(_24);
 });
 };
