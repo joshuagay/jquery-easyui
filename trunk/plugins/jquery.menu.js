@@ -90,10 +90,14 @@ _12.addClass("menu-active");
 var _15=_12[0].submenu;
 if(_15){
 var _16=_12.offset().left+_12.outerWidth()-2;
-if(_16+_15.outerWidth()>$(window).width()){
+if(_16+_15.outerWidth()+5>$(window).width()){
 _16=_12.offset().left-_15.outerWidth()+2;
 }
-_1f(_15,{left:_16,top:_12.offset().top-3});
+var top=_12.offset().top-3;
+if(top+_15.outerHeight()>$(window).height()){
+top=$(window).height()-_15.outerHeight()-5;
+}
+_1f(_15,{left:_16,top:top});
 }
 },function(e){
 _12.removeClass("menu-active");
@@ -124,6 +128,12 @@ var _1e=$.data(_1d,"menu").options;
 if(pos){
 _1e.left=pos.left;
 _1e.top=pos.top;
+if(_1e.left+$(_1d).outerWidth()>$(window).width()){
+_1e.left=$(window).width()-$(_1d).outerWidth()-5;
+}
+if(_1e.top+$(_1d).outerHeight()>$(window).height()){
+_1e.top-=$(_1d).outerHeight();
+}
 }
 _1f($(_1d),{left:_1e.left,top:_1e.top},function(){
 $(document).unbind(".menu").bind("mousedown.menu",function(){
