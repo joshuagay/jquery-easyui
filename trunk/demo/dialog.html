@@ -60,5 +60,26 @@
 		<p>dialog content.</p>
 		<p>dialog content.</p>
 	</div>
+	<div id="d2" class="easyui-dialog" title="Another Dialog" style="width:400px;height:200px;left:100px;top:100px;padding:10px"
+			toolbar="#dlg-toolbar" buttons="#dlg-buttons" resizable="true">
+		Dialog toolbar and buttons are created from existing HTML nodes.
+	</div>
+	<div id="dlg-toolbar">
+		<table cellpadding="0" cellspacing="0" style="width:100%">
+			<tr>
+				<td>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">Edit</a>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-help" plain="true">Help</a>
+				</td>
+				<td style="text-align:right">
+					<input></input><a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" onclick="javascript:alert('save')">Save</a>
+		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#d2').dialog('close')">Close</a>
+	</div>
 </body>
 </html>
