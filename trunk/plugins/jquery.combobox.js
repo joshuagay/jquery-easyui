@@ -124,7 +124,7 @@ var _29=$.data(_28,"combobox").options;
 var _2a=[];
 $(">option",_28).each(function(){
 var _2b={};
-_2b[_29.valueField]=$(this).attr("value")||$(this).html();
+_2b[_29.valueField]=$(this).attr("value")!=undefined?$(this).attr("value"):$(this).html();
 _2b[_29.textField]=$(this).html();
 _2b["selected"]=$(this).attr("selected");
 _2a.push(_2b);
