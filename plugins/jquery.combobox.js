@@ -195,7 +195,7 @@ if(!_39.url){
 return;
 }
 _37=_37||{};
-$.ajax({url:_39.url,dataType:"json",data:_37,success:function(_3a){
+$.ajax({type:_39.method,url:_39.url,dataType:"json",data:_37,success:function(_3a){
 _2c(_36,_3a,_38);
 },error:function(){
 _39.onLoadError.apply(this,arguments);
@@ -300,9 +300,9 @@ _1b(this,_4d);
 }};
 $.fn.combobox.parseOptions=function(_4e){
 var t=$(_4e);
-return $.extend({},$.fn.combo.parseOptions(_4e),{valueField:t.attr("valueField"),textField:t.attr("textField"),mode:t.attr("mode"),url:t.attr("url")});
+return $.extend({},$.fn.combo.parseOptions(_4e),{valueField:t.attr("valueField"),textField:t.attr("textField"),mode:t.attr("mode"),method:(t.attr("method")?t.attr("method"):undefined),url:t.attr("url")});
 };
-$.fn.combobox.defaults=$.extend({},$.fn.combo.defaults,{valueField:"value",textField:"text",mode:"local",url:null,data:null,keyHandler:{up:function(){
+$.fn.combobox.defaults=$.extend({},$.fn.combo.defaults,{valueField:"value",textField:"text",mode:"local",method:"post",url:null,data:null,keyHandler:{up:function(){
 _6(this);
 },down:function(){
 _e(this);

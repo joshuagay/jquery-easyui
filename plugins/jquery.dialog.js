@@ -23,6 +23,10 @@ var _7=$.data(_5,"dialog").contentPanel;
 $(_5).find("div.dialog-toolbar").remove();
 $(_5).find("div.dialog-button").remove();
 if(_6.toolbar){
+if(typeof _6.toolbar=="string"){
+$(_6.toolbar).addClass("dialog-toolbar").prependTo(_5);
+$(_6.toolbar).show();
+}else{
 var _8=$("<div class=\"dialog-toolbar\"></div>").prependTo(_5);
 for(var i=0;i<_6.toolbar.length;i++){
 var p=_6.toolbar[i];
@@ -38,7 +42,12 @@ _9.linkbutton($.extend({},p,{plain:true}));
 }
 _8.append("<div style=\"clear:both\"></div>");
 }
+}
 if(_6.buttons){
+if(typeof _6.buttons=="string"){
+$(_6.buttons).addClass("dialog-button").appendTo(_5);
+$(_6.buttons).show();
+}else{
 var _a=$("<div class=\"dialog-button\"></div>").appendTo(_5);
 for(var i=0;i<_6.buttons.length;i++){
 var p=_6.buttons[i];
@@ -47,6 +56,7 @@ if(p.handler){
 _b[0].onclick=p.handler;
 }
 _b.linkbutton(p);
+}
 }
 }
 var _c=_6.href;
@@ -110,7 +120,7 @@ _10(this,_1b);
 }};
 $.fn.dialog.parseOptions=function(_1c){
 var t=$(_1c);
-return $.extend({},$.fn.window.parseOptions(_1c),{});
+return $.extend({},$.fn.window.parseOptions(_1c),{toolbar:t.attr("toolbar"),buttons:t.attr("buttons")});
 };
 $.fn.dialog.defaults=$.extend({},$.fn.window.defaults,{title:"New Dialog",collapsible:false,minimizable:false,maximizable:false,resizable:false,toolbar:null,buttons:null});
 })(jQuery);
