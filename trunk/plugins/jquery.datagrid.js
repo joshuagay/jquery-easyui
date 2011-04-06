@@ -258,6 +258,10 @@ _43.find("div.datagrid-footer-inner").css("display",_3e.showFooter?"block":"none
 _44.find("div.datagrid-footer-inner").css("display",_3e.showFooter?"block":"none");
 $("div.datagrid-toolbar",_3f).remove();
 if(_3e.toolbar){
+if(typeof _3e.toolbar=="string"){
+$(_3e.toolbar).addClass("datagrid-toolbar").prependTo(_3f);
+$(_3e.toolbar).show();
+}else{
 var tb=$("<div class=\"datagrid-toolbar\"></div>").prependTo(_3f);
 for(var i=0;i<_3e.toolbar.length;i++){
 var btn=_3e.toolbar[i];
@@ -268,6 +272,7 @@ var _48=$("<a href=\"javascript:void(0)\"></a>");
 _48[0].onclick=eval(btn.handler||function(){
 });
 _48.css("float","left").appendTo(tb).linkbutton($.extend({},btn,{plain:true}));
+}
 }
 }
 }
@@ -659,6 +664,7 @@ function _a2(_a3,_a4){
 var _a5=$.data(_a3,"datagrid").options;
 var _a6=$.data(_a3,"datagrid").panel;
 var _a7=$.data(_a3,"datagrid").selectedRows;
+_a4=_a5.loadFilter.call(_a3,_a4);
 var _a8=_a4.rows;
 $.data(_a3,"datagrid").data=_a4;
 if(_a4.footer){
@@ -1541,7 +1547,7 @@ $(this).datagrid("fitColumns");
 }};
 $.fn.datagrid.parseOptions=function(_1a3){
 var t=$(_1a3);
-return $.extend({},$.fn.panel.parseOptions(_1a3),{fitColumns:(t.attr("fitColumns")?t.attr("fitColumns")=="true":undefined),striped:(t.attr("striped")?t.attr("striped")=="true":undefined),nowrap:(t.attr("nowrap")?t.attr("nowrap")=="true":undefined),rownumbers:(t.attr("rownumbers")?t.attr("rownumbers")=="true":undefined),singleSelect:(t.attr("singleSelect")?t.attr("singleSelect")=="true":undefined),pagination:(t.attr("pagination")?t.attr("pagination")=="true":undefined),pageSize:(t.attr("pageSize")?parseInt(t.attr("pageSize")):undefined),pageList:(t.attr("pageList")?eval(t.attr("pageList")):undefined),remoteSort:(t.attr("remoteSort")?t.attr("remoteSort")=="true":undefined),showHeader:(t.attr("showHeader")?t.attr("showHeader")=="true":undefined),showFooter:(t.attr("showFooter")?t.attr("showFooter")=="true":undefined),scrollbarSize:(t.attr("scrollbarSize")?parseInt(t.attr("scrollbarSize")):undefined),loadMsg:(t.attr("loadMsg")!=undefined?t.attr("loadMsg"):undefined),idField:t.attr("idField"),url:t.attr("url")});
+return $.extend({},$.fn.panel.parseOptions(_1a3),{fitColumns:(t.attr("fitColumns")?t.attr("fitColumns")=="true":undefined),striped:(t.attr("striped")?t.attr("striped")=="true":undefined),nowrap:(t.attr("nowrap")?t.attr("nowrap")=="true":undefined),rownumbers:(t.attr("rownumbers")?t.attr("rownumbers")=="true":undefined),singleSelect:(t.attr("singleSelect")?t.attr("singleSelect")=="true":undefined),pagination:(t.attr("pagination")?t.attr("pagination")=="true":undefined),pageSize:(t.attr("pageSize")?parseInt(t.attr("pageSize")):undefined),pageList:(t.attr("pageList")?eval(t.attr("pageList")):undefined),remoteSort:(t.attr("remoteSort")?t.attr("remoteSort")=="true":undefined),showHeader:(t.attr("showHeader")?t.attr("showHeader")=="true":undefined),showFooter:(t.attr("showFooter")?t.attr("showFooter")=="true":undefined),scrollbarSize:(t.attr("scrollbarSize")?parseInt(t.attr("scrollbarSize")):undefined),loadMsg:(t.attr("loadMsg")!=undefined?t.attr("loadMsg"):undefined),idField:t.attr("idField"),toolbar:t.attr("toolbar"),url:t.attr("url")});
 };
 var _1a4={render:function(_1a5,_1a6,_1a7){
 var opts=$.data(_1a5,"datagrid").options;
@@ -1708,6 +1714,12 @@ _1ce.find("div.datagrid-cell-rownumber,div.datagrid-cell-check").css("visibility
 }
 }};
 $.fn.datagrid.defaults=$.extend({},$.fn.panel.defaults,{frozenColumns:null,columns:null,fitColumns:false,toolbar:null,striped:false,method:"post",nowrap:true,idField:null,url:null,loadMsg:"Processing, please wait ...",rownumbers:false,singleSelect:false,pagination:false,pageNumber:1,pageSize:10,pageList:[10,20,30,40,50],queryParams:{},sortName:null,sortOrder:"asc",remoteSort:true,showHeader:true,showFooter:false,scrollbarSize:18,rowStyler:function(_1cf,_1d0){
+},loadFilter:function(data){
+if(typeof data.length=="number"&&typeof data.splice=="function"){
+return {total:data.length,rows:data};
+}else{
+return data;
+}
 },editors:_13b,editConfig:{getTr:function(_1d1,_1d2){
 return $(_1d1).datagrid("getPanel").find("div.datagrid-body tr[datagrid-row-index="+_1d2+"]");
 },getRow:function(_1d3,_1d4){
