@@ -17,7 +17,6 @@ return;
 }
 if(typeof (_3.min)=="number"&&_4<_3.min){
 $(_2).val(_3.min.toFixed(_3.precision));
-console.log($(_2).val());
 }else{
 if(typeof (_3.max)=="number"&&_4>_3.max){
 $(_2).val(_3.max.toFixed(_3.precision));
