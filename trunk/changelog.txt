@@ -11,7 +11,7 @@ Version 1.2.3
  * treegrid: Support root nodes pagination and editable features.
  * datagrid: Add 'getFooterRows','reloadFooter','insertRow' methods and improve editing performance.
  * datagrid: Add 'loadFilter' option that allow users to change original source data to standard data format.
- * tree: Add 'onBeforeDrag' callback event function.
+ * draggable: Add 'onBeforeDrag' callback event function.
  * validatebox: Add 'remote' validation type.
  * combobox: Add 'method' option.
 * New Plugins
