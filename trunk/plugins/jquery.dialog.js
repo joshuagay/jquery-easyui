@@ -20,13 +20,12 @@ return _3;
 function _4(_5){
 var _6=$.data(_5,"dialog").options;
 var _7=$.data(_5,"dialog").contentPanel;
-$(_5).find("div.dialog-toolbar").remove();
-$(_5).find("div.dialog-button").remove();
 if(_6.toolbar){
 if(typeof _6.toolbar=="string"){
 $(_6.toolbar).addClass("dialog-toolbar").prependTo(_5);
 $(_6.toolbar).show();
 }else{
+$(_5).find("div.dialog-toolbar").remove();
 var _8=$("<div class=\"dialog-toolbar\"></div>").prependTo(_5);
 for(var i=0;i<_6.toolbar.length;i++){
 var p=_6.toolbar[i];
@@ -42,12 +41,15 @@ _9.linkbutton($.extend({},p,{plain:true}));
 }
 _8.append("<div style=\"clear:both\"></div>");
 }
+}else{
+$(_5).find("div.dialog-toolbar").remove();
 }
 if(_6.buttons){
 if(typeof _6.buttons=="string"){
 $(_6.buttons).addClass("dialog-button").appendTo(_5);
 $(_6.buttons).show();
 }else{
+$(_5).find("div.dialog-button").remove();
 var _a=$("<div class=\"dialog-button\"></div>").appendTo(_5);
 for(var i=0;i<_6.buttons.length;i++){
 var p=_6.buttons[i];
@@ -58,6 +60,8 @@ _b[0].onclick=p.handler;
 _b.linkbutton(p);
 }
 }
+}else{
+$(_5).find("div.dialog-button").remove();
 }
 var _c=_6.href;
 _6.href=null;

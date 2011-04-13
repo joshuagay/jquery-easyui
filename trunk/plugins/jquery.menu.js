@@ -220,6 +220,9 @@ _2f.attr("href",_2d.href);
 if(_2d.onclick){
 _2f.attr("onclick",_2d.onclick);
 }
+if(_2d.handler){
+_2f[0].onclick=eval(_2d.handler);
+}
 _10(_2c,_2f);
 };
 function _30(_31,_32){
