@@ -25,6 +25,9 @@ if ($.fn.combobox){
 if ($.fn.combotree){
 	$.fn.combotree.defaults.missingMessage = 'Ce champ est obligatoire.';
 }
+if ($.fn.combogrid){
+	$.fn.combogrid.defaults.missingMessage = 'Ce champ est obligatoire.';
+}
 if ($.fn.calendar){
 	$.fn.calendar.defaults.weeks = ['S','M','T','W','T','F','S'];
 	$.fn.calendar.defaults.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
