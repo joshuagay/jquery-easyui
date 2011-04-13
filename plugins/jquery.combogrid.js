@@ -22,8 +22,7 @@ _4.datagrid($.extend({},_3,{border:false,fit:true,singleSelect:(!_3.multiple),on
 var _7=$.data(_2,"combogrid").remainText;
 var _8=$(_2).combo("getValues");
 _1c(_2,_8,_7);
-$.data(_2,"combogrid").remainText=false;
-_3.onLoadSuccess.apply(this,arguments);
+_3.onLoadSuccess.apply(_2,arguments);
 },onClickRow:_9,onSelect:function(_a,_b){
 _c();
 _3.onSelect.call(this,_a,_b);
@@ -111,6 +110,9 @@ ss.push(_22[_23][_20.textField]);
 ss.push(_1e[i]);
 }
 }
+if($(_1d).combo("getValues").join(",")==_1e.join(",")){
+return;
+}
 $(_1d).combo("setValues",_1e);
 if(!_1f){
 $(_1d).combo("setText",ss.join(_20.separator));
@@ -126,7 +128,8 @@ _1c(_25,[],true);
 _1c(_25,[q],true);
 }
 if(_26.mode=="remote"){
-_27.datagrid("reload",{q:q});
+_27.datagrid("clearSelections");
+_27.datagrid("load",{q:q});
 }else{
 if(!q){
 return;

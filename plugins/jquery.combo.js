@@ -71,15 +71,14 @@ var _18=$.data(_16,"combo").combo;
 var _19=$.data(_16,"combo").panel;
 var _1a=_18.find(".combo-text");
 var _1b=_18.find(".combo-arrow");
-$(document).unbind(".combo");
+$(document).unbind(".combo").bind("mousedown.combo",function(e){
+$("div.combo-panel").panel("close");
+});
 _18.unbind(".combo");
 _19.unbind(".combo");
 _1a.unbind(".combo");
 _1b.unbind(".combo");
 if(!_17.disabled){
-$(document).bind("mousedown.combo",function(e){
-$("div.combo-panel").panel("close");
-});
 _19.bind("mousedown.combo",function(e){
 return false;
 });
