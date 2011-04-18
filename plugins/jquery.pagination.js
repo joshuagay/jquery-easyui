@@ -102,8 +102,8 @@ _f=1;
 if(_c>_e){
 _f=_e;
 }
-_d.onSelectPage.call(_b,_f,_d.pageSize);
 _d.pageNumber=_f;
+_d.onSelectPage.call(_b,_f,_d.pageSize);
 _10(_b);
 };
 function _10(_11){
