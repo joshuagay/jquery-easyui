@@ -86,8 +86,10 @@ function _18(_19,pp,_1a){
 pp.panel($.extend({},_1a,{collapsible:false,minimizable:false,maximizable:false,closable:false,doSize:false,collapsed:pp.attr("selected")!="true",tools:[{iconCls:"accordion-collapse",handler:function(){
 var _1b=$.data(_19,"accordion").options.animate;
 if(pp.panel("options").collapsed){
+_27(_19);
 pp.panel("expand",_1b);
 }else{
+_27(_19);
 pp.panel("collapse",_1b);
 }
 return false;
@@ -132,56 +134,58 @@ _23.onSelect.call(_21,_25.panel("options").title);
 }
 }
 };
-function add(_27,_28){
-var _29=$.data(_27,"accordion").options;
-var _2a=$.data(_27,"accordion").panels;
-for(var i=0;i<_2a.length;i++){
-_2a[i].stop(true,true);
+function _27(_28){
+var _29=$.data(_28,"accordion").panels;
+for(var i=0;i<_29.length;i++){
+_29[i].stop(true,true);
 }
-var pp=$("<div></div>").appendTo(_27);
-_2a.push(pp);
-_18(_27,pp,_28);
-_1(_27);
-_29.onAdd.call(_27,_28.title);
-_20(_27,_28.title);
 };
-function _2b(_2c,_2d){
-var _2e=$.data(_2c,"accordion").options;
-var _2f=$.data(_2c,"accordion").panels;
-for(var i=0;i<_2f.length;i++){
-_2f[i].stop(true,true);
-}
-if(_2e.onBeforeRemove.call(_2c,_2d)==false){
+function add(_2a,_2b){
+var _2c=$.data(_2a,"accordion").options;
+var _2d=$.data(_2a,"accordion").panels;
+_27(_2a);
+var pp=$("<div></div>").appendTo(_2a);
+_2d.push(pp);
+_18(_2a,pp,_2b);
+_1(_2a);
+_2c.onAdd.call(_2a,_2b.title);
+_20(_2a,_2b.title);
+};
+function _2e(_2f,_30){
+var _31=$.data(_2f,"accordion").options;
+var _32=$.data(_2f,"accordion").panels;
+_27(_2f);
+if(_31.onBeforeRemove.call(_2f,_30)==false){
 return;
 }
-var _30=_d(_2c,_2d,true);
-if(_30){
-_30.panel("destroy");
-if(_2f.length){
-_1(_2c);
-var _31=_9(_2c);
-if(!_31){
-_20(_2c,_2f[0].panel("options").title);
+var _33=_d(_2f,_30,true);
+if(_33){
+_33.panel("destroy");
+if(_32.length){
+_1(_2f);
+var _34=_9(_2f);
+if(!_34){
+_20(_2f,_32[0].panel("options").title);
 }
 }
 }
-_2e.onRemove.call(_2c,_2d);
+_31.onRemove.call(_2f,_30);
 };
-$.fn.accordion=function(_32,_33){
-if(typeof _32=="string"){
-return $.fn.accordion.methods[_32](this,_33);
+$.fn.accordion=function(_35,_36){
+if(typeof _35=="string"){
+return $.fn.accordion.methods[_35](this,_36);
 }
-_32=_32||{};
+_35=_35||{};
 return this.each(function(){
-var _34=$.data(this,"accordion");
-var _35;
-if(_34){
-_35=$.extend(_34.options,_32);
-_34.opts=_35;
+var _37=$.data(this,"accordion");
+var _38;
+if(_37){
+_38=$.extend(_37.options,_35);
+_37.opts=_38;
 }else{
-_35=$.extend({},$.fn.accordion.defaults,$.fn.accordion.parseOptions(this),_32);
+_38=$.extend({},$.fn.accordion.defaults,$.fn.accordion.parseOptions(this),_35);
 var r=_13(this);
-$.data(this,"accordion",{options:_35,accordion:r.accordion,panels:r.panels});
+$.data(this,"accordion",{options:_38,accordion:r.accordion,panels:r.panels});
 }
 _1(this);
 _20(this);
@@ -197,29 +201,29 @@ _1(this);
 });
 },getSelected:function(jq){
 return _9(jq[0]);
-},getPanel:function(jq,_36){
-return _d(jq[0],_36);
-},select:function(jq,_37){
+},getPanel:function(jq,_39){
+return _d(jq[0],_39);
+},select:function(jq,_3a){
 return jq.each(function(){
-_20(this,_37);
+_20(this,_3a);
 });
-},add:function(jq,_38){
+},add:function(jq,_3b){
 return jq.each(function(){
-add(this,_38);
+add(this,_3b);
 });
-},remove:function(jq,_39){
+},remove:function(jq,_3c){
 return jq.each(function(){
-_2b(this,_39);
+_2e(this,_3c);
 });
 }};
-$.fn.accordion.parseOptions=function(_3a){
-var t=$(_3a);
-return {width:(parseInt(_3a.style.width)||undefined),height:(parseInt(_3a.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),animate:(t.attr("animate")?t.attr("animate")=="true":undefined)};
+$.fn.accordion.parseOptions=function(_3d){
+var t=$(_3d);
+return {width:(parseInt(_3d.style.width)||undefined),height:(parseInt(_3d.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined),animate:(t.attr("animate")?t.attr("animate")=="true":undefined)};
 };
-$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_3b){
-},onAdd:function(_3c){
-},onBeforeRemove:function(_3d){
-},onRemove:function(_3e){
+$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_3e){
+},onAdd:function(_3f){
+},onBeforeRemove:function(_40){
+},onRemove:function(_41){
 }};
 })(jQuery);
 
