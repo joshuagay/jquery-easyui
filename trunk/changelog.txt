@@ -1,3 +1,10 @@
+Version 1.2.4
+-------------
+* Improvement
+ * treegrid: The 'getEditors' and 'getEditor' methods are supported now.
+* New Plugins
+ * searchbox: Allow users to type words into box and do searching operation.
+ 
 Version 1.2.3
 -------------
 * Bug
