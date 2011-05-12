@@ -5,7 +5,7 @@
 	<title>jQuery EasyUI</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		$(function(){
@@ -72,13 +72,11 @@
 				}]
 			});
 			var p = $('#test').datagrid('getPager');
-			if (p){
-				$(p).pagination({
-					onBeforeRefresh:function(){
-						alert('before refresh');
-					}
-				});
-			}
+			$(p).pagination({
+				onBeforeRefresh:function(){
+					alert('before refresh');
+				}
+			});
 		});
 		function resize(){
 			$('#test').datagrid('resize', {
