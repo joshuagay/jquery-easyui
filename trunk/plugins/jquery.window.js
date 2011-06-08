@@ -43,7 +43,7 @@ _8.shadow.css({left:_8.options.left,top:_8.options.top});
 };
 function _9(_a){
 var _b=$.data(_a,"window");
-var _c=$(_a).panel($.extend({},_b.options,{border:false,doSize:true,closed:true,cls:"window",headerCls:"window-header",bodyCls:"window-body",onBeforeDestroy:function(){
+var _c=$(_a).panel($.extend({},_b.options,{border:false,doSize:true,closed:true,cls:"window",headerCls:"window-header",bodyCls:"window-body "+(_b.options.noheader?"window-body-noheader":""),onBeforeDestroy:function(){
 if(_b.options.onBeforeDestroy.call(_a)==false){
 return false;
 }
