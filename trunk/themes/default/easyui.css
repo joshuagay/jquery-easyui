@@ -809,6 +809,12 @@ a.m-btn-plain-active{
 .messager-input{
 	width: 262px;
 	border:1px solid #ccc;
+}
+.messager-progress{
+	padding:10px;
+}
+.messager-p-msg{
+	margin-bottom:5px;
 }.pagination{
 	zoom:1;
 }
@@ -939,6 +945,21 @@ a.m-btn-plain-active{
 	background:url('images/panel_loading.gif') no-repeat 10px 10px;
 }
 
+.progressbar{
+	border:1px solid #99BBE8;
+	border-radius:5px;
+	overflow:hidden;
+}
+.progressbar-text{
+	text-align:center;
+	color:#15428b;
+	position:absolute;
+}
+.progressbar-value{
+	background-color:#FF8D40;
+	border-radius:5px;
+	width:0;
+}
 .propertygrid .datagrid-view1 .datagrid-body,.propertygrid .datagrid-group{
 	background:#E0ECFF;
 }
@@ -1437,12 +1458,14 @@ a.s-btn-plain-active .s-btn-downarrow{
 	background1:#878787;
 	padding:5px;
 	border:1px solid #99BBE8;
+	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius: 5px;
 }
 .window-shadow{
 	position:absolute;
 	background:#ddd;
+	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius: 5px;
 	-moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
@@ -1457,6 +1480,9 @@ a.s-btn-plain-active .s-btn-downarrow{
 	background:#fff;
 	border:1px solid #99BBE8;
 	border-top-width:0px;
+}
+.window .window-body-noheader{
+	border-top-width:1px;
 }
 .window .window-header .panel-icon{
 	left:1px;
