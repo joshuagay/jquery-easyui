@@ -1,9 +1,13 @@
 Version 1.2.4
 -------------
+* Bug
+ * menu: The menu position is wrong when scroll bar appears. fixed.
 * Improvement
  * treegrid: The 'getEditors' and 'getEditor' methods are supported now.
+ * messager: Add 'progress' method to display a message box with a progress bar.
 * New Plugins
  * searchbox: Allow users to type words into box and do searching operation.
+ * progressbar: To display the progress of a task.
  
 Version 1.2.3
 -------------
