@@ -31,6 +31,15 @@
 				showType:'fade'
 			});
 		}
+		function show4(){
+			var win = $.messager.progress({
+				title:'Please waiting',
+				msg:'Loading data...'
+			});
+			setTimeout(function(){
+				$.messager.progress('close');
+			},5000)
+		}
 		function alert1(){
 			$.messager.alert('My Title','Here is a message!');
 		}
@@ -69,6 +78,7 @@
 		<a href="javascript:void(0)" onclick="show1()">show</a> |
 		<a href="#" onclick="show2()">slide</a> |
 		<a href="#" onclick="show3()">fade</a> |
+		<a href="#" onclick="show4()">progress</a>
 	</div>
 		
 	<div>
@@ -84,6 +94,5 @@
 	<div>
 		<a href="#" onclick="prompt1()">prompt</a>
 	</div>
-	<div style="height:600px;"></div>
 </body>
 </html>
