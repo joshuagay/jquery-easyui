@@ -433,14 +433,14 @@ _6a.sortOrder="desc";
 }
 _6b.find("div.datagrid-cell").removeClass("datagrid-sort-asc datagrid-sort-desc");
 $(this).addClass(c);
-if(_6a.onSortColumn){
-_6a.onSortColumn.call(_68,_6a.sortName,_6a.sortOrder);
-}
 if(_6a.remoteSort){
 _12e(_68);
 }else{
 var _6e=$.data(_68,"datagrid").data;
 _a2(_68,_6e);
+}
+if(_6a.onSortColumn){
+_6a.onSortColumn.call(_68,_6a.sortName,_6a.sortOrder);
 }
 });
 _6b.find("input[type=checkbox]").unbind(".datagrid").bind("click.datagrid",function(){
@@ -1556,7 +1556,7 @@ $(this).datagrid("fitColumns");
 }};
 $.fn.datagrid.parseOptions=function(_1a7){
 var t=$(_1a7);
-return $.extend({},$.fn.panel.parseOptions(_1a7),{fitColumns:(t.attr("fitColumns")?t.attr("fitColumns")=="true":undefined),striped:(t.attr("striped")?t.attr("striped")=="true":undefined),nowrap:(t.attr("nowrap")?t.attr("nowrap")=="true":undefined),rownumbers:(t.attr("rownumbers")?t.attr("rownumbers")=="true":undefined),singleSelect:(t.attr("singleSelect")?t.attr("singleSelect")=="true":undefined),pagination:(t.attr("pagination")?t.attr("pagination")=="true":undefined),pageSize:(t.attr("pageSize")?parseInt(t.attr("pageSize")):undefined),pageList:(t.attr("pageList")?eval(t.attr("pageList")):undefined),remoteSort:(t.attr("remoteSort")?t.attr("remoteSort")=="true":undefined),showHeader:(t.attr("showHeader")?t.attr("showHeader")=="true":undefined),showFooter:(t.attr("showFooter")?t.attr("showFooter")=="true":undefined),scrollbarSize:(t.attr("scrollbarSize")?parseInt(t.attr("scrollbarSize")):undefined),loadMsg:(t.attr("loadMsg")!=undefined?t.attr("loadMsg"):undefined),idField:t.attr("idField"),toolbar:t.attr("toolbar"),url:t.attr("url")});
+return $.extend({},$.fn.panel.parseOptions(_1a7),{fitColumns:(t.attr("fitColumns")?t.attr("fitColumns")=="true":undefined),striped:(t.attr("striped")?t.attr("striped")=="true":undefined),nowrap:(t.attr("nowrap")?t.attr("nowrap")=="true":undefined),rownumbers:(t.attr("rownumbers")?t.attr("rownumbers")=="true":undefined),singleSelect:(t.attr("singleSelect")?t.attr("singleSelect")=="true":undefined),pagination:(t.attr("pagination")?t.attr("pagination")=="true":undefined),pageSize:(t.attr("pageSize")?parseInt(t.attr("pageSize")):undefined),pageList:(t.attr("pageList")?eval(t.attr("pageList")):undefined),remoteSort:(t.attr("remoteSort")?t.attr("remoteSort")=="true":undefined),sortName:t.attr("sortName"),sortOrder:t.attr("sortOrder"),showHeader:(t.attr("showHeader")?t.attr("showHeader")=="true":undefined),showFooter:(t.attr("showFooter")?t.attr("showFooter")=="true":undefined),scrollbarSize:(t.attr("scrollbarSize")?parseInt(t.attr("scrollbarSize")):undefined),loadMsg:(t.attr("loadMsg")!=undefined?t.attr("loadMsg"):undefined),idField:t.attr("idField"),toolbar:t.attr("toolbar"),url:t.attr("url")});
 };
 var _1a8={render:function(_1a9,_1aa,_1ab){
 var opts=$.data(_1a9,"datagrid").options;
