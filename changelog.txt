@@ -3,8 +3,11 @@ Version 1.2.4
 * Bug
  * menu: The menu position is wrong when scroll bar appears. fixed.
 * Improvement
+ * combo: Add 'delay' property to set the delay time to do searching from the last key input event.
  * treegrid: The 'getEditors' and 'getEditor' methods are supported now.
+ * treegrid: The 'loadFilter' option is supported now.
  * messager: Add 'progress' method to display a message box with a progress bar.
+ * panel: Add 'extractor' option to allow users to extract panel content from ajax response.
 * New Plugins
  * searchbox: Allow users to type words into box and do searching operation.
  * progressbar: To display the progress of a task.
