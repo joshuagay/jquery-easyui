@@ -12,7 +12,7 @@ function _1(_2){
 var _3=$.data(_2,"menubutton").options;
 var _4=$(_2);
 _4.removeClass("m-btn-active m-btn-plain-active");
-_4.linkbutton(_3);
+_4.linkbutton($.extend({},_3,{text:_3.text+"<span class=\"m-btn-downarrow\">&nbsp;</span>"}));
 if(_3.menu){
 $(_3.menu).menu({onShow:function(){
 _4.addClass((_3.plain==true)?"m-btn-plain-active":"m-btn-active");
@@ -71,7 +71,6 @@ var _f=$.data(this,"menubutton");
 if(_f){
 $.extend(_f.options,_d);
 }else{
-$(this).append("<span class=\"m-btn-downarrow\">&nbsp;</span>");
 $.data(this,"menubutton",{options:$.extend({},$.fn.menubutton.defaults,$.fn.menubutton.parseOptions(this),_d)});
 $(this).removeAttr("disabled");
 }

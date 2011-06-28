@@ -203,6 +203,7 @@ $("<tr class=\"treegrid-tr-tree\">"+"<td style=\"border:0px\" colspan=\""+_3a+"\
 };
 function _3b(_3c,_3d,_3e,_3f){
 var _40=$.data(_3c,"treegrid").options;
+_3e=_40.loadFilter.call(_3c,_3e,_3d);
 var _41=$.data(_3c,"datagrid").panel;
 var _42=_41.children("div.datagrid-view");
 var _43=_42.children("div.datagrid-view1");
@@ -1008,11 +1009,13 @@ i--;
 }
 return _100;
 }});
-$.fn.treegrid.defaults=$.extend({},$.fn.datagrid.defaults,{treeField:null,animate:false,singleSelect:true,view:_c6,editConfig:{getTr:function(_101,id){
-return $(_101).datagrid("getPanel").find("div.datagrid-body tr[node-id="+id+"]");
-},getRow:function(_102,id){
-return $(_102).treegrid("find",id);
-}},onBeforeLoad:function(row,_103){
+$.fn.treegrid.defaults=$.extend({},$.fn.datagrid.defaults,{treeField:null,animate:false,singleSelect:true,view:_c6,loadFilter:function(data,_101){
+return data;
+},editConfig:{getTr:function(_102,id){
+return $(_102).datagrid("getPanel").find("div.datagrid-body tr[node-id="+id+"]");
+},getRow:function(_103,id){
+return $(_103).treegrid("find",id);
+}},onBeforeLoad:function(row,_104){
 },onLoadSuccess:function(row,data){
 },onLoadError:function(){
 },onBeforeCollapse:function(row){
@@ -1023,7 +1026,7 @@ return $(_102).treegrid("find",id);
 },onDblClickRow:function(row){
 },onContextMenu:function(e,row){
 },onBeforeEdit:function(row){
-},onAfterEdit:function(row,_104){
+},onAfterEdit:function(row,_105){
 },onCancelEdit:function(row){
 }});
 })(jQuery);
