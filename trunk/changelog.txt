@@ -2,7 +2,10 @@ Version 1.2.4
 -------------
 * Bug
  * menu: The menu position is wrong when scroll bar appears. fixed.
+ * accordion: Cannot display the default selected panel in jQuery 1.6.2. fixed.
+ * tabs: Cannot display the default selected tab panel in jQuery 1.6.2. fixed.
 * Improvement
+ * menu: Allow users to disable or enable menu item.
  * combo: Add 'delay' property to set the delay time to do searching from the last key input event.
  * treegrid: The 'getEditors' and 'getEditor' methods are supported now.
  * treegrid: The 'loadFilter' option is supported now.
