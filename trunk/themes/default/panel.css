@@ -12,6 +12,9 @@
 	position:relative;
 	border:1px solid #99BBE8;
 }
+.panel-title{
+	background:url('images/blank.gif') no-repeat;
+}
 .panel-header-noborder{
 	border-width:0px;
 	border-bottom:1px solid #99BBE8;

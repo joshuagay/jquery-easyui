@@ -754,7 +754,14 @@ a:hover.l-btn-disabled span.l-btn-left{
 	-webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 	filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=2,MakeShadow=false,ShadowOpacity=0.2);
 }
-
+.menu-item-disabled{
+	opacity:0.5;
+	filter:alpha(opacity=50);
+	cursor:default;
+}
+.menu-active-disabled{
+	border-color:#d3d3d3;
+}
 .m-btn-downarrow{
 	display:inline-block;
 	width:12px;
@@ -870,6 +877,9 @@ a.m-btn-plain-active{
 	background:url('images/panel_title.gif') repeat-x;
 	position:relative;
 	border:1px solid #D3D3D3;
+}
+.panel-title{
+	background:url('images/blank.gif') no-repeat;
 }
 .panel-header-noborder{
 	border-width:0px;
