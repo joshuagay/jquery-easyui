@@ -1,9 +1,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>Dialog - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -45,10 +46,15 @@
 	</script>
 </head>
 <body>
-	<h1>Dialog</h1>
-	<div style="margin-bottom:10px;">
-		<a href="#" onclick="open1()">open1</a>
-		<a href="#" onclick="close1()">close1</a>
+	<h2>Dialog</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>Click below button to open or close dialog.</div>
+	</div>
+	
+	<div style="margin:10px 0;">
+		<a href="#" class="easyui-linkbutton" onclick="open1()">Open</a>
+		<a href="#" class="easyui-linkbutton" onclick="close1()">Close</a>
 	</div>
 	<div id="dd" icon="icon-save" style="padding:5px;width:400px;height:200px;">
 		<p>dialog content.</p>
@@ -60,7 +66,7 @@
 		<p>dialog content.</p>
 		<p>dialog content.</p>
 	</div>
-	<div id="d2" class="easyui-dialog" title="Another Dialog" style="width:400px;height:200px;left:100px;top:100px;padding:10px"
+	<div id="d2" class="easyui-dialog" title="Another Dialog" style="width:400px;height:200px;left:100px;top:150px;padding:10px"
 			toolbar="#dlg-toolbar" buttons="#dlg-buttons" resizable="true">
 		Dialog toolbar and buttons are created from existing HTML nodes.
 	</div>

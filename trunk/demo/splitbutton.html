@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>SplitButton - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -21,11 +22,15 @@
 	</script>
 </head>
 <body>
-	<h1>SplitButton</h1>
-	<p>Similar to MenuButton, SplitButton include linkbutton and menu but can act as a single button.</p>
-	<div style="margin-bottom:10px;">
-		<a href="javascript:void(0)" id="dd1">3D</a>
-		<a href="javascript:void(0)" id="dd2">Plain</a>
+	<h2>SplitButton</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>Similar to MenuButton, SplitButton include linkbutton and menu but can act as a single button.</div>
+	</div>
+	
+	<div style="margin:10px 0;">
+		<a href="javascript:void(0)" class="easyui-linkbutton" id="dd1">3D</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" id="dd2">Plain</a>
 	</div>
 	<div style="background:#C9EDCC;padding:5px;width:600px;">
 		<a href="javascript:void(0)" id="sb1" class="easyui-splitbutton" menu="#mm1" iconCls="icon-edit" onclick="javascript:alert('edit')">Edit</a>

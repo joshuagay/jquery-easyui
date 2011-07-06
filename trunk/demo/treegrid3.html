@@ -2,9 +2,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>jQuery EasyUI</title>
+	<title>Editable TreeGrid - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -29,14 +30,19 @@
 	</script>
 </head>
 <body>
-	<h1>TreeGrid - Pagination</h1>
-	<div style="margin:10px 0">
-		<a href="javascript:editNode()">Edit</a>
-		<a href="javascript:saveNode()">Save</a>
-		<a href="javascript:cancelNode()">Cancel</a>
+	<h2>Editable TreeGrid - Pagination</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>Select node and Click edit button to perform editing.</div>
 	</div>
 	
-	<table id="tt" title="TreeGrid" class="easyui-treegrid" style="width:600px;height:300px"
+	<div style="margin:10px 0">
+		<a href="javascript:editNode()" class="easyui-linkbutton">Edit</a>
+		<a href="javascript:saveNode()" class="easyui-linkbutton">Save</a>
+		<a href="javascript:cancelNode()" class="easyui-linkbutton">Cancel</a>
+	</div>
+	
+	<table id="tt" title="TreeGrid" class="easyui-treegrid" style="width:700px;height:300px"
 			url="treegrid_data3.json" idField="id" treeField="code"
 			pagination="true" fitColumns="true">
 		<thead>

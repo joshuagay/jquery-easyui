@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>Editable Tree - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
@@ -18,10 +19,12 @@
 	</script>
 </head>
 <body>
-	<h1>Editable Tree</h1>
-	<div style="margin-bottom:10px">
-		Click the node to begin edit, press enter key to stop edit and esc key to cancel edit.
+	<h2>Editable Tree</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip"></div>
+		<div>Click the node to begin edit, press enter key to stop edit or esc key to cancel edit.</div>
 	</div>
+	
 	<ul id="tt" url="tree_data.json" animate="true"></ul>
 </body>
 </html>
