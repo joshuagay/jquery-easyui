@@ -1,9 +1,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>Tabs - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
@@ -51,15 +52,19 @@
 	</script>
 </head>
 <body>
-	<h1>Tabs</h1>
-	<div>
+	<h2>Tabs</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>Tabs are automatically made scrollable when the sum of their width exceeds their container width size.</div>
+	</div>
+	
+	<div style="margin:10px 0">
 		<a class="easyui-linkbutton" icon="icon-add" href="javascript:void(0)" onclick="addTab()">add tab</a>
 		<a class="easyui-linkbutton" href="javascript:void(0)" onclick="getSelected()">getSelected</a>
 		<a class="easyui-linkbutton" href="javascript:void(0)" onclick="update()">Update</a>
 	</div>
-	<br/>
 	
-	<div id="tt" style="width:500px;height:250px;">
+	<div id="tt" style="width:700px;height:250px;">
 		<div title="Tab1" style="padding:20px;">
 		</div>
 		<div title="Tab2" closable="true" style="padding:20px;" cache="false" href="tabs_href_test.html">

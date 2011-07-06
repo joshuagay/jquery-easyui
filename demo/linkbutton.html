@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>LinkButton - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<style>
@@ -26,7 +27,12 @@
 	</script>
 </head>
 <body>
-	<h1>LinkButton</h1>
+	<h2>LinkButton</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip"></div>
+		<div>Buttons can be created from &lt;a/&gt; link.</div>
+	</div>
+	
 	<div style="padding:5px;">
 		<a href="#" onclick="enable()">enable</a> |
 		<a href="#" onclick="disable()">disable</a> |
@@ -36,7 +42,7 @@
 		<a href="#" onclick="javascript:$('a.easyui-linkbutton').linkbutton({plain:true})">make to plain</a> | 
 		<a href="#" onclick="javascript:$('a.easyui-linkbutton').linkbutton({plain:false})">restore</a>  
 	</div>
-	<h3>3D</h3>
+	<p>3D</p>
 	<div class="toolbar">
 		<a id="add" href="#" class="easyui-linkbutton" iconCls="icon-add">Add</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-remove">Remove</a>
@@ -59,8 +65,8 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-back">Back</a>
 	</div>
 	
-	<h3>Plain</h3>
-	<div style="padding:5px;background:#efefef;width:500px;">
+	<p>Plain</p>
+	<div style="padding:5px;background:#fafafa;width:500px;">
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel">Cancel</a>
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-reload">Reload</a>
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search">Search</a>
@@ -68,8 +74,8 @@
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-print">Print</a>
 	</div>
 	
-	<h3>DEMO1</h3>
-	<div style="padding:5px;background:#efefef;width:500px;">
+	<p>DEMO1</p>
+	<div style="padding:5px;background:#fafafa;width:500px;">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-reload">Refresh</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-search">Query</a>
@@ -77,8 +83,8 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-print">Print</a>
 	</div>
 	
-	<h3>DEMO2</h3>
-	<div style="padding:5px;background:#efefef;width:500px;">
+	<p>DEMO2</p>
+	<div style="padding:5px;background:#fafafa;width:500px;">
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel">Cancel</a>
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-reload">Refresh</a>
 		<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search">Search</a>

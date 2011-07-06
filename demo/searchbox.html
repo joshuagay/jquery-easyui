@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery EasyUI</title>
+<title>SearchBox - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="../themes/default/searchbox.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -15,14 +15,19 @@
 	</script>
 </head>
 <body>
-	<h1>SearchBox</h1>
+	<h2>SearchBox</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip"></div>
+		<div>Click search button or press enter key in input box to do searching.</div>
+	</div>
+	
 	<input id="ss" class="easyui-searchbox"
 			searcher="qq"
 			prompt="Please Input Value" menu="#mm" style="width:300px"></input>
 			
-	<div id="mm" style="width:100px">
-		<div name="all" iconCls="icon-save">All News</div>
-		<div name="sports" iconCls="icon-cut">Sports News</div>
+	<div id="mm" style="width:120px">
+		<div name="all" iconCls="icon-ok">All News</div>
+		<div name="sports">Sports News</div>
 	</div>
 </body>
 </html>

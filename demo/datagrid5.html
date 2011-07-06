@@ -2,9 +2,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>jQuery EasyUI</title>
+	<title>DataGrid Footer Row - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -12,7 +13,7 @@
 			$('#tt').datagrid({
 				url: 'datagrid_data3.json',
 				title: 'DataGrid',
-				width: 600,
+				width: 700,
 				height: 220,
 				fitColumns: true,
 				nowrap:false,
@@ -20,10 +21,10 @@
 				showFooter:true,
 				columns:[[
 					{field:'itemid',title:'Item ID',width:80},
-					{field:'productid',title:'Product ID',width:100},
+					{field:'productid',title:'Product ID',width:120},
 					{field:'listprice',title:'List Price',width:80,align:'right'},
 					{field:'unitcost',title:'Unit Cost',width:80,align:'right'},
-					{field:'attr1',title:'Attribute',width:150},
+					{field:'attr1',title:'Attribute',width:250},
 					{field:'status',title:'Status',width:60,align:'center'}
 				]]
 			});
@@ -31,7 +32,11 @@
 	</script>
 </head>
 <body>
-	<h1>DataGrid - Footer Row</h1>
+	<h2>DataGrid - Footer Row</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip"></div>
+		<div>Display summary information in footer rows.</div>
+	</div>
 	
 	<table id="tt"></table>
 </body>

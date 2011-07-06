@@ -2,9 +2,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>jQuery EasyUI</title>
+	<title>TreeGrid - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
@@ -12,7 +13,7 @@
 			$('#test').treegrid({
 				title:'TreeGrid',
 				iconCls:'icon-save',
-				width:500,
+				width:700,
 				height:350,
 				nowrap: false,
 				rownumbers: true,
@@ -22,15 +23,15 @@
 				idField:'code',
 				treeField:'code',
 				frozenColumns:[[
-	                {title:'Code',field:'code',width:150,
+	                {title:'Code',field:'code',width:200,
 		                formatter:function(value){
 		                	return '<span style="color:red">'+value+'</span>';
 		                }
 	                }
 				]],
 				columns:[[
-					{field:'name',title:'Name',width:120},
-					{field:'addr',title:'Address',width:120,rowspan:2},
+					{field:'name',title:'Name',width:150},
+					{field:'addr',title:'Address',width:220,rowspan:2},
 					{field:'col4',title:'Col41',width:150,rowspan:2}
 				]],
 				onBeforeLoad:function(row,param){
@@ -135,17 +136,22 @@
 	</script>
 </head>
 <body>
-	<h1>TreeGrid</h1>
-	<div style="margin:10px;">
-		<a href="#" onclick="reload()">reload</a>
-		<a href="#" onclick="getChildren()">getChildren</a>
-		<a href="#" onclick="getSelected()">getSelected</a>
-		<a href="#" onclick="collapse()">collapse</a>
-		<a href="#" onclick="expand()">expand</a>
-		<a href="#" onclick="collapseAll()">collapseAll</a>
-		<a href="#" onclick="expandAll()">expandAll</a>
-		<a href="#" onclick="expandTo()">expandTo</a>
-		<a href="#" onclick="append()">append</a>
+	<h2>TreeGrid</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>Combines treeview and datagrid to represent hierarchical data.</div>
+	</div>
+	
+	<div style="margin:10px 0;">
+		<a href="#" onclick="reload()">Reload</a>
+		<a href="#" onclick="getChildren()">GetChildren</a>
+		<a href="#" onclick="getSelected()">GetSelected</a>
+		<a href="#" onclick="collapse()">Collapse</a>
+		<a href="#" onclick="expand()">Expand</a>
+		<a href="#" onclick="collapseAll()">CollapseAll</a>
+		<a href="#" onclick="expandAll()">ExpandAll</a>
+		<a href="#" onclick="expandTo()">ExpandTo</a>
+		<a href="#" onclick="append()">Append</a>
 	</div>
 	
 	<table id="test"></table>
