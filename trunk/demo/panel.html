@@ -16,9 +16,7 @@
 			$('#p').panel('close');
 		}
 		function load1(){
-			$('#p').panel({
-				href:'tabs_href_test.html'
-			});
+			$('#p').panel('refresh','tabs_href_test.html');
 		}
 	</script>
 </head>
@@ -35,7 +33,7 @@
 		<a href="#" class="easyui-linkbutton" onclick="load1()">Load</a>
 	</div>
 	<div style="height:300px;background:#fafafa;padding:5px;">
-		<div id="p" class="easyui-panel" style="width:500px;height:150px;padding:10px;"
+		<div id="p" class="easyui-panel" style="width:500px;height:200px;padding:10px;"
 				title="My Panel" iconCls="icon-save"
 				collapsible="true" minimizable="true"
 				maximizable=true closable="true">
