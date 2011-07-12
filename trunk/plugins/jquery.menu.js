@@ -240,7 +240,11 @@ if(_31.href){
 _33.attr("href",_31.href);
 }
 if(_31.onclick){
+if(typeof _31.onclick=="string"){
 _33.attr("onclick",_31.onclick);
+}else{
+_33[0].onclick=eval(_31.onclick);
+}
 }
 if(_31.handler){
 _33[0].onclick=eval(_31.handler);

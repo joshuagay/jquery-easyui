@@ -293,7 +293,9 @@ if(_43.maximized==true){
 return;
 }
 _45.addClass("panel-tool-restore");
+if(!$.data(_42,"panel").original){
 $.data(_42,"panel").original={width:_43.width,height:_43.height,left:_43.left,top:_43.top,fit:_43.fit};
+}
 _43.left=0;
 _43.top=0;
 _43.fit=true;
@@ -328,6 +330,7 @@ _4c.fit=_4f.fit;
 _3(_4b);
 _4c.minimized=false;
 _4c.maximized=false;
+$.data(_4b,"panel").original=null;
 _4c.onRestore.call(_4b);
 };
 function _50(_51){
