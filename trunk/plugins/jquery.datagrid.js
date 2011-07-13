@@ -195,7 +195,7 @@ if(th.attr("width")){
 col.width=parseInt(th.attr("width"));
 }
 if(th.attr("hidden")){
-col.hidden=th.attr("hidden")=="true";
+col.hidden=true;
 }
 if(th.attr("resizable")){
 col.resizable=th.attr("resizable")=="true";
