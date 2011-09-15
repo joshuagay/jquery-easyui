@@ -1,3 +1,16 @@
+Version 1.2.5
+-------------
+* Bug
+ * tabs: When add a new tab panel with href property, the content page is loaded twice. fixed.
+ * form: Failed to call 'load' method to load form input with complex name. fixed.
+ * draggable: End drag in ie9, the cursor cannot be restored. fixed.
+* Improvement
+ * tabs: Call 'close' method to close specified tab panel, users can pass tab title or index of tab panel. Other methods such 'select','getTab' and 'exists' are similar to 'close' method.
+ * tabs: Add 'getTabIndex' method.
+ * tree: The mouse must move a specified distance to begin drag and drop operation.
+ * resizable: Add 'options','enable' and 'disable' methods.
+ * numberbox: Allow users to change number format.
+
 Version 1.2.4
 -------------
 * Bug
