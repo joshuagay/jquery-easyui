@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.4
+ * jQuery EasyUI 1.2.5
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -9,25 +9,40 @@
  */
 (function($){
 function _1(_2){
-var _3=$.data(_2,"numberbox").options;
-var _4=parseFloat($(_2).val()).toFixed(_3.precision);
-if(isNaN(_4)){
-$(_2).val("");
-return;
+var v=$("<input type=\"hidden\">").insertAfter(_2);
+var _3=$(_2).attr("name");
+if(_3){
+v.attr("name",_3);
+$(_2).removeAttr("name").attr("numberboxName",_3);
 }
-if(typeof (_3.min)=="number"&&_4<_3.min){
-$(_2).val(_3.min.toFixed(_3.precision));
-}else{
-if(typeof (_3.max)=="number"&&_4>_3.max){
-$(_2).val(_3.max.toFixed(_3.precision));
-}else{
-$(_2).val(_4);
-}
+return v;
+};
+function _4(_5){
+var _6=$.data(_5,"numberbox").options;
+var fn=_6.onChange;
+_6.onChange=function(){
+};
+_7(_5,_6.parser.call(_5,_6.value));
+_6.onChange=fn;
+};
+function _8(_9){
+return $.data(_9,"numberbox").field.val();
+};
+function _7(_a,_b){
+var _c=$.data(_a,"numberbox");
+var _d=_c.options;
+var _e=_8(_a);
+_b=_d.parser.call(_a,_b);
+_d.value=_b;
+_c.field.val(_b);
+$(_a).val(_d.formatter.call(_a,_b));
+if(_e!=_b){
+_d.onChange.call(_a,_b,_e);
 }
 };
-function _5(_6){
-$(_6).unbind(".numberbox");
-$(_6).bind("keypress.numberbox",function(e){
+function _f(_10){
+var _11=$.data(_10,"numberbox").options;
+$(_10).unbind(".numberbox").bind("keypress.numberbox",function(e){
 if(e.which==45){
 return true;
 }
@@ -58,66 +73,111 @@ return false;
 }).bind("dragenter.numberbox",function(){
 return false;
 }).bind("blur.numberbox",function(){
-_1(_6);
+_7(_10,$(this).val());
+$(this).val(_11.formatter.call(_10,_8(_10)));
+}).bind("focus.numberbox",function(){
+var vv=_8(_10);
+if($(this).val()!=vv){
+$(this).val(vv);
+}
 });
 };
-function _7(_8){
+function _12(_13){
 if($.fn.validatebox){
-var _9=$.data(_8,"numberbox").options;
-$(_8).validatebox(_9);
+var _14=$.data(_13,"numberbox").options;
+$(_13).validatebox(_14);
 }
 };
-function _a(_b,_c){
-var _d=$.data(_b,"numberbox").options;
-if(_c){
-_d.disabled=true;
-$(_b).attr("disabled",true);
+function _15(_16,_17){
+var _18=$.data(_16,"numberbox").options;
+if(_17){
+_18.disabled=true;
+$(_16).attr("disabled",true);
 }else{
-_d.disabled=false;
-$(_b).removeAttr("disabled");
+_18.disabled=false;
+$(_16).removeAttr("disabled");
 }
 };
-$.fn.numberbox=function(_e,_f){
-if(typeof _e=="string"){
-var _10=$.fn.numberbox.methods[_e];
-if(_10){
-return _10(this,_f);
+$.fn.numberbox=function(_19,_1a){
+if(typeof _19=="string"){
+var _1b=$.fn.numberbox.methods[_19];
+if(_1b){
+return _1b(this,_1a);
 }else{
-return this.validatebox(_e,_f);
+return this.validatebox(_19,_1a);
 }
 }
-_e=_e||{};
+_19=_19||{};
 return this.each(function(){
-var _11=$.data(this,"numberbox");
-if(_11){
-$.extend(_11.options,_e);
+var _1c=$.data(this,"numberbox");
+if(_1c){
+$.extend(_1c.options,_19);
 }else{
-_11=$.data(this,"numberbox",{options:$.extend({},$.fn.numberbox.defaults,$.fn.numberbox.parseOptions(this),_e)});
+_1c=$.data(this,"numberbox",{options:$.extend({},$.fn.numberbox.defaults,$.fn.numberbox.parseOptions(this),_19),field:_1(this)});
 $(this).removeAttr("disabled");
 $(this).css({imeMode:"disabled"});
 }
-_a(this,_11.options.disabled);
-_5(this);
-_7(this);
+_15(this,_1c.options.disabled);
+_f(this);
+_12(this);
+_4(this);
 });
 };
-$.fn.numberbox.methods={disable:function(jq){
+$.fn.numberbox.methods={options:function(jq){
+return $.data(jq[0],"numberbox").options;
+},destroy:function(jq){
 return jq.each(function(){
-_a(this,true);
+$.data(this,"numberbox").field.remove();
+$(this).validatebox("destroy");
+$(this).remove();
+});
+},disable:function(jq){
+return jq.each(function(){
+_15(this,true);
 });
 },enable:function(jq){
 return jq.each(function(){
-_a(this,false);
+_15(this,false);
 });
 },fix:function(jq){
 return jq.each(function(){
-_1(this);
+_7(this,$(this).val());
+});
+},setValue:function(jq,_1d){
+return jq.each(function(){
+_7(this,_1d);
+});
+},getValue:function(jq){
+return _8(jq[0]);
+},clear:function(jq){
+return jq.each(function(){
+var _1e=$.data(this,"numberbox");
+_1e.field.val("");
+$(this).val("");
 });
 }};
-$.fn.numberbox.parseOptions=function(_12){
-var t=$(_12);
-return $.extend({},$.fn.validatebox.parseOptions(_12),{disabled:(t.attr("disabled")?true:undefined),min:(t.attr("min")=="0"?0:parseFloat(t.attr("min"))||undefined),max:(t.attr("max")=="0"?0:parseFloat(t.attr("max"))||undefined),precision:(parseInt(t.attr("precision"))||undefined)});
+$.fn.numberbox.parseOptions=function(_1f){
+var t=$(_1f);
+return $.extend({},$.fn.validatebox.parseOptions(_1f),{disabled:(t.attr("disabled")?true:undefined),value:(t.val()||undefined),min:(t.attr("min")=="0"?0:parseFloat(t.attr("min"))||undefined),max:(t.attr("max")=="0"?0:parseFloat(t.attr("max"))||undefined),precision:(parseInt(t.attr("precision"))||undefined)});
 };
-$.fn.numberbox.defaults=$.extend({},$.fn.validatebox.defaults,{disabled:false,min:null,max:null,precision:0});
+$.fn.numberbox.defaults=$.extend({},$.fn.validatebox.defaults,{disabled:false,value:"",min:null,max:null,precision:0,formatter:function(_20){
+return _20;
+},parser:function(s){
+var _21=$(this).numberbox("options");
+var val=parseFloat(s).toFixed(_21.precision);
+if(isNaN(val)){
+val="";
+}else{
+if(typeof (_21.min)=="number"&&val<_21.min){
+val=_21.min.toFixed(_21.precision);
+}else{
+if(typeof (_21.max)=="number"&&val>_21.max){
+val=_21.max.toFixed(_21.precision);
+}
+}
+}
+return val;
+},onChange:function(_22,_23){
+}});
 })(jQuery);
 
