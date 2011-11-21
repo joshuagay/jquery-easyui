@@ -31,7 +31,7 @@
 					text:'append',
 					iconCls:'icon-add',
 					handler:function(){
-					$('#tt').datagrid('endEdit', lastIndex);
+						$('#tt').datagrid('endEdit', lastIndex);
 						$('#tt').datagrid('appendRow',{
 							itemid:'',
 							productid:'',
@@ -40,7 +40,7 @@
 							attr1:'',
 							status:'P'
 						});
-						var lastIndex = $('#tt').datagrid('getRows').length-1;
+						lastIndex = $('#tt').datagrid('getRows').length-1;
 						$('#tt').datagrid('selectRow', lastIndex);
 						$('#tt').datagrid('beginEdit', lastIndex);
 					}
