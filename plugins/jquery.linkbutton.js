@@ -33,6 +33,13 @@ if(_3.iconCls){
 $(_2).find(".l-btn-empty").addClass(_3.iconCls);
 }
 }
+$(_2).unbind(".linkbutton").bind("focus.linkbutton",function(){
+if(!_3.disabled){
+$(this).find("span.l-btn-text").addClass("l-btn-focus");
+}
+}).bind("blur.linkbutton",function(){
+$(this).find("span.l-btn-text").removeClass("l-btn-focus");
+});
 _4(_2,_3.disabled);
 };
 function _4(_5,_6){

@@ -778,7 +778,9 @@ _cd.options=_ce;
 _ce=$.extend({},$.fn.tree.defaults,$.fn.tree.parseOptions(this),_cb);
 $.data(this,"tree",{options:_ce,tree:_1(this)});
 var _cf=_4(this);
-_47(this,this,_cf);
+if(_cf.length&&!_ce.data){
+_ce.data=_cf;
+}
 }
 if(_ce.data){
 _47(this,this,_ce.data);
