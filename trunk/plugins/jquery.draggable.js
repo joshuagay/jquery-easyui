@@ -133,8 +133,8 @@ _16();
 _15();
 }
 _14.onStopDrag.call(e.data.target,e);
-setTimeout(function(){
 $(document).unbind(".draggable");
+setTimeout(function(){
 $("body").css("cursor","auto");
 },100);
 function _16(){
