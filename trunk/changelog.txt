@@ -5,11 +5,15 @@ Version 1.2.5
  * form: Failed to call 'load' method to load form input with complex name. fixed.
  * draggable: End drag in ie9, the cursor cannot be restored. fixed.
 * Improvement
+ * panel: The tools can be defined via html markup.
  * tabs: Call 'close' method to close specified tab panel, users can pass tab title or index of tab panel. Other methods such 'select','getTab' and 'exists' are similar to 'close' method.
  * tabs: Add 'getTabIndex' method.
+ * tabs: Users can define mini tools on tabs.
  * tree: The mouse must move a specified distance to begin drag and drop operation.
  * resizable: Add 'options','enable' and 'disable' methods.
  * numberbox: Allow users to change number format.
+ * datagrid: The subgrid is supported now.
+ * searchbox: Add 'selectName' method to select searching type name.
 
 Version 1.2.4
 -------------
