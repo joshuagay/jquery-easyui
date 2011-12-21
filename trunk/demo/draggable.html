@@ -2,21 +2,50 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-	<script type="text/javascript" src="../jquery-1.6.min.js"></script>
+<title>Draggable - jQuery EasyUI demo</title>
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	<style type="text/css">
+		.cc{
+			position:relative;
+			overflow:auto;
+			width:400px;
+			height:200px;
+			background:#fafafa;
+			border:1px solid #ccc;
+		}
+		#dd1{
+			margin:0px;
+			width:100px;
+			height:100px;
+			background:#fff;
+			border:1px solid #ccc;
+		}
+		#dd2{
+			width:100px;
+			height:100px;
+			background:#fafafa;
+			border:1px solid #ccc;
+			position:absolute;
+			left:600px;
+			top:200px;
+		}
+		#dd3{
+			width:100px;
+			height:100px;
+			background:red;
+			position:absolute;
+			left:450px;
+			top:200px;
+		}
+	</style>
+	<script type="text/javascript" src="../jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script>
 		$(function(){
-			$('.mc').draggable().draggable();
-			$('#dd1').draggable({
-				
-				onStartDrag:function(){
-					$('#info').html('start drag:'+$(this).css('left'));
-				}
-			});
+			$('#dd1').draggable();
 			$('#dd2').draggable({axis:null,handle:'#title'});
-
-			$('#mydd').draggable();
+			$('#dd3').draggable();
 		});
 
 		function start(){
@@ -28,20 +57,24 @@
 	</script>
 </head>
 <body>
-	<div id="info" style="top:300px;height:20px;border:1px solid #ccc;">info</div>
-	<div style="position:relative;overflow:auto;width:400px;height:200px;border:1px solid #ccc;">
-		<div style="width:500px;height:20px;border:1px solid blue;"></div>
-		<div id="dd1" class="mc" style="margin:0px;width:100px;height:100px;background:#ccc;border:1px solid red;">
-			<a href="#" onclick="start()">start drag1</a><br/>
-			<a href="#" onclick="stop()">stop drag</a>
+	<h2>Draggable</h2>
+	<div class="demo-info">
+		<div class="demo-tip icon-tip"></div>
+		<div>
+			Move below box by clicking on it with mouse.
 		</div>
 	</div>
-		<div id="dd2" class="mc" style="margin:10px;width:100px;height:100px;background:#fafafa;border:1px solid red;">
-			<div id="title" style="background:#ccc;">title</div>
+	<div style="margin:10px 0"></div>
+	
+	<div class="cc">
+		<div id="dd1">
+			<a href="#" onclick="start()">Start Drag</a><br/>
+			<a href="#" onclick="stop()">Stop Drag</a>
 		</div>
-		<div style="height:200px;width:1500px;border:1px solid red;"></div>
-		
-		
-		<div id="mydd" style="width:100px;height:100px;background:red;"></div>
+	</div>
+	<div id="dd2">
+		<div id="title" style="padding:5px;background:#ccc;">Title</div>
+	</div>
+	<div id="dd3"></div>
 </body>
 </html>
