@@ -1,10 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.2.5
+ * jQuery EasyUI 1.2.6
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
  *
- * Copyright(c) 2009-2011 stworthy [ stworthy@gmail.com ] 
+ * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
  * 
  */
 (function($){
@@ -237,13 +237,18 @@ _3a.tab=tab;
 function _41(_42,_43){
 var _44=$.data(_42,"tabs").options;
 var _45=$.data(_42,"tabs").tabs;
+if(_43.selected==undefined){
+_43.selected=true;
+}
 var pp=$("<div></div>").appendTo($(_42).children("div.tabs-panels"));
 _45.push(pp);
 _37(_42,pp,_43);
 _44.onAdd.call(_42,_43.title);
 _7(_42);
 _2c(_42);
+if(_43.selected){
 _46(_42,_45.length-1);
+}
 };
 function _47(_48,_49){
 var _4a=$.data(_48,"tabs").selectHis;

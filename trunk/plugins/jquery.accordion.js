@@ -1,10 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.2.5
+ * jQuery EasyUI 1.2.6
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
  *
- * Copyright(c) 2009-2011 stworthy [ stworthy@gmail.com ] 
+ * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
  * 
  */
 (function($){
@@ -23,7 +23,7 @@ cc.width($.boxModel==true?(_3.width-(cc.outerWidth()-cc.width())):_3.width);
 var _5="auto";
 if(_3.height>0){
 cc.height($.boxModel==true?(_3.height-(cc.outerHeight()-cc.height())):_3.height);
-var _6=_4.length?_4[0].panel("header").css("height",null).outerHeight():"auto";
+var _6=_4.length?_4[0].panel("header").css("height","").outerHeight():"auto";
 var _5=cc.height()-(_4.length-1)*_6;
 }
 for(var i=0;i<_4.length;i++){
