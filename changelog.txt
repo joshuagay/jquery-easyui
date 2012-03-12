@@ -1,3 +1,17 @@
+Version 1.2.6
+-------------
+* Bug
+ * tabs: Call 'add' method with 'selected:false' option, the added tab panel is always selected. fixed.
+ * treegrid: The 'onSelect' and 'onUnselect' events can't be triggered. fixed.
+* Improvement
+ * propertygrid: Add 'expandGroup' and 'collapseGroup' methods.
+ * layout: Allow users to create collapsed layout panels by assigning 'collapsed' property to true.
+ * layout: Add 'add' and 'remove' methods that allow users to dynamically add or remove region panel.
+ * layout: Additional tool icons can be added on region panel header.
+ * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ...
+ * tree: Add 'lines' option, true to display tree lines. 
+ * tree: Add 'loadFilter' option that allows users to change data format before loading into the tree.
+
 Version 1.2.5
 -------------
 * Bug
