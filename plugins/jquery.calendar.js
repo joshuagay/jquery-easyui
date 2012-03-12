@@ -169,87 +169,100 @@ _1f.height(_1e.outerHeight());
 _21.height(_1f.height()-_20.outerHeight());
 }
 };
-function _22(_23,_24){
-var _25=[];
-var _26=new Date(_23,_24,0).getDate();
-for(var i=1;i<=_26;i++){
-_25.push([_23,_24,i]);
+function _22(_23,_24,_25){
+var _26=$.data(_23,"calendar").options;
+var _27=[];
+var _28=new Date(_24,_25,0).getDate();
+for(var i=1;i<=_28;i++){
+_27.push([_24,_25,i]);
 }
-var _27=[],_28=[];
-while(_25.length>0){
-var _29=_25.shift();
-_28.push(_29);
-if(new Date(_29[0],_29[1]-1,_29[2]).getDay()==6){
-_27.push(_28);
-_28=[];
+var _29=[],_2a=[];
+while(_27.length>0){
+var _2b=_27.shift();
+_2a.push(_2b);
+var day=new Date(_2b[0],_2b[1]-1,_2b[2]).getDay();
+if(day==(_26.firstDay==0?7:_26.firstDay)-1){
+_29.push(_2a);
+_2a=[];
 }
 }
-if(_28.length){
-_27.push(_28);
+if(_2a.length){
+_29.push(_2a);
 }
-var _2a=_27[0];
-if(_2a.length<7){
-while(_2a.length<7){
-var _2b=_2a[0];
-var _29=new Date(_2b[0],_2b[1]-1,_2b[2]-1);
-_2a.unshift([_29.getFullYear(),_29.getMonth()+1,_29.getDate()]);
+var _2c=_29[0];
+if(_2c.length<7){
+while(_2c.length<7){
+var _2d=_2c[0];
+var _2b=new Date(_2d[0],_2d[1]-1,_2d[2]-1);
+_2c.unshift([_2b.getFullYear(),_2b.getMonth()+1,_2b.getDate()]);
 }
 }else{
-var _2b=_2a[0];
-var _28=[];
+var _2d=_2c[0];
+var _2a=[];
 for(var i=1;i<=7;i++){
-var _29=new Date(_2b[0],_2b[1]-1,_2b[2]-i);
-_28.unshift([_29.getFullYear(),_29.getMonth()+1,_29.getDate()]);
+var _2b=new Date(_2d[0],_2d[1]-1,_2d[2]-i);
+_2a.unshift([_2b.getFullYear(),_2b.getMonth()+1,_2b.getDate()]);
 }
-_27.unshift(_28);
+_29.unshift(_2a);
 }
-var _2c=_27[_27.length-1];
-while(_2c.length<7){
-var _2d=_2c[_2c.length-1];
-var _29=new Date(_2d[0],_2d[1]-1,_2d[2]+1);
-_2c.push([_29.getFullYear(),_29.getMonth()+1,_29.getDate()]);
+var _2e=_29[_29.length-1];
+while(_2e.length<7){
+var _2f=_2e[_2e.length-1];
+var _2b=new Date(_2f[0],_2f[1]-1,_2f[2]+1);
+_2e.push([_2b.getFullYear(),_2b.getMonth()+1,_2b.getDate()]);
 }
-if(_27.length<6){
-var _2d=_2c[_2c.length-1];
-var _28=[];
+if(_29.length<6){
+var _2f=_2e[_2e.length-1];
+var _2a=[];
 for(var i=1;i<=7;i++){
-var _29=new Date(_2d[0],_2d[1]-1,_2d[2]+i);
-_28.push([_29.getFullYear(),_29.getMonth()+1,_29.getDate()]);
+var _2b=new Date(_2f[0],_2f[1]-1,_2f[2]+i);
+_2a.push([_2b.getFullYear(),_2b.getMonth()+1,_2b.getDate()]);
 }
-_27.push(_28);
+_29.push(_2a);
 }
-return _27;
+return _29;
 };
-function _f(_2e){
-var _2f=$.data(_2e,"calendar").options;
-$(_2e).find(".calendar-title span").html(_2f.months[_2f.month-1]+" "+_2f.year);
-var _30=$(_2e).find("div.calendar-body");
-_30.find(">table").remove();
-var t=$("<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><thead></thead><tbody></tbody></table>").prependTo(_30);
+function _f(_30){
+var _31=$.data(_30,"calendar").options;
+$(_30).find(".calendar-title span").html(_31.months[_31.month-1]+" "+_31.year);
+var _32=$(_30).find("div.calendar-body");
+_32.find(">table").remove();
+var t=$("<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><thead></thead><tbody></tbody></table>").prependTo(_32);
 var tr=$("<tr></tr>").appendTo(t.find("thead"));
-for(var i=0;i<_2f.weeks.length;i++){
-tr.append("<th>"+_2f.weeks[i]+"</th>");
+for(var i=_31.firstDay;i<_31.weeks.length;i++){
+tr.append("<th>"+_31.weeks[i]+"</th>");
 }
-var _31=_22(_2f.year,_2f.month);
-for(var i=0;i<_31.length;i++){
-var _32=_31[i];
+for(var i=0;i<_31.firstDay;i++){
+tr.append("<th>"+_31.weeks[i]+"</th>");
+}
+var _33=_22(_30,_31.year,_31.month);
+for(var i=0;i<_33.length;i++){
+var _34=_33[i];
 var tr=$("<tr></tr>").appendTo(t.find("tbody"));
-for(var j=0;j<_32.length;j++){
-var day=_32[j];
+for(var j=0;j<_34.length;j++){
+var day=_34[j];
 $("<td class=\"calendar-day calendar-other-month\"></td>").attr("abbr",day[0]+","+day[1]+","+day[2]).html(day[2]).appendTo(tr);
 }
 }
-t.find("td[abbr^=\""+_2f.year+","+_2f.month+"\"]").removeClass("calendar-other-month");
+t.find("td[abbr^=\""+_31.year+","+_31.month+"\"]").removeClass("calendar-other-month");
 var now=new Date();
-var _33=now.getFullYear()+","+(now.getMonth()+1)+","+now.getDate();
-t.find("td[abbr=\""+_33+"\"]").addClass("calendar-today");
-if(_2f.current){
+var _35=now.getFullYear()+","+(now.getMonth()+1)+","+now.getDate();
+t.find("td[abbr=\""+_35+"\"]").addClass("calendar-today");
+if(_31.current){
 t.find(".calendar-selected").removeClass("calendar-selected");
-var _34=_2f.current.getFullYear()+","+(_2f.current.getMonth()+1)+","+_2f.current.getDate();
-t.find("td[abbr=\""+_34+"\"]").addClass("calendar-selected");
+var _36=_31.current.getFullYear()+","+(_31.current.getMonth()+1)+","+_31.current.getDate();
+t.find("td[abbr=\""+_36+"\"]").addClass("calendar-selected");
 }
-t.find("tr").find("td:first").addClass("calendar-sunday");
-t.find("tr").find("td:last").addClass("calendar-saturday");
+var _37=6-_31.firstDay;
+var _38=_37+1;
+if(_37>=7){
+_37-=7;
+}
+if(_38>=7){
+_38-=7;
+}
+t.find("tr").find("td:eq("+_37+")").addClass("calendar-saturday");
+t.find("tr").find("td:eq("+_38+")").addClass("calendar-sunday");
 t.find("td").hover(function(){
 $(this).addClass("calendar-hover");
 },function(){
@@ -257,25 +270,25 @@ $(this).removeClass("calendar-hover");
 }).click(function(){
 t.find(".calendar-selected").removeClass("calendar-selected");
 $(this).addClass("calendar-selected");
-var _35=$(this).attr("abbr").split(",");
-_2f.current=new Date(_35[0],parseInt(_35[1])-1,_35[2]);
-_2f.onSelect.call(_2e,_2f.current);
+var _39=$(this).attr("abbr").split(",");
+_31.current=new Date(_39[0],parseInt(_39[1])-1,_39[2]);
+_31.onSelect.call(_30,_31.current);
 });
 };
-$.fn.calendar=function(_36,_37){
-if(typeof _36=="string"){
-return $.fn.calendar.methods[_36](this,_37);
+$.fn.calendar=function(_3a,_3b){
+if(typeof _3a=="string"){
+return $.fn.calendar.methods[_3a](this,_3b);
 }
-_36=_36||{};
+_3a=_3a||{};
 return this.each(function(){
-var _38=$.data(this,"calendar");
-if(_38){
-$.extend(_38.options,_36);
+var _3c=$.data(this,"calendar");
+if(_3c){
+$.extend(_3c.options,_3a);
 }else{
-_38=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,$.fn.calendar.parseOptions(this),_36)});
+_3c=$.data(this,"calendar",{options:$.extend({},$.fn.calendar.defaults,$.fn.calendar.parseOptions(this),_3a)});
 _7(this);
 }
-if(_38.options.border==false){
+if(_3c.options.border==false){
 $(this).addClass("calendar-noborder");
 }
 _1(this);
@@ -289,16 +302,16 @@ return $.data(jq[0],"calendar").options;
 return jq.each(function(){
 _1(this);
 });
-},moveTo:function(jq,_39){
+},moveTo:function(jq,_3d){
 return jq.each(function(){
-$(this).calendar({year:_39.getFullYear(),month:_39.getMonth()+1,current:_39});
+$(this).calendar({year:_3d.getFullYear(),month:_3d.getMonth()+1,current:_3d});
 });
 }};
-$.fn.calendar.parseOptions=function(_3a){
-var t=$(_3a);
-return {width:(parseInt(_3a.style.width)||undefined),height:(parseInt(_3a.style.height)||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)};
+$.fn.calendar.parseOptions=function(_3e){
+var t=$(_3e);
+return {width:(parseInt(_3e.style.width)||undefined),height:(parseInt(_3e.style.height)||undefined),firstDay:(parseInt(t.attr("firstDay"))||undefined),fit:(t.attr("fit")?t.attr("fit")=="true":undefined),border:(t.attr("border")?t.attr("border")=="true":undefined)};
 };
-$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_3b){
+$.fn.calendar.defaults={width:180,height:180,fit:false,border:true,firstDay:0,weeks:["S","M","T","W","T","F","S"],months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date(),onSelect:function(_3f){
 }};
 })(jQuery);
 

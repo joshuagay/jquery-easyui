@@ -230,6 +230,9 @@ if(_2f.onBeforeDestroy.call(_2d)==false){
 return;
 }
 }
+$(_2d).find(".combo-f").each(function(){
+$(this).combo("destroy");
+});
 _1(_30);
 _2f.onDestroy.call(_2d);
 };
