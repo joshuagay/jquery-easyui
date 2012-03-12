@@ -10,7 +10,7 @@ Version 1.2.6
  * layout: Additional tool icons can be added on region panel header.
  * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ...
  * tree: Add 'lines' option, true to display tree lines. 
- * tree: Add 'loadFilter' option that allows users to change data format before loading into the tree.
+ * tree: Add 'loadFilter' option that allow users to change data format before loading into the tree.
 
 Version 1.2.5
 -------------
