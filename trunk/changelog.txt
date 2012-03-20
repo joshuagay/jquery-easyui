@@ -11,6 +11,9 @@ Version 1.2.6
  * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ...
  * tree: Add 'lines' option, true to display tree lines. 
  * tree: Add 'loadFilter' option that allow users to change data format before loading into the tree.
+ * treegrid: Add 'onClickCell' and 'onDblClickCell' callback function options.
+* New Plugins
+ * slider: Allows the user to choose a numeric value from a finite range.
 
 Version 1.2.5
 -------------
