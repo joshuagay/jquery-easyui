@@ -86,6 +86,7 @@ _4.find("input.pagination-num").unbind(".pagination").bind("keydown.pagination",
 if(e.keyCode==13){
 var _9=parseInt($(this).val())||1;
 _b(_2,_9);
+return false;
 }
 });
 _4.find(".pagination-page-list").unbind(".pagination").bind("change.pagination",function(){

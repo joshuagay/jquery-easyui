@@ -37,6 +37,7 @@ _6.top=_5.top;
 }
 if(_6.fit==true){
 var p=_7.parent();
+p.addClass("panel-noscroll");
 _6.width=p.width();
 _6.height=p.height();
 }

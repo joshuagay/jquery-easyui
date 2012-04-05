@@ -74,6 +74,7 @@ var _1a=$.data(_19,"tabs").options;
 var cc=$(_19);
 if(_1a.fit==true){
 var p=cc.parent();
+p.addClass("panel-noscroll");
 _1a.width=p.width();
 _1a.height=p.height();
 }
