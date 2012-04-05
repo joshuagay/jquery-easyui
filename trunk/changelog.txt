@@ -3,6 +3,7 @@ Version 1.2.6
 * Bug
  * tabs: Call 'add' method with 'selected:false' option, the added tab panel is always selected. fixed.
  * treegrid: The 'onSelect' and 'onUnselect' events can't be triggered. fixed.
+ * treegrid: Cannot display zero value field. fixed. 
 * Improvement
  * propertygrid: Add 'expandGroup' and 'collapseGroup' methods.
  * layout: Allow users to create collapsed layout panels by assigning 'collapsed' property to true.
@@ -12,6 +13,8 @@ Version 1.2.6
  * tree: Add 'lines' option, true to display tree lines. 
  * tree: Add 'loadFilter' option that allow users to change data format before loading into the tree.
  * treegrid: Add 'onClickCell' and 'onDblClickCell' callback function options.
+ * datagrid: Add 'autoRowHeight' property that allow datagrid to determine if set the row height based on the contents of that row.
+ * datagrid: Improve performance to load large data set.
 * New Plugins
  * slider: Allows the user to choose a numeric value from a finite range.
 
