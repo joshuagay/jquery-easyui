@@ -14,6 +14,7 @@ var _4=$.data(_2,"accordion").panels;
 var cc=$(_2);
 if(_3.fit==true){
 var p=cc.parent();
+p.addClass("panel-noscroll");
 _3.width=p.width();
 _3.height=p.height();
 }

@@ -15,7 +15,9 @@ var _5=$.data(_3,"layout").panels;
 var cc=$(_3);
 if(_4.fit==true){
 var p=cc.parent();
-cc.width(p.width()).height(p.height());
+p.addClass("panel-noscroll");
+cc.width(p.width());
+cc.height(p.height());
 }
 var _6={top:0,left:0,width:cc.width(),height:cc.height()};
 function _7(pp){
