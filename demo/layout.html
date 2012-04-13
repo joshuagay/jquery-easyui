@@ -13,16 +13,13 @@
 					alert('collapse');
 				}
 			});
-			setTimeout(function(){
-				$('body').layout('collapse','east');
-			},0);
 		});
 	</script>
 </head>
 <body class="easyui-layout">
 	<div region="north" border="false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
 	<div region="west" split="true" title="West" style="width:150px;padding:10px;">west content</div>
-	<div region="east" split="true" title="East" style="width:100px;padding:10px;">east region</div>
+	<div region="east" split="true" collapsed="true" title="East" style="width:100px;padding:10px;">east region</div>
 	<div region="south" border="false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
 	<div region="center" title="Main Title">
 	</div>
