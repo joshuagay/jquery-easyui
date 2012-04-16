@@ -20,6 +20,7 @@ Version 1.2.6
  * treegrid: Add 'loader' option that allow users to define how to load data from remote server.
  * combobox: Add 'onBeforeLoad' callback event function.
  * combobox: Add 'loader' option that allow users to define how to load data from remote server.
+ * Add support for other loading mode such as dwr,xml,etc.
 * New Plugins
  * slider: Allows the user to choose a numeric value from a finite range.
 
