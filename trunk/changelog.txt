@@ -12,9 +12,14 @@ Version 1.2.6
  * calendar: Add 'firstDay' option that allow users to set first day of week. Sunday is 0, Monday is 1, ...
  * tree: Add 'lines' option, true to display tree lines. 
  * tree: Add 'loadFilter' option that allow users to change data format before loading into the tree.
+ * tree: Add 'loader' option that allow users to define how to load data from remote server.
  * treegrid: Add 'onClickCell' and 'onDblClickCell' callback function options.
- * datagrid: Add 'autoRowHeight' property that allow datagrid to determine if set the row height based on the contents of that row.
+ * datagrid: Add 'autoRowHeight' property that allow users to determine if set the row height based on the contents of that row.
  * datagrid: Improve performance to load large data set.
+ * datagrid: Add 'loader' option that allow users to define how to load data from remote server.
+ * treegrid: Add 'loader' option that allow users to define how to load data from remote server.
+ * combobox: Add 'onBeforeLoad' callback event function.
+ * combobox: Add 'loader' option that allow users to define how to load data from remote server.
 * New Plugins
  * slider: Allows the user to choose a numeric value from a finite range.
 
