@@ -23,11 +23,8 @@ var _7=0;
 if(_4.hasDownArrow){
 _7=_5.find(".combo-arrow").outerWidth();
 }
-var _3=_4.width-_7;
-if($.boxModel==true){
-_3-=_5.outerWidth()-_5.width();
-}
-_5.find("input.combo-text").width(_3);
+_5._outerWidth(_4.width);
+_5.find("input.combo-text").width(_5.width()-_7);
 _6.panel("resize",{width:(_4.panelWidth?_4.panelWidth:_5.outerWidth()),height:_4.panelHeight});
 _5.insertAfter(_2);
 };

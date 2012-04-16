@@ -11,7 +11,7 @@
 function _1(_2){
 var _3=$.data(_2,"menubutton").options;
 var _4=$(_2);
-_4.removeClass("m-btn-active m-btn-plain-active");
+_4.removeClass("m-btn-active m-btn-plain-active").addClass("m-btn");
 _4.linkbutton($.extend({},_3,{text:_3.text+"<span class=\"m-btn-downarrow\">&nbsp;</span>"}));
 if(_3.menu){
 $(_3.menu).menu({onShow:function(){
@@ -87,10 +87,18 @@ _5(this,false);
 return jq.each(function(){
 _5(this,true);
 });
+},destroy:function(jq){
+return jq.each(function(){
+var _10=$(this).menubutton("options");
+if(_10.menu){
+$(_10.menu).menu("destroy");
+}
+$(this).remove();
+});
 }};
-$.fn.menubutton.parseOptions=function(_10){
-var t=$(_10);
-return $.extend({},$.fn.linkbutton.parseOptions(_10),{menu:t.attr("menu"),duration:t.attr("duration")});
+$.fn.menubutton.parseOptions=function(_11){
+var t=$(_11);
+return $.extend({},$.fn.linkbutton.parseOptions(_11),{menu:t.attr("menu"),duration:t.attr("duration")});
 };
 $.fn.menubutton.defaults=$.extend({},$.fn.linkbutton.defaults,{plain:true,menu:null,duration:100});
 })(jQuery);

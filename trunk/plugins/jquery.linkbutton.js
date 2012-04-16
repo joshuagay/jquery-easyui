@@ -15,7 +15,7 @@ $(_2).addClass("l-btn");
 if(_3.id){
 $(_2).attr("id",_3.id);
 }else{
-$.fn.removeProp?$(_2).removeProp("id"):$(_2).removeAttr("id");
+$(_2).removeAttr("id");
 }
 if(_3.plain){
 $(_2).addClass("l-btn-plain");
