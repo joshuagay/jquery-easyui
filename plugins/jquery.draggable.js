@@ -21,10 +21,8 @@ if(_3.deltaY!=null&&_3.deltaY!=undefined){
 _6=e.pageY+_3.deltaY;
 }
 if(e.data.parent!=document.body){
-if($.boxModel==true){
 _5+=$(e.data.parent).scrollLeft();
 _6+=$(e.data.parent).scrollTop();
-}
 }
 if(_3.axis=="h"){
 _4.left=_5;

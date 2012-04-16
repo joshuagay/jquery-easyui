@@ -20,21 +20,18 @@ $(_2).removeAttr("name").attr("searchboxName",_5);
 }
 return _3;
 };
-function _6(_7){
-var _8=$.data(_7,"searchbox").options;
+function _6(_7,_8){
+var _9=$.data(_7,"searchbox").options;
 var sb=$.data(_7,"searchbox").searchbox;
-if(_9){
-_8.width=_9;
+if(_8){
+_9.width=_8;
 }
 sb.appendTo("body");
-if(isNaN(_8.width)){
-_8.width=sb.outerWidth();
+if(isNaN(_9.width)){
+_9.width=sb.outerWidth();
 }
-var _9=_8.width-sb.find("a.searchbox-menu").outerWidth()-sb.find("span.searchbox-button").outerWidth();
-if($.boxModel==true){
-_9-=sb.outerWidth()-sb.width();
-}
-sb.find("input.searchbox-text").width(_9);
+sb._outerWidth(_9.width);
+sb.find("input.searchbox-text")._outerWidth(sb.width()-sb.find("a.searchbox-menu").outerWidth()-sb.find("span.searchbox-button").outerWidth());
 sb.insertAfter(_7);
 };
 function _a(_b){
