@@ -268,9 +268,6 @@ var row=_47(_50,_51);
 if(_55.onBeforeLoad.call(_50,row,_57)==false){
 return;
 }
-if(!_55.url){
-return;
-}
 var _58=_56.find("tr[node-id="+_51+"] span.tree-folder");
 _58.addClass("tree-loading");
 $(_50).treegrid("loading");
