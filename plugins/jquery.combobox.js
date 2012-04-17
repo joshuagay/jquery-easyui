@@ -191,9 +191,6 @@ var _39=$.data(_36,"combobox").options;
 if(url){
 _39.url=url;
 }
-if(!_39.url){
-return;
-}
 _37=_37||{};
 if(_39.onBeforeLoad.call(_36,_37)==false){
 return;
