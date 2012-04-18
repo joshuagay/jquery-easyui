@@ -1,10 +1,10 @@
 /**
  * easyloader - jQuery EasyUI
  * 
- * Licensed under the GPL:
- *   http://www.gnu.org/licenses/gpl.txt
+ * Licensed under the GPL terms
+ * To use it on other terms please contact us
  *
- * Copyright 2010 stworthy [ stworthy@gmail.com ] 
+ * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
  * 
  */
 (function(){
@@ -22,6 +22,10 @@
 			js:'jquery.linkbutton.js',
 			css:'linkbutton.css'
 		},
+		progressbar:{
+			js:'jquery.progressbar.js',
+			css:'progressbar.css'
+		},
 		pagination:{
 			js:'jquery.pagination.js',
 			css:'pagination.css',
@@ -35,6 +39,11 @@
 		treegrid:{
 			js:'jquery.treegrid.js',
 			css:'tree.css',
+			dependencies:['datagrid']
+		},
+		propertygrid:{
+			js:'jquery.propertygrid.js',
+			css:'propertygrid.css',
 			dependencies:['datagrid']
 		},
 		panel: {
@@ -54,7 +63,7 @@
 		messager:{
 			js:'jquery.messager.js',
 			css:'messager.css',
-			dependencies:['linkbutton','window']
+			dependencies:['linkbutton','window','progressbar']
 		},
 		layout:{
 			js:'jquery.layout.js',
@@ -118,6 +127,11 @@
 			js:'jquery.numberbox.js',
 			dependencies:['validatebox']
 		},
+		searchbox:{
+			js:'jquery.searchbox.js',
+			css:'searchbox.css',
+			dependencies:['menubutton']
+		},
 		spinner:{
 			js:'jquery.spinner.js',
 			css:'spinner.css',
@@ -139,7 +153,15 @@
 		datebox:{
 			js:'jquery.datebox.js',
 			css:'datebox.css',
-			dependencies:['calendar','validatebox']
+			dependencies:['calendar','combo']
+		},
+		datetimebox:{
+			js:'jquery.datetimebox.js',
+			dependencies:['datebox','timespinner']
+		},
+		slider:{
+			js:'jquery.slider.js',
+			dependencies:['draggable']
 		},
 		parser:{
 			js:'jquery.parser.js'
@@ -151,6 +173,7 @@
 		'bg':'easyui-lang-bg.js',
 		'ca':'easyui-lang-ca.js',
 		'cs':'easyui-lang-cs.js',
+		'cz':'easyui-lang-cz.js',
 		'da':'easyui-lang-da.js',
 		'de':'easyui-lang-de.js',
 		'en':'easyui-lang-en.js',
