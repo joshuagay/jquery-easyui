@@ -164,25 +164,17 @@
 .datagrid-row-editing .datagrid-cell{
 	height:auto;
 }
-.datagrid-header-check{
-	padding:3px 6px;
-}
-.datagrid-cell-check{
-	padding:3px 6px;
+.datagrid-header-check,.datagrid-cell-check{
+	padding:0 6px;
+	height:18px;
 	font-size:1px;
 	overflow:hidden;
 }
-.datagrid-header-check input{
+.datagrid-header-check input,.datagrid-cell-check input{
 	margin:0;
 	padding:0;
 	width:15px;
-	height:15px;
-}
-.datagrid-cell-check input{
-	margin:0;
-	padding:0;
-	width:15px;
-	height:15px;
+	height:18px;
 }
 .datagrid-row{
 	height:25px;
