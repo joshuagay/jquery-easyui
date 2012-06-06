@@ -934,6 +934,13 @@ a.m-btn-plain-active{
 .panel-noscroll{
 	overflow:hidden;
 }
+.panel-fit,.panel-fit body{
+	height:100%;
+	margin:0;
+	padding:0;
+	border:0;
+	overflow:hidden;
+}
 .progressbar{
 	border:1px solid #99BBE8;
 	border-radius:5px;
