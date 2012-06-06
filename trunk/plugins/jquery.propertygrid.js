@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.6
+ * jQuery EasyUI 1.3
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -64,7 +64,7 @@ _1(this);
 $.fn.propertygrid.methods={};
 $.fn.propertygrid.parseOptions=function(_e){
 var t=$(_e);
-return $.extend({},$.fn.datagrid.parseOptions(_e),{showGroup:(t.attr("showGroup")?t.attr("showGroup")=="true":undefined)});
+return $.extend({},$.fn.datagrid.parseOptions(_e),$.parser.parseOptions(_e,[{showGroup:"boolean"}]));
 };
 var _4=$.extend({},$.fn.datagrid.defaults.view,{render:function(_f,_10,_11){
 var _12=$.data(_f,"datagrid").options;
@@ -187,7 +187,7 @@ _31.next("table").hide();
 $(this).datagrid("fixRowHeight");
 });
 }});
-$.fn.propertygrid.defaults=$.extend({},$.fn.datagrid.defaults,{singleSelect:true,remoteSort:false,fitColumns:true,loadMsg:"",frozenColumns:[[{field:"f",width:16,resizable:false}]],columns:[[{field:"name",title:"Name",width:100,sortable:true},{field:"value",title:"Value",width:100,resizable:false}]],showGroup:false,groupField:"group",groupFormatter:function(_33){
+$.fn.propertygrid.defaults=$.extend({},$.fn.datagrid.defaults,{singleSelect:true,remoteSort:false,fitColumns:true,loadMsg:"",frozenColumns:[[{field:"f",width:16,resizable:false}]],columns:[[{field:"name",title:"Name",width:100,sortable:true},{field:"value",title:"Value",width:100,resizable:false}]],showGroup:false,groupField:"group",groupFormatter:function(_33,_34){
 return _33;
 }});
 })(jQuery);

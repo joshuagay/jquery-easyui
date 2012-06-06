@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.6
+ * jQuery EasyUI 1.3
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -64,7 +64,7 @@ _7.pageSize=_12.pagination("options").pageSize;
 function _16(_17,_18){
 var _19=$.data(_17,"datagrid").options;
 var dc=$.data(_17,"datagrid").dc;
-if(!dc.body1.is(":empty")&&(!_19.nowrap||_19.autoRowHeight||forceFix)){
+if(!dc.body1.is(":empty")&&(!_19.nowrap||_19.autoRowHeight)){
 if(_18!=undefined){
 var _1a=_1b(_17,_18);
 for(var i=0;i<_1a.length;i++){
@@ -558,7 +558,8 @@ tr.remove();
 var _b2=del(_b0);
 if(_b2){
 if(_b2.children.length==0){
-tr=_b1.finder.getTr(_af,_b2[_b1.treeField]);
+tr=_b1.finder.getTr(_af,_b2[_b1.idField]);
+tr.next("tr.treegrid-tr-tree").remove();
 var _b3=tr.children("td[field="+_b1.treeField+"]").children("div.datagrid-cell");
 _b3.find(".tree-icon").removeClass("tree-folder").addClass("tree-file");
 _b3.find(".tree-hit").remove();
@@ -575,7 +576,7 @@ cc=_b4.children;
 cc=$(_af).treegrid("getData");
 }
 for(var i=0;i<cc.length;i++){
-if(cc[i][_b1.treeField]==id){
+if(cc[i][_b1.idField]==id){
 cc.splice(i,1);
 break;
 }
@@ -755,8 +756,7 @@ $(this).datagrid("cancelEdit",id);
 });
 }};
 $.fn.treegrid.parseOptions=function(_c6){
-var t=$(_c6);
-return $.extend({},$.fn.datagrid.parseOptions(_c6),{treeField:t.attr("treeField"),animate:(t.attr("animate")?t.attr("animate")=="true":undefined)});
+return $.extend({},$.fn.datagrid.parseOptions(_c6),$.parser.parseOptions(_c6,["treeField",{animate:"boolean"}]));
 };
 var _c7=$.extend({},$.fn.datagrid.defaults.view,{render:function(_c8,_c9,_ca){
 var _cb=$.data(_c8,"treegrid").options;
@@ -837,10 +837,11 @@ cc.push("class=\"datagrid-cell ");
 cc.push("\">");
 if(col.checkbox){
 if(row.checked){
-cc.push("<input type=\"checkbox\" checked=\"checked\"/>");
+cc.push("<input type=\"checkbox\" checked=\"checked\"");
 }else{
-cc.push("<input type=\"checkbox\"/>");
+cc.push("<input type=\"checkbox\"");
 }
+cc.push(" name=\""+_e2+"\" value=\""+(row[_e2]!=undefined?row[_e2]:"")+"\"/>");
 }else{
 var val=null;
 if(col.formatter){
