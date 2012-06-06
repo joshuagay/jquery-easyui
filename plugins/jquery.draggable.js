@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.6
+ * jQuery EasyUI 1.3
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -170,7 +170,7 @@ if(_1c){
 _1c.handle.unbind(".draggable");
 _1b=$.extend(_1c.options,_19);
 }else{
-_1b=$.extend({},$.fn.draggable.defaults,_19||{});
+_1b=$.extend({},$.fn.draggable.defaults,$.fn.draggable.parseOptions(this),_19||{});
 }
 if(_1b.disabled==true){
 $(this).css("cursor","default");
@@ -238,6 +238,10 @@ return jq.each(function(){
 $(this).draggable({disabled:true});
 });
 }};
+$.fn.draggable.parseOptions=function(_28){
+var t=$(_28);
+return $.extend({},$.parser.parseOptions(_28,["cursor","handle","axis",{"revert":"boolean","deltaX":"number","deltaY":"number","edge":"number"}]),{disabled:(t.attr("disabled")?true:undefined)});
+};
 $.fn.draggable.defaults={proxy:null,revert:false,cursor:"move",deltaX:null,deltaY:null,handle:null,disabled:false,edge:0,axis:null,onBeforeDrag:function(e){
 },onStartDrag:function(e){
 },onDrag:function(e){

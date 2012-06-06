@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.6
+ * jQuery EasyUI 1.3
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -16,6 +16,9 @@ var cc=$(_3);
 if(_4.fit==true){
 var p=cc.parent();
 p.addClass("panel-noscroll");
+if(p[0].tagName=="BODY"){
+$("html").addClass("panel-fit");
+}
 cc.width(p.width());
 cc.height(p.height());
 }
@@ -75,17 +78,18 @@ _5.center.panel("resize",_6);
 function _c(_d){
 var cc=$(_d);
 if(cc[0].tagName=="BODY"){
-$("html").css({height:"100%",overflow:"hidden"});
-$("body").css({height:"100%",overflow:"hidden",border:"none"});
+$("html").addClass("panel-fit");
 }
 cc.addClass("layout");
-cc.css({margin:0,padding:0});
+cc.children("div").each(function(){
+var _e=$.parser.parseOptions(this,["region"]);
+var r=_e.region;
+if(r=="north"||r=="south"||r=="east"||r=="west"||r=="center"){
+_11(_d,{region:r},this);
+}
+});
 $("<div class=\"layout-split-proxy-h\"></div>").appendTo(cc);
 $("<div class=\"layout-split-proxy-v\"></div>").appendTo(cc);
-cc.children("div[region]").each(function(){
-var _e=$(this).attr("region");
-_11(_d,{region:_e});
-});
 cc.bind("_resize",function(e,_f){
 var _10=$.data(_d,"layout").options;
 if(_10.fit==true||_f){
@@ -94,7 +98,7 @@ _2(_d);
 return false;
 });
 };
-function _11(_12,_13){
+function _11(_12,_13,el){
 _13.region=_13.region||"center";
 var _14=$.data(_12,"layout").panels;
 var cc=$(_12);
@@ -102,7 +106,7 @@ var dir=_13.region;
 if(_14[dir].length){
 return;
 }
-var pp=cc.children("div[region="+dir+"]");
+var pp=$(el);
 if(!pp.length){
 pp=$("<div></div>").appendTo(cc);
 }
@@ -415,10 +419,13 @@ $.fn.layout=function(_3e,_3f){
 if(typeof _3e=="string"){
 return $.fn.layout.methods[_3e](this,_3f);
 }
+_3e=_3e||{};
 return this.each(function(){
 var _40=$.data(this,"layout");
-if(!_40){
-var _41=$.extend({},{fit:$(this).attr("fit")=="true"});
+if(_40){
+$.extend(_40.options,_3e);
+}else{
+var _41=$.extend({},$.fn.layout.defaults,$.fn.layout.parseOptions(this),_3e);
 $.data(this,"layout",{options:_41,panels:{center:$(),north:$(),south:$(),east:$(),west:$()}});
 _c(this);
 _37(this);
@@ -455,5 +462,9 @@ _20(this,_46);
 _2(this);
 });
 }};
+$.fn.layout.parseOptions=function(_47){
+return $.extend({},$.parser.parseOptions(_47,[{fit:"boolean"}]));
+};
+$.fn.layout.defaults={fit:false};
 })(jQuery);
 

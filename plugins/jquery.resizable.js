@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.2.6
+ * jQuery EasyUI 1.3
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -76,7 +76,7 @@ if(_10){
 $(this).unbind(".resizable");
 _f=$.extend(_10.options,_2||{});
 }else{
-_f=$.extend({},$.fn.resizable.defaults,_2||{});
+_f=$.extend({},$.fn.resizable.defaults,$.fn.resizable.parseOptions(this),_2||{});
 $.data(this,"resizable",{options:_f});
 }
 if(_f.disabled==true){
@@ -156,6 +156,10 @@ return jq.each(function(){
 $(this).resizable({disabled:true});
 });
 }};
+$.fn.resizable.parseOptions=function(_1a){
+var t=$(_1a);
+return $.extend({},$.parser.parseOptions(_1a,["handles",{minWidth:"number",minHeight:"number",maxWidth:"number",maxHeight:"number",edge:"number"}]),{disabled:(t.attr("disabled")?true:undefined)});
+};
 $.fn.resizable.defaults={disabled:false,handles:"n, e, s, w, ne, se, sw, nw, all",minWidth:10,minHeight:10,maxWidth:10000,maxHeight:10000,edge:5,onStartResize:function(e){
 },onResize:function(e){
 },onStopResize:function(e){
