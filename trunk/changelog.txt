@@ -8,7 +8,8 @@ Version 1.3
  * dialog: Set cache to false and load data via ajax, the content cannot be refreshed. fixed.
 * Improvement
  * The HTML5 'data-options' attribute is available for components to declare all custom options, including properties and events.
- * More detailed documentation is available. 
+ * More detailed documentation is available.
+ * panel: Prevent script on panel body from running twice.
  * accordion: Add 'getPanelIndex' method.
  * accordion: The tools can be added on panel header.
  * datetimebox: Add 'timeSeparator' option that allows users to define the time separator.
