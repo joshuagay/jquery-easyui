@@ -13,6 +13,12 @@ Version 1.3
  * accordion: Add 'getPanelIndex' method.
  * accordion: The tools can be added on panel header.
  * datetimebox: Add 'timeSeparator' option that allows users to define the time separator.
+ * datagrid: Auto resize the column width to fit the contents when the column width is not defined.
+ * datagrid: Double click on the right border of columns to auto resize the columns to the contents in the columns.
+ * datagrid: Add 'autoSizeColumn' method that allows users to adjust the column width to fit the contents.
+ * datagrid: Add 'getChecked' method to get all rows where the checkbox has been checked.
+ * datagrid: Add 'selectOnCheck' and 'checkOnSelect' properties and some checking methods to enhance the row selections.
+ * datagrid: The buffer view and virtual scroll view are supported to display large amounts of records without pagination.
 
 Version 1.2.6
 -------------
