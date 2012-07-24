@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Panel - jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Panel - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
@@ -34,9 +34,8 @@
 	</div>
 	<div style="height:300px;background:#fafafa;padding:5px;">
 		<div id="p" class="easyui-panel" style="width:500px;height:200px;padding:10px;"
-				title="My Panel" iconCls="icon-save"
-				collapsible="true" minimizable="true"
-				maximizable=true closable="true">
+				data-options="title:'My Panel',iconCls:'icon-save',
+						collapsible:true,minimizable:true,maximizable:true,closable:true">
 			<p>panel</p>
 			<p>panel</p>
 			<p>panel</p>
@@ -51,6 +50,5 @@
 			<p>panel</p>
 		</div>
 	</div>
-
 </body>
 </html>

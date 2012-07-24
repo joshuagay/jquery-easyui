@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Format NumberBox- jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Format NumberBox- jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
@@ -21,23 +21,23 @@
 	<table>
 		<tr>
 			<td>Number in the United States</td>
-			<td><input class="easyui-numberbox" value="1234567.89" precision="2" groupSeparator=","></input></td>
+			<td><input class="easyui-numberbox" value="1234567.89" data-options="precision:2,groupSeparator:','"></input></td>
 		</tr>
 		<tr>
 			<td>Number in France</td>
-			<td><input class="easyui-numberbox" value="1234567.89" precision="2" groupSeparator=" " decimalSeparator=","></input></td>
+			<td><input class="easyui-numberbox" value="1234567.89" data-options="precision:2,groupSeparator:' ',decimalSeparator:','"></input></td>
 		</tr>
 		<tr>
 			<td>Currency:USD</td>
-			<td><input class="easyui-numberbox" value="1234567.89" precision="2" groupSeparator="," decimalSeparator="." prefix="$"></input></td>
+			<td><input class="easyui-numberbox" value="1234567.89" data-options="precision:2,groupSeparator:',',decimalSeparator:'.',prefix:'$'"></input></td>
 		</tr>
 		<tr>
 			<td>Currency:EUR</td>
-			<td><input class="easyui-numberbox" value="1234567.89" precision="2" groupSeparator="," decimalSeparator=" " prefix="€ "></input></td>
+			<td><input class="easyui-numberbox" value="1234567.89" data-options="precision:2,groupSeparator:',',decimalSeparator:' ',prefix:'€ '"></input></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input class="easyui-numberbox" value="1234567.89" precision="2" groupSeparator=" " decimalSeparator="," suffix=" €"></input></td>
+			<td><input class="easyui-numberbox" value="1234567.89" data-options="precision:2,groupSeparator:' ',decimalSeparator:',',suffix:' €'"></input></td>
 		</tr>
 	</table>
 </body>

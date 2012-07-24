@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -96,16 +96,25 @@
 	</div>
 	
 	<table id="tt" style="width:700px;height:auto"
-			title="Editable DataGrid" iconCls="icon-edit" singleSelect="true"
-			idField="itemid" url="datagrid_data2.json">
+			data-options="iconCls:'icon-edit',singleSelect:true,idField:'itemid',url:'datagrid_data2.json'"
+			title="Editable DataGrid">
 		<thead>
 			<tr>
-				<th field="itemid" width="80">Item ID</th>
-				<th field="productid" width="100" formatter="productFormatter" editor="{type:'combobox',options:{valueField:'productid',textField:'name',data:products,required:true}}">Product</th>
-				<th field="listprice" width="80" align="right" editor="{type:'numberbox',options:{precision:1}}">List Price</th>
-				<th field="unitcost" width="80" align="right" editor="numberbox">Unit Cost</th>
-				<th field="attr1" width="250" editor="text">Attribute</th>
-				<th field="status" width="60" align="center" editor="{type:'checkbox',options:{on:'P',off:''}}">Status</th>
+				<th data-options="field:'itemid',width:80">Item ID</th>
+				<th data-options="field:'productid',width:100,formatter:productFormatter,
+						editor:{
+							type:'combobox',
+							options:{
+								valueField:'productid',
+								textField:'name',
+								data:products,
+								required:true
+							}
+						}">Product</th>
+				<th data-options="field:'listprice',width:80,align:'right',editor:{type:'numberbox',options:{precision:1}}">List Price</th>
+				<th data-options="field:'unitcost',width:80,align:'right',editor:'numberbox'">Unit Cost</th>
+				<th data-options="field:'attr1',width:250,editor:'text'">Attribute</th>
+				<th data-options="field:'status',width:60,align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
 			</tr>
 		</thead>
 	</table>

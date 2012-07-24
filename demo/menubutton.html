@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MenuButton - jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>MenuButton - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
@@ -34,7 +34,7 @@
 	</script>
 </head>
 <body>
-	<h1>MenuButton</h1>
+	<h2>MenuButton</h2>
 	<div class="demo-info">
 		<div class="demo-tip icon-tip"></div>
 		<div>
@@ -50,12 +50,12 @@
 		<a href="javascript:void(0)" id="dd4">Plain</a>
 	</div>
 	<div style="background:#C9EDCC;padding:5px;width:600px;">
-		<a href="javascript:void(0)" id="mb1" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">Edit</a>
-		<a href="javascript:void(0)" id="mb2" class="easyui-menubutton" menu="#mm2" iconCls="icon-help">Help</a>
+		<a href="javascript:void(0)" id="mb1" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-edit'">Edit</a>
+		<a href="javascript:void(0)" id="mb2" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Help</a>
 	</div>
 	<div id="mm1" style="width:150px;">
-		<div iconCls="icon-undo">Undo</div>
-		<div iconCls="icon-redo">Redo</div>
+		<div data-options="iconCls:'icon-undo'">Undo</div>
+		<div data-options="iconCls:'icon-redo'">Redo</div>
 		<div class="menu-sep"></div>
 		<div>Cut</div>
 		<div>Copy</div>
@@ -72,7 +72,7 @@
 				<div>New Toolbar...</div>
 			</div>
 		</div>
-		<div iconCls="icon-remove">Delete</div>
+		<div data-options="iconCls:'icon-remove'">Delete</div>
 		<div>Select All</div>
 	</div>
 	<div id="mm2" style="width:100px;">

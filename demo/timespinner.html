@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TimeSpinner - jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>TimeSpinner - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
@@ -29,8 +29,8 @@
 		<a href="#" class="easyui-linkbutton" onclick="disable()">Disable</a>
 	</div>
 	<span>Begin Time: </span>
-	<input id="ss" class="easyui-timespinner" min="08:30" showSeconds="true" style="width:120px;"></input>
+	<input id="ss" class="easyui-timespinner" data-options="min:'08:30',showSeconds:true" style="width:120px;"></input>
 	<span>End Time: </span>
-	<input class="easyui-timespinner" required="true" style="width:80px;"></input>
+	<input class="easyui-timespinner" data-options="required:true" style="width:80px;"></input>
 </body>
 </html>

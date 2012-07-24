@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,28 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
-	<script>
-		$(function(){
-			$('#tt').datagrid({
-				url: 'datagrid_data3.json',
-				title: 'DataGrid',
-				width: 700,
-				height: 220,
-				fitColumns: true,
-				nowrap:false,
-				rownumbers:true,
-				showFooter:true,
-				columns:[[
-					{field:'itemid',title:'Item ID',width:80},
-					{field:'productid',title:'Product ID',width:120},
-					{field:'listprice',title:'List Price',width:80,align:'right'},
-					{field:'unitcost',title:'Unit Cost',width:80,align:'right'},
-					{field:'attr1',title:'Attribute',width:250},
-					{field:'status',title:'Status',width:60,align:'center'}
-				]]
-			});
-		});
-	</script>
 </head>
 <body>
 	<h2>DataGrid - Footer Row</h2>
@@ -38,6 +16,18 @@
 		<div>Display summary information in footer rows.</div>
 	</div>
 	
-	<table id="tt"></table>
+	<table class="easyui-datagrid" title="DataGrid" style="width:700px;height:220px"
+			data-options="url:'datagrid_data3.json',fitColumns:true,nowrap:false,rownumbers:true,showFooter:true">
+		<thead>
+			<tr>
+				<th data-options="field:'itemid',width:80">Item ID</th>
+				<th data-options="field:'productid',width:120">Product ID</th>
+				<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+				<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+				<th data-options="field:'attr1',width:250">Attribute</th>
+				<th data-options="field:'status',width:60,align:'center'">Status</th>
+			</tr>
+		</thead>
+	</table>
 </body>
 </html>
