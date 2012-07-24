@@ -76,7 +76,9 @@ _e.css({left:_d.left,top:_d.top});
 _d.onMove.apply(_b,[_d.left,_d.top]);
 };
 function _f(_10){
-var _11=$(_10).addClass("panel-body").wrap("<div class=\"panel\"></div>").parent();
+$(_10).addClass("panel-body");
+var _11=$("<div class=\"panel\"></div>").insertBefore(_10);
+_11[0].appendChild(_10);
 _11.bind("_resize",function(){
 var _12=$.data(_10,"panel").options;
 if(_12.fit==true){

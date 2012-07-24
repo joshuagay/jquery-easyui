@@ -14,25 +14,25 @@ var _4=_3.options;
 var bb=_3.bb={};
 var _5={first:{iconCls:"pagination-first",handler:function(){
 if(_4.pageNumber>1){
-_e(_2,1);
+_d(_2,1);
 }
 }},prev:{iconCls:"pagination-prev",handler:function(){
 if(_4.pageNumber>1){
-_e(_2,_4.pageNumber-1);
+_d(_2,_4.pageNumber-1);
 }
 }},next:{iconCls:"pagination-next",handler:function(){
 var _6=Math.ceil(_4.total/_4.pageSize);
 if(_4.pageNumber<_6){
-_e(_2,_4.pageNumber+1);
+_d(_2,_4.pageNumber+1);
 }
 }},last:{iconCls:"pagination-last",handler:function(){
 var _7=Math.ceil(_4.total/_4.pageSize);
 if(_4.pageNumber<_7){
-_e(_2,_7);
+_d(_2,_7);
 }
 }},refresh:{iconCls:"pagination-load",handler:function(){
 if(_4.onBeforeRefresh.call(_2,_4.pageNumber,_4.pageSize)!=false){
-_e(_2,_4.pageNumber);
+_d(_2,_4.pageNumber);
 _4.onRefresh.call(_2,_4.pageNumber,_4.pageSize);
 }
 }}};
@@ -47,18 +47,14 @@ return a;
 if(_4.showPageList){
 var ps=$("<select class=\"pagination-page-list\"></select>");
 ps.bind("change",function(){
-_4.pageSize=$(this).val();
+_4.pageSize=parseInt($(this).val());
 _4.onChangePageSize.call(_2,_4.pageSize);
-_e(_2,_4.pageNumber);
+_d(_2,_4.pageNumber);
 });
 for(var i=0;i<_4.pageList.length;i++){
-var _b=$("<option></option>").text(_4.pageList[i]).appendTo(ps);
-if(_4.pageList[i]==_4.pageSize){
-_b.attr("selected","selected");
-}
+$("<option></option>").text(_4.pageList[i]).appendTo(ps);
 }
 $("<td></td>").append(ps).appendTo(tr);
-_4.pageSize=parseInt(ps.val());
 $("<td><div class=\"pagination-btn-separator\"></div></td>").appendTo(tr);
 }
 bb.first=_9("first");
@@ -68,8 +64,8 @@ $("<span style=\"padding-left:6px;\"></span>").html(_4.beforePageText).appendTo(
 bb.num=$("<input class=\"pagination-num\" type=\"text\" value=\"1\" size=\"2\">").appendTo(tr).wrap("<td></td>");
 bb.num.unbind(".pagination").bind("keydown.pagination",function(e){
 if(e.keyCode==13){
-var _c=parseInt($(this).val())||1;
-_e(_2,_c);
+var _b=parseInt($(this).val())||1;
+_d(_2,_b);
 return false;
 }
 });
@@ -84,12 +80,12 @@ bb.refresh=_9("refresh");
 if(_4.buttons){
 $("<td><div class=\"pagination-btn-separator\"></div></td>").appendTo(tr);
 for(var i=0;i<_4.buttons.length;i++){
-var _d=_4.buttons[i];
-if(_d=="-"){
+var _c=_4.buttons[i];
+if(_c=="-"){
 $("<td><div class=\"pagination-btn-separator\"></div></td>").appendTo(tr);
 }else{
 var td=$("<td></td>").appendTo(tr);
-$("<a href=\"javascript:void(0)\"></a>").appendTo(td).linkbutton($.extend(_d,{plain:true})).bind("click",eval(_d.handler||function(){
+$("<a href=\"javascript:void(0)\"></a>").appendTo(td).linkbutton($.extend(_c,{plain:true})).bind("click",eval(_c.handler||function(){
 }));
 }
 }
@@ -97,74 +93,83 @@ $("<a href=\"javascript:void(0)\"></a>").appendTo(td).linkbutton($.extend(_d,{pl
 $("<div class=\"pagination-info\"></div>").appendTo(_8);
 $("<div style=\"clear:both;\"></div>").appendTo(_8);
 };
-function _e(_f,_10){
-var _11=$.data(_f,"pagination").options;
-var _12=Math.ceil(_11.total/_11.pageSize)||1;
-var _13=_10;
-if(_10<1){
-_13=1;
-}
-if(_10>_12){
-_13=_12;
-}
-_11.pageNumber=_13;
-_11.onSelectPage.call(_f,_13,_11.pageSize);
-_14(_f);
+function _d(_e,_f){
+var _10=$.data(_e,"pagination").options;
+_11(_e,{pageNumber:_f});
+_10.onSelectPage.call(_e,_10.pageNumber,_10.pageSize);
 };
-function _14(_15){
-var _16=$.data(_15,"pagination").options;
-var bb=$.data(_15,"pagination").bb;
-var _17=Math.ceil(_16.total/_16.pageSize)||1;
-bb.num.val(_16.pageNumber);
-bb.after.html(_16.afterPageText.replace(/{pages}/,_17));
-var _18=_16.displayMsg;
-_18=_18.replace(/{from}/,_16.total==0?0:_16.pageSize*(_16.pageNumber-1)+1);
-_18=_18.replace(/{to}/,Math.min(_16.pageSize*(_16.pageNumber),_16.total));
-_18=_18.replace(/{total}/,_16.total);
-$(_15).find(".pagination-info").html(_18);
-bb.first.add(bb.prev).linkbutton({disabled:(_16.pageNumber==1)});
-bb.next.add(bb.last).linkbutton({disabled:(_16.pageNumber==_17)});
-_19(_15,_16.loading);
+function _11(_12,_13){
+var _14=$.data(_12,"pagination").options;
+var bb=$.data(_12,"pagination").bb;
+$.extend(_14,_13||{});
+var ps=$(_12).find("select.pagination-page-list");
+ps.val(_14.pageSize+"");
+_14.pageSize=parseInt(ps.val());
+var _15=Math.ceil(_14.total/_14.pageSize)||1;
+if(_14.pageNumber<1){
+_14.pageNumber=1;
+}
+if(_14.pageNumber>_15){
+_14.pageNumber=_15;
+}
+bb.num.val(_14.pageNumber);
+bb.after.html(_14.afterPageText.replace(/{pages}/,_15));
+var _16=_14.displayMsg;
+_16=_16.replace(/{from}/,_14.total==0?0:_14.pageSize*(_14.pageNumber-1)+1);
+_16=_16.replace(/{to}/,Math.min(_14.pageSize*(_14.pageNumber),_14.total));
+_16=_16.replace(/{total}/,_14.total);
+$(_12).find("div.pagination-info").html(_16);
+bb.first.add(bb.prev).linkbutton({disabled:(_14.pageNumber==1)});
+bb.next.add(bb.last).linkbutton({disabled:(_14.pageNumber==_15)});
+_17(_12,_14.loading);
 };
-function _19(_1a,_1b){
-var _1c=$.data(_1a,"pagination").options;
-var bb=$.data(_1a,"pagination").bb;
-_1c.loading=_1b;
-if(_1c.showRefresh){
-if(_1c.loading){
+function _17(_18,_19){
+var _1a=$.data(_18,"pagination").options;
+var bb=$.data(_18,"pagination").bb;
+_1a.loading=_19;
+if(_1a.showRefresh){
+if(_1a.loading){
 bb.refresh.linkbutton({iconCls:"pagination-loading"});
 }else{
 bb.refresh.linkbutton({iconCls:"pagination-load"});
 }
 }
 };
-$.fn.pagination=function(_1d,_1e){
-if(typeof _1d=="string"){
-return $.fn.pagination.methods[_1d](this,_1e);
+$.fn.pagination=function(_1b,_1c){
+if(typeof _1b=="string"){
+return $.fn.pagination.methods[_1b](this,_1c);
 }
-_1d=_1d||{};
+_1b=_1b||{};
 return this.each(function(){
-var _1f;
-var _20=$.data(this,"pagination");
-if(_20){
-_1f=$.extend(_20.options,_1d);
+var _1d;
+var _1e=$.data(this,"pagination");
+if(_1e){
+_1d=$.extend(_1e.options,_1b);
 }else{
-_1f=$.extend({},$.fn.pagination.defaults,$.fn.pagination.parseOptions(this),_1d);
-$.data(this,"pagination",{options:_1f});
+_1d=$.extend({},$.fn.pagination.defaults,$.fn.pagination.parseOptions(this),_1b);
+$.data(this,"pagination",{options:_1d});
 }
 _1(this);
-_14(this);
+_11(this);
 });
 };
 $.fn.pagination.methods={options:function(jq){
 return $.data(jq[0],"pagination").options;
 },loading:function(jq){
 return jq.each(function(){
-_19(this,true);
+_17(this,true);
 });
 },loaded:function(jq){
 return jq.each(function(){
-_19(this,false);
+_17(this,false);
+});
+},refresh:function(jq,_1f){
+return jq.each(function(){
+_11(this,_1f);
+});
+},select:function(jq,_20){
+return jq.each(function(){
+_d(this,_20);
 });
 }};
 $.fn.pagination.parseOptions=function(_21){
