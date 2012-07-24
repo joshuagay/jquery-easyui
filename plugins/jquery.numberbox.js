@@ -44,10 +44,18 @@ function _f(_10){
 var _11=$.data(_10,"numberbox").options;
 $(_10).unbind(".numberbox").bind("keypress.numberbox",function(e){
 if(e.which==45){
+if($(this).val().indexOf("-")==-1){
 return true;
+}else{
+return false;
+}
 }
 if(e.which==46){
+if($(this).val().indexOf(".")==-1){
 return true;
+}else{
+return false;
+}
 }else{
 if((e.which>=48&&e.which<=57&&e.ctrlKey==false&&e.shiftKey==false)||e.which==0||e.which==8){
 return true;
