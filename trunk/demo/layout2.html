@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Border Layout on Panel - jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Border Layout on Panel - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
@@ -17,27 +17,23 @@
 	</div>
 	
 	<div class="easyui-layout" style="width:700px;height:400px;">
-		<div region="north" style="overflow:hidden;height:60px;padding:10px">
+		<div data-options="region:'north'" style="overflow:hidden;padding:10px">
 			<h2>Layout in Panel</h2>
 		</div>
-		<div region="south" split="true" style="height:50px;background:#fafafa;">
-		</div>
-		<div region="east" icon="icon-reload" title="East" split="true" style="width:180px;">
-		</div>
-		<div region="west" split="true" title="West" style="width:100px;">
-		</div>
-		<div region="center" title="Main Title" style="background:#fafafa;overflow:hidden">
+		<div data-options="region:'south',split:true" style="height:50px;background:#fafafa;"></div>
+		<div data-options="region:'east',iconCls:'icon-reload',split:true" title="East" style="width:180px;"></div>
+		<div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
+		<div data-options="region:'center',title:'Main Title'" style="background:#fafafa;overflow:hidden">
 			<table class="easyui-datagrid"
-					url="datagrid_data2.json" border="false"
-					fit="true" fitColumns="true">
+					data-options="url:'datagrid_data2.json',border:false,fit:true,fitColumns:true">
 				<thead>
 					<tr>
-						<th field="itemid" width="80">Item ID</th>
-						<th field="productid" width="100">Product ID</th>
-						<th field="listprice" width="80" align="right">List Price</th>
-						<th field="unitcost" width="80" align="right">Unit Cost</th>
-						<th field="attr1" width="150">Attribute</th>
-						<th field="status" width="50" align="center">Status</th>
+						<th data-options="field:'itemid'" width="80">Item ID</th>
+						<th data-options="field:'productid'" width="100">Product ID</th>
+						<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+						<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+						<th data-options="field:'attr1'" width="150">Attribute</th>
+						<th data-options="field:'status',align:'center'" width="50">Status</th>
 					</tr>
 				</thead>
 			</table>

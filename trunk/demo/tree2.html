@@ -1,22 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Editable Tree - jQuery EasyUI Demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Editable Tree - jQuery EasyUI Demo</title>
 	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="demo.css">
 	<script type="text/javascript" src="../jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('#tt').tree({
-				onClick:function(node){
-					$('#tt').tree('beginEdit', node.target);
-				}
-			});
-		});
-	</script>
 </head>
 <body>
 	<h2>Editable Tree</h2>
@@ -25,6 +16,8 @@
 		<div>Click the node to begin edit, press enter key to stop edit or esc key to cancel edit.</div>
 	</div>
 	
-	<ul id="tt" url="tree_data.json" animate="true"></ul>
+	<ul id="tt" class="easyui-tree" data-options="url:'tree_data.json',animate:true,
+			onClick:function(node){$(this).tree('beginEdit',node.target)}"
+	></ul>
 </body>
 </html>

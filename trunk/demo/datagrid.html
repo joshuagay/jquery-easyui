@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,7 +15,8 @@
 				iconCls:'icon-save',
 				width:700,
 				height:350,
-				nowrap: false,
+				nowrap: true,
+				autoRowHeight: false,
 				striped: true,
 				collapsible:true,
 				url:'datagrid_data.json',
@@ -25,7 +26,7 @@
 				idField:'code',
 				frozenColumns:[[
 	                {field:'ck',checkbox:true},
-	                {title:'code',field:'code',width:80,sortable:true}
+	                {title:'Code',field:'code',width:80,sortable:true}
 				]],
 				columns:[[
 			        {title:'Base Information',colspan:3},

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,16 +43,16 @@
 	</div>
 	
 	<table id="tt" title="TreeGrid" class="easyui-treegrid" style="width:700px;height:300px"
-			url="treegrid_data3.json" idField="id" treeField="code"
-			pagination="true" fitColumns="true">
+			data-options="url:'treegrid_data3.json',idField:'id',treeField:'code',
+					rownumbers:true,pagination:true,fitColumns:true,autoRowHeight:false">
 		<thead>
 			<tr>
-				<th field="code" rowspan="2" width="150" editor="text">Code</th>
+				<th data-options="field:'code',editor:'text'" rowspan="2" width="150">Code</th>
 				<th colspan="2">Group Fields</th>
 			</tr>
 			<tr>
-				<th field="name" width="200" editor="text">Name</th>
-				<th field="addr" width="200" editor="text">Addr</th>
+				<th data-options="field:'name',editor:'text'" width="200">Name</th>
+				<th data-options="field:'addr',editor:'text'" width="200">Addr</th>
 			</tr>
 		</thead>
 	</table>

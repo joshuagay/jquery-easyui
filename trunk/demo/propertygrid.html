@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,15 +9,6 @@
 	<script type="text/javascript" src="../jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="../jquery.easyui.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
-			$('#tt').propertygrid({
-				width:300,
-				height:'auto',
-				url:'propertygrid_data.json',
-				showGroup:true,
-				scrollbarSize:0
-			});
-		});
 		function showGroup(){
 			$('#tt').propertygrid({
 				showGroup:true
@@ -57,6 +48,7 @@
 		<a href="#" class="easyui-linkbutton" onclick="getChanges()">GetChanges</a>
 	</div>
 	
-	<table id="tt"></table>
+	<table id="tt" class="easyui-propertygrid" style="width:300px"
+			data-options="url:'propertygrid_data.json',showGroup:true,scrollbarSize:0"></table>
 </body>
 </html>
