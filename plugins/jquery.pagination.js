@@ -103,8 +103,10 @@ var _14=$.data(_12,"pagination").options;
 var bb=$.data(_12,"pagination").bb;
 $.extend(_14,_13||{});
 var ps=$(_12).find("select.pagination-page-list");
+if(ps.length){
 ps.val(_14.pageSize+"");
 _14.pageSize=parseInt(ps.val());
+}
 var _15=Math.ceil(_14.total/_14.pageSize)||1;
 if(_14.pageNumber<1){
 _14.pageNumber=1;
