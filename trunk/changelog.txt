@@ -1,3 +1,23 @@
+Version 1.3.1
+-------------
+* Bug
+ * datagrid: Setting the 'pageNumber' property is not valid. fixed.
+ * datagrid: The id attribute of rows isn't adjusted properly while calling 'insertRow' or 'deleteRow' method.
+ * dialog: When load content from 'href', the script will run twice. fixed.
+ * propertygrid: The editors that extended from combo can not accept its changed value. fixed.
+* Improvement
+ * droppable: Add 'disabled' property.
+ * droppable: Add 'options','enable' and 'disable' methods.
+ * tabs: The tab panel tools can be changed by calling 'update' method.
+ * messager: When show a message window, the user can define the window position by applying 'style' property.
+ * window: Prevent script on window body from running twice.
+ * window: Add 'hcenter','vcenter' and 'center' methods.
+ * tree: Add 'onBeforeCheck' callback event.
+ * tree: Extend the 'getChecked' method to allow users to get 'checked','unchecked' or 'indeterminate' nodes.
+ * treegrid: Add 'update' method to update a specified node.
+ * treegrid: Add 'insert' method to insert a new node.
+ * treegrid: Add 'pop' method to remove a node and get the removed node data.
+
 Version 1.3
 -----------
 * Bug
