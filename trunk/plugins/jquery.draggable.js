@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -87,7 +87,10 @@ _7(e);
 var _10=e.data.target;
 $.data(e.data.target,"draggable").droppables.each(function(){
 var _11=$(this);
-var p2=$(this).offset();
+if(_11.droppable("options").disabled){
+return;
+}
+var p2=_11.offset();
 if(e.pageX>p2.left&&e.pageX<p2.left+_11.outerWidth()&&e.pageY>p2.top&&e.pageY<p2.top+_11.outerHeight()){
 if(!this.entered){
 $(this).trigger("_dragenter",[_10]);
@@ -110,7 +113,6 @@ var _13=$.data(e.data.target,"draggable").proxy;
 var _14=$.data(e.data.target,"draggable").options;
 if(_14.revert){
 if(_15()==true){
-_16();
 $(e.data.target).css({position:e.data.startPosition,left:e.data.startLeft,top:e.data.startTop});
 }else{
 if(_13){
@@ -125,7 +127,6 @@ $(e.data.target).css("position",e.data.startPosition);
 }
 }else{
 $(e.data.target).css({position:"absolute",left:e.data.left,top:e.data.top});
-_16();
 _15();
 }
 _14.onStopDrag.call(e.data.target,e);
@@ -143,16 +144,24 @@ function _15(){
 var _17=false;
 $.data(e.data.target,"draggable").droppables.each(function(){
 var _18=$(this);
-var p2=$(this).offset();
+if(_18.droppable("options").disabled){
+return;
+}
+var p2=_18.offset();
 if(e.pageX>p2.left&&e.pageX<p2.left+_18.outerWidth()&&e.pageY>p2.top&&e.pageY<p2.top+_18.outerHeight()){
 if(_14.revert){
 $(e.data.target).css({position:e.data.startPosition,left:e.data.startLeft,top:e.data.startTop});
 }
+_16();
 $(this).trigger("_drop",[e.data.target]);
 _17=true;
 this.entered=false;
+return false;
 }
 });
+if(!_17&&!_14.revert){
+_16();
+}
 return _17;
 };
 return false;

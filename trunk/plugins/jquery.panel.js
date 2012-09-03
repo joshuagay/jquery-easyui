@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -53,7 +53,7 @@ _7.width("auto");
 _8.add(_9)._outerWidth(_7.width());
 if(!isNaN(_6.height)){
 _7._outerHeight(_6.height);
-_9._outerHeight(_7.height()-_8.outerHeight());
+_9._outerHeight(_7.height()-_8._outerHeight());
 }else{
 _9.height("auto");
 }

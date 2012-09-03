@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -183,7 +183,6 @@ var _2e=$.data(_2b,"combo").combo.find("input.combo-text");
 _2e.validatebox(_2d);
 if(_2c){
 _2e.validatebox("validate");
-_2e.trigger("mouseleave");
 }
 };
 function _2f(_30,_31){

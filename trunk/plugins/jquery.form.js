@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -178,14 +178,11 @@ return false;
 };
 function _1f(_24){
 if($.fn.validatebox){
-var box=$(".validatebox-text",_24);
-if(box.length){
-box.validatebox("validate");
-box.trigger("focus");
-box.trigger("blur");
-var _25=$(".validatebox-invalid:first",_24).focus();
+var t=$(_24);
+t.find(".validatebox-text:not(:disabled)").validatebox("validate");
+var _25=t.find(".validatebox-invalid");
+_25.filter(":not(:disabled):first").focus();
 return _25.length==0;
-}
 }
 return true;
 };
