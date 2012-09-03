@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -27,7 +27,7 @@ cc._outerWidth(_3.width);
 var _5="auto";
 if(_3.height>0){
 cc._outerHeight(_3.height);
-var _6=_4.length?_4[0].panel("header").css("height","").outerHeight():"auto";
+var _6=_4.length?_4[0].panel("header").css("height","")._outerHeight():"auto";
 var _5=cc.height()-(_4.length-1)*_6;
 }
 for(var i=0;i<_4.length;i++){

@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3
+ * jQuery EasyUI 1.3.1
  * 
  * Licensed under the GPL terms
  * To use it on other terms please contact us
@@ -38,11 +38,22 @@ $.data(this,"droppable",{options:$.extend({},$.fn.droppable.defaults,$.fn.droppa
 }
 });
 };
-$.fn.droppable.methods={};
+$.fn.droppable.methods={options:function(jq){
+return $.data(jq[0],"droppable").options;
+},enable:function(jq){
+return jq.each(function(){
+$(this).droppable({disabled:false});
+});
+},disable:function(jq){
+return jq.each(function(){
+$(this).droppable({disabled:true});
+});
+}};
 $.fn.droppable.parseOptions=function(_a){
-return $.extend({},$.parser.parseOptions(_a,["accept"]));
+var t=$(_a);
+return $.extend({},$.parser.parseOptions(_a,["accept"]),{disabled:(t.attr("disabled")?true:undefined)});
 };
-$.fn.droppable.defaults={accept:null,onDragEnter:function(e,_b){
+$.fn.droppable.defaults={accept:null,disabled:false,onDragEnter:function(e,_b){
 },onDragOver:function(e,_c){
 },onDragLeave:function(e,_d){
 },onDrop:function(e,_e){
