@@ -108,10 +108,10 @@
 }
 
 .tree-node-hover{
-	background:#fafafa;
+	background:#e6e6e6;
 }
 .tree-node-selected{
-	background:#FBEC88;
+	background:#EAF4F9;
 }
 .tree-checkbox{
 	display:inline-block;
@@ -131,8 +131,8 @@
 .tree-node-proxy{
 	font-size:12px;
 	padding:1px 2px 1px 18px;
-	background:#fafafa;
-	border:1px solid #ccc;
+	background-color:#fff;
+	border:1px solid #ddd;
 	z-index:9900000;
 }
 .tree-dnd-yes{
@@ -151,7 +151,7 @@
 	border:1px dotted red;
 }
 .tree-editor{
-	border:1px solid #ccc;
+	border:1px solid #ddd;
 	font-size:12px;
 	line-height:16px;
 	width:80px;
