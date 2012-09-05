@@ -53,8 +53,8 @@ if(!_8.menu){
 return;
 }
 var _c=_9.offset().left;
-if(_c+$(_8.menu).outerWidth()+5>$(window).width()){
-_c=$(window).width()-$(_8.menu).outerWidth()-5;
+if(_c+$(_8.menu)._outerWidth()+5>$(window)._outerWidth()){
+_c=$(window)._outerWidth()-$(_8.menu)._outerWidth()-5;
 }
 $("body>div.menu-top").menu("hide");
 $(_8.menu).menu("show",{left:_c,top:_9.offset().top+_9.outerHeight()});

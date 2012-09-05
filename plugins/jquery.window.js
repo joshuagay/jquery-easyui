@@ -52,7 +52,7 @@ if(_d.inline){
 var _f=_c.window.parent();
 _d.left=(_f.width()-_e)/2+_f.scrollLeft();
 }else{
-_d.left=($(window).width()-_e)/2+$(document).scrollLeft();
+_d.left=($(window)._outerWidth()-_e)/2+$(document).scrollLeft();
 }
 if(_b){
 _5(_a);
@@ -69,7 +69,7 @@ if(_14.inline){
 var _16=_13.window.parent();
 _14.top=(_16.height()-_15)/2+_16.scrollTop();
 }else{
-_14.top=($(window).height()-_15)/2+$(document).scrollTop();
+_14.top=($(window)._outerHeight()-_15)/2+$(document).scrollTop();
 }
 if(_12){
 _5(_11);
@@ -220,7 +220,7 @@ return {width:Math.max(document.documentElement.scrollWidth,document.documentEle
 }
 };
 $(window).resize(function(){
-$("body>div.window-mask").css({width:$(window).width(),height:$(window).height()});
+$("body>div.window-mask").css({width:$(window)._outerWidth(),height:$(window)._outerHeight()});
 setTimeout(function(){
 $("body>div.window-mask").css({width:_1d().width,height:_1d().height});
 },50);
