@@ -103,7 +103,7 @@ $(this).width(_e-($(this).outerWidth()-$(this).width()));
 $.fn._outerHeight=function(_f){
 if(_f==undefined){
 if(this[0]==window){
-return this.width()||document.body.clientHeight;
+return this.height()||document.body.clientHeight;
 }
 return this.outerHeight()||0;
 }
