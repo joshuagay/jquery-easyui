@@ -1207,18 +1207,23 @@ opts.view.deleteRow.call(opts.view,_125,_126);
 if(opts.height=="auto"){
 _1b(_125);
 }
+$(_125).datagrid("getPager").pagination("refresh",{total:data.total});
 };
 function _12a(_12b,_12c){
+var data=$.data(_12b,"datagrid").data;
 var view=$.data(_12b,"datagrid").options.view;
 var _12d=$.data(_12b,"datagrid").insertedRows;
 view.insertRow.call(view,_12b,_12c.index,_12c.row);
 _12d.push(_12c.row);
+$(_12b).datagrid("getPager").pagination("refresh",{total:data.total});
 };
 function _12e(_12f,row){
+var data=$.data(_12f,"datagrid").data;
 var view=$.data(_12f,"datagrid").options.view;
 var _130=$.data(_12f,"datagrid").insertedRows;
 view.insertRow.call(view,_12f,null,row);
 _130.push(row);
+$(_12f).datagrid("getPager").pagination("refresh",{total:data.total});
 };
 function _131(_132){
 var data=$.data(_132,"datagrid").data;
