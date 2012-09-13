@@ -346,7 +346,6 @@
 	white-space:nowrap;
 	word-wrap:normal;
 	overflow:hidden;
-	text-align:center;
 }
 .datagrid-header .datagrid-cell-group{
 	margin:0;
