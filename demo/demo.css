@@ -20,7 +20,8 @@ h2 {
 	padding:12px;
 }
 .demo-tip{
-	width:24px;
+	width:16px;
 	height:16px;
+	margin-right:8px;
 	float:left;
 }
