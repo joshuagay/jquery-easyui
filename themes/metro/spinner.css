@@ -4,7 +4,7 @@
 	font-size:12px;
 	margin:0;
 	padding:0;
-	border:1px solid #d3d3d3;
+	border:1px solid #ddd;
 }
 .spinner-text{
 	font-size:12px;
@@ -25,14 +25,14 @@
 }
 .spinner-arrow-up,.spinner-arrow-down{
 	display:block;
-	background:#eee url('images/spinner_arrow_up.gif') no-repeat 5px 2px;
+	background:url('images/spinner_arrow_up.gif') no-repeat 5px 2px;
 	font-size:1px;
 	width:18px;
 	height:10px;
 }
 .spinner-arrow-down{
-	background:#eee url('images/spinner_arrow_down.gif') no-repeat 5px 3px;
+	background:url('images/spinner_arrow_down.gif') no-repeat 5px 3px;
 }
 .spinner-arrow-hover{
-	background-color:#ddd;
+	background-color:#E6E6E6;
 }

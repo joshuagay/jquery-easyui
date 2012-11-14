@@ -13,6 +13,7 @@
 	position:absolute;
 	top:0px;
 	left:10px;
+	width:150px;
 	padding:3px 5px;
 	border:1px solid #CC9933;
 	background:#FFFFCC;
@@ -20,7 +21,7 @@
 	font-size:12px;
 }
 .validatebox-tip-pointer{
-	background:url('images/validatebox_pointer.gif') no-repeat left top;
+	background:url('images/validatebox_pointer.png') no-repeat left top;
 	display:inline-block;
 	width:10px;
 	height:19px;
@@ -28,4 +29,13 @@
 	left:1px;
 	top:0px;
 	z-index:9900002;
+}
+.validatebox-tip-left .validatebox-tip-content{
+	left:auto;
+	right:10px;
+}
+.validatebox-tip-left .validatebox-tip-pointer{
+	background:url('images/validatebox_pointer.png') no-repeat left -19px;
+	left:auto;
+	right:1px;
 }

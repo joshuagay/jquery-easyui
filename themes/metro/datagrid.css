@@ -17,7 +17,7 @@
 .datagrid-view2{
 	position:absolute;
 	overflow:hidden;
-	left:210px;
+	right:0px;
 	top:0px;
 }
 .datagrid-mask{
