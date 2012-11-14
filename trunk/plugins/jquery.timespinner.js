@@ -10,6 +10,7 @@
 (function($){
 function _1(_2){
 var _3=$.data(_2,"timespinner").options;
+$(_2).addClass("timespinner-f");
 $(_2).spinner(_3);
 $(_2).unbind(".timespinner");
 $(_2).bind("click.timespinner",function(){
@@ -158,7 +159,7 @@ _1(this);
 };
 $.fn.timespinner.methods={options:function(jq){
 var _21=$.data(jq[0],"timespinner").options;
-return $.extend(_21,{value:jq.val()});
+return $.extend(_21,{value:jq.val(),originalValue:jq.spinner("options").originalValue});
 },setValue:function(jq,_22){
 return jq.each(function(){
 $(this).val(_22);

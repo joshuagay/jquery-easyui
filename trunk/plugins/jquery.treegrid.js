@@ -608,14 +608,6 @@ _b1.view.onAfterRender.call(_b1.view,this);
 $(this).treegrid("fixRowHeight");
 }
 });
-},loading:function(jq){
-return jq.each(function(){
-$(this).datagrid("loading");
-});
-},loaded:function(jq){
-return jq.each(function(){
-$(this).datagrid("loaded");
-});
 },getData:function(jq){
 return $.data(jq[0],"treegrid").data;
 },getFooterRows:function(jq){
@@ -783,7 +775,9 @@ if(col.checkbox){
 var _d8="";
 }else{
 var _d8="";
-_d8+="text-align:"+(col.align||"left")+";";
+if(col.align){
+_d8+="text-align:"+col.align+";";
+}
 if(!_d5.nowrap){
 _d8+="white-space:normal;height:auto;";
 }else{

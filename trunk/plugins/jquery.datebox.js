@@ -83,17 +83,24 @@ _1(this);
 });
 };
 $.fn.datebox.methods={options:function(jq){
-return $.data(jq[0],"datebox").options;
+var _19=$.data(jq[0],"datebox").options;
+_19.originalValue=jq.combo("options").originalValue;
+return _19;
 },calendar:function(jq){
 return $.data(jq[0],"datebox").calendar;
-},setValue:function(jq,_19){
+},setValue:function(jq,_1a){
 return jq.each(function(){
-_c(this,_19);
+_c(this,_1a);
+});
+},reset:function(jq){
+return jq.each(function(){
+var _1b=$(this).datebox("options");
+$(this).datebox("setValue",_1b.originalValue);
 });
 }};
-$.fn.datebox.parseOptions=function(_1a){
-var t=$(_1a);
-return $.extend({},$.fn.combo.parseOptions(_1a),{});
+$.fn.datebox.parseOptions=function(_1c){
+var t=$(_1c);
+return $.extend({},$.fn.combo.parseOptions(_1c),{});
 };
 $.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:180,panelHeight:"auto",keyHandler:{up:function(){
 },down:function(){
@@ -101,10 +108,10 @@ $.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:180,panelHeigh
 _d(this);
 },query:function(q){
 _a(this,q);
-}},currentText:"Today",closeText:"Close",okText:"Ok",formatter:function(_1b){
-var y=_1b.getFullYear();
-var m=_1b.getMonth()+1;
-var d=_1b.getDate();
+}},currentText:"Today",closeText:"Close",okText:"Ok",formatter:function(_1d){
+var y=_1d.getFullYear();
+var m=_1d.getMonth()+1;
+var d=_1d.getDate();
 return m+"/"+d+"/"+y;
 },parser:function(s){
 var t=Date.parse(s);
@@ -113,7 +120,7 @@ return new Date(t);
 }else{
 return new Date();
 }
-},onSelect:function(_1c){
+},onSelect:function(_1e){
 }});
 })(jQuery);
 

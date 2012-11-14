@@ -167,57 +167,90 @@ $(".combogrid-f",_1d).combogrid("clear");
 _1f(_1d);
 };
 function _20(_21){
-var _22=$.data(_21,"form").options;
-var _23=$(_21);
-_23.unbind(".form").bind("submit.form",function(){
+_21.reset();
+var t=$(_21);
+if($.fn.combo){
+t.find(".combo-f").combo("reset");
+}
+if($.fn.combobox){
+t.find(".combobox-f").combobox("reset");
+}
+if($.fn.combotree){
+t.find(".combotree-f").combotree("reset");
+}
+if($.fn.combogrid){
+t.find(".combogrid-f").combogrid("reset");
+}
+if($.fn.spinner){
+t.find(".spinner-f").spinner("reset");
+}
+if($.fn.timespinner){
+t.find(".timespinner-f").timespinner("reset");
+}
+if($.fn.numberbox){
+t.find(".numberbox-f").numberbox("reset");
+}
+if($.fn.numberspinner){
+t.find(".numberspinner-f").numberspinner("reset");
+}
+_1f(_21);
+};
+function _22(_23){
+var _24=$.data(_23,"form").options;
+var _25=$(_23);
+_25.unbind(".form").bind("submit.form",function(){
 setTimeout(function(){
-_1(_21,_22);
+_1(_23,_24);
 },0);
 return false;
 });
 };
-function _1f(_24){
+function _1f(_26){
 if($.fn.validatebox){
-var t=$(_24);
+var t=$(_26);
 t.find(".validatebox-text:not(:disabled)").validatebox("validate");
-var _25=t.find(".validatebox-invalid");
-_25.filter(":not(:disabled):first").focus();
-return _25.length==0;
+var _27=t.find(".validatebox-invalid");
+_27.filter(":not(:disabled):first").focus();
+return _27.length==0;
 }
 return true;
 };
-$.fn.form=function(_26,_27){
-if(typeof _26=="string"){
-return $.fn.form.methods[_26](this,_27);
+$.fn.form=function(_28,_29){
+if(typeof _28=="string"){
+return $.fn.form.methods[_28](this,_29);
 }
-_26=_26||{};
+_28=_28||{};
 return this.each(function(){
 if(!$.data(this,"form")){
-$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_26)});
+$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_28)});
 }
-_20(this);
+_22(this);
 });
 };
-$.fn.form.methods={submit:function(jq,_28){
+$.fn.form.methods={submit:function(jq,_2a){
 return jq.each(function(){
-_1(this,$.extend({},$.fn.form.defaults,_28||{}));
+_1(this,$.extend({},$.fn.form.defaults,_2a||{}));
 });
-},load:function(jq,_29){
+},load:function(jq,_2b){
 return jq.each(function(){
-_b(this,_29);
+_b(this,_2b);
 });
 },clear:function(jq){
 return jq.each(function(){
 _1c(this);
+});
+},reset:function(jq){
+return jq.each(function(){
+_20(this);
 });
 },validate:function(jq){
 return _1f(jq[0]);
 }};
 $.fn.form.defaults={url:null,onSubmit:function(){
 return $(this).form("validate");
-},success:function(_2a){
-},onBeforeLoad:function(_2b){
-},onLoadSuccess:function(_2c){
+},success:function(_2c){
+},onBeforeLoad:function(_2d){
+},onLoadSuccess:function(_2e){
 },onLoadError:function(){
 }};
 })(jQuery);
