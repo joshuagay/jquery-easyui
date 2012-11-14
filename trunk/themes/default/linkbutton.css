@@ -42,6 +42,14 @@ a.l-btn span span.l-btn-text{
 	line-height:16px;
 	padding:0px;
 }
+a.l-btn span span.l-btn-icon-left{
+	padding:0 0 0 20px;
+	background-position:left center;
+}
+a.l-btn span span.l-btn-icon-right{
+	padding:0 20px 0 0;
+	background-position:right center;
+}
 a.l-btn span span span.l-btn-empty{
 	display:inline-block;
 	padding:0px;

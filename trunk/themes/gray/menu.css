@@ -6,6 +6,9 @@
 	border:1px solid #ccc;
 	overflow:hidden;
 }
+.menu-content{
+	background:#fff;
+}
 .menu-item{
 	position:relative;
 	margin:0;
@@ -14,6 +17,7 @@
 	line-height:20px;
 	overflow:hidden;
 	font-size:12px;
+	white-space:nowrap;
 	cursor:pointer;
 	border:1px solid transparent;
 	_border:1px solid #f0f0f0;

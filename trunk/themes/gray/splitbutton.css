@@ -13,10 +13,10 @@ a.s-btn-active span.l-btn-left{
 	background-position: bottom left;
 }
 a.s-btn-active .s-btn-downarrow{
-	background:url('images/menu_split_downarrow.png') no-repeat 4px -19px;
+	background:url('images/menu_split_downarrow.png') no-repeat -12px center;
 }
 a:hover.l-btn .s-btn-downarrow{
-	background:url('images/menu_split_downarrow.png') no-repeat 4px -19px;
+	background:url('images/menu_split_downarrow.png') no-repeat -12px center;
 }
 
 a.s-btn-plain-active{
@@ -28,5 +28,5 @@ a.s-btn-plain-active{
 	border-radius:3px;
 }
 a.s-btn-plain-active .s-btn-downarrow{
-	background:url('images/menu_split_downarrow.png') no-repeat 4px -19px;
+	background:url('images/menu_split_downarrow.png') no-repeat -12px center;
 }

@@ -1,6 +1,7 @@
 .panel{
 	overflow:hidden;
 	font-size:12px;
+	text-align:left;
 }
 .panel-header{
 	padding:5px;
@@ -16,8 +17,7 @@
 	background:url('images/blank.gif') no-repeat;
 }
 .panel-header-noborder{
-	border-width:0px;
-	border-bottom:1px solid #ddd;
+	border-width:0 0 1px 0;
 }
 .panel-body{
 	overflow:auto;

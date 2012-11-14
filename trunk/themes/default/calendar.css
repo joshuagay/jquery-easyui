@@ -42,19 +42,19 @@
 }
 .calendar-prevmonth{
 	left:20px;
-	background:url('images/calendar_prevmonth.gif') no-repeat 3px 2px;
+	background:url('images/calendar_arrows.png') no-repeat -18px -2px;
 }
 .calendar-nextmonth{
 	right:20px;
-	background:url('images/calendar_nextmonth.gif') no-repeat 3px 2px;
+	background:url('images/calendar_arrows.png') no-repeat -34px -2px;
 }
 .calendar-prevyear{
 	left:3px;
-	background:url('images/calendar_prevyear.gif') no-repeat 1px 2px;
+	background:url('images/calendar_arrows.png') no-repeat -1px -2px;
 }
 .calendar-nextyear{
 	right:3px;
-	background:url('images/calendar_nextyear.gif') no-repeat 1px 2px;
+	background:url('images/calendar_arrows.png') no-repeat -49px -2px;
 }
 .calendar-body{
 	font-size:12px;
@@ -140,11 +140,11 @@
 }
 .calendar-menu-prev{
 	margin-right:10px;
-	background:url('images/calendar_prevyear.gif') no-repeat 5px 6px;
+	background:url('images/calendar_arrows.png') no-repeat 2px 2px;
 }	
 .calendar-menu-next{
 	margin-left:10px;
-	background:url('images/calendar_nextyear.gif') no-repeat 5px 6px;
+	background:url('images/calendar_arrows.png') no-repeat -45px 2px;
 }
 .calendar-menu-hover{
 	background-color:#FBEC88;

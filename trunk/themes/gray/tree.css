@@ -31,20 +31,20 @@
 	width:16px;
 	height:18px;
 	vertical-align:middle;
-	background:url('images/tree_arrows.gif') no-repeat -18px 0px;
+	background:url('images/tree_arrows.png') no-repeat -18px 0px;
 }
 .tree-expanded-hover{
-	background:url('images/tree_arrows.gif') no-repeat -50px 0px;
+	background:url('images/tree_arrows.png') no-repeat -50px 0px;
 }
 .tree-collapsed{
 	display:inline-block;
 	width:16px;
 	height:18px;
 	vertical-align:middle;
-	background:url('images/tree_arrows.gif') no-repeat 0px 0px;
+	background:url('images/tree_arrows.png') no-repeat 0px 0px;
 }
 .tree-collapsed-hover{
-	background:url('images/tree_arrows.gif') no-repeat -32px 0px;
+	background:url('images/tree_arrows.png') no-repeat -32px 0px;
 }
 .tree-lines .tree-expanded{
 	background:url('images/tree_elbow.png') no-repeat -36px -54px;
