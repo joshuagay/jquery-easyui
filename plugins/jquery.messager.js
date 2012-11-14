@@ -176,7 +176,7 @@ return win;
 var _20={bar:function(){
 return $("body>div.messager-window").find("div.messager-p-bar");
 },close:function(){
-var win=$("body>div.messager-window>div.messager-body");
+var win=$("body>div.messager-window>div.messager-body:has(div.messager-progress)");
 if(win.length){
 win.window("close");
 }

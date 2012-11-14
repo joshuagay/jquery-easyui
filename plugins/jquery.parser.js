@@ -115,6 +115,43 @@ $(this).height(_f-($(this).outerHeight()-$(this).height()));
 }
 });
 };
+$.fn._scrollLeft=function(_10){
+if(_10==undefined){
+return this.scrollLeft();
+}else{
+return this.each(function(){
+$(this).scrollLeft(_10);
+});
+}
+};
 $.fn._propAttr=$.fn.prop||$.fn.attr;
+$.fn._fit=function(fit){
+fit=fit==undefined?true:fit;
+var p=this.parent()[0];
+var t=this[0];
+var _11=p.fcount||0;
+if(fit){
+if(!t.fitted){
+t.fitted=true;
+p.fcount=_11+1;
+$(p).addClass("panel-noscroll");
+if(p.tagName=="BODY"){
+$("html").addClass("panel-fit");
+}
+}
+}else{
+if(t.fitted){
+t.fitted=false;
+p.fcount=_11-1;
+if(p.fcount==0){
+$(p).removeClass("panel-noscroll");
+if(p.tagName=="BODY"){
+$("html").removeClass("panel-fit");
+}
+}
+}
+}
+return {width:$(p).width(),height:$(p).height()};
+};
 })(jQuery);
 

@@ -12,15 +12,7 @@ function _1(_2){
 var _3=$.data(_2,"accordion").options;
 var _4=$.data(_2,"accordion").panels;
 var cc=$(_2);
-if(_3.fit==true){
-var p=cc.parent();
-p.addClass("panel-noscroll");
-if(p[0].tagName=="BODY"){
-$("html").addClass("panel-fit");
-}
-_3.width=p.width();
-_3.height=p.height();
-}
+_3.fit?$.extend(_3,cc._fit()):cc._fit(false);
 if(_3.width>0){
 cc._outerWidth(_3.width);
 }

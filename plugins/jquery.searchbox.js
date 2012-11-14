@@ -28,10 +28,10 @@ _9.width=_8;
 }
 sb.appendTo("body");
 if(isNaN(_9.width)){
-_9.width=sb.outerWidth();
+_9.width=sb._outerWidth();
 }
 sb._outerWidth(_9.width);
-sb.find("input.searchbox-text")._outerWidth(sb.width()-sb.find("a.searchbox-menu").outerWidth()-sb.find("span.searchbox-button").outerWidth());
+sb.find("input.searchbox-text")._outerWidth(sb.width()-sb.find("a.searchbox-menu")._outerWidth()-sb.find("span.searchbox-button")._outerWidth());
 sb.insertAfter(_7);
 };
 function _a(_b){

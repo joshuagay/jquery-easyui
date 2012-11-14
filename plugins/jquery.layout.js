@@ -13,15 +13,7 @@ function _2(_3){
 var _4=$.data(_3,"layout").options;
 var _5=$.data(_3,"layout").panels;
 var cc=$(_3);
-if(_4.fit==true){
-var p=cc.parent();
-p.addClass("panel-noscroll");
-if(p[0].tagName=="BODY"){
-$("html").addClass("panel-fit");
-}
-cc.width(p.width());
-cc.height(p.height());
-}
+_4.fit?cc.css(cc._fit()):cc._fit(false);
 var _6={top:0,left:0,width:cc.width(),height:cc.height()};
 function _7(pp){
 if(pp.length==0){
