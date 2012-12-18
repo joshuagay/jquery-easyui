@@ -2,9 +2,10 @@ Version 1.3.2
 -------------
 * Bug
  * datagrid: The loading message window can not be centered when changing the width of datagrid. fixed.
+ * treegrid: The 'mergeCells' method can not work normally. fixed.
  * propertygrid: Calling 'endEdit' method to stop editing a row will cause errors. fixed.
 * Improvement
- * RTL feature is now supported.
+ * RTL feature is supported now.
  * tabs: Add 'scrollBy' method to scroll the tab header by the specified amount of pixels
  * tabs: Add 'toolPosition' property to set tab tools to left or right.
  * tabs: Add 'tabPosition' property to define the tab position, possible values are: 'top','bottom','left','right'.
@@ -20,9 +21,13 @@ Version 1.3.2
  * combo: Add 'reset' method.
  * numberbox: Add 'reset' method.
  * spinner: Add 'reset' method.
+ * spinner: Add 'height' property to allow users to define the height of spinner.
+ * searchbox: Add 'height' property to allow users to define the height of searchbox.
  * form: Add 'reset' method.
  * validatebox: Add 'tipPosition' property to define the tip position, supported values are: 'left','right'.
+ * validatebox: Multiple validate rules on a field is supported now.
  * slider: Add 'reversed' property to determine if the min value and max value will switch their positions.
+ * progressbar: Add 'height' property to allow users to define the height of progressbar.
 
 Version 1.3.1
 -------------
