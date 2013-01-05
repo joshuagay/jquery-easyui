@@ -40,7 +40,7 @@
   display: none;
 }
 .datagrid-sort-icon {
-  padding: 0 13px 0 0;
+  padding: 0;
 }
 .datagrid-toolbar {
   height: auto;
@@ -177,9 +177,11 @@
   border-style: solid;
 }
 .datagrid-sort-desc .datagrid-sort-icon {
+  padding: 0 13px 0 0;
   background: url('images/datagrid_icons.png') no-repeat -16px center;
 }
 .datagrid-sort-asc .datagrid-sort-icon {
+  padding: 0 13px 0 0;
   background: url('images/datagrid_icons.png') no-repeat 0px center;
 }
 .datagrid-row-collapse {
@@ -194,12 +196,12 @@
 .datagrid-header,
 .datagrid-td-rownumber {
   background-color: #efefef;
-  background: -webkit-linear-gradient(top,#f9f9f9 0,#efefef 100%);
-  background: -moz-linear-gradient(top,#f9f9f9 0,#efefef 100%);
-  background: -o-linear-gradient(top,#f9f9f9 0,#efefef 100%);
-  background: linear-gradient(to bottom,#f9f9f9 0,#efefef 100%);
+  background: -webkit-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+  background: -moz-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+  background: -o-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+  background: linear-gradient(to bottom,#F9F9F9 0,#efefef 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f9f9f9,endColorstr=#efefef,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F9F9F9,endColorstr=#efefef,GradientType=0);
 }
 .datagrid-cell-rownumber {
   color: #000000;
@@ -215,7 +217,7 @@
 }
 .datagrid-toolbar,
 .datagrid-pager {
-  background: #f4f4f4;
+  background: #F4F4F4;
 }
 .datagrid-header,
 .datagrid-toolbar,

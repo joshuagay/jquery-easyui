@@ -94,7 +94,7 @@ a.l-btn-plain span.l-btn-left {
 a:hover.l-btn-plain {
   background: #e2e2e2;
   color: #000000;
-  border: 1px solid #D3D3D3;
+  border: 1px solid #ccc;
   -moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;

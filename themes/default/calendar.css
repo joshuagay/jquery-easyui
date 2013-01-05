@@ -165,7 +165,7 @@
   background: #ffffff;
 }
 .calendar-body th {
-  background: #f4f4f4;
+  background: #F4F4F4;
 }
 .calendar-hover,
 .calendar-nav-hover,
@@ -180,6 +180,6 @@
 .calendar-selected {
   background-color: #FBEC88;
   color: #000000;
-  border: 1px solid #e2c608;
+  border: 1px solid #E2C608;
   padding: 0;
 }
