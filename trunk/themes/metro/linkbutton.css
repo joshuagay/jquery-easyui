@@ -98,6 +98,7 @@ a.l-btn span.l-btn-left {
 a:hover.l-btn {
   background: #E6E6E6;
   color: #444;
+  border: 1px solid #ddd;
   filter: none;
 }
 a.l-btn-plain,
@@ -109,7 +110,7 @@ a.l-btn-plain span.l-btn-left {
 a:hover.l-btn-plain {
   background: #E6E6E6;
   color: #444;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   -moz-border-radius: 0px 0px 0px 0px;
   -webkit-border-radius: 0px 0px 0px 0px;
   border-radius: 0px 0px 0px 0px;

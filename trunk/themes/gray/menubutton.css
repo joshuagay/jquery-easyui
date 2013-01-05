@@ -24,7 +24,7 @@ a.m-btn-plain-active {
   background: url('images/menu_arrows.png') no-repeat 2px center;
 }
 a.m-btn-plain-active {
-  border-color: #D3D3D3;
+  border-color: #ccc;
   background-color: #e2e2e2;
   color: #000000;
 }

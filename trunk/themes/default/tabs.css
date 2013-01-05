@@ -281,46 +281,46 @@
 .tabs li.tabs-selected a.tabs-inner {
   background-color: #ffffff;
   color: #0E2D5F;
-  background: -webkit-linear-gradient(top,#eff5ff 0,#ffffff 100%);
-  background: -moz-linear-gradient(top,#eff5ff 0,#ffffff 100%);
-  background: -o-linear-gradient(top,#eff5ff 0,#ffffff 100%);
-  background: linear-gradient(to bottom,#eff5ff 0,#ffffff 100%);
+  background: -webkit-linear-gradient(top,#EFF5FF 0,#ffffff 100%);
+  background: -moz-linear-gradient(top,#EFF5FF 0,#ffffff 100%);
+  background: -o-linear-gradient(top,#EFF5FF 0,#ffffff 100%);
+  background: linear-gradient(to bottom,#EFF5FF 0,#ffffff 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff5ff,endColorstr=#ffffff,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#ffffff,GradientType=0);
 }
 .tabs-header-bottom .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(top,#ffffff 0,#eff5ff 100%);
-  background: -moz-linear-gradient(top,#ffffff 0,#eff5ff 100%);
-  background: -o-linear-gradient(top,#ffffff 0,#eff5ff 100%);
-  background: linear-gradient(to bottom,#ffffff 0,#eff5ff 100%);
+  background: -webkit-linear-gradient(top,#ffffff 0,#EFF5FF 100%);
+  background: -moz-linear-gradient(top,#ffffff 0,#EFF5FF 100%);
+  background: -o-linear-gradient(top,#ffffff 0,#EFF5FF 100%);
+  background: linear-gradient(to bottom,#ffffff 0,#EFF5FF 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eff5ff,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#EFF5FF,GradientType=0);
 }
 .tabs-header-left .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(left,#eff5ff 0,#ffffff 100%);
-  background: -moz-linear-gradient(left,#eff5ff 0,#ffffff 100%);
-  background: -o-linear-gradient(left,#eff5ff 0,#ffffff 100%);
-  background: linear-gradient(to right,#eff5ff 0,#ffffff 100%);
+  background: -webkit-linear-gradient(left,#EFF5FF 0,#ffffff 100%);
+  background: -moz-linear-gradient(left,#EFF5FF 0,#ffffff 100%);
+  background: -o-linear-gradient(left,#EFF5FF 0,#ffffff 100%);
+  background: linear-gradient(to right,#EFF5FF 0,#ffffff 100%);
   background-repeat: repeat-y;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff5ff,endColorstr=#ffffff,GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#ffffff,GradientType=1);
 }
 .tabs-header-right .tabs li.tabs-selected a.tabs-inner {
-  background: -webkit-linear-gradient(left,#ffffff 0,#eff5ff 100%);
-  background: -moz-linear-gradient(left,#ffffff 0,#eff5ff 100%);
-  background: -o-linear-gradient(left,#ffffff 0,#eff5ff 100%);
-  background: linear-gradient(to right,#ffffff 0,#eff5ff 100%);
+  background: -webkit-linear-gradient(left,#ffffff 0,#EFF5FF 100%);
+  background: -moz-linear-gradient(left,#ffffff 0,#EFF5FF 100%);
+  background: -o-linear-gradient(left,#ffffff 0,#EFF5FF 100%);
+  background: linear-gradient(to right,#ffffff 0,#EFF5FF 100%);
   background-repeat: repeat-y;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eff5ff,GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#EFF5FF,GradientType=1);
 }
 .tabs li a.tabs-inner {
   color: #0E2D5F;
   background-color: #E0ECFF;
-  background: -webkit-linear-gradient(top,#eff5ff 0,#E0ECFF 100%);
-  background: -moz-linear-gradient(top,#eff5ff 0,#E0ECFF 100%);
-  background: -o-linear-gradient(top,#eff5ff 0,#E0ECFF 100%);
-  background: linear-gradient(to bottom,#eff5ff 0,#E0ECFF 100%);
+  background: -webkit-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+  background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+  background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+  background: linear-gradient(to bottom,#EFF5FF 0,#E0ECFF 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#eff5ff,endColorstr=#E0ECFF,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
 }
 .tabs-header,
 .tabs-tool {

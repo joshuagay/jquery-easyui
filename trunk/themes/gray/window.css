@@ -71,12 +71,12 @@
 }
 .window {
   background-color: #f3f3f3;
-  background: -webkit-linear-gradient(top,#f8f8f8 0,#eeeeee 20%);
-  background: -moz-linear-gradient(top,#f8f8f8 0,#eeeeee 20%);
-  background: -o-linear-gradient(top,#f8f8f8 0,#eeeeee 20%);
-  background: linear-gradient(to bottom,#f8f8f8 0,#eeeeee 20%);
+  background: -webkit-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
+  background: -moz-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
+  background: -o-linear-gradient(top,#F8F8F8 0,#eeeeee 20%);
+  background: linear-gradient(to bottom,#F8F8F8 0,#eeeeee 20%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f8f8f8,endColorstr=#eeeeee,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F8F8F8,endColorstr=#eeeeee,GradientType=0);
 }
 .window-proxy {
   border: 1px dashed #D3D3D3;
