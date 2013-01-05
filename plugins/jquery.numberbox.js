@@ -1,11 +1,13 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.2
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: jeasyui@gmail.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 function _1(_2){
@@ -69,19 +71,6 @@ return false;
 }
 }
 }
-}).bind("paste.numberbox",function(){
-if(window.clipboardData){
-var s=clipboardData.getData("text");
-if(!/\D/.test(s)){
-return true;
-}else{
-return false;
-}
-}else{
-return false;
-}
-}).bind("dragenter.numberbox",function(){
-return false;
 }).bind("blur.numberbox",function(){
 _7(_10,$(this).val());
 $(this).val(_11.formatter.call(_10,_8(_10)));

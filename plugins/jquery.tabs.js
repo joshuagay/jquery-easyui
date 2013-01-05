@@ -1,11 +1,13 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.2
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: jeasyui@gmail.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 function _1(_2){
@@ -156,7 +158,7 @@ _29.addClass("tabs-header-left");
 _2a.addClass("tabs-panels-right");
 }else{
 if(_28.tabPosition=="right"){
-_29.addClass("tabs-header-left tabs-header-right");
+_29.addClass("tabs-header-right");
 _2a.addClass("tabs-panels-left");
 }
 }
