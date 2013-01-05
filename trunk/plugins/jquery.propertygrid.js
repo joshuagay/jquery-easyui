@@ -1,11 +1,13 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.2
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: jeasyui@gmail.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 var _1;
@@ -30,11 +32,11 @@ _5.onClickRow.call(_3,_7,_8);
 _c(this);
 return _5.loadFilter.call(this,_a);
 },onLoadSuccess:function(_b){
-$(_3).datagrid("getPanel").find("div.datagrid-group").css("border","");
+$(_3).datagrid("getPanel").find("div.datagrid-group").attr("style","");
 _5.onLoadSuccess.call(_3,_b);
 }}));
 $(document).unbind(".propertygrid").bind("mousedown.propertygrid",function(e){
-var p=$(e.target).closest("div.propertygrid,div.combo-panel");
+var p=$(e.target).closest("div.datagrid-view,div.combo-panel");
 if(p.length){
 return;
 }
@@ -142,10 +144,10 @@ var _29=_27.find("div.datagrid-group");
 }else{
 var _29=_28.find("div.datagrid-group");
 }
-$("<td style=\"border:0\"><div class=\"datagrid-row-expander datagrid-row-collapse\" style=\"width:25px;height:16px;cursor:pointer\"></div></td>").insertBefore(_29.find("td"));
+$("<td style=\"border:0;text-align:center;width:25px\"><span class=\"datagrid-row-expander datagrid-row-collapse\" style=\"display:inline-block;width:16px;height:16px;cursor:pointer\">&nbsp;</span></td>").insertBefore(_29.find("td"));
 _26.find("div.datagrid-group").each(function(){
 var _2a=$(this).attr("group-index");
-$(this).find("div.datagrid-row-expander").bind("click",{groupIndex:_2a},function(e){
+$(this).find("span.datagrid-row-expander").bind("click",{groupIndex:_2a},function(e){
 if($(this).hasClass("datagrid-row-collapse")){
 $(_24).datagrid("collapseGroup",e.data.groupIndex);
 }else{
@@ -193,7 +195,7 @@ var _36=_35.find("div.datagrid-group[group-index=\""+_34+"\"]");
 }else{
 var _36=_35.find("div.datagrid-group");
 }
-var _37=_36.find("div.datagrid-row-expander");
+var _37=_36.find("span.datagrid-row-expander");
 if(_37.hasClass("datagrid-row-expand")){
 _37.removeClass("datagrid-row-expand").addClass("datagrid-row-collapse");
 _36.next("table").show();
@@ -208,7 +210,7 @@ var _3a=_39.find("div.datagrid-group[group-index=\""+_38+"\"]");
 }else{
 var _3a=_39.find("div.datagrid-group");
 }
-var _3b=_3a.find("div.datagrid-row-expander");
+var _3b=_3a.find("span.datagrid-row-expander");
 if(_3b.hasClass("datagrid-row-collapse")){
 _3b.removeClass("datagrid-row-collapse").addClass("datagrid-row-expand");
 _3a.next("table").hide();

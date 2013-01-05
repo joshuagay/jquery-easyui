@@ -1,11 +1,13 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.2
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: jeasyui@gmail.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 function _1(_2,_3){
@@ -15,16 +17,17 @@ var _6=$.data(_2,"combo").panel;
 if(_3){
 _4.width=_3;
 }
+if(isNaN(_4.width)){
+var c=$(_2).clone();
+c.css("visibility","hidden");
+c.appendTo("body");
+_4.width=c.outerWidth();
+c.remove();
+}
 _5.appendTo("body");
 var _7=_5.find("input.combo-text");
 var _8=_5.find(".combo-arrow");
-if(isNaN(_4.width)){
-_4.width=_7.outerWidth();
-}
-var _9=0;
-if(_4.hasDownArrow){
-_9=_8._outerWidth();
-}
+var _9=_4.hasDownArrow?_8._outerWidth():0;
 _5._outerWidth(_4.width)._outerHeight(_4.height);
 _7._outerWidth(_5.width()-_9);
 _7.css({height:_5.height()+"px",lineHeight:_5.height()+"px"});
@@ -74,11 +77,11 @@ var _1c=$.data(_18,"combo").panel;
 var _1d=_1b.find(".combo-text");
 var _1e=_1b.find(".combo-arrow");
 $(document).unbind(".combo").bind("mousedown.combo",function(e){
-var _1f=$("body>div.combo-p>div.combo-panel");
-var p=$(e.target).closest("div.combo-panel",_1f);
+var p=$(e.target).closest("span.combo,div.combo-panel");
 if(p.length){
 return;
 }
+var _1f=$("body>div.combo-p>div.combo-panel");
 _1f.panel("close");
 });
 _1b.unbind(".combo");
@@ -135,7 +138,6 @@ $(this).addClass("combo-arrow-hover");
 }).bind("mouseleave.combo",function(){
 $(this).removeClass("combo-arrow-hover");
 }).bind("mousedown.combo",function(){
-return false;
 });
 }
 };

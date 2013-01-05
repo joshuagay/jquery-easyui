@@ -1,11 +1,13 @@
 ﻿/**
- * jQuery EasyUI 1.3.1
+ * jQuery EasyUI 1.3.2
  * 
- * Licensed under the GPL terms
- * To use it on other terms please contact us
+ * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
- * Copyright(c) 2009-2012 stworthy [ stworthy@gmail.com ] 
- * 
+ * Licensed under the GPL or commercial licenses
+ * To use it on other terms please contact us: jeasyui@gmail.com
+ * http://www.gnu.org/licenses/gpl.txt
+ * http://www.jeasyui.com/license_commercial.php
+ *
  */
 (function($){
 function _1(_2){
@@ -48,7 +50,6 @@ if(!_a.hasClass("menu-content")){
 _a.children("div").each(function(){
 var _b=$(this);
 if(_b.hasClass("menu-sep")){
-_b.html("&nbsp;");
 }else{
 var _c=$.extend({},$.parser.parseOptions(this,["name","iconCls","href"]),{disabled:(_b.attr("disabled")?true:undefined)});
 _b.attr("name",_c.name||"").attr("href",_c.href||"");
@@ -67,6 +68,7 @@ _b._outerHeight(22);
 _f(_2,_b);
 }
 });
+$("<div class=\"menu-line\"></div>").prependTo(_a);
 }
 _10(_2,_a);
 _a.hide();
@@ -262,7 +264,7 @@ function _37(_38,_39){
 var _3a=$(_38);
 if(_39.parent){
 if(!_39.parent.submenu){
-var _3b=$("<div class=\"menu\"></div>").appendTo("body");
+var _3b=$("<div class=\"menu\"><div class=\"menu-line\"></div></div>").appendTo("body");
 _3b[0].autowidth=true;
 _3b.hide();
 _39.parent.submenu=_3b;
