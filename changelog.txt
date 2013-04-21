@@ -1,3 +1,24 @@
+Version 1.3.3
+-------------
+* Bug
+ * datagrid: Some style features are not supported by column styler function. fixed.
+ * datagrid: IE 31 stylesheet limit. fixed.
+ * treegrid: Some style features are not supported by column styler function. fixed.
+ * menu: The auto width of menu item displays incorrect in ie6. fixed.
+ * combo: The 'onHidePanel' event can not fire when clicked outside the combo area. fixed. 
+* Improvement
+ * datagrid: Add 'scrollTo' and 'highlightRow' methods.
+ * treegrid: Enable treegrid to parse data from <tbody> element.
+ * combo: Add 'selectOnNavigation' option.
+ * combobox: Add 'loadFilter' option to allow users to change data format before loading into combobox.
+ * tree: Add 'onBeforeDrop' callback event.
+ * validatebox: Dependent on tooltip plugin now, add 'deltaX' property.
+ * numberbox: The 'filter' options can be used to determine if the key pressed was accepted.
+ * linkbutton: The group button is available.
+ * layout: The 'minWidth','maxWidth','minHeight','maxHeight' and 'collapsible' properties are available for region panel.
+* New Plugins
+ * tooltip: Display a popup message when moving mouse over an element.
+ 
 Version 1.3.2
 -------------
 * Bug
