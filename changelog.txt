@@ -9,7 +9,7 @@ Version 1.3.3
 * Improvement
  * datagrid: Add 'scrollTo' and 'highlightRow' methods.
  * treegrid: Enable treegrid to parse data from <tbody> element.
- * combo: Add 'selectOnNavigation' option.
+ * combo: Add 'selectOnNavigation' and 'readonly' options.
  * combobox: Add 'loadFilter' option to allow users to change data format before loading into combobox.
  * tree: Add 'onBeforeDrop' callback event.
  * validatebox: Dependent on tooltip plugin now, add 'deltaX' property.
