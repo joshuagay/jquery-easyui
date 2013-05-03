@@ -1,22 +1,27 @@
 ﻿/**
- * jQuery EasyUI 1.3.2
+ * jQuery EasyUI 1.3.3
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: jeasyui@gmail.com
+ * To use it on other terms please contact us: info@jeasyui.com
  * http://www.gnu.org/licenses/gpl.txt
  * http://www.jeasyui.com/license_commercial.php
  *
  */
 (function($){
-function _1(_2){
-_2.each(function(){
+$.fn._remove=function(){
+return this.each(function(){
 $(this).remove();
-if($.browser.msie){
+try{
 this.outerHTML="";
 }
+catch(err){
+}
 });
+};
+function _1(_2){
+_2._remove();
 };
 function _3(_4,_5){
 var _6=$.data(_4,"panel").options;
@@ -153,23 +158,29 @@ _16.children("div.panel-body").addClass("panel-body-noheader");
 function _1a(_1b){
 var _1c=$.data(_1b,"panel");
 var _1d=_1c.options;
-if(_1d.content){
-_1e(_1b);
-_1f(_1d.content);
-}
-if(_1d.href&&(!_1c.isLoaded||!_1d.cache)){
+if(_1d.href){
+if(!_1c.isLoaded||!_1d.cache){
 _1c.isLoaded=false;
 _1e(_1b);
 if(_1d.loadingMessage){
 $(_1b).html($("<div class=\"panel-loading\"></div>").html(_1d.loadingMessage));
 }
-$.ajax({url:_1d.href,cache:false,dataType:"html",success:function(_20){
-_1f(_1d.extractor.call(_1b,_20));
+$.ajax({url:_1d.href,cache:false,dataType:"html",success:function(_1f){
+_20(_1d.extractor.call(_1b,_1f));
 _1d.onLoad.apply(_1b,arguments);
 _1c.isLoaded=true;
 }});
 }
-function _1f(_21){
+}else{
+if(_1d.content){
+if(!_1c.isLoaded){
+_1e(_1b);
+_20(_1d.content);
+_1c.isLoaded=true;
+}
+}
+}
+function _20(_21){
 $(_1b).html(_21);
 if($.parser){
 $.parser.parse($(_1b));
@@ -187,6 +198,7 @@ $(this).menubutton("destroy");
 t.find(".s-btn").each(function(){
 $(this).splitbutton("destroy");
 });
+t.find(".tooltip-f").tooltip("destroy");
 };
 function _23(_24){
 $(_24).find("div.panel:visible,div.accordion:visible,div.tabs-container:visible,div.layout:visible").each(function(){
@@ -400,6 +412,7 @@ var _5d=$.data(this,"panel");
 var _5e;
 if(_5d){
 _5e=$.extend(_5d.options,_5b);
+_5d.isLoaded=false;
 }else{
 _5e=$.extend({},$.fn.panel.defaults,$.fn.panel.parseOptions(this),_5b);
 $(this).attr("title","");
