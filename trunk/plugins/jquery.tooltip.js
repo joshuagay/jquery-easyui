@@ -134,7 +134,6 @@ $(_1f).attr("title",_21._title);
 }
 $.removeData(_1f,"tooltip");
 $(_1f).unbind(".tooltip").removeClass("tooltip-f");
-$(_1f).remove();
 _21.onDestroy.call(_1f);
 }
 };
