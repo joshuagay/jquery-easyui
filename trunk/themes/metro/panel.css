@@ -1,6 +1,5 @@
 .panel {
   overflow: hidden;
-  font-size: 12px;
   text-align: left;
 }
 .panel-header,
@@ -109,8 +108,10 @@
 .panel-body {
   background-color: #fff;
   color: #444;
+  font-size: 12px;
 }
 .panel-title {
+  font-size: 12px;
   font-weight: bold;
   color: #777;
   height: 16px;

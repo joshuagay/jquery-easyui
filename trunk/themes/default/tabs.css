@@ -72,7 +72,6 @@
   margin: 0px;
   padding: 0px;
   padding-left: 4px;
-  font-size: 12px;
   width: 5000px;
   border-style: solid;
   border-width: 0 0 1px 0;
@@ -154,6 +153,9 @@
   left: 10px;
   top: 50%;
   margin-top: -8px;
+}
+.tabs-title {
+  font-size: 12px;
 }
 .tabs-closable {
   padding-right: 8px;

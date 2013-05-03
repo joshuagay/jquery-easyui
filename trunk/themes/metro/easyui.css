@@ -1,6 +1,5 @@
 .panel {
   overflow: hidden;
-  font-size: 12px;
   text-align: left;
 }
 .panel-header,
@@ -109,8 +108,10 @@
 .panel-body {
   background-color: #fff;
   color: #444;
+  font-size: 12px;
 }
 .panel-title {
+  font-size: 12px;
   font-weight: bold;
   color: #777;
   height: 16px;
@@ -505,7 +506,6 @@
   margin: 0px;
   padding: 0px;
   padding-left: 4px;
-  font-size: 12px;
   width: 5000px;
   border-style: solid;
   border-width: 0 0 1px 0;
@@ -587,6 +587,9 @@
   left: 10px;
   top: 50%;
   margin-top: -8px;
+}
+.tabs-title {
+  font-size: 12px;
 }
 .tabs-closable {
   padding-right: 8px;
@@ -758,7 +761,6 @@
 }
 a.l-btn {
   background-position: right 0;
-  font-size: 12px;
   text-decoration: none;
   display: inline-block;
   zoom: 1;
@@ -794,6 +796,7 @@ a.l-btn span span.l-btn-text {
   width: auto;
   height: 16px;
   line-height: 16px;
+  font-size: 12px;
   padding: 0;
   margin: 0;
 }
@@ -875,7 +878,37 @@ a:hover.l-btn-plain {
 }
 a.l-btn-disabled,
 a:hover.l-btn-disabled {
+  color: #777;
   filter: alpha(opacity=50);
+  background: #ffffff;
+  color: #777;
+  background: -webkit-linear-gradient(top,#ffffff 0,#ffffff 100%);
+  background: -moz-linear-gradient(top,#ffffff 0,#ffffff 100%);
+  background: -o-linear-gradient(top,#ffffff 0,#ffffff 100%);
+  background: linear-gradient(to bottom,#ffffff 0,#ffffff 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff,GradientType=0);
+  filter: alpha(opacity=50) progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff,GradientType=0);
+}
+a.l-btn-plain-disabled,
+a:hover.l-btn-plain-disabled {
+  background: transparent;
+  filter: alpha(opacity=50);
+}
+a.l-btn-selected,
+a:hover.l-btn-selected {
+  background-position: right -24px;
+  background: #ddd;
+  filter: none;
+}
+a.l-btn-selected span.l-btn-left,
+a:hover.l-btn-selected span.l-btn-left {
+  background-position: 0 bottom;
+  background-image: none;
+}
+a.l-btn-plain-selected,
+a:hover.l-btn-plain-selected {
+  background: #ddd;
 }
 .datagrid .panel-body {
   overflow: hidden;
@@ -976,6 +1009,12 @@ a:hover.l-btn-disabled {
   height: 18px;
   line-height: 18px;
   font-weight: normal;
+  font-size: 12px;
+}
+.datagrid-header .datagrid-cell {
+  height: auto;
+}
+.datagrid-header .datagrid-cell span {
   font-size: 12px;
 }
 .datagrid-cell-group {
@@ -1223,13 +1262,16 @@ a:hover.l-btn-disabled {
   border-style: solid;
   padding: 1px;
   overflow: hidden;
-  font-size: 12px;
 }
 .calendar table {
   border-collapse: separate;
   font-size: 12px;
   width: 100%;
   height: 100%;
+}
+.calendar table td,
+.calendar table th {
+  font-size: 12px;
 }
 .calendar-noborder {
   border: 0;
@@ -1249,6 +1291,7 @@ a:hover.l-btn-disabled {
   padding: 0 3px;
   height: 18px;
   line-height: 18px;
+  font-size: 12px;
   cursor: pointer;
   -moz-border-radius: 0px 0px 0px 0px;
   -webkit-border-radius: 0px 0px 0px 0px;
@@ -1327,6 +1370,7 @@ a:hover.l-btn-disabled {
   margin: 0;
   padding: 2px;
   font-weight: bold;
+  font-size: 12px;
 }
 .calendar-menu-prev,
 .calendar-menu-next {
@@ -1409,8 +1453,10 @@ a:hover.l-btn-disabled {
 .datebox-button {
   height: 18px;
   padding: 2px 5px;
-  font-size: 12px;
   text-align: center;
+}
+.datebox-button a {
+  font-size: 12px;
 }
 .datebox-current,
 .datebox-close,
@@ -1527,6 +1573,7 @@ a:hover.l-btn-disabled {
 }
 .progressbar-text {
   color: #444;
+  font-size: 12px;
 }
 .progressbar-value .progressbar-text {
   background-color: #CCE6FF;
@@ -1627,7 +1674,7 @@ a:hover.l-btn-disabled {
   top: 7px;
   border-width: 1px;
   border-style: solid;
-  border-radius: 3px;
+  border-radius: 0px;
 }
 .slider-handle {
   position: absolute;
@@ -1642,6 +1689,7 @@ a:hover.l-btn-disabled {
   position: absolute;
   display: inline-block;
   line-height: 12px;
+  font-size: 12px;
   white-space: nowrap;
   top: -22px;
 }
@@ -1664,6 +1712,7 @@ a:hover.l-btn-disabled {
 .slider-rulelabel span {
   position: absolute;
   display: inline-block;
+  font-size: 12px;
 }
 .slider-v .slider-inner {
   width: 6px;
@@ -1823,6 +1872,7 @@ a:hover.l-btn-disabled {
   width: 16px;
   height: 16px;
   line-height: 16px;
+  font-size: 12px;
   _vertical-align: middle;
 }
 a.m-btn-active {
@@ -1857,6 +1907,7 @@ a.m-btn-plain-active {
   line-height: 16px;
   border-width: 0;
   border-style: solid;
+  font-size: 12px;
   _vertical-align: middle;
 }
 a.s-btn-active {
@@ -2084,43 +2135,6 @@ a.s-btn-plain-active {
   background: #CCE6FF;
   color: #000;
 }
-.validatebox-tip {
-  position: absolute;
-  width: 200px;
-  height: auto;
-  display: none;
-  z-index: 9900000;
-}
-.validatebox-tip-content {
-  display: inline-block;
-  position: absolute;
-  top: 0px;
-  left: 8px;
-  width: 150px;
-  border-width: 1px;
-  border-style: solid;
-  padding: 3px 5px;
-  z-index: 9900001;
-  font-size: 12px;
-}
-.validatebox-tip-pointer {
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  position: absolute;
-  left: 1px;
-  top: 0px;
-  z-index: 9900002;
-}
-.validatebox-tip-left .validatebox-tip-content {
-  left: auto;
-  right: 8px;
-}
-.validatebox-tip-left .validatebox-tip-pointer {
-  background-position: -20px center;
-  left: auto;
-  right: 1px;
-}
 .validatebox-invalid {
   background-image: url('images/validatebox_warning.png');
   background-repeat: no-repeat;
@@ -2129,11 +2143,101 @@ a.s-btn-plain-active {
   background-color: #fff3f3;
   color: #000;
 }
-.validatebox-tip-pointer {
-  background: url('images/validatebox_arrows.png') no-repeat -4px center;
+.tooltip {
+  position: absolute;
+  display: none;
+  z-index: 9900000;
+  outline: none;
+  padding: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  -moz-border-radius: 0px 0px 0px 0px;
+  -webkit-border-radius: 0px 0px 0px 0px;
+  border-radius: 0px 0px 0px 0px;
 }
-.validatebox-tip-content {
-  border-color: #CC9933;
-  background-color: #FFFFCC;
-  color: #000;
+.tooltip-content {
+  font-size: 12px;
+}
+.tooltip-arrow-outer,
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  border-style: solid;
+  border-width: 6px;
+  border-color: transparent;
+  _border-color: tomato;
+  _filter: chroma(color=tomato);
+}
+.tooltip-right .tooltip-arrow-outer {
+  left: 0;
+  top: 50%;
+  margin: -6px 0 0 -13px;
+}
+.tooltip-right .tooltip-arrow {
+  left: 0;
+  top: 50%;
+  margin: -6px 0 0 -12px;
+}
+.tooltip-left .tooltip-arrow-outer {
+  right: 0;
+  top: 50%;
+  margin: -6px -13px 0 0;
+}
+.tooltip-left .tooltip-arrow {
+  right: 0;
+  top: 50%;
+  margin: -6px -12px 0 0;
+}
+.tooltip-top .tooltip-arrow-outer {
+  bottom: 0;
+  left: 50%;
+  margin: 0 0 -13px -6px;
+}
+.tooltip-top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin: 0 0 -12px -6px;
+}
+.tooltip-bottom .tooltip-arrow-outer {
+  top: 0;
+  left: 50%;
+  margin: -13px 0 0 -6px;
+}
+.tooltip-bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin: -12px 0 0 -6px;
+}
+.tooltip {
+  background-color: #fff;
+  border-color: #ddd;
+  color: #444;
+}
+.tooltip-right .tooltip-arrow-outer {
+  border-right-color: #ddd;
+}
+.tooltip-right .tooltip-arrow {
+  border-right-color: #fff;
+}
+.tooltip-left .tooltip-arrow-outer {
+  border-left-color: #ddd;
+}
+.tooltip-left .tooltip-arrow {
+  border-left-color: #fff;
+}
+.tooltip-top .tooltip-arrow-outer {
+  border-top-color: #ddd;
+}
+.tooltip-top .tooltip-arrow {
+  border-top-color: #fff;
+}
+.tooltip-bottom .tooltip-arrow-outer {
+  border-bottom-color: #ddd;
+}
+.tooltip-bottom .tooltip-arrow {
+  border-bottom-color: #fff;
 }

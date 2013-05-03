@@ -1,6 +1,5 @@
 a.l-btn {
   background-position: right 0;
-  font-size: 12px;
   text-decoration: none;
   display: inline-block;
   zoom: 1;
@@ -36,6 +35,7 @@ a.l-btn span span.l-btn-text {
   width: auto;
   height: 16px;
   line-height: 16px;
+  font-size: 12px;
   padding: 0;
   margin: 0;
 }
@@ -101,5 +101,23 @@ a:hover.l-btn-plain {
 }
 a.l-btn-disabled,
 a:hover.l-btn-disabled {
+  color: #444;
   filter: alpha(opacity=50);
+}
+a.l-btn-plain-disabled,
+a:hover.l-btn-plain-disabled {
+  background: transparent;
+  filter: alpha(opacity=50);
+}
+a.l-btn-selected,
+a:hover.l-btn-selected {
+  background-position: right -24px;
+}
+a.l-btn-selected span.l-btn-left,
+a:hover.l-btn-selected span.l-btn-left {
+  background-position: 0 bottom;
+}
+a.l-btn-plain-selected,
+a:hover.l-btn-plain-selected {
+  background: #ddd;
 }
