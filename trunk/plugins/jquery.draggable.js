@@ -1,10 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.3.2
+ * jQuery EasyUI 1.3.3
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: jeasyui@gmail.com
+ * To use it on other terms please contact us: info@jeasyui.com
  * http://www.gnu.org/licenses/gpl.txt
  * http://www.jeasyui.com/license_commercial.php
  *
@@ -183,8 +183,8 @@ if(e.pageX>p2.left&&e.pageX<p2.left+_1f.outerWidth()&&e.pageY>p2.top&&e.pageY<p2
 if(_1a.revert){
 $(e.data.target).css({position:e.data.startPosition,left:e.data.startLeft,top:e.data.startTop});
 }
-_1d();
 $(this).trigger("_drop",[e.data.target]);
+_1d();
 _1e=true;
 this.entered=false;
 return false;
@@ -286,5 +286,35 @@ $.fn.draggable.defaults={proxy:null,revert:false,cursor:"move",deltaX:null,delta
 },onDrag:function(e){
 },onStopDrag:function(e){
 }};
+$(function(){
+function _31(e){
+var _32=e.changedTouches,_33=_32[0],_34="";
+switch(e.type){
+case "touchstart":
+_34="mousedown";
+break;
+case "touchmove":
+_34="mousemove";
+break;
+case "touchend":
+_34="mouseup";
+break;
+default:
+return;
+}
+var _35=document.createEvent("MouseEvent");
+_35.initMouseEvent(_34,true,true,window,1,_33.screenX,_33.screenY,_33.clientX,_33.clientY,false,false,false,false,0,null);
+_33.target.dispatchEvent(_35);
+if(_1){
+e.preventDefault();
+}
+};
+if(document.addEventListener){
+document.addEventListener("touchstart",_31,true);
+document.addEventListener("touchmove",_31,true);
+document.addEventListener("touchend",_31,true);
+document.addEventListener("touchcancel",_31,true);
+}
+});
 })(jQuery);
 

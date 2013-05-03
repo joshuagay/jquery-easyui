@@ -1,17 +1,17 @@
 ﻿/**
- * jQuery EasyUI 1.3.2
+ * jQuery EasyUI 1.3.3
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: jeasyui@gmail.com
+ * To use it on other terms please contact us: info@jeasyui.com
  * http://www.gnu.org/licenses/gpl.txt
  * http://www.jeasyui.com/license_commercial.php
  *
  */
 (function($){
 $.parser={auto:true,onComplete:function(_1){
-},plugins:["draggable","droppable","resizable","pagination","linkbutton","menu","menubutton","splitbutton","progressbar","tree","combobox","combotree","combogrid","numberbox","validatebox","searchbox","numberspinner","timespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","tabs","accordion","window","dialog"],parse:function(_2){
+},plugins:["draggable","droppable","resizable","pagination","tooltip","linkbutton","menu","menubutton","splitbutton","progressbar","tree","combobox","combotree","combogrid","numberbox","validatebox","searchbox","numberspinner","timespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","tabs","accordion","window","dialog"],parse:function(_2){
 var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
 var _3=$.parser.plugins[i];
@@ -83,6 +83,9 @@ $.extend(_8,_b);
 return _8;
 }};
 $(function(){
+var d=$("<div style=\"position:absolute;top:-1000px;width:100px;height:100px;padding:5px\"></div>").appendTo("body");
+$._boxModel=d.width()==100;
+d.remove();
 if(!window.easyloader&&$.parser.auto){
 $.parser.parse();
 }
@@ -95,10 +98,10 @@ return this.width()||document.body.clientWidth;
 return this.outerWidth()||0;
 }
 return this.each(function(){
-if(!$.support.boxModel&&$.browser.msie){
-$(this).width(_e);
-}else{
+if($._boxModel){
 $(this).width(_e-($(this).outerWidth()-$(this).width()));
+}else{
+$(this).width(_e);
 }
 });
 };
@@ -110,10 +113,10 @@ return this.height()||document.body.clientHeight;
 return this.outerHeight()||0;
 }
 return this.each(function(){
-if(!$.support.boxModel&&$.browser.msie){
-$(this).height(_f);
-}else{
+if($._boxModel){
 $(this).height(_f-($(this).outerHeight()-$(this).height()));
+}else{
+$(this).height(_f);
 }
 });
 };
@@ -129,8 +132,8 @@ $(this).scrollLeft(_10);
 $.fn._propAttr=$.fn.prop||$.fn.attr;
 $.fn._fit=function(fit){
 fit=fit==undefined?true:fit;
-var p=this.parent()[0];
 var t=this[0];
+var p=(t.tagName=="BODY"?t:this.parent()[0]);
 var _11=p.fcount||0;
 if(fit){
 if(!t.fitted){
