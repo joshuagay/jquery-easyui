@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -158,5 +158,65 @@ $("html").removeClass("panel-fit");
 }
 return {width:$(p).width(),height:$(p).height()};
 };
+})(jQuery);
+(function($){
+var _12=null;
+var _13=null;
+var _14=false;
+function _15(e){
+if(e.touches.length!=1){
+return;
+}
+if(!_14){
+_14=true;
+dblClickTimer=setTimeout(function(){
+_14=false;
+},500);
+}else{
+clearTimeout(dblClickTimer);
+_14=false;
+_16(e,"dblclick");
+}
+_12=setTimeout(function(){
+_16(e,"contextmenu",3);
+},1000);
+_16(e,"mousedown");
+if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
+e.preventDefault();
+}
+};
+function _17(e){
+if(e.touches.length!=1){
+return;
+}
+if(_12){
+clearTimeout(_12);
+}
+_16(e,"mousemove");
+if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
+e.preventDefault();
+}
+};
+function _18(e){
+if(_12){
+clearTimeout(_12);
+}
+_16(e,"mouseup");
+if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
+e.preventDefault();
+}
+};
+function _16(e,_19,_1a){
+var _1b=new $.Event(_19);
+_1b.pageX=e.changedTouches[0].pageX;
+_1b.pageY=e.changedTouches[0].pageY;
+_1b.which=_1a||1;
+$(e.target).trigger(_1b);
+};
+if(document.addEventListener){
+document.addEventListener("touchstart",_15,true);
+document.addEventListener("touchmove",_17,true);
+document.addEventListener("touchend",_18,true);
+}
 })(jQuery);
 

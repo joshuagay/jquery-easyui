@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -28,11 +28,7 @@ var p=$("<div style=\"padding:2px\"><input style=\"width:80px\"></div>").insertA
 _3.spinner=p.children("input");
 var _8=_7.children("div.datebox-button");
 var ok=$("<a href=\"javascript:void(0)\" class=\"datebox-ok\"></a>").html(_4.okText).appendTo(_8);
-ok.hover(function(){
-$(this).addClass("datebox-button-hover");
-},function(){
-$(this).removeClass("datebox-button-hover");
-}).click(function(){
+ok.click(function(){
 _f(_2);
 });
 }
