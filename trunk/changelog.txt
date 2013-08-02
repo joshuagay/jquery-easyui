@@ -1,3 +1,24 @@
+Version 1.3.4
+-------------
+* Bug
+ * combobox: The onLoadSuccess event fires when parsing empty local data. fixed.
+ * form: Calling 'reset' method can not reset datebox field. fixed.
+* Improvement
+ * mobile: The context menu and double click features are supported on mobile devices.
+ * combobox: The 'groupField' and 'groupFormatter' options are available to display items in groups.
+ * tree: When append or insert nodes, the 'data' parameter accepts one or more nodes data.
+ * tree: The 'getChecked' method accepts a single 'state' or an array of 'state'.
+ * tree: Add 'scrollTo' method.
+ * datagrid: The 'multiSort' property is added to support multiple column sorting.
+ * datagrid: The 'rowStyler' and column 'styler' can return CSS class name or inline styles.
+ * treegrid: Add 'load' method to load data and navigate to the first page.
+ * tabs: Add 'tabWidth' and 'tabHeight' properties.
+ * validatebox: The 'novalidate' property is available to indicate whether to perform the validation.
+ * validatebox: Add 'enableValidation' and 'disableValidation' methods.
+ * form: Add 'enableValidation' and 'disableValidation' methods.
+ * slider: Add 'onComplete' event.
+ * pagination: The 'buttons' property accepts the existing element.
+
 Version 1.3.3
 -------------
 * Bug
