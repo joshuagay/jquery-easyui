@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -13,11 +13,7 @@
 function _1(_2){
 var _3=$.data(_2,"calendar").options;
 var t=$(_2);
-if(_3.fit==true){
-var p=t.parent();
-_3.width=p.width();
-_3.height=p.height();
-}
+_3.fit?$.extend(_3,t._fit()):t._fit(false);
 var _4=t.find(".calendar-header");
 t._outerWidth(_3.width);
 t._outerHeight(_3.height);

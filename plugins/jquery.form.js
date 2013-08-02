@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -189,6 +189,12 @@ t.find(".combotree-f").combotree("reset");
 if($.fn.combogrid){
 t.find(".combogrid-f").combogrid("reset");
 }
+if($.fn.datebox){
+t.find(".datebox-f").datebox("reset");
+}
+if($.fn.datetimebox){
+t.find(".datetimebox-f").datetimebox("reset");
+}
 if($.fn.spinner){
 t.find(".spinner-f").spinner("reset");
 }
@@ -223,25 +229,28 @@ return _28.length==0;
 }
 return true;
 };
-$.fn.form=function(_29,_2a){
-if(typeof _29=="string"){
-return $.fn.form.methods[_29](this,_2a);
+function _29(_2a,_2b){
+$(_2a).find(".validatebox-text:not(:disabled)").validatebox(_2b?"disableValidation":"enableValidation");
+};
+$.fn.form=function(_2c,_2d){
+if(typeof _2c=="string"){
+return $.fn.form.methods[_2c](this,_2d);
 }
-_29=_29||{};
+_2c=_2c||{};
 return this.each(function(){
 if(!$.data(this,"form")){
-$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_29)});
+$.data(this,"form",{options:$.extend({},$.fn.form.defaults,_2c)});
 }
 _23(this);
 });
 };
-$.fn.form.methods={submit:function(jq,_2b){
+$.fn.form.methods={submit:function(jq,_2e){
 return jq.each(function(){
-_1(this,$.extend({},$.fn.form.defaults,_2b||{}));
+_1(this,$.extend({},$.fn.form.defaults,_2e||{}));
 });
-},load:function(jq,_2c){
+},load:function(jq,_2f){
 return jq.each(function(){
-_d(this,_2c);
+_d(this,_2f);
 });
 },clear:function(jq){
 return jq.each(function(){
@@ -253,12 +262,20 @@ _21(this);
 });
 },validate:function(jq){
 return _20(jq[0]);
+},disableValidation:function(jq){
+return jq.each(function(){
+_29(this,true);
+});
+},enableValidation:function(jq){
+return jq.each(function(){
+_29(this,false);
+});
 }};
-$.fn.form.defaults={url:null,onSubmit:function(_2d){
+$.fn.form.defaults={url:null,onSubmit:function(_30){
 return $(this).form("validate");
-},success:function(_2e){
-},onBeforeLoad:function(_2f){
-},onLoadSuccess:function(_30){
+},success:function(_31){
+},onBeforeLoad:function(_32){
+},onLoadSuccess:function(_33){
 },onLoadError:function(){
 }};
 })(jQuery);

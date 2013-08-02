@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -160,6 +160,9 @@ var _1c=$.data(_1b,"panel");
 var _1d=_1c.options;
 if(_1d.href){
 if(!_1c.isLoaded||!_1d.cache){
+if(_1d.onBeforeLoad.call(_1b)==false){
+return;
+}
 _1c.isLoaded=false;
 _1e(_1b);
 if(_1d.loadingMessage){
@@ -504,6 +507,7 @@ return _6b[1];
 }else{
 return _69;
 }
+},onBeforeLoad:function(){
 },onLoad:function(){
 },onBeforeOpen:function(){
 },onOpen:function(){

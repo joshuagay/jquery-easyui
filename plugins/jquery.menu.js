@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.3
+ * jQuery EasyUI 1.3.4
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -53,7 +53,8 @@ var _c=$(this);
 if(_c.hasClass("menu-sep")){
 }else{
 var _d=$.extend({},$.parser.parseOptions(this,["name","iconCls","href"]),{disabled:(_c.attr("disabled")?true:undefined)});
-_c.attr("name",_d.name||"").attr("href",_d.href||"");
+_c[0].itemName=_d.name||"";
+_c[0].itemHref=_d.href||"";
 var _e=_c.addClass("menu-item").html();
 _c.empty().append($("<div class=\"menu-text\"></div>").html(_e));
 if(_d.iconCls){
@@ -79,12 +80,12 @@ function _11(_13,_14){
 var _15=$.data(_13,"menu").options;
 var d=_14.css("display");
 _14.css({display:"block",left:-10000});
-_14.find("div.menu-item")._outerHeight(22);
 var _16=0;
 _14.find("div.menu-text").each(function(){
 if(_16<$(this)._outerWidth()){
 _16=$(this)._outerWidth();
 }
+$(this).closest("div.menu-item")._outerHeight($(this)._outerHeight()+2);
 });
 _16+=65;
 _14._outerWidth(Math.max((_14[0].originalWidth||0),_16,_15.minWidth));
@@ -160,21 +161,17 @@ return false;
 };
 function _24(_25,_26){
 var _27,top;
+_26=_26||{};
 var _28=$(_26.menu||_25);
 if(_28.hasClass("menu-top")){
 var _29=$.data(_25,"menu").options;
+$.extend(_29,_26);
 _27=_29.left;
 top=_29.top;
-if(_26.alignTo){
-var at=$(_26.alignTo);
+if(_29.alignTo){
+var at=$(_29.alignTo);
 _27=at.offset().left;
 top=at.offset().top+at._outerHeight();
-}
-if(_26.left!=undefined){
-_27=_26.left;
-}
-if(_26.top!=undefined){
-top=_26.top;
 }
 if(_27+_28.outerWidth()>$(window)._outerWidth()+$(document)._scrollLeft()){
 _27=$(window)._outerWidth()+$(document).scrollLeft()-_28.outerWidth()-5;
@@ -279,11 +276,11 @@ $("<div class=\"menu-icon\"></div>").addClass(_39.iconCls).appendTo(_3c);
 if(_39.id){
 _3c.attr("id",_39.id);
 }
-if(_39.href){
-_3c.attr("href",_39.href);
-}
 if(_39.name){
-_3c.attr("name",_39.name);
+_3c[0].itemName=_39.name;
+}
+if(_39.href){
+_3c[0].itemHref=_39.href;
 }
 if(_39.onclick){
 if(typeof _39.onclick=="string"){
@@ -372,7 +369,7 @@ $("<div class=\"menu-icon\"></div>").addClass(_48.iconCls).appendTo(_48.target);
 });
 },getItem:function(jq,_4a){
 var t=$(_4a);
-var _4b={target:_4a,id:t.attr("id"),text:$.trim(t.children("div.menu-text").html()),disabled:t.hasClass("menu-item-disabled"),href:t.attr("href"),name:t.attr("name"),onclick:_4a.onclick};
+var _4b={target:_4a,id:t.attr("id"),text:$.trim(t.children("div.menu-text").html()),disabled:t.hasClass("menu-item-disabled"),name:_4a.itemName,href:_4a.itemHref,onclick:_4a.onclick};
 var _4c=t.children("div.menu-icon");
 if(_4c.length){
 var cc=[];
