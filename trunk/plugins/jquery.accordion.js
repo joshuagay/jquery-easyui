@@ -11,24 +11,24 @@
  */
 (function($){
 function _1(_2){
-var _3=$.data(_2,"accordion").options;
-var _4=$.data(_2,"accordion").panels;
+var _3=$.data(_2,"accordion");
+var _4=_3.options;
+var _5=_3.panels;
 var cc=$(_2);
-_3.fit?$.extend(_3,cc._fit()):cc._fit(false);
-if(_3.width>0){
-cc._outerWidth(_3.width);
+_4.fit?$.extend(_4,cc._fit()):cc._fit(false);
+if(_4.width>0){
+cc._outerWidth(_4.width);
 }
-var _5="auto";
-if(_3.height>0){
-cc._outerHeight(_3.height);
-var _6=_4.length?_4[0].panel("header").css("height","")._outerHeight():"auto";
-var _5=cc.height()-(_4.length-1)*_6;
+var _6="auto";
+if(_4.height>0){
+cc._outerHeight(_4.height);
+var _7=_5.length?_5[0].panel("header").css("height","")._outerHeight():"auto";
+var _6=cc.height()-(_5.length-1)*_7;
 }
-for(var i=0;i<_4.length;i++){
-var _7=_4[i];
-var _8=_7.panel("header");
-_8._outerHeight(_6);
-_7.panel("resize",{width:cc.width(),height:_5});
+for(var i=0;i<_5.length;i++){
+var _8=_5[i];
+_8.panel("header")._outerHeight(_7);
+_8.panel("resize",{width:cc.width(),height:_6});
 }
 };
 function _9(_a){
@@ -104,6 +104,11 @@ return {accordion:cc,panels:_1c};
 };
 function _20(_21,pp,_22){
 pp.panel($.extend({},_22,{collapsible:false,minimizable:false,maximizable:false,closable:false,doSize:false,collapsed:true,headerCls:"accordion-header",bodyCls:"accordion-body",onBeforeExpand:function(){
+if(_22.onBeforeExpand){
+if(_22.onBeforeExpand.call(this)==false){
+return false;
+}
+}
 var _23=_9(_21);
 if(_23){
 var _24=$(_23).panel("header");
@@ -114,9 +119,17 @@ var _24=pp.panel("header");
 _24.addClass("accordion-header-selected");
 _24.find(".accordion-collapse").removeClass("accordion-expand");
 },onExpand:function(){
+if(_22.onExpand){
+_22.onExpand.call(this);
+}
 var _25=$.data(_21,"accordion").options;
 _25.onSelect.call(_21,pp.panel("options").title,_d(_21,this));
 },onBeforeCollapse:function(){
+if(_22.onBeforeCollapse){
+if(_22.onBeforeCollapse.call(this)==false){
+return false;
+}
+}
 var _26=pp.panel("header");
 _26.removeClass("accordion-header-selected");
 _26.find(".accordion-collapse").addClass("accordion-expand");
@@ -175,59 +188,61 @@ _37[i].stop(true,true);
 }
 };
 function add(_38,_39){
-var _3a=$.data(_38,"accordion").options;
-var _3b=$.data(_38,"accordion").panels;
+var _3a=$.data(_38,"accordion");
+var _3b=_3a.options;
+var _3c=_3a.panels;
 if(_39.selected==undefined){
 _39.selected=true;
 }
 _35(_38);
 var pp=$("<div></div>").appendTo(_38);
-_3b.push(pp);
+_3c.push(pp);
 _20(_38,pp,_39);
 _1(_38);
-_3a.onAdd.call(_38,_39.title,_3b.length-1);
+_3b.onAdd.call(_38,_39.title,_3c.length-1);
 if(_39.selected){
-_29(_38,_3b.length-1);
+_29(_38,_3c.length-1);
 }
 };
-function _3c(_3d,_3e){
-var _3f=$.data(_3d,"accordion").options;
-var _40=$.data(_3d,"accordion").panels;
-_35(_3d);
-var _41=_11(_3d,_3e);
-var _42=_41.panel("options").title;
-var _43=_d(_3d,_41);
-if(_3f.onBeforeRemove.call(_3d,_42,_43)==false){
+function _3d(_3e,_3f){
+var _40=$.data(_3e,"accordion");
+var _41=_40.options;
+var _42=_40.panels;
+_35(_3e);
+var _43=_11(_3e,_3f);
+var _44=_43.panel("options").title;
+var _45=_d(_3e,_43);
+if(_41.onBeforeRemove.call(_3e,_44,_45)==false){
 return;
 }
-var _41=_11(_3d,_3e,true);
-if(_41){
-_41.panel("destroy");
-if(_40.length){
-_1(_3d);
-var _44=_9(_3d);
-if(!_44){
-_29(_3d,0);
+var _43=_11(_3e,_3f,true);
+if(_43){
+_43.panel("destroy");
+if(_42.length){
+_1(_3e);
+var _46=_9(_3e);
+if(!_46){
+_29(_3e,0);
 }
 }
 }
-_3f.onRemove.call(_3d,_42,_43);
+_41.onRemove.call(_3e,_44,_45);
 };
-$.fn.accordion=function(_45,_46){
-if(typeof _45=="string"){
-return $.fn.accordion.methods[_45](this,_46);
+$.fn.accordion=function(_47,_48){
+if(typeof _47=="string"){
+return $.fn.accordion.methods[_47](this,_48);
 }
-_45=_45||{};
+_47=_47||{};
 return this.each(function(){
-var _47=$.data(this,"accordion");
-var _48;
-if(_47){
-_48=$.extend(_47.options,_45);
-_47.opts=_48;
+var _49=$.data(this,"accordion");
+var _4a;
+if(_49){
+_4a=$.extend(_49.options,_47);
+_49.opts=_4a;
 }else{
-_48=$.extend({},$.fn.accordion.defaults,$.fn.accordion.parseOptions(this),_45);
+_4a=$.extend({},$.fn.accordion.defaults,$.fn.accordion.parseOptions(this),_47);
 var r=_1a(this);
-$.data(this,"accordion",{options:_48,accordion:r.accordion,panels:r.panels});
+$.data(this,"accordion",{options:_4a,accordion:r.accordion,panels:r.panels});
 }
 _17(this);
 _1(this);
@@ -244,31 +259,31 @@ _1(this);
 });
 },getSelected:function(jq){
 return _9(jq[0]);
-},getPanel:function(jq,_49){
-return _11(jq[0],_49);
-},getPanelIndex:function(jq,_4a){
-return _d(jq[0],_4a);
-},select:function(jq,_4b){
+},getPanel:function(jq,_4b){
+return _11(jq[0],_4b);
+},getPanelIndex:function(jq,_4c){
+return _d(jq[0],_4c);
+},select:function(jq,_4d){
 return jq.each(function(){
-_29(this,_4b);
+_29(this,_4d);
 });
-},add:function(jq,_4c){
+},add:function(jq,_4e){
 return jq.each(function(){
-add(this,_4c);
+add(this,_4e);
 });
-},remove:function(jq,_4d){
+},remove:function(jq,_4f){
 return jq.each(function(){
-_3c(this,_4d);
+_3d(this,_4f);
 });
 }};
-$.fn.accordion.parseOptions=function(_4e){
-var t=$(_4e);
-return $.extend({},$.parser.parseOptions(_4e,["width","height",{fit:"boolean",border:"boolean",animate:"boolean"}]));
+$.fn.accordion.parseOptions=function(_50){
+var t=$(_50);
+return $.extend({},$.parser.parseOptions(_50,["width","height",{fit:"boolean",border:"boolean",animate:"boolean"}]));
 };
-$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_4f,_50){
-},onAdd:function(_51,_52){
-},onBeforeRemove:function(_53,_54){
-},onRemove:function(_55,_56){
+$.fn.accordion.defaults={width:"auto",height:"auto",fit:false,border:true,animate:true,onSelect:function(_51,_52){
+},onAdd:function(_53,_54){
+},onBeforeRemove:function(_55,_56){
+},onRemove:function(_57,_58){
 }};
 })(jQuery);
 
