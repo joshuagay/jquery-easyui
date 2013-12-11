@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.4
+ * jQuery EasyUI 1.3.5
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -117,11 +117,13 @@ $.fn.datetimebox.parseOptions=function(_23){
 var t=$(_23);
 return $.extend({},$.fn.datebox.parseOptions(_23),$.parser.parseOptions(_23,["timeSeparator",{showSeconds:"boolean"}]));
 };
-$.fn.datetimebox.defaults=$.extend({},$.fn.datebox.defaults,{showSeconds:true,timeSeparator:":",keyHandler:{up:function(){
-},down:function(){
-},enter:function(){
+$.fn.datetimebox.defaults=$.extend({},$.fn.datebox.defaults,{showSeconds:true,timeSeparator:":",keyHandler:{up:function(e){
+},down:function(e){
+},left:function(e){
+},right:function(e){
+},enter:function(e){
 _f(this);
-},query:function(q){
+},query:function(q,e){
 _d(this,q);
 }},formatter:function(_24){
 var h=_24.getHours();
