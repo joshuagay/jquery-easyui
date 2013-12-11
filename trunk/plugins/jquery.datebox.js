@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.3.4
+ * jQuery EasyUI 1.3.5
  * 
  * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
  *
@@ -15,6 +15,7 @@ var _3=$.data(_2,"datebox");
 var _4=_3.options;
 $(_2).addClass("datebox-f").combo($.extend({},_4,{onShowPanel:function(){
 _5();
+_11(_2,$(_2).datebox("getText"));
 _4.onShowPanel.call(_2);
 }}));
 $(_2).combo("textbox").parent().addClass("datebox");
@@ -22,13 +23,21 @@ if(!_3.calendar){
 _6();
 }
 function _6(){
-var _7=$(_2).combo("panel");
-_3.calendar=$("<div></div>").appendTo(_7).wrap("<div class=\"datebox-calendar-inner\"></div>");
-_3.calendar.calendar({fit:true,border:false,onSelect:function(_8){
-var _9=_4.formatter(_8);
-_11(_2,_9);
-$(_2).combo("hidePanel");
-_4.onSelect.call(_2,_8);
+var _7=$(_2).combo("panel").css("overflow","hidden");
+var cc=$("<div class=\"datebox-calendar-inner\"></div>").appendTo(_7);
+if(_4.sharedCalendar){
+_3.calendar=$(_4.sharedCalendar).appendTo(cc);
+if(!_3.calendar.hasClass("calendar")){
+_3.calendar.calendar();
+}
+}else{
+_3.calendar=$("<div></div>").appendTo(cc).calendar();
+}
+$.extend(_3.calendar.calendar("options"),{fit:true,border:false,onSelect:function(_8){
+var _9=$(this.target).datebox("options");
+_11(this.target,_9.formatter(_8));
+$(this.target).combo("hidePanel");
+_9.onSelect.call(_2,_8);
 }});
 _11(_2,_4.value);
 var _a=$("<div class=\"datebox-button\"></div>").appendTo(_7);
@@ -38,18 +47,21 @@ _b.click(function(){
 _3.calendar.calendar({year:new Date().getFullYear(),month:new Date().getMonth()+1,current:new Date()});
 });
 _c.click(function(){
-$(_2).combo("hidePanel");
+$(this).closest("div.combo-panel").panel("close");
 });
 };
 function _5(){
-if(_4.panelHeight!="auto"){
 var _d=$(_2).combo("panel");
-var ci=_d.children("div.datebox-calendar-inner");
+var cc=_d.children("div.datebox-calendar-inner");
+_d.children()._outerWidth(_d.width());
+_3.calendar.appendTo(cc);
+_3.calendar[0].target=_2;
+if(_4.panelHeight!="auto"){
 var _e=_d.height();
-_d.children().not(ci).each(function(){
+_d.children().not(cc).each(function(){
 _e-=$(this).outerHeight();
 });
-ci._outerHeight(_e);
+cc._outerHeight(_e);
 }
 _3.calendar.calendar("resize");
 };
@@ -60,8 +72,7 @@ _11(_10,q);
 function _12(_13){
 var _14=$.data(_13,"datebox");
 var _15=_14.options;
-var c=_14.calendar;
-var _16=_15.formatter(c.calendar("options").current);
+var _16=_15.formatter(_14.calendar.calendar("options").current);
 _11(_13,_16);
 $(_13).combo("hidePanel");
 };
@@ -107,14 +118,15 @@ $(this).datebox("setValue",_21.originalValue);
 });
 }};
 $.fn.datebox.parseOptions=function(_22){
-var t=$(_22);
-return $.extend({},$.fn.combo.parseOptions(_22),{});
+return $.extend({},$.fn.combo.parseOptions(_22),$.parser.parseOptions(_22,["sharedCalendar"]));
 };
-$.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:180,panelHeight:"auto",keyHandler:{up:function(){
-},down:function(){
-},enter:function(){
+$.fn.datebox.defaults=$.extend({},$.fn.combo.defaults,{panelWidth:180,panelHeight:"auto",sharedCalendar:null,keyHandler:{up:function(e){
+},down:function(e){
+},left:function(e){
+},right:function(e){
+},enter:function(e){
 _12(this);
-},query:function(q){
+},query:function(q,e){
 _f(this,q);
 }},currentText:"Today",closeText:"Close",okText:"Ok",formatter:function(_23){
 var y=_23.getFullYear();
