@@ -16,6 +16,9 @@ $(_2).addClass("validatebox-text");
 function _3(_4){
 var _5=$.data(_4,"validatebox");
 _5.validating=false;
+if(_5.timer){
+clearTimeout(_5.timer);
+}
 $(_4).tooltip("destroy");
 $(_4).unbind();
 $(_4).remove();
